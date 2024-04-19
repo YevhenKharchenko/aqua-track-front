@@ -1,0 +1,49 @@
+#root {
+  padding-top: 30px;
+  padding-bottom: 50px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+body {
+  font-family: sans-serif;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+ul,
+ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: currentColor;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  cursor: pointer;
+}
+
+h1 {
+  text-align: center;
+}
