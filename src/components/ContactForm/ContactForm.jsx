@@ -3,6 +3,8 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { addContact } from '../../redux/contacts/operations';
 import css from './ContactForm.module.css';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 const initialValues = {
   name: '',
@@ -10,10 +12,7 @@ const initialValues = {
 };
 
 const FeedbackSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(3, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Required'),
+  name: Yup.string().min(3, 'Too Short!').max(50, 'Too Long!').required('Required'),
   number: Yup.string()
     .min(7, 'Too Short!')
     .max(12, 'Too Long!')
@@ -30,36 +29,24 @@ const ContactForm = () => {
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={handleSubmit}
-      validationSchema={FeedbackSchema}
-    >
+    <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={FeedbackSchema}>
       <Form className={css.form}>
         <label className={css.label}>
           Name
-          <Field
-            type="text"
-            name="name"
-            className={css.input}
-            placeholder="John Doe"
-          ></Field>
+          <Field type="text" name="name" className={css.input} placeholder="John Doe"></Field>
           <ErrorMessage name="name" component="span" className={css.error} />
         </label>
         <label className={css.label}>
           Number
-          <Field
-            type="tel"
-            name="number"
-            className={css.input}
-            placeholder="123-45-67"
-          ></Field>
+          <Field type="tel" name="number" className={css.input} placeholder="123-45-67"></Field>
           <ErrorMessage name="number" component="span" className={css.error} />
         </label>
 
-        <button type="submit" className={css.btn}>
-          Add contact
-        </button>
+        <Stack spacing={2} direction="row">
+          <Button variant="contained" type="submit">
+            Add contact
+          </Button>
+        </Stack>
       </Form>
     </Formik>
   );
