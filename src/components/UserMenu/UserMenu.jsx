@@ -5,11 +5,11 @@ import css from './UserMenu.module.css';
 
 const UserMenu = () => {
   const dispatch = useDispatch();
-  const { user } = useSelector(selectUser);
+  const { name } = useSelector(selectUser);
 
   return (
     <div>
-      <p>Welcome, {user.name}</p>
+      <p>Welcome, {name}</p>
       <button
         type="button"
         onClick={() => {
