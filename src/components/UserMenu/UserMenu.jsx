@@ -8,7 +8,7 @@ const UserMenu = () => {
   const { name } = useSelector(selectUser);
 
   return (
-    <div>
+    <div className={css.userMenu}>
       <p>Welcome, {name}</p>
       <button
         type="button"

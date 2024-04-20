@@ -1,6 +1,5 @@
 .contactItem {
   display: flex;
-  width: 280px;
   padding: 10px;
   border: 1px solid black;
   border-radius: 8px;
@@ -11,17 +10,7 @@
   transform: translateX(-380%);
 }
 
-.inputsWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
 .nameText {
-  width: 180px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 }
 
 .btn {

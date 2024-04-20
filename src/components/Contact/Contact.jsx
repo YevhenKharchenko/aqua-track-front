@@ -11,16 +11,12 @@ const Contact = ({ name, number, id }) => {
 
   return (
     <div className={`${css.contactItem} ${isDeleting ? css.slideOut : ''}`}>
-      <div className={css.inputsWrapper}>
-        <p className={css.nameText}>
-          <FaUser color="#4d5ae5" /> {name}
-        </p>
-        <p>
-          <a href={`tel:+${number}`}>
-            <FaPhone color="#4d5ae5" /> {number}
-          </a>
-        </p>
+      <div className={css.nameText}>
+        <FaUser color="#4d5ae5" /> {name}
       </div>
+      <a href={`tel:+${number}`}>
+        <FaPhone color="#4d5ae5" /> {number}
+      </a>
       <button
         type="button"
         className={css.btn}
