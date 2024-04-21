@@ -20,7 +20,7 @@ const AppBar = () => {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               <Navigation />
             </Typography>
-            <Typography>{isLoggedIn ? <UserMenu /> : <AuthNav />}</Typography>
+            <Typography component="div">{isLoggedIn ? <UserMenu /> : <AuthNav />}</Typography>
           </Toolbar>
         </AppBar1>
       </Box>

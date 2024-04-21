@@ -5,6 +5,8 @@ import { addContact } from '../../redux/contacts/operations';
 import css from './ContactForm.module.css';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import InputBase from '@mui/material/InputBase';
+import Paper from '@mui/material/Paper';
 
 const initialValues = {
   name: '',
@@ -32,13 +34,21 @@ const ContactForm = () => {
     <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={FeedbackSchema}>
       <Form className={css.form}>
         <label className={css.label}>
-          Name
-          <Field type="text" name="name" className={css.input} placeholder="John Doe"></Field>
+          <Field
+            type="text"
+            name="name"
+            className={css.input}
+            placeholder="Enter contact name"
+          ></Field>
           <ErrorMessage name="name" component="span" className={css.error} />
         </label>
         <label className={css.label}>
-          Number
-          <Field type="tel" name="number" className={css.input} placeholder="123-45-67"></Field>
+          <Field
+            type="tel"
+            name="number"
+            className={css.input}
+            placeholder="Enter contact number"
+          ></Field>
           <ErrorMessage name="number" component="span" className={css.error} />
         </label>
 

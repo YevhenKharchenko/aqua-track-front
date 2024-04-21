@@ -12,6 +12,11 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import Avatar from '@mui/material/Avatar';
+import WorkIcon from '@mui/icons-material/Work';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
 import css from './Contact.module.css';
 
 const Contact = ({ name, number, id }) => {
@@ -24,14 +29,13 @@ const Contact = ({ name, number, id }) => {
   };
 
   return (
-    <div className={`${css.contactItem} ${isDeleting ? css.slideOut : ''}`}>
-      <AccountCircleIcon />
-      <div className={css.nameText}>
-        <FaUser color="#4d5ae5" /> {name}
-      </div>
-      <a href={`tel:+${number}`}>
-        <FaPhone color="#4d5ae5" /> {number}
-      </a>
+    <>
+      <ListItemAvatar>
+        <Avatar>
+          <AccountCircleIcon />
+        </Avatar>
+      </ListItemAvatar>
+      <ListItemText primary={name} secondary={number} />
       <Stack direction="row" spacing={2}>
         <Button
           variant="outlined"
@@ -44,15 +48,18 @@ const Contact = ({ name, number, id }) => {
           Delete
         </Button>
       </Stack>
+
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">You really want to delete contact?</DialogTitle>
+        <DialogTitle id="alert-dialog-title">
+          You really want to delete contact &quot;{name}&quot;?
+        </DialogTitle>
         <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
+          <Button onClick={handleClose}>No</Button>
           <Button
             onClick={() => {
               dispatch(deleteContact(id));
@@ -61,11 +68,11 @@ const Contact = ({ name, number, id }) => {
             }}
             autoFocus
           >
-            Agree
+            Yes
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 };
 
