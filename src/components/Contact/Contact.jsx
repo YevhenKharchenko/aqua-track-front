@@ -36,18 +36,16 @@ const Contact = ({ name, number, id }) => {
         </Avatar>
       </ListItemAvatar>
       <ListItemText primary={name} secondary={number} />
-      <Stack direction="row" spacing={2}>
-        <Button
-          variant="outlined"
-          startIcon={<DeleteIcon />}
-          type="button"
-          onClick={() => {
-            setOpen(true);
-          }}
-        >
-          Delete
-        </Button>
-      </Stack>
+      <Button
+        variant="outlined"
+        startIcon={<DeleteIcon />}
+        type="button"
+        onClick={() => {
+          setOpen(true);
+        }}
+      >
+        Delete
+      </Button>
 
       <Dialog
         open={open}
@@ -56,7 +54,7 @@ const Contact = ({ name, number, id }) => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          You really want to delete contact &quot;{name}&quot;?
+          Are you sure you want to delete contact &quot;{name}&quot;?
         </DialogTitle>
         <DialogActions>
           <Button onClick={handleClose}>No</Button>

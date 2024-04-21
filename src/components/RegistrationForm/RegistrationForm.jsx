@@ -2,6 +2,8 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { register } from '../../redux/auth/operations';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 import css from './RegistrationForm.module.css';
 
 const initialValues = {
@@ -32,24 +34,26 @@ const RegistrationForm = () => {
 
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={FeedbackSchema}>
-      <Form>
-        <label>
+      <Form className={css.form}>
+        <label className={css.label}>
           Username
-          <Field type="text" name="name" placeholder=""></Field>
-          <ErrorMessage name="name" component="span" />
+          <Field className={css.input} type="text" name="name" placeholder=""></Field>
+          <ErrorMessage className={css.error} name="name" component="span" />
         </label>
-        <label>
+        <label className={css.label}>
           Email
-          <Field type="email" name="email" placeholder=""></Field>
-          <ErrorMessage name="email" component="span" />
+          <Field className={css.input} type="email" name="email" placeholder=""></Field>
+          <ErrorMessage className={css.error} name="email" component="span" />
         </label>
-        <label>
+        <label className={css.label}>
           Password
-          <Field type="password" name="password" placeholder=""></Field>
-          <ErrorMessage name="password" component="span" />
+          <Field className={css.input} type="password" name="password" placeholder=""></Field>
+          <ErrorMessage className={css.error} name="password" component="span" />
         </label>
 
-        <button type="submit">Register</button>
+        <Button variant="contained" type="submit">
+          Register
+        </Button>
       </Form>
     </Formik>
   );

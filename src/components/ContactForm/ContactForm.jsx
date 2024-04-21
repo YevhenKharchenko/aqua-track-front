@@ -52,11 +52,9 @@ const ContactForm = () => {
           <ErrorMessage name="number" component="span" className={css.error} />
         </label>
 
-        <Stack spacing={2} direction="row">
-          <Button variant="contained" type="submit">
-            Add contact
-          </Button>
-        </Stack>
+        <Button variant="contained" type="submit">
+          Add contact
+        </Button>
       </Form>
     </Formik>
   );

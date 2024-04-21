@@ -2,6 +2,7 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/auth/operations';
+import Button from '@mui/material/Button';
 import css from './LoginForm.module.css';
 
 const initialValues = {
@@ -30,19 +31,21 @@ const LoginForm = () => {
 
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={FeedbackSchema}>
-      <Form>
-        <label>
+      <Form className={css.form}>
+        <label className={css.label}>
           Email
-          <Field type="email" name="email" placeholder=""></Field>
-          <ErrorMessage name="email" component="span" />
+          <Field className={css.input} type="email" name="email" placeholder=""></Field>
+          <ErrorMessage className={css.error} name="email" component="span" />
         </label>
-        <label>
+        <label className={css.label}>
           Password
-          <Field type="password" name="password" placeholder=""></Field>
-          <ErrorMessage name="password" component="span" />
+          <Field className={css.input} type="password" name="password" placeholder=""></Field>
+          <ErrorMessage className={css.error} name="password" component="span" />
         </label>
 
-        <button type="submit">Log In</button>
+        <Button variant="contained" type="submit">
+          Log In
+        </Button>
       </Form>
     </Formik>
   );
