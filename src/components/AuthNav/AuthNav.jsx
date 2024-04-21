@@ -3,10 +3,10 @@ import css from './AuthNav.module.css';
 
 const AuthNav = () => {
   return (
-    <div className={css.authNav}>
-      <NavLink to="/register">Register</NavLink>
+    <nav className={css.authNav}>
+      <NavLink to="/register">Try for free</NavLink>
       <NavLink to="/login">Log In</NavLink>
-    </div>
+    </nav>
   );
 };
 

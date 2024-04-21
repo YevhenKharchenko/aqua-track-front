@@ -4,20 +4,17 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
-export const fetchContacts = createAsyncThunk(
-  'contacts/fetchAll',
-  async (_, thunkAPI) => {
-    try {
-      const res = await axios.get('/contacts');
-      return res.data;
-    } catch (e) {
-      toast.error(
-        `Oops! Something went wrong. Please try again later or contact support if the issue persists. Error details: ${e.message}`
-      );
-      return thunkAPI.rejectWithValue(e.message);
-    }
+export const fetchContacts = createAsyncThunk('contacts/fetchAll', async (_, thunkAPI) => {
+  try {
+    const res = await axios.get('/contacts');
+    return res.data;
+  } catch (e) {
+    toast.error(
+      `Oops! Something went wrong. Please try again later or contact support if the issue persists. Error details: ${e.message}`
+    );
+    return thunkAPI.rejectWithValue(e.message);
   }
-);
+});
 
 export const addContact = createAsyncThunk(
   'contacts/addContact',
@@ -41,6 +38,22 @@ export const deleteContact = createAsyncThunk(
     try {
       const res = await axios.delete(`/contacts/${contactId}`);
       toast.error(`Contact "${res.data.name}" deleted.`);
+      return res.data;
+    } catch (e) {
+      toast.error(
+        `Oops! Something went wrong. Please try again later or contact support if the issue persists. Error details: ${e.message}`
+      );
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const editContact = createAsyncThunk(
+  'contacts/editContact',
+  async ({ id, values }, thunkAPI) => {
+    try {
+      const res = await axios.patch(`/contacts/${id}`, values);
+      toast.success(`Contact "${values.name}" updated.`);
       return res.data;
     } catch (e) {
       toast.error(

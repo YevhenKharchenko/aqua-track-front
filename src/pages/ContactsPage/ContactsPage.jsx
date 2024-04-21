@@ -14,7 +14,7 @@ const ContactsPage = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <>
       <ContactForm />
       <div className={css.contactsWrapper}>
         <div className={css.searchWrapper}>
@@ -22,7 +22,7 @@ const ContactsPage = () => {
         </div>
         <ContactList />
       </div>
-    </div>
+    </>
   );
 };
 

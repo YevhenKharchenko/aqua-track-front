@@ -1,12 +1,10 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import { addContact } from '../../redux/contacts/operations';
 import css from './ContactForm.module.css';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import InputBase from '@mui/material/InputBase';
-import Paper from '@mui/material/Paper';
 
 const initialValues = {
   name: '',
@@ -14,10 +12,13 @@ const initialValues = {
 };
 
 const FeedbackSchema = Yup.object().shape({
-  name: Yup.string().min(3, 'Too Short!').max(50, 'Too Long!').required('Required'),
+  name: Yup.string()
+    .min(3, 'Too Short! Min 3 characters.')
+    .max(50, 'Too Long! Max 50 characters.')
+    .required('Required'),
   number: Yup.string()
-    .min(7, 'Too Short!')
-    .max(12, 'Too Long!')
+    .min(7, 'Too Short! Min 7 digits.')
+    .max(12, 'Too Long! Max 12 digits.')
     .matches(/^(?!-)[-\d]+(?<!-)$/, 'Wrong format, only digits allowed')
     .required('Required'),
 });
@@ -33,6 +34,9 @@ const ContactForm = () => {
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={FeedbackSchema}>
       <Form className={css.form}>
+        <Typography variant="h5" component="p">
+          Create contact:
+        </Typography>
         <label className={css.label}>
           <Field
             type="text"
