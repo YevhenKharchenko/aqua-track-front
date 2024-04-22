@@ -8,6 +8,7 @@ import { RestrictedRoute } from './components/RestrictedRoute';
 import { PrivateRoute } from './components/PrivateRoute';
 import Loader from './components/Loader/Loader';
 import Layout from './components/Layout/Layout';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const RegistrationPage = lazy(() => import('./pages/RegistrationPage/RegistrationPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage/LoginPage'));
@@ -40,6 +41,7 @@ function App() {
           path="/contacts"
           element={<PrivateRoute redirectTo="/login" component={<ContactsPage />} />}
         />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Layout>
   );

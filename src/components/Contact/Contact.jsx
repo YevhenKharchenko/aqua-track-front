@@ -2,6 +2,8 @@ import { FaPhone } from 'react-icons/fa6';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteContact, editContact } from '../../redux/contacts/operations';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -21,6 +23,30 @@ const Contact = ({ name, number, id }) => {
   const [openDelete, setOpenDelete] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const dispatch = useDispatch();
+
+  const FeedbackSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(3, 'Too Short! Min 3 characters.')
+      .max(50, 'Too Long! Max 50 characters.')
+      .required('Required'),
+    number: Yup.string()
+      .min(7, 'Too Short! Min 7 digits.')
+      .max(12, 'Too Long! Max 12 digits.')
+      .matches(/^(?!-)[-\d]+(?<!-)$/, "Wrong format, only digits or '-' allowed")
+      .required('Required'),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      name: name,
+      number: number,
+    },
+    validationSchema: FeedbackSchema,
+    onSubmit: values => {
+      dispatch(editContact({ id, values }));
+      handleCloseEdit();
+    },
+  });
 
   const handleCloseDelete = () => {
     setOpenDelete(false);
@@ -96,12 +122,9 @@ const Contact = ({ name, number, id }) => {
         onClose={handleCloseEdit}
         PaperProps={{
           component: 'form',
-          onSubmit: event => {
-            event.preventDefault();
-            const formData = new FormData(event.currentTarget);
-            const values = Object.fromEntries(formData.entries());
-            dispatch(editContact({ id, values }));
-            handleCloseEdit();
+          onSubmit: e => {
+            e.preventDefault();
+            formik.handleSubmit();
           },
         }}
       >
@@ -116,10 +139,14 @@ const Contact = ({ name, number, id }) => {
             margin="dense"
             id="name"
             name="name"
-            label={name}
+            label="Name"
+            value={formik.values.name}
+            onChange={formik.handleChange}
             type="text"
             fullWidth
-            variant="standard"
+            variant="outlined"
+            error={formik.touched.name && Boolean(formik.errors.name)}
+            helperText={formik.touched.name && formik.errors.name}
           />
           <TextField
             autoFocus
@@ -127,10 +154,14 @@ const Contact = ({ name, number, id }) => {
             margin="dense"
             id="number"
             name="number"
-            label={number}
-            type="number"
+            label="Number"
+            value={formik.values.number}
+            onChange={formik.handleChange}
+            type="text"
             fullWidth
-            variant="standard"
+            variant="outlined"
+            error={formik.touched.number && Boolean(formik.errors.number)}
+            helperText={formik.touched.number && formik.errors.number}
           />
         </DialogContent>
         <DialogActions>

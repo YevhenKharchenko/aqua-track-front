@@ -2,7 +2,6 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { register } from '../../redux/auth/operations';
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import css from './RegistrationForm.module.css';
 
@@ -13,14 +12,16 @@ const initialValues = {
 };
 
 const FeedbackSchema = Yup.object().shape({
-  name: Yup.string().min(3, 'Too Short!').max(50, 'Too Long!').required('Required'),
+  name: Yup.string()
+    .min(3, 'Too Short! Min 3 characters.')
+    .max(50, 'Too Long! Max 50 characters.')
+    .required('Required'),
   email: Yup.string()
     .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'Invalid email')
     .required('Required'),
   password: Yup.string()
-    .min(8, 'Too Short!')
-    .max(50, 'Too Long!')
-    // .matches(/^(?!-)[-\d]+(?<!-)$/, 'Wrong format')
+    .min(8, 'Too Short! Min 8 characters.')
+    .max(50, 'Too Long! Max 50 characters.')
     .required('Required'),
 });
 

@@ -15,9 +15,8 @@ const FeedbackSchema = Yup.object().shape({
     .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'Invalid email')
     .required('Required'),
   password: Yup.string()
-    .min(8, 'Too Short!')
-    .max(50, 'Too Long!')
-    // .matches(/^(?!-)[-\d]+(?<!-)$/, 'Wrong format')
+    .min(8, 'Too Short! Min 8 characters.')
+    .max(50, 'Too Long! Max 50 characters.')
     .required('Required'),
 });
 

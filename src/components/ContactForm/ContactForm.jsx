@@ -19,7 +19,7 @@ const FeedbackSchema = Yup.object().shape({
   number: Yup.string()
     .min(7, 'Too Short! Min 7 digits.')
     .max(12, 'Too Long! Max 12 digits.')
-    .matches(/^(?!-)[-\d]+(?<!-)$/, 'Wrong format, only digits allowed')
+    .matches(/^(?!-)[-\d]+(?<!-)$/, "Wrong format, only digits or '-' allowed")
     .required('Required'),
 });
 
