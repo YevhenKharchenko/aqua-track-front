@@ -16,10 +16,11 @@ export const register = createAsyncThunk('auth/register', async (credentials, th
   try {
     const res = await axios.post('/users/signup', credentials);
     setAuthHeader(res.data.token);
+    toast.success(`Congratulations! You have successfully registered.`);
     return res.data;
   } catch (e) {
     toast.error(
-      `Oops! Something went wrong. Please try again later or contact support if the issue persists. Error details: ${e.message}`
+      `Oops! Something went wrong. Please try again later or contact support. Error details: ${e.message}`
     );
     return thunkAPI.rejectWithValue(e.message);
   }
@@ -29,10 +30,15 @@ export const login = createAsyncThunk('auth/login', async (credentials, thunkAPI
   try {
     const res = await axios.post('/users/login', credentials);
     setAuthHeader(res.data.token);
+    toast.success(`You have successfully logged in.`);
     return res.data;
   } catch (e) {
+    if (e.response.status === 400) {
+      toast.error('Invalid email or password');
+      return thunkAPI.rejectWithValue(e.message);
+    }
     toast.error(
-      `Oops! Something went wrong. Please try again later or contact support if the issue persists. Error details: ${e.message}`
+      `Oops! Something went wrong. Please try again later or contact support. Error details: ${e.message}`
     );
     return thunkAPI.rejectWithValue(e.message);
   }
@@ -42,9 +48,10 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     await axios.post('/users/logout');
     clearAuthHeader();
+    toast.success('You have been successfully logged out.');
   } catch (e) {
     toast.error(
-      `Oops! Something went wrong. Please try again later or contact support if the issue persists. Error details: ${e.message}`
+      `Oops! Something went wrong. Please try again later or contact support. Error details: ${e.message}`
     );
     return thunkAPI.rejectWithValue(e.message);
   }
@@ -61,10 +68,11 @@ export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) 
   try {
     setAuthHeader(persistedToken);
     const res = await axios.get('/users/current');
+    toast.success(`Session refreshed successfully.`);
     return res.data;
   } catch (e) {
     toast.error(
-      `Oops! Something went wrong. Please try again later or contact support if the issue persists. Error details: ${e.message}`
+      `Oops! Something went wrong. Please try again later or contact support. Error details: ${e.message}`
     );
     return thunkAPI.rejectWithValue(e.message);
   }

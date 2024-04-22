@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import DocumentTitle from '../../components/DocumentTitle';
 import css from './NotFoundPage.module.css';
 
 const NotFoundPage = () => {
@@ -9,6 +10,7 @@ const NotFoundPage = () => {
 
   return (
     <>
+      <DocumentTitle>Contacts App - Page not found</DocumentTitle>
       <Typography variant="h3" component="p" sx={{ textAlign: 'center', marginTop: 20 }}>
         Page Not Found
       </Typography>

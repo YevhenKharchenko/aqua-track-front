@@ -7,6 +7,7 @@ import ListItemText from '@mui/material/ListItemText';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import DocumentTitle from '../../components/DocumentTitle';
 import css from './HomePage.module.css';
 
 const HomePage = () => {
@@ -14,6 +15,7 @@ const HomePage = () => {
 
   return (
     <>
+      <DocumentTitle>Contacts App - Home</DocumentTitle>
       <Typography variant="h2" component="h1" sx={{ marginTop: 20 }}>
         Welcome to Contacts App!
       </Typography>

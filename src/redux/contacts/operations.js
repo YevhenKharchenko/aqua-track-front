@@ -10,7 +10,7 @@ export const fetchContacts = createAsyncThunk('contacts/fetchAll', async (_, thu
     return res.data;
   } catch (e) {
     toast.error(
-      `Oops! Something went wrong. Please try again later or contact support if the issue persists. Error details: ${e.message}`
+      `Oops! Something went wrong. Please try again later or contact support. Error details: ${e.message}`
     );
     return thunkAPI.rejectWithValue(e.message);
   }
@@ -25,7 +25,7 @@ export const addContact = createAsyncThunk(
       return res.data;
     } catch (e) {
       toast.error(
-        `Oops! Something went wrong. Please try again later or contact support if the issue persists. Error details: ${e.message}`
+        `Oops! Something went wrong. Please try again later or contact support. Error details: ${e.message}`
       );
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -41,7 +41,7 @@ export const deleteContact = createAsyncThunk(
       return res.data;
     } catch (e) {
       toast.error(
-        `Oops! Something went wrong. Please try again later or contact support if the issue persists. Error details: ${e.message}`
+        `Oops! Something went wrong. Please try again later or contact support. Error details: ${e.message}`
       );
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -57,7 +57,7 @@ export const editContact = createAsyncThunk(
       return res.data;
     } catch (e) {
       toast.error(
-        `Oops! Something went wrong. Please try again later or contact support if the issue persists. Error details: ${e.message}`
+        `Oops! Something went wrong. Please try again later or contact support. Error details: ${e.message}`
       );
       return thunkAPI.rejectWithValue(e.message);
     }
