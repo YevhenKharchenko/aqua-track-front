@@ -71,9 +71,7 @@ export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) 
     toast.success(`Session refreshed successfully.`);
     return res.data;
   } catch (e) {
-    toast.error(
-      `Oops! Something went wrong. Please try again later or contact support. Error details: ${e.message}`
-    );
+    toast.error(`Unable to retrieve user information, please log in or register to continue`);
     return thunkAPI.rejectWithValue(e.message);
   }
 });
