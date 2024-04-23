@@ -1,14 +1,11 @@
-import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/auth/operations';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 import css from './LoginForm.module.css';
-
-const initialValues = {
-  email: '',
-  password: '',
-};
 
 const FeedbackSchema = Yup.object().shape({
   email: Yup.string()
@@ -23,35 +20,69 @@ const FeedbackSchema = Yup.object().shape({
 const LoginForm = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = (values, actions) => {
-    dispatch(login(values));
-    actions.resetForm();
-  };
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: FeedbackSchema,
+    onSubmit: values => {
+      dispatch(login(values));
+    },
+  });
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={FeedbackSchema}>
-      <Form className={css.form}>
-        <label className={css.label}>
-          Email
-          <Field className={css.input} type="email" name="email" placeholder="Enter email"></Field>
-          <ErrorMessage className={css.error} name="email" component="span" />
-        </label>
-        <label className={css.label}>
-          Password
-          <Field
-            className={css.input}
-            type="password"
-            name="password"
-            placeholder="Enter password"
-          ></Field>
-          <ErrorMessage className={css.error} name="password" component="span" />
-        </label>
-
-        <Button variant="contained" type="submit">
-          Log In
-        </Button>
-      </Form>
-    </Formik>
+    <Box
+      component="form"
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 2,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        marginTop: 7,
+        width: '35ch',
+      }}
+      noValidate
+      autoComplete="on"
+      onSubmit={formik.handleSubmit}
+    >
+      <TextField
+        autoFocus
+        required
+        margin="dense"
+        id="email"
+        name="email"
+        label="Email"
+        value={formik.values.email}
+        onChange={formik.handleChange}
+        type="email"
+        fullWidth
+        variant="outlined"
+        error={formik.touched.email && Boolean(formik.errors.email)}
+        helperText={formik.touched.email && formik.errors.email}
+      />
+      <TextField
+        autoFocus
+        required
+        margin="dense"
+        id="password"
+        name="password"
+        label="Password"
+        value={formik.values.password}
+        onChange={formik.handleChange}
+        type="password"
+        fullWidth
+        variant="outlined"
+        error={formik.touched.password && Boolean(formik.errors.password)}
+        helperText={formik.touched.password && formik.errors.password}
+      />
+      <Button variant="contained" type="submit">
+        Log In
+      </Button>
+    </Box>
   );
 };
 
