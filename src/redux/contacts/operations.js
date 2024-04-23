@@ -6,8 +6,8 @@ axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
 export const fetchContacts = createAsyncThunk('contacts/fetchAll', async (_, thunkAPI) => {
   try {
-    const res = await axios.get('/contacts');
-    return res.data;
+    const { data } = await axios.get('/contacts');
+    return data;
   } catch (e) {
     toast.error(
       `Oops! Something went wrong. Please try again later or contact support. Error details: ${e.message}`
@@ -20,9 +20,9 @@ export const addContact = createAsyncThunk(
   'contacts/addContact',
   async ({ name, number }, thunkAPI) => {
     try {
-      const res = await axios.post('/contacts', { name, number });
+      const { data } = await axios.post('/contacts', { name, number });
       toast.success(`Contact "${name}" added.`);
-      return res.data;
+      return data;
     } catch (e) {
       toast.error(
         `Oops! Something went wrong. Please try again later or contact support. Error details: ${e.message}`
@@ -36,9 +36,9 @@ export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
   async (contactId, thunkAPI) => {
     try {
-      const res = await axios.delete(`/contacts/${contactId}`);
-      toast.error(`Contact "${res.data.name}" deleted.`);
-      return res.data;
+      const { data } = await axios.delete(`/contacts/${contactId}`);
+      toast.error(`Contact "${data.name}" deleted.`);
+      return data;
     } catch (e) {
       toast.error(
         `Oops! Something went wrong. Please try again later or contact support. Error details: ${e.message}`
@@ -52,9 +52,9 @@ export const editContact = createAsyncThunk(
   'contacts/editContact',
   async ({ id, values }, thunkAPI) => {
     try {
-      const res = await axios.patch(`/contacts/${id}`, values);
+      const { data } = await axios.patch(`/contacts/${id}`, values);
       toast.success(`Contact "${values.name}" updated.`);
-      return res.data;
+      return data;
     } catch (e) {
       toast.error(
         `Oops! Something went wrong. Please try again later or contact support. Error details: ${e.message}`

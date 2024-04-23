@@ -27,7 +27,7 @@ const HomePage = () => {
           variant="contained"
           color="primary"
           onClick={() => {
-            navigate('/contacts');
+            navigate('/contacts', { replace: false });
           }}
         >
           Get Started

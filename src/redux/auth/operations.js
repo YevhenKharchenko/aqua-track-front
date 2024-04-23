@@ -14,10 +14,10 @@ const clearAuthHeader = () => {
 
 export const register = createAsyncThunk('auth/register', async (credentials, thunkAPI) => {
   try {
-    const res = await axios.post('/users/signup', credentials);
-    setAuthHeader(res.data.token);
+    const { data } = await axios.post('/users/signup', credentials);
+    setAuthHeader(data.token);
     toast.success(`Congratulations! You have successfully registered.`);
-    return res.data;
+    return data;
   } catch (e) {
     toast.error(
       `Oops! Something went wrong. Please try again later or contact support. Error details: ${e.message}`
@@ -28,10 +28,10 @@ export const register = createAsyncThunk('auth/register', async (credentials, th
 
 export const login = createAsyncThunk('auth/login', async (credentials, thunkAPI) => {
   try {
-    const res = await axios.post('/users/login', credentials);
-    setAuthHeader(res.data.token);
+    const { data } = await axios.post('/users/login', credentials);
+    setAuthHeader(data.token);
     toast.success(`You have successfully logged in.`);
-    return res.data;
+    return data;
   } catch (e) {
     if (e.response.status === 400) {
       toast.error('Invalid email or password');
@@ -60,16 +60,15 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
 export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
   const state = thunkAPI.getState();
   const persistedToken = state.auth.token;
-
   if (persistedToken === null) {
     return thunkAPI.rejectWithValue('Unable to fetch user');
   }
 
   try {
     setAuthHeader(persistedToken);
-    const res = await axios.get('/users/current');
+    const { data } = await axios.get('/users/current');
     toast.success(`Session refreshed successfully.`);
-    return res.data;
+    return data;
   } catch (e) {
     toast.error(`Unable to retrieve user information, please log in or register to continue`);
     return thunkAPI.rejectWithValue(e.message);
