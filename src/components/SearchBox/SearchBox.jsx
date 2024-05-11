@@ -30,7 +30,7 @@ const SearchBox = () => {
         value={filter}
         onChange={e => dispatch(changeFilter(e.target.value))}
       />
-      <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+      <IconButton type="button" sx={{ p: '10px' }} aria-label="search" disabled={true}>
         <SearchIcon />
       </IconButton>
     </Paper>

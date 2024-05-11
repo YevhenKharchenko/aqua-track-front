@@ -130,7 +130,7 @@ const Contact = ({ name, number, id }) => {
       >
         <DialogTitle>Edit</DialogTitle>
         <DialogContent>
-          <DialogContentText>
+          <DialogContentText sx={{ marginBottom: '20px' }}>
             If you wish to edit this contact, please enter the new values.
           </DialogContentText>
           <TextField
@@ -147,6 +147,8 @@ const Contact = ({ name, number, id }) => {
             variant="outlined"
             error={formik.touched.name && Boolean(formik.errors.name)}
             helperText={formik.touched.name && formik.errors.name}
+            size="small"
+            sx={{ marginBottom: '20px' }}
           />
           <TextField
             autoFocus
@@ -162,6 +164,7 @@ const Contact = ({ name, number, id }) => {
             variant="outlined"
             error={formik.touched.number && Boolean(formik.errors.number)}
             helperText={formik.touched.number && formik.errors.number}
+            size="small"
           />
         </DialogContent>
         <DialogActions>

@@ -1,8 +1,10 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 import { addContact } from '../../redux/contacts/operations';
 import css from './ContactForm.module.css';
 
@@ -26,41 +28,73 @@ const FeedbackSchema = Yup.object().shape({
 const ContactForm = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = (values, actions) => {
-    dispatch(addContact(values));
-    actions.resetForm();
-  };
+  const formik = useFormik({
+    initialValues: initialValues,
+    validationSchema: FeedbackSchema,
+    onSubmit: (values, actions) => {
+      dispatch(addContact(values));
+      actions.resetForm();
+    },
+  });
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={FeedbackSchema}>
-      <Form className={css.form}>
-        <Typography variant="h5" component="p">
-          Create contact:
-        </Typography>
-        <label className={css.label}>
-          <Field
-            type="text"
-            name="name"
-            className={css.input}
-            placeholder="Enter contact name"
-          ></Field>
-          <ErrorMessage name="name" component="span" className={css.error} />
-        </label>
-        <label className={css.label}>
-          <Field
-            type="tel"
-            name="number"
-            className={css.input}
-            placeholder="Enter contact number"
-          ></Field>
-          <ErrorMessage name="number" component="span" className={css.error} />
-        </label>
-
-        <Button variant="contained" type="submit">
-          Add contact
-        </Button>
-      </Form>
-    </Formik>
+    <Box
+      component="form"
+      sx={{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop: 5,
+        marginBottom: 5,
+      }}
+      noValidate
+      autoComplete="on"
+      onSubmit={formik.handleSubmit}
+    >
+      <Typography variant="h5" component="p">
+        Create contact:
+      </Typography>
+      <TextField
+        autoFocus
+        required
+        margin="dense"
+        id="name"
+        name="name"
+        label="Name"
+        value={formik.values.name}
+        onChange={formik.handleChange}
+        type="text"
+        variant="outlined"
+        error={formik.touched.name && Boolean(formik.errors.name)}
+        helperText={formik.touched.name && formik.errors.name}
+        sx={{
+          width: 300,
+        }}
+        size="small"
+      />
+      <TextField
+        autoFocus
+        required
+        margin="dense"
+        id="tel"
+        name="number"
+        label="Number"
+        value={formik.values.number}
+        onChange={formik.handleChange}
+        type="tel"
+        variant="outlined"
+        error={formik.touched.number && Boolean(formik.errors.number)}
+        helperText={formik.touched.number && formik.errors.number}
+        sx={{
+          width: 300,
+        }}
+        size="small"
+      />
+      <Button variant="contained" type="submit">
+        Add contact
+      </Button>
+    </Box>
   );
 };
 
