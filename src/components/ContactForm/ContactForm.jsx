@@ -69,7 +69,7 @@ const ContactForm = () => {
         error={formik.touched.name && Boolean(formik.errors.name)}
         helperText={formik.touched.name && formik.errors.name}
         sx={{
-          width: 300,
+          width: 350,
         }}
         size="small"
       />
@@ -87,7 +87,7 @@ const ContactForm = () => {
         error={formik.touched.number && Boolean(formik.errors.number)}
         helperText={formik.touched.number && formik.errors.number}
         sx={{
-          width: 300,
+          width: 350,
         }}
         size="small"
       />
