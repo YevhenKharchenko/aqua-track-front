@@ -4,16 +4,16 @@ import { Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { RestrictedRoute } from './components/RestrictedRoute';
 import { PrivateRoute } from './components/PrivateRoute';
-import Loader from './components/Loader/Loader';
-import Layout from './components/Layout/Layout';
+import Loader from './shared/components/Loader/Loader.jsx';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import HomePage from './pages/HomePage/HomePage.jsx';
 import SignUpPage from './pages/SignUpPage/SignUpPage.jsx';
 import SignInPage from './pages/SignInPage/SignInPage.jsx';
+import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
 
 function App() {
   return (
-    <Layout>
+    <SharedLayout>
       <Toaster position="top-center" />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -27,7 +27,7 @@ function App() {
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-    </Layout>
+    </SharedLayout>
   );
 }
 
