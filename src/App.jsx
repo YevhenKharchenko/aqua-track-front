@@ -7,9 +7,9 @@ import { PrivateRoute } from './components/PrivateRoute';
 import Loader from './components/Loader/Loader';
 import Layout from './components/Layout/Layout';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
-const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
-const RegistrationPage = lazy(() => import('./pages/RegistrationPage/RegistrationPage'));
-const LoginPage = lazy(() => import('./pages/LoginPage/LoginPage'));
+import HomePage from './pages/HomePage/HomePage.jsx';
+import SignUpPage from './pages/SignUpPage/SignUpPage.jsx';
+import SignInPage from './pages/SignInPage/SignInPage.jsx';
 
 function App() {
   return (
@@ -18,12 +18,12 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route
-          path="/register"
-          element={<RestrictedRoute redirectTo="/contacts" component={<RegistrationPage />} />}
+          path="/signup"
+          element={<RestrictedRoute redirectTo="/tracker" component={<SignUpPage />} />}
         />
         <Route
-          path="/login"
-          element={<RestrictedRoute redirectTo="/contacts" component={<LoginPage />} />}
+          path="/signin"
+          element={<RestrictedRoute redirectTo="/tracker" component={<SignInPage />} />}
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
