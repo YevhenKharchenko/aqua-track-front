@@ -1,0 +1,49 @@
+.popover {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  border-radius: 15px;
+  padding: 14px 20px;
+  width: 137px;
+  height: 72px;
+  background-color: #fff;
+  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+}
+@media (min-width: 768px) {
+  .popover {
+    width: 157px;
+    height: 82px;
+  }
+}
+
+.popoverBtn {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  gap: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  color: #323f47;
+}
+.logoutBtn {
+  color: rgba(50, 63, 71, 0.4);
+}
+
+.iconLogout {
+  fill: #fff;
+  stroke: rgba(50, 63, 71, 0.4);
+}
+
+.iconSettings {
+  fill: #fff;
+  stroke: currentColor;
+}
+
+@media (min-width: 768px) {
+  .iconSettings,
+  .iconLogout {
+    width: 16px;
+    height: 17px;
+  }
+}
