@@ -119,9 +119,9 @@ const SignUpForm = () => {
           </button>
         </div>
       </form>
-      <div>
+      <div className={css.textWrap}>
         Already have account?
-        <NavLink to="/signin">Sign In</NavLink>
+        <NavLink className={css.linkText} to="/signin">Sign In</NavLink>
       </div>
     </div>
   );
