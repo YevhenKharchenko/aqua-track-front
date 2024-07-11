@@ -7,6 +7,6 @@ const HomePage = () => {
     <WelcomeSection />
     <AdvantagesSection />
   </div>;
-};
+ };
 
 export default HomePage;
