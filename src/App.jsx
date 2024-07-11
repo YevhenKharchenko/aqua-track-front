@@ -19,11 +19,14 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route
           path="/signup"
-          element={<RestrictedRoute redirectTo="/tracker" component={<SignUpPage />} />}
+          // element={<RestrictedRoute redirectTo="/tracker" component={<SignUpPage />} 
+          // />}
+          element={<SignUpPage />}
         />
         <Route
           path="/signin"
-          element={<RestrictedRoute redirectTo="/tracker" component={<SignInPage />} />}
+          // element={<RestrictedRoute redirectTo="/tracker" component={<SignInPage />} />}
+          element={<SignInPage />}
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

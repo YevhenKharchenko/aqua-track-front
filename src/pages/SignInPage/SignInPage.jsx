@@ -1,7 +1,14 @@
+import Logo from '../../components/Logo/Logo';
+import SignInForm from '../../components/SignInForm/SignInForm';
 import css from './SignInPage.module.css';
 
-const RegistrationPage = () => {
-  return <div>RegistrationPage</div>;
+const SignInPage = () => {
+  return (
+    <div>
+      <Logo />
+      <SignInForm />
+    </div>
+  );
 };
 
-export default RegistrationPage;
+export default SignInPage;
