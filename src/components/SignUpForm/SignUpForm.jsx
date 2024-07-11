@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { NavLink } from 'react-router-dom';
+import css from "./SignUpForm.module.css";
 // import { useNavigate } from "react-router-dom";
 
 const SignUpForm = () => {
@@ -61,11 +62,12 @@ const SignUpForm = () => {
   };
 
   return (
-    <div>
+    <div className={css.container}>
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-        <div>
-          <h2>Sign Up</h2>
-          <label>Email:</label>
+        
+          <h2 className={css.header}>Sign Up</h2>
+         <div className={css.signupFormEmail }> 
+          <label className={css.label}>Email:</label>
           <input
             type="email"
             name="email"
@@ -75,7 +77,7 @@ const SignUpForm = () => {
         </div>
 
         <div>
-          <label>Password:</label>
+          <label className={css.label}>Password:</label>
           <div>
             <input
               type={showPassword ? 'text' : 'password'}
@@ -90,7 +92,7 @@ const SignUpForm = () => {
         </div>
 
         <div>
-          <label>Repeat Password:</label>
+          <label className={css.label}>Repeat Password:</label>
           <div>
             <input
               type={showRepeatPassword ? 'text' : 'password'}

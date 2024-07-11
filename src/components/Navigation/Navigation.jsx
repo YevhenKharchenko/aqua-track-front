@@ -1,12 +1,13 @@
-import React from 'react'
+
 import { NavLink } from 'react-router-dom'
+import css from "./Navigation.module.css";
 
 const Navigation = () => {
   return (
-    <div>
-        <nav>
-        <NavLink to="/signup">Try tracker</NavLink>
-        <NavLink to="/signin">Sign In</NavLink>
+    <div className={css.backdrop}>
+        <nav className={css.navlist}>
+        <NavLink className={css.navBtnUp} to="/signup">Try tracker</NavLink>
+        <NavLink className={css.navBtnIn} to="/signin">Sign In</NavLink>
       </nav>
     </div>
   )

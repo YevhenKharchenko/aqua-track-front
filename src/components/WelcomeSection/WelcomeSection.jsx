@@ -8,8 +8,8 @@ const WelcomeSection = () => {
     <div className={css.backdrop}>
       <Logo />
       
-      <h3>Record daily water intake and track</h3>
-      <h1>Water consumption tracker</h1> 
+      <h3 className={css.welcomeText}>Record daily water intake and track</h3>
+      <h1 className={css.welcomeHeader}>Water consumption tracker</h1> 
       
       
       <Navigation />

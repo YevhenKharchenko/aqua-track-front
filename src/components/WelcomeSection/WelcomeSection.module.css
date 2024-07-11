@@ -1,7 +1,25 @@
 .backdrop {
   border-radius: 30px;
-  background: rgb(240, 239, 244);
+  background: #f0eff4;
   padding-left: 16px;
   padding-top: 24px;
   padding-bottom: 24px;
+}
+.welcomeText {
+  font-family: var(--font-family);
+font-weight: 400;
+font-size: 14px;
+line-height: 129%;
+letter-spacing: 0.06em;
+color: #2f2f2f;
+padding-top: 74px;
+}
+.welcomeHeader {
+  font-family: var(--font-family);
+font-weight: 700;
+font-size: 38px;
+line-height: 100%;
+letter-spacing: -0.01em;
+color: #323f47;
+padding-top: 16px;
 }

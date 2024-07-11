@@ -1,0 +1,28 @@
+.container {
+    padding-top: 126px;
+    padding-bottom: 170px;
+}
+.header {
+    font-family: var(--font-family);
+font-weight: 700;
+font-size: 32px;
+line-height: 100%;
+letter-spacing: -0.01em;
+color: #323f47;
+}
+.label {
+    font-family: var(--font-family);
+font-weight: 700;
+font-size: 14px;
+line-height: 129%;
+letter-spacing: -0.01em;
+color: #2f2f2f;
+}
+.signupFormEmail {
+    display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+  width: 311px;
+  padding-top: 32px;
+}
