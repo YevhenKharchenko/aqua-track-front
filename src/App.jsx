@@ -10,6 +10,7 @@ import HomePage from './pages/HomePage/HomePage.jsx';
 import SignUpPage from './pages/SignUpPage/SignUpPage.jsx';
 import SignInPage from './pages/SignInPage/SignInPage.jsx';
 import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
+import ExampleModal from './components/ExampleModal.jsx';
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route
           path="/signup"
-          // element={<RestrictedRoute redirectTo="/tracker" component={<SignUpPage />} 
+          // element={<RestrictedRoute redirectTo="/tracker" component={<SignUpPage />}
           // />}
           element={<SignUpPage />}
         />
@@ -28,6 +29,7 @@ function App() {
           // element={<RestrictedRoute redirectTo="/tracker" component={<SignInPage />} />}
           element={<SignInPage />}
         />
+        <Route path="/modal" element={<ExampleModal />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </SharedLayout>
