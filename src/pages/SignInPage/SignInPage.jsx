@@ -4,7 +4,7 @@ import css from './SignInPage.module.css';
 
 const SignInPage = () => {
   return (
-    <div>
+    <div className={css.backdrop}>
       <Logo />
       <SignInForm />
     </div>
