@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { NavLink } from 'react-router-dom';
+import css from './SignUpForm.module.css';
 // import { useNavigate } from "react-router-dom";
 
 const SignUpForm = () => {
@@ -61,25 +62,30 @@ const SignUpForm = () => {
   };
 
   return (
-    <div>
+    <div className={css.container}>
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-        <div>
-          <h2>Sign Up</h2>
-          <label>Email:</label>
+        <h2 className={css.header}>Sign Up</h2>
+
+        <div className={css.signupFormEmail}>
+          <label className={css.label}>Email:</label>
           <input
+            className={css.signupInput}
             type="email"
             name="email"
+            placeholder="Enter your email"
             {...register('email', { required: 'Email is required' })}
           />
           {errors.email && <p>{errors.email.message}</p>}
         </div>
 
-        <div>
-          <label>Password:</label>
-          <div>
+        <div className={css.signupFormPass}>
+          <label className={css.label}>Password:</label>
+          <div className={css.signupInputWrap}>
             <input
+              className={css.signupInput}
               type={showPassword ? 'text' : 'password'}
               name="password"
+              placeholder="Enter your password"
               {...register('password', { required: 'Password is required' })}
             />
             <button type="button" onClick={togglePasswordVisibility}>
@@ -89,11 +95,13 @@ const SignUpForm = () => {
           {errors.password && <p>{errors.password.message}</p>}
         </div>
 
-        <div>
-          <label>Repeat Password:</label>
-          <div>
+        <div className={css.signupFormPass}>
+          <label className={css.label}>Repeat Password:</label>
+          <div className={css.signupInputWrap}>
             <input
+              className={css.signupInput}
               type={showRepeatPassword ? 'text' : 'password'}
+              placeholder="Repeat password"
               {...register('repeatPassword', {
                 required: 'Repeat password is required',
                 validate: value => value === watch('password') || 'Passwords do not match',
@@ -105,12 +113,15 @@ const SignUpForm = () => {
           </div>
           {errors.repeatPassword && <p>{errors.repeatPassword.message}</p>}
         </div>
-
-        <button type="submit">Sign Up</button>
+        <div className={css.btnWrap}>
+          <button className={css.signupBtn} type="submit">
+            Sign Up
+          </button>
+        </div>
       </form>
-      <div>
+      <div className={css.textWrap}>
         Already have account?
-        <NavLink to="/signin">Sign In</NavLink>
+        <NavLink className={css.linkText} to="/signin">Sign In</NavLink>
       </div>
     </div>
   );

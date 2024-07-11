@@ -3,6 +3,8 @@
   max-width: 1440px;
   padding-right: 15px;
   padding-left: 15px;
+  padding-top: 15px;  /* Добавил Олег */
+  padding-bottom: 15px; /* Добавил Олег */
   margin-left: auto;
   margin-right: auto;
 }
