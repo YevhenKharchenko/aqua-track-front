@@ -12,6 +12,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { waterReducer } from './water/slice';
 import { authReducer } from './auth/slice';
+import { setupAxiosInterceptors } from './auth/operations.js';
 
 const authPersistConfig = {
   key: 'auth',
@@ -24,7 +25,7 @@ export const store = configureStore({
     contacts: waterReducer,
     auth: persistReducer(authPersistConfig, authReducer),
   },
-  middleware: (getDefaultMiddleware) =>
+  middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
