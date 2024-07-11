@@ -1,8 +1,28 @@
 .logo {
-position: absolute;
-width: 114px;
-height: 20px;
-left: 32px;
-top: 40px;
-text-transform: uppercase;
+  position: absolute;
+  width: 114px;
+  height: 20px;
+  left: 32px;
+  top: 40px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.11em;
+  letter-spacing: -1%;
+}
+
+@media (min-width: 768px) {
+  .logo {
+    width: 152px;
+    height: 24px;
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .logo {
+    width: 152px;
+    height: 24px;
+    font-size: 24px;
+  }
 }
