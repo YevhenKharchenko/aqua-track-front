@@ -3,10 +3,12 @@ import SignInForm from '../../components/SignInForm/SignInForm';
 import css from './SignInPage.module.css';
 
 const SignInPage = () => {
-  return <div>
-  <Logo />
-  <SignInForm />
-</div>;
+  return (
+    <div>
+      <Logo />
+      <SignInForm />
+    </div>
+  );
 };
 
 export default SignInPage;

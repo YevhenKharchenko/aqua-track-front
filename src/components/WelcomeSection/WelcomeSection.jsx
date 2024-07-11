@@ -1,5 +1,6 @@
 import Logo from '../Logo/Logo';
-import {  Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import Navigation from '../Navigation/Navigation';
 
 const WelcomeSection = () => {
   return (
@@ -7,10 +8,7 @@ const WelcomeSection = () => {
       <Logo />
       <h3>Record daily water intake and track</h3>
       <h1>Water consumption tracker</h1>
-      <nav>
-        <Link to="/signup">Try tracker</Link>
-        <Link to="/signin">Sign In</Link>
-      </nav>
+      <Navigation />
 
       {/* <Routes>
         <Route path="/signup" element={<SignUpPage />} />
