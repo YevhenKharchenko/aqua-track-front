@@ -13,6 +13,7 @@
     "@reduxjs/toolkit": "^2.2.3",
     "axios": "^1.6.8",
     "clsx": "^2.1.1",
+    "date-fns": "^3.6.0",
     "modern-normalize": "^2.0.0",
     "nanoid": "^5.0.6",
     "react": "^18.2.0",

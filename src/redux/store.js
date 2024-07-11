@@ -16,7 +16,7 @@ import { authReducer } from './auth/slice';
 const authPersistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['token'],
+  whitelist: ['accessToken', 'refreshToken'],
 };
 
 export const store = configureStore({
@@ -24,12 +24,14 @@ export const store = configureStore({
     contacts: waterReducer,
     auth: persistReducer(authPersistConfig, authReducer),
   },
-  middleware: getDefaultMiddleware =>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
 });
+
+setupAxiosInterceptors(store);
 
 export const persistor = persistStore(store);
