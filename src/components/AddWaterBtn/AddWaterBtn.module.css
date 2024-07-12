@@ -18,10 +18,19 @@
   align-self: flex-end;
 }
 
+.btnContainer:hover {
+  color: #9be1a0;
+}
+
 .icon {
   stroke: #fff;
   width: 16px;
   height: 16px;
+}
+
+.icon:active,
+.icon:hover {
+  stroke: #9be1a0;
 }
 
 @media (min-width: 768px) {
