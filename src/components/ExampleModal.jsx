@@ -1,5 +1,6 @@
 import { useModal } from '../hooks/useModal.jsx';
 import { useCallback } from 'react';
+import { icons as sprite } from '../assets/icons/index.js';
 
 const ModalContent = ({ onClose }) => {
   return (
@@ -24,9 +25,14 @@ const ExampleModal = () => {
   }, [setModal, closeModal]);
 
   return (
-    <button type="button" onClick={openModal}>
-      Open Modal
-    </button>
+    <>
+      <button type="button" onClick={openModal}>
+        Open Modal
+        <svg style={{ width: 20, height: 20 }}>
+          <use xlinkHref={`${sprite}#icon-arrow-right-18x18`}></use>
+        </svg>
+      </button>
+    </>
   );
 };
 

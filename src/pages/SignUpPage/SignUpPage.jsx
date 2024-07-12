@@ -4,7 +4,7 @@ import css from './SignUpPage.module.css';
 
 const SignUpPage = () => {
   return (
-    <div>
+    <div className={css.backdrop}>
       <Logo />
       <SignUpForm />
     </div>
