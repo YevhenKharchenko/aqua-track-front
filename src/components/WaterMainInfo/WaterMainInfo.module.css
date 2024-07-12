@@ -1,63 +1,28 @@
 .infoContainer {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 16px;
   width: 343px;
   height: 415px;
   flex-shrink: 0;
   border-radius: 30px;
   background: #9be1a0 url(../../assets/images/transparent_bottle_for_water_1.png) no-repeat center
     50px/262px 335px;
-
-  /* background-position: center 50px; /* Center horizontally and 50px from top */
-  /* background-size: 262px 335px; Fixed size of the background image */
-}
-
-.dailyNormaContainer {
-  margin-top: 122px;
-  margin-left: 16px;
-}
-
-.progressBarContainer {
-  margin-bottom: 120px;
-  align-self: center;
-}
-
-.addWaterBtn {
-  margin-right: 16px;
-  margin-bottom: 32px;
-  align-self: flex-end;
 }
 
 @media (min-width: 768px) {
   .infoContainer {
     width: 704px;
     height: 578px;
-    margin: 32px;
-  }
-  .dailyNormaContainer {
-    margin-top: 157px;
-    margin-left: 32px;
-  }
-  .progressBarContainer {
-    margin-bottom: 150px;
-  }
-  .addWaterBtn {
-    margin-right: 32px;
-    margin-bottom: 64px;
+    background: #9be1a0 url(../../assets/images/transparent_bottle_for_water_1.png) no-repeat center
+      69px/374px 477px;
   }
 }
+
 @media (min-width: 1440px) {
   .infoContainer {
     width: 672px;
     height: 736px;
-  }
-  .dailyNormaContainer {
-    margin-left: 64px;
-  }
-  .progressBarContainer {
-    margin-bottom: 180px;
+    background: #9be1a0 url(../../assets/images/transparent_bottle_for_water_1.png) no-repeat center
+      92px/472px 604px;
   }
 }

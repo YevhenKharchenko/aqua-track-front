@@ -1,26 +1,27 @@
 //import currentIntake
 //import dailyNormValue
 import css from './WaterProgressBar.module.css';
-import ProgressBar from 'react-bootstrap/ProgressBar';
+import { Line } from 'react-progressbar.js';
 
-const WaterProgressBar = () => {
-  // Suppose we get the current consumption and daily rate from props or context
-  let currentIntake; //example: 1000ml
-  let dailyNormValue; // example: 2000ml
-
+const WaterProgressBar = ({ currentIntake, dailyNormValue }) => {
   const progress = (currentIntake / dailyNormValue) * 100;
+
+  const options = {
+    color: '#9BE1A0',
+    strokeWidth: 9,
+    trailColor: '#e0e0e0',
+    trailWidth: 9,
+  };
 
   return (
     <div className={css.progressBarContainer}>
       <h3 className={css.progressTitle}>Today</h3>
-      <ProgressBar className={css.progressBar} now={progress} />
-      <div className={css.percentage}>
-        <ul>
-          <li>0%</li>
-          <li>50%</li>
-          <li>100%</li>
-        </ul>
-      </div>
+      <Line progress={progress / 100} options={options} initialAnimate={true} />
+      <ul className={css.percentageList}>
+        <li>0%</li>
+        <li>50%</li>
+        <li>100%</li>
+      </ul>
     </div>
   );
 };

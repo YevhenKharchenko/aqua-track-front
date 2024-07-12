@@ -1,9 +1,12 @@
 .normaContainer {
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   width: 102px;
-  height: 54px;
+  margin-top: 122px;
+  margin-left: 16px;
+  margin-bottom: 49px;
   padding: 12px;
-  align-items: center;
   border-radius: 15px;
   background: #fff;
   box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.1);
@@ -27,7 +30,10 @@
   .normaContainer {
     padding: 14px 18px;
     width: 129px;
-    height: 78px;
+    gap: 4px;
+    margin-top: 157px;
+    margin-left: 32px;
+    margin-bottom: 87px;
   }
   .normaTitle {
     font-size: 12px;
@@ -37,5 +43,12 @@
   .normaValue {
     font-size: 15px;
     line-height: 1.49 em;
+  }
+}
+
+@media (min-width: 1440px) {
+  .normaContainer {
+    margin-left: 64px;
+    margin-bottom: 215px;
   }
 }
