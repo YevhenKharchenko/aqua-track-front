@@ -47,8 +47,21 @@
   padding-left: 16px;
   letter-spacing: -0.01em;
   background-color: transparent;
+
+  padding-right: 40px;
 }
+.signupInput.error {
+  border-color: red;
+  color: red;
+}
+.errorMessage {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
 .signupInputWrap {
+  position: relative;
   padding-top: 8px;
 }
 .signupBtn {
@@ -58,35 +71,49 @@
   height: 50px;
   background-color: #9be1a0;
   font-family: var(--font-family);
-font-weight: 700;
-font-size: 14px;
-line-height: 129%;
-letter-spacing: -0.01em;
-color: #323f47;
-display: flex;
-justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: #323f47;
+  display: flex;
+  justify-content: center;
 }
 .signupBtn:hover,
 .signupBtn:focus {
-    background-color: #87d28d;
+  background-color: #87d28d;
 }
 .btnWrap {
-    padding-top: 32px;
+  padding-top: 32px;
 }
 .textWrap {
-    font-family: var(--font-family);
-font-weight: 400;
-font-size: 14px;
-line-height: 129%;
-letter-spacing: -0.01em;
-color: rgba(47, 47, 47, 0.5);
-padding-top: 16px;
-text-align: center;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: rgba(47, 47, 47, 0.5);
+  padding-top: 16px;
+  text-align: center;
 }
 .linkText {
-    font-weight: 700;
-text-decoration: underline;
-text-decoration-skip-ink: none;
-color: #2f2f2f;
-padding-left: 3px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: #2f2f2f;
+  padding-left: 3px;
+}
+.passwordToggleIcon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-30%);
+  cursor: pointer;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .passwordToggleIcon {
+    display: block;
+  }
 }
