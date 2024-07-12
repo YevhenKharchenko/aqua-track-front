@@ -1,0 +1,99 @@
+.content {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+@media screen and (min-width: 1440px) {
+    .content {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+}
+
+.icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    stroke: var(--dark);
+    fill: transparent;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 24px;
+    color: var(--dark-blue);
+    text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+    .title {
+        font-size: 28px;
+        line-height: 1.14;
+    }
+}
+
+.subscription {
+    font-size: 14px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--dark-blue);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+    .subscription {
+        font-size: 18px;
+    }
+}
+
+.btnDelete {
+    margin-bottom: 10px;
+    min-width: 270px;
+}
+
+@media screen and (min-width: 375px) {
+    .btnDelete {
+        min-width: 300px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .btnDelete {
+        margin-bottom: 0px;
+        min-width: 170px;
+    }
+}
+
+.btnCancel {
+    min-width: 270px;
+    background-color: #f0eff4;
+}
+
+@media screen and (min-width: 375px) {
+    .btnCancel {
+        min-width: 300px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .btnCancel {
+        min-width: 170px;
+    }
+}
+
+.btnCancel:hover,
+.btnCancel:focus {
+    background-color: gray;
+}
+
+@media screen and (min-width: 768px) {
+    .wrapBtn {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+    }
+}
