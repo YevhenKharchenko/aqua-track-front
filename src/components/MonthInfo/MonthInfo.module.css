@@ -1,0 +1,10 @@
+.calendar {
+    background-color: #f0eff4;
+    padding: 46px 0;
+    max-height: 431px;
+  }
+  @media (--tablet-bp) {
+    .calendar {
+      padding-bottom: 35px;
+    }
+  }
