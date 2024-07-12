@@ -1,0 +1,73 @@
+.progressBarContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 198px;
+  align-self: center;
+  margin-bottom: 42px;
+  background-color: #fff;
+  box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  padding: 12px;
+  position: relative;
+}
+
+.progressTitle {
+  color: #323f47;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1em;
+}
+
+.progressBar {
+  width: 100%;
+  height: 6px;
+  background-color: #d3d3d3;
+  border-radius: 9px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progressBarFill {
+  height: 100%;
+  border-radius: 9px;
+  background-color: #9be1a0;
+  transition: width 0.4s ease;
+}
+
+.progressBarFill::after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+  stroke: #9be1a0;
+  stroke-width: 1px;
+  border-radius: 50%;
+  position: absolute;
+  top: -1.5px; /* Adjust to center the circle vertically */
+  right: -6px; /* Adjust to center the circle horizontally */
+}
+
+.percentageList {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 8px;
+  color: rgba(47, 47, 47, 0.6);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1em;
+}
+
+@media (min-width: 768px) {
+  .progressBarContainer {
+    margin-bottom: 26px;
+    width: 295px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .progressBarContainer {
+    margin-bottom: 56px;
+  }
+}

@@ -1,0 +1,28 @@
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  width: 343px;
+  height: 415px;
+  flex-shrink: 0;
+  border-radius: 30px;
+  background: #9be1a0 url(../../assets/images/transparent_bottle_for_water_1.png) no-repeat center
+    50px/262px 335px;
+}
+
+@media (min-width: 768px) {
+  .infoContainer {
+    width: 704px;
+    height: 578px;
+    background: #9be1a0 url(../../assets/images/transparent_bottle_for_water_1.png) no-repeat center
+      69px/374px 477px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .infoContainer {
+    width: 672px;
+    height: 736px;
+    background: #9be1a0 url(../../assets/images/transparent_bottle_for_water_1.png) no-repeat center
+      92px/472px 604px;
+  }
+}
