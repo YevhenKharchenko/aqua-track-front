@@ -1,0 +1,23 @@
+.progressBarContainer {
+  display: inline-flex;
+  width: 100%;
+  max-width: 300px;
+  background-color: #fff;
+  box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  padding: 12px;
+  position: relative;
+}
+
+.progressTitle {
+  color: #323f47;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1em;
+}
+.progressBar {
+  width: 174px;
+  height: 6px;
+  border-radius: 9px;
+  background-color: #f0eff4;
+}

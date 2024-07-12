@@ -1,5 +1,7 @@
 .normaContainer {
   display: inline-flex;
+  width: 102px;
+  height: 54px;
   padding: 12px;
   align-items: center;
   border-radius: 15px;
@@ -10,7 +12,6 @@
 .normaTitle {
   color: rgba(47, 47, 47, 0.6);
   font-size: 10px;
-  font-style: normal;
   font-weight: 400;
   line-height: 1em;
 }
@@ -18,7 +19,23 @@
 .normaValue {
   color: #323f47;
   font-size: 14px;
-  font-style: normal;
   font-weight: 700;
   line-height: 1em;
+}
+
+@media (min-width: 768px) {
+  .normaContainer {
+    padding: 14px 18px;
+    width: 129px;
+    height: 78px;
+  }
+  .normaTitle {
+    font-size: 12px;
+    line-height: 1.87 em;
+  }
+
+  .normaValue {
+    font-size: 15px;
+    line-height: 1.49 em;
+  }
 }
