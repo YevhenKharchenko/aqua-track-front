@@ -11,6 +11,7 @@ import SignUpPage from './pages/SignUpPage/SignUpPage.jsx';
 import SignInPage from './pages/SignInPage/SignInPage.jsx';
 import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
 import ExampleModal from './components/ExampleModal.jsx';
+import WaterDetailedInfo from './components/WaterDetailedInfo/WaterDetailedInfo';
 
 function App() {
   return (

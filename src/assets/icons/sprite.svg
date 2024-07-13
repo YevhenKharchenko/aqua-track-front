@@ -112,5 +112,8 @@
 <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.7429" d="M22.349 10.921l-6.349-6.349-6.349 6.349"></path>
 <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.7429" d="M16 4.571v15.238"></path>
 </symbol>
+<symbol id="icon-settings" viewBox="0 0 32 32">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3" d="M16 20c2.209 0 4-1.791 4-4s-1.791-4-4-4c-2.209 0-4 1.791-4 4s1.791 4 4 4z"></path>
+</symbol>
 </defs>
 </svg>

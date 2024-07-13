@@ -1,17 +1,15 @@
 import css from './UserBar.module.css';
+import avatar from '../../assets/images/avatar.png';
+import { forwardRef } from 'react';
+
 // add props:name(useremail), avatar
-const UserBar = ({ onClick }) => {
+const UserBar = forwardRef((props, ref) => {
+  const { togglePopover } = props;
   return (
-    <div className={css.tabletThumb}>
-      <button onClick={onClick} className={css.userBarBtn} type="button">
+    <div ref={ref} onClick={togglePopover} className={css.tabletThumb}>
+      <button className={css.userBarBtn} type="button">
         <p className={css.greetNameText}>Nadia</p>
-        <img
-          className={css.avatar}
-          src="./src/assets/images/avatar.png"
-          width="38"
-          height="38"
-          alt="User's avatar"
-        />
+        <img className={css.avatar} src={avatar} width="38" height="38" alt="User's avatar" />
         <svg width="16" height="16">
           <use
             className={css.iconArrowUp}
@@ -21,5 +19,7 @@ const UserBar = ({ onClick }) => {
       </button>
     </div>
   );
-};
+});
+
+UserBar.displayName = 'UserBar';
 export default UserBar;

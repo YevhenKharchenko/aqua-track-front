@@ -1,0 +1,51 @@
+.waterInfoList {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 24px;
+  overflow-x: auto;
+}
+
+.waterInfoList::-webkit-scrollbar {
+  height: 8px;
+}
+.waterInfoList::-webkit-scrollbar-track {
+  background-color: #fff;
+  border-radius: 9px;
+}
+
+.waterInfoList::-webkit-scrollbar-thumb {
+  background-color: #323f47;
+  border-radius: 9px;
+}
+
+@media (min-width: 768px) {
+  .waterInfoList {
+    gap: 16px;
+  }
+}
+
+.waterItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 9px;
+  height: 74px;
+  flex: 0 1 calc((100% - 8px) / 2);
+  /* max-width: 147px; */
+  min-width: calc((100% - 8px) / 2);
+  padding: 18px 14px;
+  border-radius: 15px;
+  background-color: #fff;
+}
+
+@media (min-width: 768px) {
+  .waterItem {
+    gap: 20px;
+    padding: 20px;
+    flex: 0 1 calc((100% - 2 * 32px) / 3);
+    min-width: calc((100% - 2 * 32px) / 3);
+    /* max-width: 191px; */
+    height: 86px;
+  }
+}

@@ -1,0 +1,61 @@
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  column-gap: 6px;
+  width: 50px;
+  height: 32px;
+}
+.waterVolum {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1;
+}
+
+@media (min-width: 768px) {
+  .waterVolum {
+    font-size: 15px;
+    line-height: 1.49;
+  }
+}
+
+.time {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1;
+  color: rgba(47, 47, 47, 0.6);
+}
+
+@media (min-width: 768px) {
+  .time {
+    line-height: 1.87;
+  }
+}
+.iconThumb {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+@media (min-width: 768px) {
+  .iconThumb {
+    gap: 14px;
+  }
+}
+
+@media (min-width: 768px) {
+  .iconEdit,
+  .iconTrash {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.iconEdit,
+.iconTrash {
+  fill: #fff;
+  stroke: #323f47;
+}
+
+.iconGlass {
+  display: inline-block;
+}
