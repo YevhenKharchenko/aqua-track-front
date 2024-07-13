@@ -1,23 +1,27 @@
-export const selectWater = (state) => state.water;
+export const selectIsLoggedIn = (state) => state.user.isLoggedIn;
+
+export const selectUser = (state) => {
+  return state.user.userInfo;
+};
 
 export const selectIsRefreshing = (state) => state.user.isRefreshing;
 
-export const selectIsLoggedIn = (state) => state.user.isLoggedIn;
+export const selectAccessToken = (state) => state.user.accessToken;
 
-export const selectUser = (state) => state.user.user;
+export const selectRefreshToken = (state) => state.user.refreshToken;
 
-export const selectTotalDayWater = (state) => state.water.totalDayWater;
+export const selectUserError = (state) => state.user.error;
 
-export const selectWaterItems = (state) => state.water.items;
+export const selectUserAvatar = (state) => state.user.userInfo.avatar;
 
-export const selectWaterDate = (state) => state.water.date;
+export const selectWaterPerDay = (state) => state.water.waters.waterPerDay;
 
-export const selectWaterLoading = (state) => state.water.loading;
+export const selectWaterPerMonth = (state) => state.water.waters.waterPerMonth;
 
-export const selectUserLoading = (state) => state.user.loading;
+export const selectLoading = (state) => state.water.loading;
 
-export const selectMonthWater = (state) => state.water.monthItems;
+export const selectError = (state) => state.water.error;
 
-export const selectDesiredVolume = (state) => state.user.user.desiredVolume;
+export const selectActiveDay = (state) => state.water.activeDay;
 
-export const selectIsResendEmail = (state) => state.user.isResendVerify;
+export const selectCurrentDate = (state) => state.water.currentDate;

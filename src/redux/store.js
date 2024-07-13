@@ -10,20 +10,26 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { waterReducer } from './water/slice';
-import { authReducer } from './auth/slice';
-import { setupAxiosInterceptors } from './auth/operations.js';
 
-const authPersistConfig = {
-  key: 'auth',
+import { userReducer } from './auth/slice.js';
+import { waterReducer } from './water/slice.js';
+
+const userPersistConfig = {
+  key: 'user',
   storage,
-  whitelist: ['accessToken', 'refreshToken'],
+  whitelist: [],
+};
+
+const waterPersistConfig = {
+  key: 'water',
+  storage,
+  whitelist: [],
 };
 
 export const store = configureStore({
   reducer: {
-    contacts: waterReducer,
-    auth: persistReducer(authPersistConfig, authReducer),
+    user: persistReducer(userPersistConfig, userReducer),
+    water: persistReducer(waterPersistConfig, waterReducer),
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
@@ -32,7 +38,5 @@ export const store = configureStore({
       },
     }),
 });
-
-setupAxiosInterceptors(store);
 
 export const persistor = persistStore(store);

@@ -1,0 +1,16 @@
+.container {
+  background-image: url('../../assets/images/Rectangle19_mob-min.png');
+  background-size: cover;
+  background-position: center;
+  border-radius: 30px;
+  width: 343px;
+  height: 353px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    background-image: url('../../assets/images/Rectangle19_tab-min.png');
+    width: 704px;
+height: 446px;
+  }
+}
