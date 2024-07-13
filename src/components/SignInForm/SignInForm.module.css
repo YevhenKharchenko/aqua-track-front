@@ -160,3 +160,11 @@ color: #ef5050;
 }
 
 
+@media (min-width: 1440px) {
+  .container {
+    padding-top: 113px;
+    padding-bottom: 169px;
+    padding-left: 86px;
+  }
+}
+
