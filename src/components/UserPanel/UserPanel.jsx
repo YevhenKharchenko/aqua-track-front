@@ -12,6 +12,13 @@ const UserPanel = () => {
   };
 
   useEffect(() => {
+    if (isPopoverOpen) {
+      // Log popoverRef.current to see the value after each render
+      console.log('Popover Ref:', popoverRef.current);
+    }
+  }, [isPopoverOpen]);
+
+  useEffect(() => {
     const handleClickOutside = event => {
       if (
         popoverRef.current &&
@@ -35,6 +42,7 @@ const UserPanel = () => {
         Hello, <span className={css.greetName}>Nadia</span>
       </h2>
       <UserBar ref={userBarRef} togglePopover={togglePopover} />
+
       {isPopoverOpen && (
         <UserBarPopover ref={popoverRef} userBarRef={userBarRef} isOpen={isPopoverOpen} />
       )}

@@ -2,7 +2,6 @@ import { usePopper } from 'react-popper';
 import clsx from 'clsx';
 import css from './UserBarPopover.module.css';
 import { forwardRef } from 'react';
-// import { useEffect } from 'react';
 
 const UserBarPopover = forwardRef((props, ref) => {
   const { isOpen, userBarRef } = props;
@@ -11,21 +10,20 @@ const UserBarPopover = forwardRef((props, ref) => {
     placement: 'bottom-start', // Adjust placement as needed
   });
 
-  // useEffect(() => {
-  //   if (isOpen && update) {
-  //     update();
-  //   }
-  // }, [isOpen, update]);
   return (
     <>
       {isOpen && (
         <div
-          className={clsx(css.popover, { [css.popoverHidden]: !isOpen })}
-          ref={ref}
+          // className={clsx(css.popover, { [css.popoverHidden]: !isOpen })}
+          className={css.popover}
           style={styles.popper}
           {...attributes.popper}
         >
-          <button className={css.popoverBtn} type="button">
+          <button
+            className={clsx(css.popoverBtn, { [css.popoverHidden]: !isOpen })}
+            ref={ref}
+            type="button"
+          >
             <svg width="16" height="16">
               <use
                 className={css.iconSettings}

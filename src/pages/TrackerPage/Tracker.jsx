@@ -1,7 +1,13 @@
-import css from './Tracker.module.css';
+// import css from './Tracker.module.css';
+import WaterDetailedInfo from '../../components/WaterDetailedInfo';
 
 const Tracker = () => {
-  return <div>Tracker</div>;
+  return (
+    <div>
+      {/* <WaterMainInfo/> */}
+      <WaterDetailedInfo />
+    </div>
+  );
 };
 
 export default Tracker;

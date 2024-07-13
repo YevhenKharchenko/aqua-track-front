@@ -6,8 +6,8 @@ import { forwardRef } from 'react';
 const UserBar = forwardRef((props, ref) => {
   const { togglePopover } = props;
   return (
-    <div ref={ref} onClick={togglePopover} className={css.tabletThumb}>
-      <button className={css.userBarBtn} type="button">
+    <div className={css.tabletThumb}>
+      <button className={css.userBarBtn} ref={ref} onClick={togglePopover} type="button">
         <p className={css.greetNameText}>Nadia</p>
         <img className={css.avatar} src={avatar} width="38" height="38" alt="User's avatar" />
         <svg width="16" height="16">
