@@ -22,7 +22,7 @@ const ExampleModal = () => {
   }, [setModal]);
 
   const openModal = useCallback(() => {
-    setModal(<ExampleWaterModal onClose={closeModal} />);
+    setModal(<ExampleWaterModal onClose={closeModal} operation="add" />);
   }, [setModal, closeModal]);
 
   return (
