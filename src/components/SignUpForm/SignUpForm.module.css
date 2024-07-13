@@ -33,9 +33,8 @@
   border: 1px solid rgba(47, 47, 47, 0.2);
   outline: none;
   display: flex;
-  width: 100%;
+  width: 311px;
   height: 50px;
-  color: rgba(47, 47, 47, 0.6);
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -43,8 +42,10 @@
   padding-left: 16px;
   letter-spacing: -0.01em;
   background-color: transparent;
-
   padding-right: 40px;
+}
+.signupInput::placeholder {
+  color: rgba(47, 47, 47, 0.6);
 }
 .signupInput.error {
   border-color: #ef5050;
@@ -94,7 +95,7 @@ color: #ef5050;
   letter-spacing: -0.01em;
   color: rgba(47, 47, 47, 0.5);
   padding-top: 16px;
-  text-align: center;
+  padding-left: 50.5px;
 }
 .linkText {
   font-weight: 700;
@@ -113,7 +114,47 @@ color: #ef5050;
 }
 
 @media (min-width: 768px) {
+  .container {
+    padding-top: 171px;
+    padding-bottom: 227px;
+    padding-left: 102px;
+  }
+  .header {
+    font-size: 36px;
+    line-height: 106%;
+    letter-spacing: -0.01em;
+  }
+  .label {
+    font-size: 16px;
+    line-height: 150%;
+  }
+  .signupInput {
+    width: 436px;
+    height: 56px;
+    font-size: 16px;
+    line-height: 150%;
+    padding-right: 40px;
+  }
+  .signupFormEmail {
+    width: 434px;
+  }
+  .signupFormPass {
+    width: 434px;
+    padding-top: 20px;
+  }
+  .textWrap {
+    font-size: 16px;
+    line-height: 150%;
+    padding-left: 98px;
+  }
   .passwordToggleIcon {
     display: block;
+  }
+  .signupBtn {
+    padding: 18px 189px;
+    width: 436px;
+    height: 60px;
+    font-size: 16px;
+    line-height: 150%;
   }
 }

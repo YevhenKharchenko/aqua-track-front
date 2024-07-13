@@ -33,7 +33,7 @@
   border: 1px solid rgba(47, 47, 47, 0.2);
   outline: none;
   display: flex;
-  width: 100%;
+  width: 311px;
   height: 50px;
   color: #323f47;
   font-size: 14px;
@@ -82,7 +82,7 @@
   letter-spacing: -0.01em;
   color: rgba(47, 47, 47, 0.5);
   padding-top: 16px;
-  text-align: center;
+  padding-left: 45.5px;
 }
 .linkText {
   font-weight: 700;
@@ -114,8 +114,49 @@ color: #ef5050;
 }
 
 @media (min-width: 768px) {
+  .container {
+    padding-top: 225px;
+    padding-bottom: 281px;
+    padding-left: 102px;
+  }
+  .header {
+    font-size: 36px;
+    line-height: 106%;
+    letter-spacing: -0.01em;
+  }
+  .label {
+    font-size: 16px;
+    line-height: 150%;
+  }
+  .signupInput {
+    width: 436px;
+    height: 56px;
+    font-size: 16px;
+    line-height: 150%;
+    padding-right: 40px;
+  }
+  .signupFormEmail {
+    width: 434px;
+  }
+  .signupFormPass {
+    width: 434px;
+    padding-top: 20px;
+  }
+  .textWrap {
+    font-size: 16px;
+    line-height: 150%;
+    padding-left: 92px;
+  }
   .passwordToggleIcon {
     display: block;
   }
+  .signupBtn {
+    padding: 18px 189px;
+    width: 436px;
+    height: 60px;
+    font-size: 16px;
+    line-height: 150%;
+  }
 }
+
 
