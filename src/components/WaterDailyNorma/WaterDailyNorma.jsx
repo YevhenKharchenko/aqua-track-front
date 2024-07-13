@@ -1,10 +1,13 @@
+import { useSelector } from 'react-redux';
 import css from './WaterDailyNorma.module.css';
-//import dailyNormValue!!!!
+import { selectWaterPerDay } from '../../redux/selectors';
+
 const WaterDailyNorma = () => {
-  let dailyNormValue = 1.5; // need import from setting modal
+  //const dailyNormValue = useSelector(selectWaterPerDay);
+  const dailyNormValue = 1.5;
 
   return (
-    <div className={css.normaContainer}>
+    <div className={css.dailyNormaWrapper}>
       <p className={css.normaValue}>{dailyNormValue} L</p>
       <p className={css.normaTitle}>My daily norma</p>
     </div>

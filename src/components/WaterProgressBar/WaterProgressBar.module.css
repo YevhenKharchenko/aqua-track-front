@@ -35,7 +35,7 @@
   transition: width 0.4s ease;
 }
 
-.progressBarFill::after {
+/* .progressBarFill::after {
   content: '';
   width: 12px;
   height: 12px;
@@ -44,9 +44,9 @@
   stroke-width: 1px;
   border-radius: 50%;
   position: absolute;
-  top: -1.5px; /* Adjust to center the circle vertically */
-  right: -6px; /* Adjust to center the circle horizontally */
-}
+  top: -1.5px; 
+  right: -6px; 
+} */
 
 .percentageList {
   display: flex;

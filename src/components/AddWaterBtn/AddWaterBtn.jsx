@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import css from './AddWaterBtn.module.css';
 import WaterModal from '../WaterModal/WaterModal';
+import sprite from '../../assets/icons/sprite.svg';
 const AddWaterBtn = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -15,7 +16,7 @@ const AddWaterBtn = () => {
     <>
       <button type="button" className={css.btnContainer} onClick={handleOpenModal}>
         <svg className={css.icon}>
-          <use href="../../assets/icons/sprite.svg#icon-plus16x16"></use>
+          <use href={`${sprite}#icon-plus16x16`}></use>
         </svg>
         Add water
       </button>
