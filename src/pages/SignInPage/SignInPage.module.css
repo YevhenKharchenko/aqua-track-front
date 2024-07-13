@@ -4,4 +4,13 @@
     padding-left: 16px;
     padding-top: 24px;
     padding-bottom: 24px;
+    max-width: 343px;
+  }
+
+  @media (min-width: 768px) {
+    .backdrop {
+      padding-left: 32px;
+      padding-top: 32px;
+      max-width: 704px;
+    }
   }

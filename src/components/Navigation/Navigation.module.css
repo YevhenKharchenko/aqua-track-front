@@ -24,26 +24,48 @@
 }
 .navBtnUp:hover,
 .navBtnUp:focus {
-    background-color: #87d28d;
+  background-color: #87d28d;
 }
 .navBtnIn {
-    border: 1px solid #323f47;
-border-radius: 30px;
-padding: 14px 28px;
-width: 104px;
-height: 46px;
-font-family: var(--font-family);
-font-weight: 700;
-font-size: 14px;
-line-height: 129%;
-letter-spacing: -0.01em;
-text-align: center;
-color: #323f47;
-display: flex;
+  border: 1px solid #323f47;
+  border-radius: 30px;
+  padding: 14px 28px;
+  width: 104px;
+  height: 46px;
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #323f47;
+  display: flex;
   justify-content: center;
 }
 .navBtnIn:hover,
 .navBtnIn:focus {
-    border: 1px solid #87d28d;
-    color: #87d28d;
+  border: 1px solid #87d28d;
+  color: #87d28d;
+}
+
+@media (min-width: 768px) {
+  .navlist {
+    gap: 16px;
+    padding-left: 32px;
+  }
+  .navBtnUp {
+    border-radius: 30px;
+    padding: 18px 40px;
+    width: 169px;
+    height: 60px;
+    font-size: 16px;
+    line-height: 150%;
+  }
+  .navBtnIn {
+    padding: 18px 40px;
+    width: 135px;
+    height: 60px;
+    font-size: 16px;
+    line-height: 150%;
+  }
 }
