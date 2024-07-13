@@ -1,0 +1,73 @@
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 30px;
+    padding: 14px 19px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18.06px;
+    letter-spacing: -0.01em;
+    text-align: center;
+    cursor: pointer;
+}
+
+.btn:disabled,
+.btn[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.primary {
+    background-color: var(--accent-color);
+    font-family: var(--font-family);
+    color: var(--main-color);
+    transition: background-color 0.3s ease;
+}
+
+.primary:is(:hover, :focus) {
+    background-color: var(--accent-color-hover);
+}
+
+.outline {
+    border: 1px solid var(--main-color);
+    background-color: transparent;
+    font-family: var(--font-family);
+    color: var(--main-color);
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.outline:is(:hover, :focus) {
+    border-color: var(--accent-color-hover);
+    color: var(--accent-color-hover);
+}
+
+.secondary {
+    padding: 18px 30px;
+    background-color: var(--main-color);
+    color: var(--main-white);
+    transition: color 0.3s ease;
+}
+
+.secondary:is(:hover, :focus) {
+    color: var(--accent-color-hover);
+}
+
+.default {
+    background-color: var(--background-white);
+    color: var(--main-color-rgba);
+    transition: color 0.3s ease;
+}
+
+.default:is(:hover, :focus) {
+    color: var(--main-color);
+}
+
+@media only screen and (min-width: 768px) {
+    .btn {
+        padding: 18px 40px;
+        font-size: 16px;
+        line-height: 1.5;
+    }
+}
