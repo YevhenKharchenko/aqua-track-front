@@ -1,9 +1,10 @@
 .container {
-  background-color: #ffffff;
+  background-color: #fff;
   padding: 40px 20px;
   position: relative;
   width: 343px;
   border-radius: 15px;
+  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
 }
 
 .closeBtn {
@@ -138,4 +139,81 @@
   letter-spacing: -0.01em;
   text-align: center;
   color: #323f47;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 40px 40px;
+    width: 518px;
+    height: 555px;
+  }
+
+  .closeBtn {
+    right: 20px;
+  }
+
+  .closeIcon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .modalTitle {
+    font-size: 28px;
+    line-height: 1.14286;
+    width: 347px;
+  }
+
+  .modalText {
+    font-size: 18px;
+    line-height: 1.33333;
+  }
+
+  .amountText {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .quantityIcon {
+    width: 43px;
+    height: 43px;
+  }
+
+  .itemQuantity {
+    width: 86px;
+    height: 43px;
+  }
+
+  .quantitySpan {
+    font-size: 15px;
+    line-height: 1.49333;
+  }
+
+  .labelTime {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .labelValue {
+    font-size: 18px;
+    line-height: 1.33333;
+  }
+
+  .modalInput {
+    padding: 16px 16px;
+    width: 438px;
+    height: 56px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .saveBtn {
+    padding: 18px 50px;
+    width: 141px;
+    height: 60px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+@media (min-width: 1440px) {
 }
