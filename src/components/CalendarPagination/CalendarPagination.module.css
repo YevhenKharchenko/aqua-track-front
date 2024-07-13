@@ -95,7 +95,72 @@
     .statisticBtn img {
       width: 24px;
       height: 24px;
-    }
+    }.container{
+      display: flex;
+      align-items: center;
+      width: 179px;
+      justify-content: space-between;
+      height: 20px;
+  }
+  
+  .text{
+      font-family: "Poppins", sans-serif;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 129%;
+      letter-spacing: -0.01em;
+      text-align: center;
+      color: #323f47;
+  }
+  
+  .button{
+      border: none;
+      background-color: transparent;
+      align-content: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  
+  .icons{
+      width: 18px;
+      height: 18px;
+      stroke: black;
+      fill: none;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+  }
+  
+  
+  @media only screen and (min-width: 320px) and (max-width: 374px) {
+  
+  }
+  
+  @media only screen and (min-width: 375px) {
+   
+  }
+  
+  @media only screen and (min-width: 768px) {
+      .container{
+          width: 205px;
+          height: 24px;
+      }
+      
+      .text{
+          font-size: 16px;
+          line-height: 150%;
+      }
+      
+      .button{
+          width: 24px;
+          height: 24px;
+      }
+  }
+  
+  @media only screen and (min-width: 1440px) {
+  
+  }
     .chooseMonth {
       gap: 20px;
     }

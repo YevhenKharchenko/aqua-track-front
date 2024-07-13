@@ -1,22 +1,19 @@
-import { useState } from 'react';
-import { CalendarPagination } from '../CalendarPagination/CalendarPagination';
-import { Calendar } from '../Calendar/Calendar';
-import css from './MonthInfo.module.css';
+import Calendar from "../Calendar/Calendar";
+import CalendarPagination from "../CalendarPagination/CalendarPagination";
 
-export const MonthInfo = () => {
-  // За замовчуванню обрана дата дорівнює поточному місяцю
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [isActive, setIsActive] = useState(true);
-  return (
-    <div className={css.calendar}>
-      <CalendarPagination
-        setIsActive={setIsActive}
-        currentDate={currentDate}
-        setCurrentDate={setCurrentDate}
-        isActive={isActive}
-      />
+import css from './MonthInfo.module.css'
 
-      {isActive ? <Calendar currentMonth={currentDate} /> : <Chart />}
-    </div>
-  );
-};
+const MonthInfo = () => {
+    return (
+        <section className={css.monthSectionInfo}>
+            <div className={css.monthPaginationContainer}>
+                <h3 className={css.monthTitle}>Month</h3>
+                <CalendarPagination />
+            </div>
+            
+            <Calendar />
+        </section>
+        )
+}
+
+export default MonthInfo;

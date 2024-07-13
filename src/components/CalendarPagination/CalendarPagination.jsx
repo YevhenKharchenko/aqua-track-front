@@ -1,72 +1,51 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentDate } from '../../redux/water/slice';
+import { fetchWaterPerMonth } from '../../redux/water/operations';
 import css from './CalendarPagination.module.css';
-import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
-import { format, addMonths, subMonths, startOfMonth } from 'date-fns';
-import { IconPie } from '../../components/icons/IconPie';
-export const CalendarPagination = ({
-  currentDate,
-  setCurrentDate,
-  isActive,
-  setIsActive,
-}) => {
-  const minDate = new Date('2024-01-01');
-  const handlePrevMonth = () => {
-    const newMonth = subMonths(currentDate, 1);
-    if (newMonth >= startOfMonth(minDate)) {
-      setCurrentDate(newMonth);
-    }
-  };
-  const handleNextMonth = () => {
-    if (currentDate < new Date()) {
-      const newMonth = addMonths(currentDate, 1);
-      setCurrentDate(newMonth);
-    }
-  };
-  const isPrevDisabled = currentDate <= startOfMonth(minDate);
-  const isNextDisabled = currentDate > new Date();
+import sprite from '../../assets/sprite.svg';
 
-  return (
-    <div className={css.paginationSection}>
-      {isActive ? (
-        <p className={css.month}>Month</p>
-      ) : (
-        <p className={css.month}>Statistic</p>
-      )}
-      <div className={css.chooseMonth}>
-        {isActive ? (
-          <>
-            <button
-              className={css.button}
-              disabled={isPrevDisabled}
-              onClick={handlePrevMonth}
-            >
-              <BsChevronLeft
-                className={isPrevDisabled ? css.chevronDisabled : css.chevron}
-              />
-            </button>
-            <span className={css.span}>
-              {format(currentDate, 'MMMM, yyyy')}
-            </span>
-            <button
-              className={isNextDisabled ? css.buttonDisabled : css.button}
-              onClick={handleNextMonth}
-              disabled={isNextDisabled}
-            >
-              <BsChevronRight
-                className={isNextDisabled ? css.chevronDisabled : css.chevron}
-              />
-            </button>
-          </>
-        ) : null}
+const months = [
+    "January", "February", "March", "April", "May", "June", 
+    "July", "August", "September", "October", "November", "December"
+];
 
-        <button
-          className={`${css.statisticBtn} ${
-            !isActive ? css.statisticBtnActive : ''
-          }`}
-          onClick={() => setIsActive(!isActive)}
-        >
-          <IconPie />
-        </button>
-      </div>
-    </div>
-  );
+const CalendarPagination = () => {
+    const dispatch = useDispatch();
+    const currentDate = useSelector(state => state.water.currentDate);
+
+    const fetchAndSetDate = (newDate) => {
+        const localDate = newDate.toLocaleDateString();
+        dispatch(setCurrentDate(newDate.getTime()));
+        dispatch(fetchWaterPerMonth(localDate));
+    };
+
+    const goToPreviousMonth = () => {
+        const newDate = new Date(currentDate);
+        newDate.setMonth(newDate.getMonth() - 1);
+        fetchAndSetDate(newDate);
+    };
+
+    const goToNextMonth = () => {
+        const newDate = new Date(currentDate);
+        newDate.setMonth(newDate.getMonth() + 1);
+        fetchAndSetDate(newDate);
+    };
+
+    return (
+        <div className={css.container}>
+            <button className={css.button} type="button" onClick={goToPreviousMonth}>
+                <svg className={css.icons}>
+                    <use width={18} height={18} xlinkHref={`${sprite}#icon-arrow-left-18x18`} />
+                </svg>
+            </button>
+            <p>{months[new Date(currentDate).getMonth()]}, {new Date(currentDate).getFullYear()}</p>
+            <button className={css.button} type="button" onClick={goToNextMonth}>
+                <svg className={css.icons}>
+                    <use width={18} height={18} xlinkHref={`${sprite}#icon-arrow-right-18x18`} />
+                </svg>
+            </button>
+        </div>
+    );
 };
+
+export default CalendarPagination;
