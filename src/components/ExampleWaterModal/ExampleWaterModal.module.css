@@ -1,0 +1,141 @@
+.container {
+  background-color: #ffffff;
+  padding: 40px 20px;
+  position: relative;
+  width: 343px;
+  border-radius: 15px;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 16px;
+}
+
+.closeIcon {
+  width: 24px;
+  height: 24px;
+  stroke: #2f2f2f;
+}
+
+.modalTitle {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #323f47;
+  margin-bottom: 24px;
+  width: 248px;
+}
+
+.modalText {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #323f47;
+  margin-bottom: 20px;
+}
+
+.amountText {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+  margin-bottom: 8px;
+}
+
+.quantityWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.quantityIcon {
+  width: 40px;
+  height: 40px;
+  fill: #ffffff;
+  stroke: #2f2f2f;
+}
+
+.itemQuantity {
+  background-color: #323f47;
+  width: 81px;
+  height: 40px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantitySpan {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
+  color: #fff;
+}
+
+.waterForm {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.labelTime {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+}
+
+.labelValue {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #323f47;
+}
+
+.modalInput {
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  border-radius: 15px;
+  padding: 14px 16px;
+  width: 303px;
+  height: 46px;
+  margin-top: 8px;
+  outline: none;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+}
+
+.saveBtn {
+  border-radius: 30px;
+  padding: 14px 40px;
+  width: 116px;
+  height: 46px;
+  background: #9be1a0;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #323f47;
+}

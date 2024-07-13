@@ -1,6 +1,7 @@
 import { useModal } from '../hooks/useModal.jsx';
 import { useCallback } from 'react';
 import { icons as sprite } from '../assets/icons/index.js';
+import ExampleWaterModal from './ExampleWaterModal/ExampleWaterModal.jsx';
 
 const ModalContent = ({ onClose }) => {
   return (
@@ -21,7 +22,7 @@ const ExampleModal = () => {
   }, [setModal]);
 
   const openModal = useCallback(() => {
-    setModal(<ModalContent onClose={closeModal} />);
+    setModal(<ExampleWaterModal onClose={closeModal} />);
   }, [setModal, closeModal]);
 
   return (
