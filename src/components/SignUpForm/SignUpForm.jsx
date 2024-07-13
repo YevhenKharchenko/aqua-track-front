@@ -14,7 +14,6 @@ const SignUpForm = () => {
 
 //   dispatch(
 //     register({
-//       name: form.elements.name.value,
 //       email: form.elements.email.value,
 //       password: form.elements.password.value,
 //     })
