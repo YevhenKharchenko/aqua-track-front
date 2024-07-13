@@ -1,232 +1,119 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { refreshTokens } from './slice.js';
+import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const axiosInstance = axios.create({
-//   baseURL: 'https://адрес бк',
-});
-
-//  add JWT
-const setAuthHeader = (token) => {
-  axiosInstance.defaults.headers.common.Authorization = `Bearer ${token}`;
+export const SetAuthHeader = (token) => {
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
-//  remove JWT
-const clearAuthHeader = () => {
-  axiosInstance.defaults.headers.common.Authorization = '';
+const ClearAuthHeader = () => {
+  axios.defaults.headers.common.Authorization = "";
 };
 
-export const setupAxiosInterceptors = (store) => {
-  axiosInstance.interceptors.response.use(
-    (response) => response,
-    async (error) => {
-      if (error.response.status === 401) {
-        try {
-          const { refreshToken } = store.getState().user;
-          if (refreshToken) {
-            const { data } = await axiosInstance.post(
-              '/users/current/refresh',
-              {
-                refreshToken,
-              }
-            );
-            await setAuthHeader(data.accessToken);
-            await store.dispatch(refreshTokens(data));
-            error.config.headers.authorization = `Bearer ${data.accessToken}`;
-          }
+axios.defaults.baseURL = "https://"; //адрес бк
 
-          return axios.request(error.config);
-        } catch (error) {
-          return Promise.reject(error);
-        }
+
+axios.interceptors.response.use(res => res, async (err) => {
+  const originalRequest = err.config;
+
+  if (err.response.status === 401 && !originalRequest._retry) {
+    originalRequest._retry = true;
+
+    const refreshToken = localStorage.getItem("refreshToken");
+
+    if (refreshToken.length > 0) {
+      try {
+        const res = await axios.post("/users/refresh", { refreshToken });
+
+        SetAuthHeader(res.data.accessToken);
+        localStorage.setItem("refreshToken", res.data.refreshToken);
+        originalRequest.headers.Authorization = `Bearer ${res.data.accessToken}`;
+
+        return axios(originalRequest);
+      } catch (refreshError) {
+        localStorage.setItem("refreshToken", "");
+        ClearAuthHeader();
+        return Promise.reject(refreshError);
       }
-      return Promise.reject(error);
     }
-  );
-};
+  }
+  return Promise.reject(err);
+});
 
-export const signUp = createAsyncThunk(
-  'user/signup',
-  async (signUpData, thunkAPI) => {
+
+export const registerUser = createAsyncThunk(
+  "auth/register",
+  async ({ email, password }, thunkAPI) => {
     try {
-      const response = await axiosInstance.post('/users/signup', signUpData);
+      const res = await axios.post("/users/register", { email, password });
 
-      return response.data;
+      return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
-
-export const signIn = createAsyncThunk(
-  'user/signin',
-  async (signInData, thunkAPI) => {
+export const loginUser = createAsyncThunk(
+  "auth/login",
+  async ({ email, password }, thunkAPI) => {
     try {
-      const response = await axiosInstance.post('/users/signin', signInData);
+      const res = await axios.post("/users/login", { email, password });
+      SetAuthHeader(res.data.accessToken);
 
-      setAuthHeader(response.data.accessToken);
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
-    }
-  }
-);
-
-export const signOut = createAsyncThunk('user/signout', async (_, thunkAPI) => {
-  try {
-    await axiosInstance.post('/users/signout');
-
-    clearAuthHeader();
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
-  }
-});
-
-export const current = createAsyncThunk('user/current', async (_, thunkAPI) => {
-  const state = thunkAPI.getState();
-  const persistedAccessToken = state.user.accessToken;
-
-  if (persistedAccessToken === null) {
-    return thunkAPI.rejectWithValue('Unable to get current user');
-  }
-
-  try {
-    setAuthHeader(persistedAccessToken);
-    const response = await axiosInstance.get('/users/current');
-
-    return response.data;
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
-  }
-});
-
-export const currentEdit = createAsyncThunk(
-  'user/currentEdit',
-  async (editedUser, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const persistedAccessToken = state.user.accessToken;
-
-    if (persistedAccessToken === null) {
-      return thunkAPI.rejectWithValue('Unable to get current user');
-    }
-
-    try {
-      setAuthHeader(persistedAccessToken);
-      const response = await axiosInstance.patch(
-        `/users/current/edit`,
-        editedUser
-      );
-
-      return response.data;
+      return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
-
-export const fetchUserCount = createAsyncThunk(
-  'user/count',
+export const logoutUser = createAsyncThunk(
+  "auth/logout",
   async (_, thunkAPI) => {
     try {
-      const response = await axiosInstance.get('/users/count');
-      return response.data.count;
+      const res = await axios.get("/users/logout");
+      ClearAuthHeader();
+      return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
+export const refreshUser = createAsyncThunk(
+  "auth/refresh",
+  async (_, thunkAPI) => {
+    ///////////////////
+    const persistedToken = localStorage.getItem("refreshToken");
 
-export const changePassword = createAsyncThunk(
-  'user/changePassword',
-  async (passwords, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const { _id: userId } = state.user.user;
-
-    const persistedAccessToken = state.user.accessToken;
-
-    if (persistedAccessToken === null) {
-      return thunkAPI.rejectWithValue('Unable to get current user');
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue("Unable to fetch user");
     }
 
     try {
-      setAuthHeader(persistedAccessToken);
+      const res = await axios.post("/users/refresh", {
+        refreshToken: persistedToken,
+      });
 
-      const response = await axiosInstance.patch(
-        `users/current/edit/password/${userId}`,
-        passwords
-      );
+      SetAuthHeader(res.data.accessToken);
 
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return res.data;
+    } catch (e) {
+      localStorage.setItem("refreshToken", "");
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
-
-export const resetPasswordSendMail = createAsyncThunk(
-  'user/resetPasswordSendMail',
-  async (email, thunkAPI) => {
-    try {
-      const response = await axiosInstance.post('users/password/forgot', email);
-
-      return response.data.message;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
-    }
-  }
-);
-
-export const checkResetToken = createAsyncThunk(
-  'user/checkResetToken',
-  async (token, thunkAPI) => {
-    try {
-      const response = await axiosInstance.get(`users/password/reset/${token}`);
-
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
-export const resetPassword = createAsyncThunk(
-  'users/resetPassword',
+export const updateUser = createAsyncThunk(
+  "auth/update",
   async (data, thunkAPI) => {
     try {
-      const response = await axiosInstance.patch(
-        `users/password/reset/${data.resetToken}`,
-        { newPass: data.newPass }
-      );
+      const res = await axios.put("users/update", data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
-      return response.data;
+      return res.data;
     } catch (error) {
-      thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
-export const verifyEmail = createAsyncThunk(
-  'users/verifyEmail',
-  async (token, thunkAPI) => {
-    try {
-      const response = await axiosInstance.get(`users/verify/${token}`);
-
-      return response.data;
-    } catch (error) {
-      thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
-export const resendVerifyEmail = createAsyncThunk(
-  'users/resendVerifyEmail',
-  async (email, thunkAPI) => {
-    try {
-      const response = await axiosInstance.post(`users/verify`, email);
-
-      return response.data;
-    } catch (error) {
-      thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );

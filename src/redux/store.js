@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 import {
   persistStore,
   persistReducer,
@@ -8,31 +8,35 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import { waterReducer } from './water/slice';
-import { authReducer } from './auth/slice';
-import { setupAxiosInterceptors } from './auth/operations.js';
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
-const authPersistConfig = {
-  key: 'auth',
+import { userReducer } from "./user/slice.js";
+import { waterReducer } from "./water/slice.js";
+
+const userPersistConfig = {
+  key: "user",
   storage,
-  whitelist: ['accessToken', 'refreshToken'],
+  whitelist: [],
+};
+
+const waterPersistConfig = {
+  key: "water",
+  storage,
+  whitelist: [], 
 };
 
 export const store = configureStore({
   reducer: {
-    contacts: waterReducer,
-    auth: persistReducer(authPersistConfig, authReducer),
+    user: persistReducer(userPersistConfig, userReducer),
+    water: persistReducer(waterPersistConfig, waterReducer),
   },
-  middleware: getDefaultMiddleware =>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
 });
-
-setupAxiosInterceptors(store);
 
 export const persistor = persistStore(store);
