@@ -1,0 +1,62 @@
+.userBarBtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  border-radius: 30px;
+  padding: 6px 12px;
+  width: 137px;
+  height: 50px;
+  border: none;
+  outline: none;
+  background-color: #323f47;
+  cursor: pointer;
+}
+
+@media screen and(min-width:768px) {
+  .userBarBtn {
+    width: 157px;
+    height: 56px;
+    margin-bottom: 49px;
+  }
+}
+.greetNameText {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+@media screen and(min-width:768px) {
+  .greetNameText {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+@media screen and(min-width:768px) {
+  .avatar {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+.iconArrowUp {
+  fill: #323f47;
+}
+
+@media screen and (min-width: 768px) {
+  .iconArrowUp {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .tabletThumb {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+}
