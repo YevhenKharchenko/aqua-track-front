@@ -29,7 +29,8 @@
 }
 
 .icon:active,
-.icon:hover {
+.icon:hover,
+.icon:focus {
   stroke: #9be1a0;
 }
 
