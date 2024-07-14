@@ -14,3 +14,11 @@
 height: 446px;
   }
 }
+
+@media (min-width: 1440px) {
+  .container {
+    background-image: url('../../assets/images/Rectangle19_dt-min.png');
+    width: 672px;
+height: 736px;
+  }
+}

@@ -14,3 +14,15 @@
       max-width: 704px;
     }
   }
+
+  @media (min-width: 1440px) {
+    .backdrop {
+      width: 672px;
+      height: 736px;
+    }
+    .wrapper {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+    }
+  }

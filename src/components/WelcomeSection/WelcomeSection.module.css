@@ -43,6 +43,20 @@
     line-height: 109%;
     padding-left: 32px;
     width: 450px;
+  }
+}
 
+@media (min-width: 1440px) {
+  .backdrop {
+    width: 672px;
+    height: 736px;
+  }
+  .welcomeText {
+    padding-top: 132px;
+  }
+  .welcomeHeader {
+    font-size: 80px;
+    line-height: 95%;
+    width: 450px;
   }
 }
