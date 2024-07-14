@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
 import Modal from "react-modal";
 import css from "./globalModal.module.css";
-import { MdClose } from "react-icons/md";
+import sprite from '../../assets/icons/sprite.svg';
 
 const customStyles = {
   overlay: {
@@ -50,7 +50,9 @@ export const GlobalModal = ({ isOpen, onRequestClose, children, title }) => {
         )}
 
         <div className={css.closeBtn}>
-          <MdClose onClick={onRequestClose} size={"24px"} />
+        <svg >
+          <use xlinkHref={`${sprite}#icon-close-24x24`} onClick={onRequestClose} size={"24px"}></use>
+        </svg>
         </div>
       </div>
       {(title === "Log out" || title === "Delete") && (
