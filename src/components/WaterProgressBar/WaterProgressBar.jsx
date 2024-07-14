@@ -1,10 +1,12 @@
 //import { useSelector } from 'react-redux';
-//import { dailyNormValue } from '../components/UserSettingsForm/UserSettingsForm';
-//import{currentIntake} from '../components/WaterForm/WaterForm';
+//import -- selector from redux/users/selectors for dailyNormValue
+//import {selectWaterPerDay} from '../../redux/selectors';
+
 import css from './WaterProgressBar.module.css';
 
 const WaterProgressBar = ({ currentIntake = 1500, dailyNormValue = 2000 }) => {
-  // Suppose we get the current consumption and daily rate from props or context
+  //const currentIntake = useSelector(selectWaterPerDay);
+  //const dailyNormValue = useSelector(selectDailyNormValue);
 
   const progress = (currentIntake / dailyNormValue) * 100;
 

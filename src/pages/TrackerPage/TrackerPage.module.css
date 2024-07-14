@@ -6,4 +6,11 @@
   flex-direction: column;
   padding: 16px;
   margin: 0 auto;
+  gap: 16px;
+}
+@media (min-width: 1440px) {
+  .container {
+    flex-direction: row;
+    gap: 32px;
+  }
 }

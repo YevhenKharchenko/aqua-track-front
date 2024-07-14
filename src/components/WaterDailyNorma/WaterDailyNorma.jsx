@@ -1,8 +1,9 @@
+//import {useSelector} from 'react-redux';
+//import -- selector from redux/users/selectors for dailyNormValue
 import css from './WaterDailyNorma.module.css';
-//import {dailyNormValue} from '../components/UsersettingsForm/UserSettingsForm';
 
 const WaterDailyNorma = () => {
-  const dailyNormValue = 1.5; //delete this line after adding proper component data
+  const dailyNormValue = 1.5; //delete this line after adding selector
 
   return (
     <div className={css.dailyNormaWrapper}>
