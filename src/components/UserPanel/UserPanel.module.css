@@ -1,0 +1,88 @@
+.greeting {
+  margin-bottom: 20px;
+  font-family: 'Gilroy', sans-serif;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--main-text-color);
+}
+@media only screen and (min-width: 768px) {
+  .greeting {
+    font-size: 36px;
+    line-height: 1.06;
+  }
+}
+
+.greetName {
+  font-weight: 700;
+}
+
+.popoverBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  border: none;
+  color: #323f47;
+  background-color: inherit;
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* .popoverBtn:hover {
+  color: #2f2f2f;
+}
+
+.popoverBtn:hover .iconSettings {
+  stroke: #2f2f2f;
+} */
+
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  color: rgba(50, 63, 71, 0.4);
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logoutBtn:hover {
+  color: #323f47;
+}
+
+.logoutBtn:hover .iconLogout {
+  stroke: #323f47;
+}
+
+.iconLogout {
+  fill: #fff;
+  stroke: rgba(50, 63, 71, 0.4);
+}
+
+.iconSettings {
+  fill: #fff;
+  stroke: currentColor;
+}
+
+@media only screen and (min-width: 768px) {
+  .iconSettings,
+  .iconLogout {
+    display: inline-block;
+    width: 16px;
+    height: 17px;
+  }
+}
+
+.tabletThumb {
+  display: block;
+}
+@media only screen and (min-width: 768px) {
+  .tabletThumb {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+}

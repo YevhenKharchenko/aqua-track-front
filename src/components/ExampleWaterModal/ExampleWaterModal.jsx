@@ -11,16 +11,16 @@ const ExampleWaterModal = ({ onClose, operation }) => {
 
   const currentTime = new Date().toTimeString().slice(0, 5);
 
-  const handleDecrease = () => {
-    if (value === 50) return;
-
-    setValue(value - 50);
+  const handleDecrement = () => {
+    setValue(prevValue => (prevValue > 50 ? prevValue - 50 : prevValue));
   };
 
-  const handleIncrease = () => {
-    if (value === 1500) return;
+  const handleIncrement = () => {
+    setValue(prevValue => (prevValue < 1500 ? prevValue + 50 : prevValue));
+  };
 
-    setValue(value + 50);
+  const handleChange = e => {
+    setValue(Number(e.target.value));
   };
 
   return (
@@ -35,13 +35,7 @@ const ExampleWaterModal = ({ onClose, operation }) => {
       <p className={css.modalText}>{modalText}</p>
       <p className={css.amountText}>Amount of water:</p>
       <div className={css.quantityWrapper}>
-        <button
-          className={css.quantityBtn}
-          type="button"
-          onClick={() => {
-            handleDecrease();
-          }}
-        >
+        <button className={css.quantityBtn} type="button" onClick={handleDecrement}>
           <svg className={css.quantityIcon}>
             <use xlinkHref={`${sprite}#icon-minus-40x40`}></use>
           </svg>
@@ -49,13 +43,7 @@ const ExampleWaterModal = ({ onClose, operation }) => {
         <div className={css.itemQuantity}>
           <span className={css.quantitySpan}>{value} ml</span>
         </div>
-        <button
-          className={css.quantityBtn}
-          type="button"
-          onClick={() => {
-            handleIncrease();
-          }}
-        >
+        <button className={css.quantityBtn} type="button" onClick={handleIncrement}>
           <svg className={css.quantityIcon}>
             <use xlinkHref={`${sprite}#icon-plus-40x40`}></use>
           </svg>
@@ -68,7 +56,7 @@ const ExampleWaterModal = ({ onClose, operation }) => {
         </label>
         <label htmlFor="" className={css.labelValue}>
           Enter the value of the water used:
-          <input className={css.modalInput} type="text" value={value} />
+          <input className={css.modalInput} type="text" value={value} onChange={handleChange} />
         </label>
         <button type="submit" className={css.saveBtn}>
           Save
