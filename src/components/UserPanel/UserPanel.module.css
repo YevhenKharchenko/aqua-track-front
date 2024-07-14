@@ -7,7 +7,7 @@
   letter-spacing: -0.01em;
   color: var(--main-text-color);
 }
-@media screen and(min-width:768px) {
+@media only screen and (min-width: 768px) {
   .greeting {
     font-size: 36px;
     line-height: 1.06;
@@ -21,7 +21,6 @@
 .popoverBtn {
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
   gap: 8px;
   font-weight: 700;
   font-size: 14px;
@@ -68,7 +67,7 @@
   stroke: currentColor;
 }
 
-@media (min-width: 768px) {
+@media only screen and (min-width: 768px) {
   .iconSettings,
   .iconLogout {
     display: inline-block;
@@ -77,7 +76,13 @@
   }
 }
 
-.popoverHidden {
-  visibility: hidden;
-  pointer-events: none;
+.tabletThumb {
+  display: block;
+}
+@media only screen and (min-width: 768px) {
+  .tabletThumb {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
 }

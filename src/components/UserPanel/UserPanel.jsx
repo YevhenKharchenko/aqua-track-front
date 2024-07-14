@@ -32,12 +32,13 @@ const UserPanel = () => {
   }, [showPopover]);
 
   return (
-    <div>
-      <h2 className={css.greeting}>
-        Hello, <span className={css.greetName}>Nadia</span>
-      </h2>
-      <UserBar ref={userBarRef} onClick={togglePopover} />
-
+    <>
+      <div className={css.tabletThumb}>
+        <h2 className={css.greeting}>
+          Hello, <span className={css.greetName}>Nadia</span>
+        </h2>
+        <UserBar ref={userBarRef} onClick={togglePopover} />
+      </div>
       {showPopover && (
         <UserBarPopover showPopover={showPopover} referenceElement={userBarRef.current}>
           <button className={css.popoverBtn} type="button">
@@ -60,7 +61,7 @@ const UserPanel = () => {
           </button>
         </UserBarPopover>
       )}
-    </div>
+    </>
   );
 };
 

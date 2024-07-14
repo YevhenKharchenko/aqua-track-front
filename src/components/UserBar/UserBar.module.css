@@ -13,7 +13,7 @@
   cursor: pointer;
 }
 
-@media screen and(min-width:768px) {
+@media only screen and (min-width: 768px) {
   .userBarBtn {
     width: 157px;
     height: 56px;
@@ -28,13 +28,13 @@
   letter-spacing: -0.01em;
   color: #fff;
 }
-@media screen and(min-width:768px) {
+@media only screen and (min-width: 768px) {
   .greetNameText {
     font-size: 16px;
     line-height: 1.5;
   }
 }
-@media screen and(min-width:768px) {
+@media only screen and (min-width: 768px) {
   .avatar {
     width: 44px;
     height: 44px;
@@ -45,18 +45,10 @@
   fill: #323f47;
 }
 
-@media screen and (min-width: 768px) {
+@media only screen and (min-width: 768px) {
   .iconArrowUp {
     display: inline-block;
     width: 20px;
     height: 20px;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .tabletThumb {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
   }
 }
