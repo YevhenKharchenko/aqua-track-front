@@ -2,7 +2,7 @@ import { WaterForm } from '../WaterForm/WaterForm';
 
 import css from './WaterModal.module.css';
 
-const WaterModal = ({ mode, onClose, water }) => {
+const WaterModal = ({ isOpen, mode, onClose, water }) => {
   const title =
     mode === 'add' ? (
       <h2 className={css.title}>Add Water</h2>
@@ -18,11 +18,13 @@ const WaterModal = ({ mode, onClose, water }) => {
     );
 
   return (
-    <div className={css.wrapModal}>
-      {title}
-      {subtitle}
-      <WaterForm mode={mode} onClose={onClose} water={water} />
-    </div>
+    isOpen && (
+      <div className={css.wrapModal}>
+        {title}
+        {subtitle}
+        <WaterForm mode={mode} onClose={onClose} water={water} />
+      </div>
+    )
   );
 };
 

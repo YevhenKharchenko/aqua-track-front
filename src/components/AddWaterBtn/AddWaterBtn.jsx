@@ -19,7 +19,7 @@ const AddWaterBtn = () => {
         </svg>
         Add water
       </button>
-      <WaterModal isOpen={isModalOpen} onClose={handleCloseModal} />
+      <WaterModal isOpen={isModalOpen} onClose={handleCloseModal} mode="add" />
     </>
   );
 };
