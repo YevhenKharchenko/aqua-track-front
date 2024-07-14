@@ -1,7 +1,8 @@
+/* WaterProgressBar.module.css */
 .progressBarContainer {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   width: 198px;
   align-self: center;
   margin-bottom: 42px;
@@ -33,20 +34,20 @@
   border-radius: 9px;
   background-color: #9be1a0;
   transition: width 0.4s ease;
+  position: relative;
 }
 
-/* .progressBarFill::after {
-  content: '';
+.progressIndicator {
   width: 12px;
   height: 12px;
   background-color: #fff;
-  stroke: #9be1a0;
-  stroke-width: 1px;
+  border: 1px solid #9be1a0;
   border-radius: 50%;
   position: absolute;
-  top: -1.5px; 
-  right: -6px; 
-} */
+  top: 50%;
+  right: -6px;
+  transform: translateY(-50%);
+}
 
 .percentageList {
   display: flex;
@@ -57,6 +58,22 @@
   font-size: 10px;
   font-weight: 400;
   line-height: 1em;
+}
+
+@media (min-width: 768px) {
+  .progressBarContainer {
+    margin-bottom: 26px;
+    width: 295px;
+  }
+  .progressBar {
+    height: 8px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .progressBarContainer {
+    margin-bottom: 56px;
+  }
 }
 
 @media (min-width: 768px) {

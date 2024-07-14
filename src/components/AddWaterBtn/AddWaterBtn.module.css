@@ -1,5 +1,5 @@
 .btnContainer {
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -37,8 +37,8 @@
 @media (min-width: 768px) {
   .btnContainer {
     padding: 14px 32px;
-    margin-right: 32px;
-    margin-bottom: 64px;
+    /* margin-right: 32px;
+    margin-bottom: 64px; */
   }
   .icon {
     width: 24px;
