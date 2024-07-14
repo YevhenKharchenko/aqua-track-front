@@ -2,8 +2,8 @@ import { useState } from "react";
 import css from "./WaterItem.module.css";
 import sprite from "../../assets/icons/sprite.svg";
 import { BaseModal } from "../BaseModal/BaseModal";
-import { EditWater } from "../EditWater/EditWater";
-import { DeleteWater } from "../deleteWater/deleteWater";
+import { WaterModal } from "../WaterModal/WaterModal";
+import { DeleteWaterModal }  from "../DeleteWaterModal/DeleteWaterModal";
 import { GlobalModal } from "../GlobalModal/GlobalModal.jsx";
 //назви функцій з модалок треба змінити під назви що наші зроблять
 
@@ -53,7 +53,7 @@ export function WaterItem({ item }) {
 
       <div>
         <BaseModal isOpen={isOpen} onClose={closeModal}>
-          <EditWater mode={"edit"} onClose={closeModal} water={item} />
+          <WaterModal mode={"edit"} onClose={closeModal} water={item} />
         </BaseModal>
       </div>
 
@@ -62,7 +62,7 @@ export function WaterItem({ item }) {
         title={"Delete"}
         onRequestClose={closeModalDelete}
       >
-        <DeleteWater onRequestClose={closeModalDelete} water={item} />
+        <DeleteWaterModal onRequestClose={closeModalDelete} water={item} />
       </GlobalModal>
     </div>
   );
