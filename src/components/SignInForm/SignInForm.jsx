@@ -3,36 +3,41 @@ import { useForm } from 'react-hook-form';
 import { NavLink } from 'react-router-dom';
 import css from './SignInForm.module.css';
 import sprite from '../../assets/icons/sprite.svg';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { loginUser } from '../../redux/auth/operations';
+import { useDispatch } from 'react-redux';
 
 const SignInForm = () => {
+  const dispatch = useDispatch();
+
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email('Invalid email format').required('Email is required'),
+    password: Yup.string()
+      .min(8, 'Password must be at least 8 characters')
+      .required('Password is required'),
+  });
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
-  const [showPassword, setShowPassword] = useState(false);
+    reset,
+  } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
 
-  const onSubmit = data => {
-    const { email, password } = data;
-    const formData = { email, password };
-    console.log(formData);
-
-    // if (isLoginSuccess) {
-    //     return <Navigate to="/profile" replace />;
-    //   }
-
-    // fetch('https://your-api-url.com/login', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(formData),
-    // })
-    // .then(response => response.json())
-    // .then(data => console.log(data))
-    // .catch(error => console.error('Error:', error));
+  const onSubmit = (data) => {
+    dispatch(
+      loginUser({
+        email: data.email,
+        password: data.password,
+      })
+    );
+    reset(); // Reset the form after successful submission
   };
 
+  const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -50,13 +55,7 @@ const SignInForm = () => {
             type="email"
             name="email"
             placeholder="Enter your email"
-            {...register('email', {
-              required: 'Email is required',
-              pattern: {
-                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message: 'Invalid email address',
-              },
-            })}
+            {...register('email')}
           /> 
           </div>
          {errors.email && <p className={css.errorMessage}>{errors.email.message}</p>}
@@ -70,13 +69,7 @@ const SignInForm = () => {
               type={showPassword ? 'text' : 'password'}
               name="password"
               placeholder="Enter your password"
-              {...register('password', {
-                required: 'Password is required',
-                minLength: {
-                  value: 8,
-                  message: 'Password must be at least 8 characters',
-                },
-              })}
+              {...register('password')}
             />
              <svg
               className={css.passwordToggleIcon}
