@@ -1,17 +1,17 @@
-import { WaterForm } from "../WaterForm/WaterForm";
+import { WaterForm } from '../WaterForm/WaterForm';
 
-import css from "./WaterModal.module.css";
+import css from './WaterModal.module.css';
 
-export const WaterModal = ({ mode, onClose, water }) => {
+const WaterModal = ({ mode, onClose, water }) => {
   const title =
-    mode === "add" ? (
+    mode === 'add' ? (
       <h2 className={css.title}>Add Water</h2>
     ) : (
       <h2 className={css.title}>Edit the entered amount of water</h2>
     );
 
   const subtitle =
-    mode === "add" ? (
+    mode === 'add' ? (
       <p className={css.subtitle}>Choose a value:</p>
     ) : (
       <p className={css.subtitle}>Correct entered data:</p>
@@ -25,3 +25,5 @@ export const WaterModal = ({ mode, onClose, water }) => {
     </div>
   );
 };
+
+export default WaterModal;
