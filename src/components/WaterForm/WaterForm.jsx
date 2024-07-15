@@ -1,20 +1,20 @@
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
-import { useDispatch, useSelector } from "react-redux";
-import toast from "react-hot-toast";
-import sprite from '../../assets/icons/sprite.svg';
-import { addWater, changeWater } from "../../redux/water/operations";
-import css from "./WaterForm.module.css";
-import { selectActiveDay } from "../../redux/selectors";
+import toast from 'react-hot-toast';
+import * as Yup from 'yup';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { icons as sprite } from '../../assets/icons/index.js';
+import { addWater, changeWater } from '../../redux/water/operations';
+import { selectActiveDay } from '../../redux/selectors';
+import css from './WaterForm.module.css';
 
 const schema = Yup.object().shape({
   waterValue: Yup.number()
-    .positive("The number must be a positive value")
-    .required("Value is required"),
+    .positive('The number must be a positive value')
+    .required('Value is required'),
   localTime: Yup.string()
     // .matches(/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/, "Invalid time format (hh:mm)")
-    .required("Time is required"),
+    .required('Time is required'),
 });
 
 const getTimeFormat = () => {
@@ -22,11 +22,10 @@ const getTimeFormat = () => {
   const hours = date.getHours();
   const min = date.getMinutes();
 
-  const timeFormatting = hours.toString().padStart(2, "0") + ":" + min.toString().padStart(2, "0");
+  const timeFormatting = hours.toString().padStart(2, '0') + ':' + min.toString().padStart(2, '0');
 
   return timeFormatting;
 };
-
 
 export const WaterForm = ({ mode, onClose, water = {} }) => {
   const {
@@ -37,7 +36,7 @@ export const WaterForm = ({ mode, onClose, water = {} }) => {
     watch,
     formState: { errors },
   } = useForm({
-    mode: "onChange",
+    mode: 'onChange',
     resolver: yupResolver(schema),
     defaultValues: {
       waterValue: Number(water.waterValue) || 50,
@@ -49,32 +48,32 @@ export const WaterForm = ({ mode, onClose, water = {} }) => {
   const dispatch = useDispatch();
 
   const handleClickMinus = () => {
-    const current = getValues("waterValue");
-    setValue("waterValue", current - 50);
+    const current = getValues('waterValue');
+    setValue('waterValue', current - 50);
   };
 
   const handleClickPlus = () => {
-    const current = getValues("waterValue");
-    setValue("waterValue", current + 50);
+    const current = getValues('waterValue');
+    setValue('waterValue', current + 50);
   };
 
   const onSubmit = () => {
     const newData = {
       localDate: activeDay,
-      waterValue: watch("waterValue"),
-      localTime: watch("localTime"),
+      waterValue: watch('waterValue'),
+      localTime: watch('localTime'),
     };
     try {
-      if (mode === "add") {
+      if (mode === 'add') {
         dispatch(addWater(newData));
         toast.success(`The amount of water consumed has been added successfully.`);
-      } else if (mode === "edit") {
+      } else if (mode === 'edit') {
         dispatch(changeWater({ _id: water._id, ...newData }));
-        toast.success("The amount of water consumed has been successfully updated.");
+        toast.success('The amount of water consumed has been successfully updated.');
       }
       onClose();
     } catch (error) {
-      toast.error("Failed to save water data. Please try again.");
+      toast.error('Failed to save water data. Please try again.');
     }
   };
 
@@ -86,21 +85,27 @@ export const WaterForm = ({ mode, onClose, water = {} }) => {
           type="button"
           className={css.quantityBtn}
           onClick={handleClickMinus}
-          disabled={getValues("waterValue") === 0}
+          disabled={getValues('waterValue') === 0}
         >
-          <svg >
-          <use xlinkHref={`${sprite}#icon-plus-24x24`}></use>
-        </svg>
+          {/* <svg>
+            <use xlinkHref={`${sprite}#icon-plus-24x24`}></use>
+          </svg> */}
+          <svg className={css.quantityIcon}>
+            <use xlinkHref={`${sprite}#icon-minus-40x40`}></use>
+          </svg>
         </button>
         <span className={css.amountValue}>
-          {watch("waterValue") >= 999
-            ? `${(Math.round((watch("waterValue") / 1000) * 100) / 100).toFixed(2)} L`
-            : `${watch("waterValue")} ml`}
+          {watch('waterValue') >= 999
+            ? `${(Math.round((watch('waterValue') / 1000) * 100) / 100).toFixed(2)} L`
+            : `${watch('waterValue')} ml`}
         </span>
         <button type="button" className={css.quantityBtn} onClick={handleClickPlus}>
-        <svg >
+          {/* <svg >
           <use xlinkHref={`${sprite}#icon-minus-40x40`}></use>
-        </svg>
+        </svg> */}
+          <svg className={css.quantityIcon}>
+            <use xlinkHref={`${sprite}#icon-plus-40x40`}></use>
+          </svg>
         </button>
       </div>
 
@@ -110,7 +115,7 @@ export const WaterForm = ({ mode, onClose, water = {} }) => {
             Recording time:
           </label>
           <input
-            {...register("localTime")}
+            {...register('localTime')}
             className={css.input}
             type="time"
             name="localTime"
@@ -124,14 +129,14 @@ export const WaterForm = ({ mode, onClose, water = {} }) => {
             Enter the value of the water used:
           </label>
           <input
-            {...register("waterValue")}
+            {...register('waterValue')}
             className={css.input}
             step={50}
             name="value"
             id="value"
-            onChange={(e) =>
+            onChange={e =>
               setValue(
-                "waterValue",
+                'waterValue',
                 isNaN(e.target.value) ? 0 : Math.max(Number(e.target.value), 0)
               )
             }
