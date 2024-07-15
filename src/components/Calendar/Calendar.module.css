@@ -1,11 +1,10 @@
-
 .list {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 0 auto;
   gap: 12px;
-  padding: 24px 0;
+  /* padding: 24px 0; */
 }
 .item {
   display: flex;
@@ -14,16 +13,7 @@
   gap: 4px;
   border-radius: 30px;
 }
-@media screen and (min-width: 339px) {
-  .list {
-    justify-content: flex-start;
-    width: 100%;
-    gap: 20px;
-  }
-  .item {
-    width: calc((100% - 5 * 21px) / 6);
-  }
-}
+
 @media screen and (min-width: 375px) {
   .list {
     justify-content: flex-start;

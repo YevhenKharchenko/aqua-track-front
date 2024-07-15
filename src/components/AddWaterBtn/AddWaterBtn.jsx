@@ -1,7 +1,8 @@
+import clsx from 'clsx';
 import { useState } from 'react';
 import css from './AddWaterBtn.module.css';
 import WaterModal from '../WaterModal/WaterModal';
-const AddWaterBtn = () => {
+const AddWaterBtn = ({ className }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -13,7 +14,11 @@ const AddWaterBtn = () => {
   };
   return (
     <>
-      <button type="button" className={css.btnContainer} onClick={handleOpenModal}>
+      <button
+        type="button"
+        className={clsx(css.btnContainer, className && className)}
+        onClick={handleOpenModal}
+      >
         <svg className={css.icon}>
           <use href="../../assets/icons/sprite.svg#icon-plus16x16"></use>
         </svg>
