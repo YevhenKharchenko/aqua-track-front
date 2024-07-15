@@ -1,0 +1,141 @@
+.logOutModalContainer {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+  border-radius: 15px;
+  transform: translate(-50%, -50%);
+
+  background-color: #fff;
+  padding: 40px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.buttonsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.logOutButton {
+  padding: 10px 20px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  border-radius: 30px;
+  background-color: #9be1a0;
+  transition: background 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+.logOutButton:hover {
+  background-color: #87d28d;
+  outline: transparent;
+}
+.logOutButton:focus {
+  outline: none;
+}
+.logOutButton:hover:focus {
+  outline: none;
+}
+.cancelButton {
+  padding: 10px 20px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  color: #323f474d;
+  border-radius: 30px;
+  background-color: #f0eff4;
+  transition: background 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+.cancelButton:hover {
+  color: #323f47;
+}
+.closeButton {
+  position: absolute;
+  right: 16px;
+
+  top: 20px;
+}
+.closeButton svg {
+  stroke: #323f47;
+}
+.title {
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 120%;
+  color: #323f47;
+}
+.text {
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  color: #323f47;
+}
+@media screen and (min-width: 375px) and (max-width: 767px) {
+  .logOutModalContainer {
+    width: 344px;
+    height: 267px;
+  }
+  .logOutButton {
+    padding: 0;
+    width: 304px;
+    height: 46px;
+  }
+  .cancelButton {
+    padding: 0;
+    width: 304px;
+    height: 46px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .logOutModalContainer {
+    width: 516px;
+    height: 244px;
+    gap: 24px;
+  }
+  .logOutButton {
+    padding: 0;
+    width: 173px;
+    height: 60px;
+    font-size: 16px;
+    line-height: 150%;
+  }
+  .cancelButton {
+    padding: 0;
+    width: 173px;
+    height: 60px;
+    font-size: 16px;
+    line-height: 150%;
+  }
+  .buttonsContainer {
+    flex-direction: row;
+    gap: 10px;
+  }
+  .textContainer {
+    gap: 24px;
+  }
+  .closeButton {
+    top: 20px;
+    right: 20px;
+  }
+  .title {
+    font-size: 28px;
+    line-height: 114%;
+  }
+  .text {
+    font-size: 18px;
+    line-height: 133%;
+  }
+}
