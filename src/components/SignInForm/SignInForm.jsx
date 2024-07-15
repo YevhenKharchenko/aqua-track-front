@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginUser } from '../../redux/auth/operations';
 import { useDispatch } from 'react-redux';
+import GoogleAuth from '../GoogleAuth/GoogleAuth';
 
 const SignInForm = () => {
   const dispatch = useDispatch();
@@ -27,28 +28,21 @@ const SignInForm = () => {
     resolver: yupResolver(validationSchema),
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = data => {
     dispatch(
       loginUser({
         email: data.email,
         password: data.password,
       })
-    ).unwrap()
-    .then(() => {
-      console.log('login success');
-    })
-    .catch(() => {
-      console.log('login error');
-    });
-
-
-
-    reset(); 
-
-
-
-
-    
+    )
+      .unwrap()
+      .then(() => {
+        console.log('login success');
+      })
+      .catch(() => {
+        console.log('login error');
+      });
+    reset();
   };
 
   const [showPassword, setShowPassword] = useState(false);
@@ -65,14 +59,14 @@ const SignInForm = () => {
           <label className={css.label}>Email:</label>
           <div className={css.signupInputWrap}>
             <input
-            className={`${css.signupInput} ${errors.email ? css.error : ''}`}
-            type="email"
-            name="email"
-            placeholder="Enter your email"
-            {...register('email')}
-          /> 
+              className={`${css.signupInput} ${errors.email ? css.error : ''}`}
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              {...register('email')}
+            />
           </div>
-         {errors.email && <p className={css.errorMessage}>{errors.email.message}</p>}
+          {errors.email && <p className={css.errorMessage}>{errors.email.message}</p>}
         </div>
 
         <div className={css.signupFormPass}>
@@ -85,7 +79,7 @@ const SignInForm = () => {
               placeholder="Enter your password"
               {...register('password')}
             />
-             <svg
+            <svg
               className={css.passwordToggleIcon}
               onClick={togglePasswordVisibility}
               width="20px"
@@ -96,13 +90,15 @@ const SignInForm = () => {
           </div>
           {errors.password && <p className={css.errorMessage}>{errors.password.message}</p>}
         </div>
-        
+
         <div className={css.btnWrap}>
           <button className={css.signupBtn} type="submit">
             Sign In
           </button>
         </div>
       </form>
+
+      <GoogleAuth />
 
       <div className={css.textWrap}>
         Don’t have an account?
