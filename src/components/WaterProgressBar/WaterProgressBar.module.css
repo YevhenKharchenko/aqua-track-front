@@ -1,3 +1,4 @@
+/* WaterProgressBar.module.css */
 .progressBarContainer {
   display: flex;
   flex-direction: column;
@@ -17,10 +18,6 @@
   font-size: 14px;
   font-weight: 700;
   line-height: 1em;
-}
-
-.progressBarWrapper {
-  position: relative;
 }
 
 .progressBar {
@@ -48,8 +45,29 @@
   border-radius: 50%;
   position: absolute;
   top: 50%;
-  right: -6px;
-  transform: translateY(-50%);
+  right: 0;
+  transform: translateX(50%) translateY(-50%);
+  transition: left 0.4s ease;
+  cursor: pointer;
+}
+
+.progressIndicator::after {
+  content: attr(data-progress);
+  display: none;
+  position: absolute;
+  top: 20px; /* Adjust this value to position the text below the indicator */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  font-size: 10px;
+  color: #323f47;
+}
+
+.progressIndicator:hover::after {
+  display: block;
 }
 
 .percentageList {
@@ -63,6 +81,13 @@
   line-height: 1em;
 }
 
+.exactProgressText {
+  color: #9be1a0;
+  font-size: 8px;
+  font-weight: 400;
+  line-height: 1em;
+}
+
 @media (min-width: 768px) {
   .progressBarContainer {
     margin-bottom: 26px;
@@ -70,19 +95,6 @@
   }
   .progressBar {
     height: 8px;
-  }
-}
-
-@media (min-width: 1440px) {
-  .progressBarContainer {
-    margin-bottom: 56px;
-  }
-}
-
-@media (min-width: 768px) {
-  .progressBarContainer {
-    margin-bottom: 26px;
-    width: 295px;
   }
 }
 
