@@ -2,30 +2,19 @@ import css from './LogOutModal.module.css';
 import {useNavigate} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../redux/auth/operations';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { icons as sprite } from '../../assets/icons/index.js';
-import { selectIsLoggedIn } from '../../redux/selectors.js';
 
-
-const LogOutModal = ({ closeModal }) => {
-  const navigate = useNavigate();
+const LogOutModalContent = ({ closeModal }) => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector(selectIsLoggedIn);
- 
-  const handleLogOut = () => {
-      
-   console.log ("before logout:", isLoggedIn)
-    
-    dispatch(logoutUser()).then(() => {
-      console.log('logout success');
-    closeModal();
-     navigate('/');} ).catch(error => console.log(error));
-      
-    
-  };
- 
   const [closeIcon, setCloseIcon] = useState('icon-close-24x24');
   const svgRef = useRef(null);
+
+  const handleLogOut = () => {
+    dispatch(logoutUser());
+    closeModal();
+  };
+
   const updateCloseIconSize = () => {
     const svgElement = svgRef.current;
     if (svgElement) {
@@ -82,5 +71,30 @@ const LogOutModal = ({ closeModal }) => {
     </div>
   );
 };
+const LogOutModal = () => {
+  // const dispatch = useDispatch();
+  const handleLogOut = () => {
+    // dispatch(logoutUser());
+    // closeModal();
+  };
+  const setModal = useModal();
+  const closeModal = useCallback(() => {
+    setModal(null);
+  }, [setModal]);
+  const openModal = useCallback(() => {
+    setModal(<LogOutModalContent closeModal={closeModal} handleLogOut={handleLogOut} />);
+  }, [setModal, closeModal]);
 
-export default LogOutModal;
+  return (
+    <>
+      <button type="button" onClick={openModal}>
+        LogOut
+        <svg style={{ width: 20, height: 20 }}>
+          <use xlinkHref={`${sprite}#icon-arrow-right-18x18`}></use>
+        </svg>
+      </button>
+    </>
+  );
+};
+
+export default LogOutModalContent;
