@@ -11,7 +11,11 @@ import SignUpPage from './pages/SignUpPage/SignUpPage.jsx';
 import SignInPage from './pages/SignInPage/SignInPage.jsx';
 import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
 import ExampleModal from './components/ExampleModal.jsx';
+
+import LogOutModal from './components/LogOutModal/LogOutModal.jsx';
+
 import TrackerPage from './pages/TrackerPage/TrackerPage.jsx';
+
 
 function App() {
   return (
@@ -34,6 +38,7 @@ function App() {
         />
         <Route path="/tracker" element={<TrackerPage />} />
         <Route path="/modal" element={<ExampleModal />} />
+        <Route path="/logout" element={<LogOutModal />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </SharedLayout>

@@ -3,7 +3,20 @@
   max-width: 1440px;
   min-height: 100vh;
   display: flex;
+  gap: 16px;
   flex-direction: column;
   padding: 16px;
   margin: 0 auto;
+}
+
+@media screen and (min-width: 768px) {
+}
+
+@media screen and (min-width: 1440px) {
+  .container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+  }
 }

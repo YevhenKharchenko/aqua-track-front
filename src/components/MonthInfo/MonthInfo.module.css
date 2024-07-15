@@ -1,9 +1,9 @@
-.monthSectionInfo{
+.monthSectionInfo {
   width: 100%;
   background-color: #f0eff4;
 }
 
-.monthTitle{
+.monthTitle {
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
   font-size: 20px;
@@ -12,29 +12,17 @@
   color: #323f47;
 }
 
-.monthPaginationContainer{
+.monthPaginationContainer {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 24px;
-}
-
-
-@media only screen and (min-width: 320px) and (max-width: 374px) {
-
-}
-
-@media only screen and (min-width: 375px) {
-  
+  margin-bottom: 24px;
 }
 
 @media only screen and (min-width: 768px) {
-  
-  
-  .monthTitle{
-      font-size: 28px;
-      line-height: 114%;
+  .monthTitle {
+    font-size: 28px;
+    line-height: 114%;
   }
 }
-

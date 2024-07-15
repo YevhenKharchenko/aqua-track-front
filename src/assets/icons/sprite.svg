@@ -9,6 +9,9 @@
 <symbol id="icon-arrow-left-18x18" viewBox="0 0 32 32">
 <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.5556" d="M20 24l-8-8 8-8"></path>
 </symbol>
+<symbol id="icon-chevron-left" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M11.25 13.5L6.75 9L11.25 4.5" stroke="#323F47" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</symbol>
 <symbol id="icon-arrow-right-18x18" viewBox="0 0 32 32">
 <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.5556" d="M12 24l8-8-8-8"></path>
 </symbol>
