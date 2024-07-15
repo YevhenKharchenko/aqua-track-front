@@ -1,11 +1,14 @@
+.container {
+}
+
 .list {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 0 auto;
   gap: 12px;
-  /* padding: 24px 0; */
 }
+
 .item {
   display: flex;
   flex-direction: column;
@@ -18,7 +21,7 @@
   .list {
     justify-content: flex-start;
     width: 100%;
-    gap: 20px;
+    /* gap: 20px; */
   }
   .item {
     width: calc((100% - 5 * 21px) / 6);
@@ -27,7 +30,8 @@
 
 @media screen and (min-width: 768px) {
   .list {
-    gap: 18px;
+    /* gap: 18px; */
+    column-gap: 16px;
   }
   .item {
     width: calc((100% - 6 * 21px) / 8);
