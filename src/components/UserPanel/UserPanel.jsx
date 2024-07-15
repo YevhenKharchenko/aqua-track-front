@@ -42,7 +42,6 @@ const UserPanel = () => {
   }, [setModal]);
 
   const openModal = useCallback(() => {
-    console.log('hello');
     setModal(<LogOutModal closeModal={closeModal} />);
   }, [setModal, closeModal]);
 

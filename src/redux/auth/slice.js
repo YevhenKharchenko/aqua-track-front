@@ -1,11 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import {
-  refreshUser,
-  loginUser,
-  logoutUser,
-  registerUser,
-  updateUser,
-} from "./operations";
+import { createSlice } from '@reduxjs/toolkit';
+import { refreshUser, loginUser, logoutUser, registerUser, updateUser } from './operations';
 
 export const initialState = {
   userInfo: {
@@ -17,31 +11,33 @@ export const initialState = {
     sportsActivity: null,
     waterRate: null,
   },
+  token: null,
   isLoggedIn: false,
   isRefreshing: false,
-  error: "",
+  error: '',
 };
 
 const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState,
   reducers: {},
-  extraReducers: (builder) =>
+  extraReducers: builder =>
     builder
-      .addCase(registerUser.fulfilled, (state, action) => {
-      })
+      .addCase(registerUser.fulfilled, (state, action) => {})
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isLoggedIn = true;
         state.isRefreshing = false;
         state.accessToken = action.payload.accessToken;
-        localStorage.setItem("refreshToken", action.payload.refreshToken);
+        localStorage.setItem('accessToken', action.payload.data.accessToken);
         state.userInfo = action.payload.user;
+        console.log(action.payload.data.accessToken);
+        state.token = action.payload.data.accessToken;
       })
 
-      .addCase(logoutUser.fulfilled, (state) => {
+      .addCase(logoutUser.fulfilled, state => {
         state.isLoggedIn = false;
         state.accessToken = null;
-        localStorage.setItem("refreshToken", "");
+        localStorage.setItem('accessToken', '');
       })
 
       .addCase(refreshUser.pending, (state, action) => {
@@ -53,7 +49,7 @@ const userSlice = createSlice({
         state.isRefreshing = false;
 
         state.accessToken = action.payload.accessToken;
-        localStorage.setItem("refreshToken", action.payload.refreshToken);
+        localStorage.setItem('accessToken', action.payload.accessToken);
 
         state.userInfo.email = action.payload.user.email;
         state.userInfo.name = action.payload.user.name;
@@ -64,13 +60,13 @@ const userSlice = createSlice({
         state.userInfo.waterRate = action.payload.user.waterRate;
       })
 
-      .addCase(updateUser.pending, (state) => {
+      .addCase(updateUser.pending, state => {
         // ТУТ  ЛОАДЕР;
         state.isRefreshing = true;
       })
 
       .addCase(updateUser.fulfilled, (state, action) => {
-        state.error = "";
+        state.error = '';
         state.isRefreshing = false;
 
         state.userInfo.email = action.payload.email;
@@ -86,8 +82,7 @@ const userSlice = createSlice({
         state.error = action.payload;
       })
 
-      .addCase(refreshUser.rejected, (state) => {
-      }),
+      .addCase(refreshUser.rejected, state => {}),
 });
 
 export const {

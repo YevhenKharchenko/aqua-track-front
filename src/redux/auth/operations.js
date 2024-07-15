@@ -1,50 +1,56 @@
-import axios from "axios";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from 'axios';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
-export const SetAuthHeader = (token) => {
+export const SetAuthHeader = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
 const ClearAuthHeader = () => {
-  axios.defaults.headers.common.Authorization = "";
+  axios.defaults.headers.common.Authorization = '';
 };
 
-axios.defaults.baseURL = "https://project6-back.onrender.com"; //адрес бк
+axios.defaults.baseURL = 'https://project6-back.onrender.com'; //адрес бк
 
-
-axios.interceptors.response.use(res => res, async (err) => {
-  const originalRequest = err.config;
-
-  if (err.response.status === 401 && !originalRequest._retry) {
-    originalRequest._retry = true;
-
-    const refreshToken = localStorage.getItem("refreshToken");
-
-    if (refreshToken.length > 0) {
-      try {
-        const res = await axios.post("/users/refresh", { refreshToken });
-
-        SetAuthHeader(res.data.accessToken);
-        localStorage.setItem("refreshToken", res.data.refreshToken);
-        originalRequest.headers.Authorization = `Bearer ${res.data.accessToken}`;
-
-        return axios(originalRequest);
-      } catch (refreshError) {
-        localStorage.setItem("refreshToken", "");
-        ClearAuthHeader();
-        return Promise.reject(refreshError);
-      }
-    }
+axios.interceptors.request.use(config => {
+  const token = localStorage.getItem('accessToken');
+  if (token) {
+    config.headers['Authorization'] = `Bearer ${token}`;
   }
-  return Promise.reject(err);
+  return config;
 });
 
+// axios.interceptors.response.use(
+//   res => res,
+//   async err => {
+//     const originalRequest = err.config;
+
+//     if (err.response.status === 401 && !originalRequest._retry) {
+//       originalRequest._retry = true;
+
+//       try {
+//         const res = await axios.post('/users/refresh');
+
+//         SetAuthHeader(res.data.accessToken);
+
+//         localStorage.setItem('accessToken', res.data.accessToken);
+//         originalRequest.headers.Authorization = `Bearer ${res.data.accessToken}`;
+
+//         return axios(originalRequest);
+//       } catch (refreshError) {
+//         localStorage.removeItem('accessToken');
+//         ClearAuthHeader();
+//         return Promise.reject(refreshError);
+//       }
+//     }
+//     return Promise.reject(err);
+//   }
+// );
 
 export const registerUser = createAsyncThunk(
-  "auth/register",
+  'auth/register',
   async ({ email, password }, thunkAPI) => {
     try {
-      const res = await axios.post("/users/register", { email, password });
+      const res = await axios.post('/users/register', { email, password });
 
       return res.data;
     } catch (error) {
@@ -52,68 +58,92 @@ export const registerUser = createAsyncThunk(
     }
   }
 );
-export const loginUser = createAsyncThunk(
-  "auth/login",
-  async ({ email, password }, thunkAPI) => {
-    try {
-      const res = await axios.post("/users/login", { email, password });
-      SetAuthHeader(res.data.accessToken);
 
-      return res.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
+export const loginUser = createAsyncThunk('auth/login', async ({ email, password }, thunkAPI) => {
+  try {
+    const res = await axios.post('/users/login', { email, password });
+    SetAuthHeader(res.data.accessToken);
+
+    return res.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
   }
-);
-export const logoutUser = createAsyncThunk(
-  "auth/logout",
-  async (_, thunkAPI) => {
-    try {
-      const res = await axios.get("/users/logout");
-      ClearAuthHeader();
-      return res.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
+});
+
+export const logoutUser = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+  try {
+    const res = await axios.post('/users/logout', {
+      withCredentials: true,
+    });
+    ClearAuthHeader();
+    console.log('Successfully logout');
+    return res.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
   }
-);
-export const refreshUser = createAsyncThunk(
-  "auth/refresh",
-  async (_, thunkAPI) => {
-    ///////////////////
-    const persistedToken = localStorage.getItem("refreshToken");
+});
 
-    if (persistedToken === null) {
-      return thunkAPI.rejectWithValue("Unable to fetch user");
-    }
+export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
+  // const persistedToken = localStorage.getItem('refreshToken');
 
-    try {
-      const res = await axios.post("/users/refresh", {
-        refreshToken: persistedToken,
-      });
+  // if (persistedToken === null) {
+  //   return thunkAPI.rejectWithValue('Unable to fetch user');
+  // }
 
-      SetAuthHeader(res.data.accessToken);
+  // try {
+  //   const res = await axios.post('/users/refresh', {
+  //     refreshToken: persistedToken,
+  //     withCredentials: true,
+  //   });
 
-      return res.data;
-    } catch (e) {
-      localStorage.setItem("refreshToken", "");
-      return thunkAPI.rejectWithValue(e.message);
-    }
+  //   SetAuthHeader(res.data.accessToken);
+
+  //   return res.data;
+  // } catch (e) {
+  //   localStorage.setItem('refreshToken', '');
+  //   return thunkAPI.rejectWithValue(e.message);
+  // }
+
+  const state = thunkAPI.getState();
+
+  const persistedToken = state.auth.token;
+
+  if (persistedToken === null) {
+    return thunkAPI.rejectWithValue('Unable to fetch user');
   }
-);
-export const updateUser = createAsyncThunk(
-  "auth/update",
-  async (data, thunkAPI) => {
-    try {
-      const res = await axios.put("users/update", data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
 
-      return res.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
+  // const persistedToken = localStorage.getItem('accessToken');
+
+  if (persistedToken === null) {
+    return thunkAPI.rejectWithValue('Unable to fetch user');
   }
-);
+
+  try {
+    const res = await axios.post('/users/refresh', {
+      refreshToken: persistedToken,
+      withCredentials: true,
+    });
+
+    SetAuthHeader(res.data.accessToken);
+    localStorage.setItem('accessToken', res.data.accessToken);
+
+    return res.data;
+  } catch (e) {
+    localStorage.removeItem('accessToken');
+    return thunkAPI.rejectWithValue(e.message);
+  }
+});
+
+export const updateUser = createAsyncThunk('auth/update', async (data, thunkAPI) => {
+  try {
+    const res = await axios.put('users/update', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    return res.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});

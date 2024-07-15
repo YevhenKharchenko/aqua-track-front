@@ -2,12 +2,19 @@ import css from './LogOutModal.module.css';
 import { useModal } from '../../hooks/useModal.jsx';
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../redux/auth/operations';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { icons as sprite } from '../../assets/icons/index.js';
 
-const LogOutModalContent = ({ closeModal, handleLogOut }) => {
+const LogOutModalContent = ({ closeModal }) => {
+  const dispatch = useDispatch();
   const [closeIcon, setCloseIcon] = useState('icon-close-24x24');
   const svgRef = useRef(null);
+
+  const handleLogOut = () => {
+    dispatch(logoutUser());
+    closeModal();
+  };
+
   const updateCloseIconSize = () => {
     const svgElement = svgRef.current;
     if (svgElement) {
@@ -66,7 +73,7 @@ const LogOutModal = () => {
   // const dispatch = useDispatch();
   const handleLogOut = () => {
     // dispatch(logoutUser());
-    closeModal();
+    // closeModal();
   };
   const setModal = useModal();
   const closeModal = useCallback(() => {
