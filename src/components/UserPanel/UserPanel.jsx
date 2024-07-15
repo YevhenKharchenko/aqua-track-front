@@ -1,7 +1,9 @@
-import { useRef, useState, useEffect } from 'react';
-import css from './UserPanel.module.css';
+import { useRef, useState, useEffect, useCallback } from 'react';
+import { useModal } from '../../hooks/useModal.jsx';
 import UserBar from '../UserBar/UserBar';
 import UserBarPopover from '../UserBarPopover/UserBarPopover';
+import LogOutModal from '../LogOutModal/LogOutModal.jsx';
+import css from './UserPanel.module.css';
 
 const UserPanel = () => {
   const [showPopover, setShowPopover] = useState(false);
@@ -14,7 +16,9 @@ const UserPanel = () => {
     if (
       userBarRef.current &&
       !userBarRef.current.contains(event.target) &&
-      !event.target.closest('.popoverBtn')
+      !event.target.closest('.popoverBtn') &&
+      !event.target.closest('[data-logout-button]') &&
+      !event.target.closest('[data-setting-button]')
     ) {
       setShowPopover(false);
     }
@@ -31,6 +35,17 @@ const UserPanel = () => {
     };
   }, [showPopover]);
 
+  const setModal = useModal();
+
+  const closeModal = useCallback(() => {
+    setModal();
+  }, [setModal]);
+
+  const openModal = useCallback(() => {
+    console.log('hello');
+    setModal(<LogOutModal closeModal={closeModal} />);
+  }, [setModal, closeModal]);
+
   return (
     <>
       <div className={css.tabletThumb}>
@@ -41,7 +56,7 @@ const UserPanel = () => {
       </div>
       {showPopover && (
         <UserBarPopover showPopover={showPopover} referenceElement={userBarRef.current}>
-          <button className={css.popoverBtn} type="button">
+          <button className={css.popoverBtn} type="button" data-setting-button>
             <svg width="16" height="16">
               <use
                 className={css.iconSettings}
@@ -50,7 +65,7 @@ const UserPanel = () => {
             </svg>
             Setting
           </button>
-          <button className={css.logoutBtn} type="button">
+          <button className={css.logoutBtn} type="button" onClick={openModal} data-logout-button>
             <svg width="16" height="16">
               <use
                 className={css.iconLogout}

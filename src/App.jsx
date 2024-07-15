@@ -25,14 +25,16 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route
           path="/signup"
-          // element={<RestrictedRoute redirectTo="/tracker" component={<SignUpPage />}
-          // />}
-          element={<SignUpPage />}
+          element={<RestrictedRoute redirectTo="/tracker" component={<SignUpPage />}
+          // element={<RestrictedRoute component={<SignUpPage />}
+          />}
+          // element={<SignUpPage />}
         />
         <Route
           path="/signin"
-          // element={<RestrictedRoute redirectTo="/tracker" component={<SignInPage />} />}
-          element={<SignInPage />}
+          element={<RestrictedRoute redirectTo="/tracker" component={<SignInPage />} />}
+          // element={<RestrictedRoute component={<SignInPage />} />}
+          // element={<SignInPage />}
         />
         <Route path="/tracker" element={<TrackerPage />} />
         <Route path="/modal" element={<ExampleModal />} />

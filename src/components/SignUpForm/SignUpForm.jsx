@@ -1,59 +1,51 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate  } from 'react-router-dom';
 import css from './SignUpForm.module.css';
 import sprite from '../../assets/icons/sprite.svg';
+import { useDispatch } from 'react-redux';
+import { registerUser } from '../../redux/auth/operations';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const SignUpForm = () => {
 
-// const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-// const handleSubmit = (e) => {
-//   e.preventDefault();
-//   const form = e.target;
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email('Invalid email format').required('Email is required'),
+    password: Yup.string()
+      .min(8, 'Password must be at least 8 characters')
+      .required('Password is required'),
+    repeatPassword: Yup.string()
+      .oneOf([Yup.ref('password'), null], 'Passwords must match')
+      .required('Repeat password is required'),
+  });
 
-//   dispatch(
-//     register({
-//       email: form.elements.email.value,
-//       password: form.elements.password.value,
-//     })
-//   );
-
-//   form.reset();
-// };
-
-// if (isLoginSuccess) {
-  //     return <Navigate to="/profile" replace />;
-  //   }
-  
-  // fetch('https://your-api-url.com/register', {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  //   body: JSON.stringify(formData),
-  // })
-  // .then(response => response.json())
-  // .then(data => console.log(data))
-  // .catch(error => console.error('Error:', error));
-  //   };
-  
 
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
-  } = useForm();
+    reset, 
+  } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
+
+  const onSubmit = (data) => {
+    dispatch(
+      registerUser({
+        email: data.email,
+        password: data.password,
+      })
+    );
+    reset();
+    navigate('/signin');
+  };
 
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
-
-  const onSubmit = data => {
-    const { email, password } = data;
-    const formData = { email, password };
-    console.log(formData);
-  };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -76,13 +68,7 @@ const SignUpForm = () => {
               type="email"
               name="email"
               placeholder="Enter your email"
-              {...register('email', {
-                required: 'Email is required',
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  message: 'Invalid email address',
-                },
-              })}
+              {...register('email')}
             />
           </div>
           {errors.email && <p className={css.errorMessage}>{errors.email.message}</p>}
@@ -96,15 +82,8 @@ const SignUpForm = () => {
               type={showPassword ? 'text' : 'password'}
               name="password"
               placeholder="Enter your password"
-              {...register('password', {
-                required: 'Password is required',
-                minLength: {
-                  value: 8,
-                  message: 'Password must be at least 8 characters',
-                },
-              })}
+              {...register('password')}
             />
-
             <svg
               className={css.passwordToggleIcon}
               onClick={togglePasswordVisibility}
@@ -124,10 +103,7 @@ const SignUpForm = () => {
               className={`${css.signupInput} ${errors.repeatPassword ? css.error : ''}`}
               type={showRepeatPassword ? 'text' : 'password'}
               placeholder="Repeat password"
-              {...register('repeatPassword', {
-                required: 'Repeat password is required',
-                validate: value => value === watch('password') || 'Passwords do not match',
-              })}
+              {...register('repeatPassword')}
             />
             <svg
               className={css.passwordToggleIcon}

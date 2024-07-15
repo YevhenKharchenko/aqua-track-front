@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentDate } from '../../redux/water/slice';
 import { fetchWaterPerMonth } from '../../redux/water/operations';
 import css from './CalendarPagination.module.css';
-import sprite from '../../assets/icons/sprite.svg';
+import { icons as sprite } from '../../assets/icons/index.js';
 
 const months = [
   'January',
@@ -44,16 +44,16 @@ const CalendarPagination = () => {
   return (
     <div className={css.container}>
       <button className={css.button} type="button" onClick={goToPreviousMonth}>
-        <svg className={css.icons}>
-          <use width={18} height={18} xlinkHref={`${sprite}#icon-arrow-left-18x18`} />
+        <svg className={css.icon}>
+          <use xlinkHref={`${sprite}#icon-chevron-left`}></use>
         </svg>
       </button>
       <p>
         {months[new Date(currentDate).getMonth()]}, {new Date(currentDate).getFullYear()}
       </p>
       <button className={css.button} type="button" onClick={goToNextMonth}>
-        <svg className={css.icons}>
-          <use width={18} height={18} xlinkHref={`${sprite}#icon-arrow-right-18x18`} />
+        <svg className={css.icon}>
+          <use xlinkHref={`${sprite}#icon-arrow-right-18x18`}></use>
         </svg>
       </button>
     </div>
