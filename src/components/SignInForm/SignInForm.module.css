@@ -1,6 +1,6 @@
 .container {
   padding-top: 172px;
-  padding-bottom: 216px;
+  padding-bottom: 164px;
 }
 .header {
   font-family: var(--font-family);
@@ -75,14 +75,15 @@
   padding-top: 32px;
 }
 .textWrap {
-  font-family: var(--font-family);
+  width: 311px;
   font-weight: 400;
   font-size: 14px;
   line-height: 129%;
   letter-spacing: -0.01em;
   color: rgba(47, 47, 47, 0.5);
   padding-top: 16px;
-  padding-left: 45.5px;
+  display: flex;
+  justify-content: center;
 }
 .linkText {
   font-weight: 700;
@@ -116,7 +117,7 @@ color: #ef5050;
 @media (min-width: 768px) {
   .container {
     padding-top: 225px;
-    padding-bottom: 281px;
+    padding-bottom: 229px;
     padding-left: 102px;
   }
   .header {
@@ -143,9 +144,9 @@ color: #ef5050;
     padding-top: 20px;
   }
   .textWrap {
+    width: 436px;
     font-size: 16px;
     line-height: 150%;
-    padding-left: 92px;
   }
   .passwordToggleIcon {
     display: block;
@@ -163,7 +164,7 @@ color: #ef5050;
 @media (min-width: 1440px) {
   .container {
     padding-top: 113px;
-    padding-bottom: 169px;
+    padding-bottom: 117px;
     padding-left: 86px;
   }
 }
