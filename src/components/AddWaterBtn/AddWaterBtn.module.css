@@ -28,9 +28,7 @@
   height: 16px;
 }
 
-.icon:active,
-.icon:hover,
-.icon:focus {
+.btnContainer:hover .icon {
   stroke: #9be1a0;
 }
 

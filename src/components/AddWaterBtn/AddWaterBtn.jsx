@@ -2,6 +2,7 @@ import { useState } from 'react';
 import css from './AddWaterBtn.module.css';
 import WaterModal from '../WaterModal/WaterModal';
 import sprite from '../../assets/icons/sprite.svg';
+
 const AddWaterBtn = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
