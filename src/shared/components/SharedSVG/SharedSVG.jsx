@@ -9,5 +9,4 @@ const SharedSVG = ({ svgId, ...props }) => {
     </>
   );
 };
-
 export default SharedSVG;
