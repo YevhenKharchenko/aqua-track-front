@@ -19,6 +19,7 @@ export const initialState = {
   },
   isLoggedIn: false,
   isRefreshing: false,
+  accessToken: null,
   error: "",
 };
 

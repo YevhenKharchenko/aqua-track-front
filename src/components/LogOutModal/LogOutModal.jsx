@@ -1,11 +1,29 @@
 import css from './LogOutModal.module.css';
-import { useModal } from '../../hooks/useModal.jsx';
-import { useDispatch } from 'react-redux';
+import {useNavigate} from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../redux/auth/operations';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { icons as sprite } from '../../assets/icons/index.js';
+import { selectIsLoggedIn } from '../../redux/selectors.js';
 
-const LogOutModalContent = ({ closeModal, handleLogOut }) => {
+
+const LogOutModal = ({ closeModal }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+ 
+  const handleLogOut = () => {
+      
+   console.log ("before logout:", isLoggedIn)
+    
+    dispatch(logoutUser()).then(() => {
+      console.log('logout success');
+    closeModal();
+     navigate('/');} ).catch(error => console.log(error));
+      
+    
+  };
+ 
   const [closeIcon, setCloseIcon] = useState('icon-close-24x24');
   const svgRef = useRef(null);
   const updateCloseIconSize = () => {
@@ -38,54 +56,31 @@ const LogOutModalContent = ({ closeModal, handleLogOut }) => {
       window.removeEventListener('resize', updateCloseIconSize);
     };
   }, []);
+  
 
   return (
     <div className={css.logOutModalContainer}>
-      <button className={css.closeButton} type="button" onClick={closeModal}>
+       
+      <button className={css.logOutModalCloseButton} type="button" onClick={closeModal}>
         <svg ref={svgRef}>
           <use xlinkHref={`${sprite}#${closeIcon}`}></use>
         </svg>
       </button>
 
-      <div className={css.textContainer}>
-        <h4 className={css.title}>Log out</h4>
-        <p className={css.text}> Do you really want to leave?</p>
+      <div className={css.logOutModalTextContainer}>
+        <h4 className={css.logOutModalTitle}>Log out</h4>
+        <p className={css.logOutModalText}> Do you really want to leave?</p>
       </div>
-      <div className={css.buttonsContainer}>
+      <div className={css.logOutModalButtonsContainer}>
         <button className={css.logOutButton} onClick={handleLogOut}>
           Log out
         </button>
-        <button className={css.cancelButton} onClick={closeModal}>
+        <button className={css.logOutModalCancelButton} onClick={closeModal}>
           Cancel
         </button>
       </div>
     </div>
   );
 };
-const LogOutModal = () => {
-  // const dispatch = useDispatch();
-  const handleLogOut = () => {
-    // dispatch(logoutUser());
-    closeModal();
-  };
-  const setModal = useModal();
-  const closeModal = useCallback(() => {
-    setModal(null);
-  }, [setModal]);
-  const openModal = useCallback(() => {
-    setModal(<LogOutModalContent closeModal={closeModal} handleLogOut={handleLogOut} />);
-  }, [setModal, closeModal]);
 
-  return (
-    <>
-      <button type="button" onClick={openModal}>
-        LogOut
-        <svg style={{ width: 20, height: 20 }}>
-          <use xlinkHref={`${sprite}#icon-arrow-right-18x18`}></use>
-        </svg>
-      </button>
-    </>
-  );
-};
-
-export default LogOutModalContent;
+export default LogOutModal;
