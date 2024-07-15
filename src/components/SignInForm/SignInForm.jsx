@@ -33,8 +33,22 @@ const SignInForm = () => {
         email: data.email,
         password: data.password,
       })
-    );
-    reset(); // Reset the form after successful submission
+    ).unwrap()
+    .then(() => {
+      console.log('login success');
+    })
+    .catch(() => {
+      console.log('login error');
+    });
+
+
+
+    reset(); 
+
+
+
+
+    
   };
 
   const [showPassword, setShowPassword] = useState(false);
