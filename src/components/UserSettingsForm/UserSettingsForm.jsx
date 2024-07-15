@@ -1,27 +1,65 @@
-import { useState } from 'react';
+// import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { icons } from '../../assets/icons';
-import avatar from '../../assets/images/avatar.png';
-import { yupResolver } from '@hookform/resolvers/yup';
 
-import css from './UserSettingsForm.module.css';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { userSettingsFormSchema } from '../../schemas/UserSettingsFormSchema';
 
+import avatar from '../../assets/images/avatar.png';
+import css from './UserSettingsForm.module.css';
+
+
 const UserSettingsForm = () => {
-  const [userAvatar, setUserAvatar] = useState(null);
+  // avatar change
+
+  // const [userAvatar, setUserAvatar] = useState(null);
+  // const avatarRef = useRef(null);
+
+  // const onAvatarChange = event => {
+  //   const avatarUpload = event.target.files[0];
+  //   setUserAvatar(avatarUpload);
+  // };
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm({
     resolver: yupResolver(userSettingsFormSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      gender: 'woman',
+      weight: 0,
+      sportTime: 0,
+      dailyNorma: 0,
+    },
   });
+
+ const calcWaterByGender = () => {
+   const weight = parseFloat(watch('weight')) || 0;
+   const sportTime = parseFloat(watch('sportTime')) || 0;
+   const gender = watch('gender');
+
+   const coefficients = {
+     woman: { weight: 0.03, sport: 0.4 },
+     man: { weight: 0.04, sport: 0.6 },
+   };
+
+   if (gender && coefficients[gender]) {
+     const { weight: weightCoeff, sport: sportCoeff } = coefficients[gender];
+     return (weight * weightCoeff + sportTime * sportCoeff).toFixed(1);
+   }
+
+   return 0;
+ };
 
   const onSubmit = data => console.log(data);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+
       <div className={css.imageWrapper}>
         <div className={css.imageContainer}>
           <img className={css.image} src={avatar} alt="User avatar" width="75" height="75" />
@@ -34,9 +72,11 @@ const UserSettingsForm = () => {
           <p className={css.text}>Upload a photo</p>
         </label>
       </div>
+
       <div className={css.formWrapper}>
         <div>
           <h2 className={css.inputTitle}>Your gender identity</h2>
+
           <div className={css.genderInputWrapper}>
             <label className={`${css.genderButton} ${css.text}`}>
               <input
@@ -88,6 +128,7 @@ const UserSettingsForm = () => {
             />
             {errors.name && <p className={css.error}>{errors.name.message}</p>}
           </div>
+
           <div className={css.userInputWrap}>
             <label className={css.userInputTitle} htmlFor="email">
               Email
@@ -103,6 +144,7 @@ const UserSettingsForm = () => {
             {errors.email && <p className={css.error}>{errors.email.message}</p>}
           </div>
         </div>
+
         <div className={css.dailyNormaWrap}>
           <h2 className={css.inputTitle}>My daily norma</h2>
           <div className={css.dailyInfoWrapper}>
@@ -113,6 +155,7 @@ const UserSettingsForm = () => {
             <h3 className={css.text}>For man:</h3>
             <p className={css.accentText}>V=(M*0,04) + (T*0,6)</p>
           </div>
+
           <div>
             <p className={`${css.waterInfo} ${css.text}`}>
               <span className={css.accentText}>*</span> V is the volume of the water norm in liters
@@ -135,41 +178,41 @@ const UserSettingsForm = () => {
             </label>
             <input
               className={`${css.userInput} ${css.text}`}
-              type="text"
               name="weight"
               placeholder="0"
               {...register('weight')}
             />
             {errors.weight && <p className={css.error}>{errors.weight.message}</p>}
           </div>
+
           <div className={css.userInputWrap}>
-            <label className={`${css.text} ${css.calcInput}`} htmlFor="timeInSports">
+            <label className={`${css.text} ${css.calcInput}`} htmlFor="sportTime">
               The time of active participation in sports:
             </label>
             <input
               className={`${css.userInput} ${css.text}`}
-              type="text"
-              name="timeInSports"
+              name="sportTime"
               placeholder="0"
-              {...register('timeInSports')}
+              {...register('sportTime')}
             />
             {errors.timeInSports && <p className={css.error}>{errors.timeInSports.message}</p>}
           </div>
         </div>
+
         <div>
           <div className={css.amountWrap}>
             <h3 className={css.text}>The required amount of water in liters per day:</h3>
-            <p className={css.accentText}> L</p>
+            <p className={css.accentText}>{calcWaterByGender()} L</p>
           </div>
           <div className={css.userInputWrap}>
-            <label className={css.userInputTitle} htmlFor="dailyWaterNorma">
+            <label className={css.userInputTitle} htmlFor="dailyNorma">
               Write down how much water you will drink:
             </label>
             <input
               className={`${css.userInput} ${css.text}`}
-              name="dailyWaterNorma"
+              name="dailyNorma"
               step={0.1}
-              {...register('dailyWaterNorma')}
+              {...register('dailyNorma')}
             />
             {errors.dailyWaterNorma && (
               <p className={css.error}>{errors.dailyWaterNorma.message}</p>
@@ -177,6 +220,7 @@ const UserSettingsForm = () => {
           </div>
         </div>
       </div>
+
       <button className={`${css.submitButton} ${css.text}`} type="submit">
         Save
       </button>
