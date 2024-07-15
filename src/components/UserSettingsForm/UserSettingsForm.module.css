@@ -1,0 +1,178 @@
+.formWrapper {
+  padding: 40px 0;
+}
+
+.imageWrapper {
+  /* padding: 20px 85px 40px; */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.imagecontainer {
+}
+
+.image {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+}
+
+.upload {
+  display: flex;
+  gap: 8px;
+
+  cursor: pointer;
+}
+
+.imageInput {
+  display: none;
+}
+
+.uploadIcon {
+  stroke: #2f2f2f;
+  fill: transparent;
+}
+
+.text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+
+  color: #2f2f2f;
+}
+
+.inputTitle {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+
+  color: #2f2f2f;
+
+  margin-bottom: 14px;
+}
+
+.genderInputWrapper {
+  display: flex;
+  gap: 20px;
+
+  margin-bottom: 25px;
+}
+
+.genderButton {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.genderInput {
+  display: none;
+  
+}
+
+.iconWrapper {
+}
+
+.radioIcon {
+}
+
+.userInroWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  margin-bottom: 24px;
+}
+
+.userInputWrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.userInputTitle {
+  display: block;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+
+  color: #2f2f2f;
+  margin-bottom: 8px;
+}
+
+.userInput {
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  border-radius: 15px;
+
+  padding: 14px 16px;
+  color: #2f2f2f;
+}
+
+.dailyNormaWrap {
+  margin-bottom: 24px;
+}
+
+.dailyInfoWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  margin-bottom: 12px;
+}
+
+.accentText {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: #9be1a0;
+}
+
+.waterInfo {
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  border-radius: 15px;
+  padding: 16px;
+
+  margin-bottom: 14px;
+}
+
+.activityWrapper {
+  display: flex;
+  gap: 4px;
+}
+
+.waterNormaWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  margin-bottom: 24px;
+}
+
+.calcInput {
+  margin-bottom: 8px;
+}
+
+.amountWrap {
+  margin-bottom: 14px;
+}
+
+.submitButton {
+  border-radius: 30px;
+  padding: 14px 40px;
+  width: 116px;
+  height: 46px;
+  background-color: #9be1a0;
+
+  font-weight: 700;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    font-weight: 400;
+}

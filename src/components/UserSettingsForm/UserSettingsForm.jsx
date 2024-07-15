@@ -1,102 +1,185 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { icons } from '../../assets/icons';
+import avatar from '../../assets/images/avatar.png';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import css from './UserSettingsForm.module.css';
+import { userSettingsFormSchema } from '../../schemas/UserSettingsFormSchema';
 
 const UserSettingsForm = () => {
-  const [avatar, setAvatar] = useState(null);
+  const [userAvatar, setUserAvatar] = useState(null);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(userSettingsFormSchema),
+  });
 
   const onSubmit = data => console.log(data);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <div>
-          <img src="" alt="User avatar" />
+      <div className={css.imageWrapper}>
+        <div className={css.imageContainer}>
+          <img className={css.image} src={avatar} alt="User avatar" width="75" height="75" />
         </div>
-        <label>
-          <input type="file" accept="image/*" />
-          <svg width="18" height="18">
+        <label className={css.upload}>
+          <input className={css.imageInput} type="file" accept="image/*" />
+          <svg className={css.uploadIcon} width="18" height="18">
             <use xlinkHref={`${icons}#icon-upload-18x18`}></use>
           </svg>
-          <p>Upload a photo</p>
+          <p className={css.text}>Upload a photo</p>
         </label>
       </div>
-
-      <div>
-        <h2>Your gender identity</h2>
+      <div className={css.formWrapper}>
         <div>
-          <label>
-            <input type="radio" name="gender" value="woman" {...register('gender')} />
-            <span>
+          <h2 className={css.inputTitle}>Your gender identity</h2>
+          <div className={css.genderInputWrapper}>
+            <label className={`${css.genderButton} ${css.text}`}>
+              <input
+                className={css.genderInput}
+                type="radio"
+                name="gender"
+                value="woman"
+                {...register('gender')}
+              />
+              {errors.gender && <p className={css.error}>{errors.gender.message}</p>}
+              <span className={css.iconWrapper}>
+                <svg className={css.radioIcon} width="18" height="18">
+                  <use xlinkHref={`${icons}#icon-upload-18x18`}></use>
+                </svg>
+              </span>
+              Woman
+            </label>
+            <label className={`${css.genderButton} ${css.text}`}>
+              <input
+                className={css.genderInput}
+                type="radio"
+                name="gender"
+                value="woman"
+                {...register('gender')}
+              />
+              {errors.gender && <p className={css.error}>{errors.gender.message}</p>}
+              <span className={css.iconWrapper}>
+                <svg className={css.radioIcon} width="18" height="18">
+                  <use xlinkHref={`${icons}#icon-upload-18x18`}></use>
+                </svg>
+              </span>
+              Man
+            </label>
+          </div>
+        </div>
+
+        <div className={css.userInroWrapper}>
+          <div className={css.userInputWrap}>
+            <label className={css.userInputTitle} htmlFor="name">
+              Your name
+            </label>
+            <input
+              className={`${css.userInput} ${css.text}`}
+              type="text"
+              name="name"
+              placeholder="Nadia"
+              id="name"
+              {...register('name')}
+            />
+            {errors.name && <p className={css.error}>{errors.name.message}</p>}
+          </div>
+          <div className={css.userInputWrap}>
+            <label className={css.userInputTitle} htmlFor="email">
+              Email
+            </label>
+            <input
+              className={`${css.userInput} ${css.text}`}
+              type="email"
+              name="email"
+              placeholder="nadia10@gmail.com"
+              id="email"
+              {...register('email')}
+            />
+            {errors.email && <p className={css.error}>{errors.email.message}</p>}
+          </div>
+        </div>
+        <div className={css.dailyNormaWrap}>
+          <h2 className={css.inputTitle}>My daily norma</h2>
+          <div className={css.dailyInfoWrapper}>
+            <h3 className={css.text}>For woman:</h3>
+            <p className={css.accentText}>V=(M*0,03) + (T*0,4)</p>
+          </div>
+          <div className={css.dailyInfoWrapper}>
+            <h3 className={css.text}>For man:</h3>
+            <p className={css.accentText}>V=(M*0,04) + (T*0,6)</p>
+          </div>
+          <div>
+            <p className={`${css.waterInfo} ${css.text}`}>
+              <span className={css.accentText}>*</span> V is the volume of the water norm in liters
+              per day, M is your body weight, T is the time of active sports, or another type of
+              activity commensurate in terms of loads (in the absence of these, you must set 0)
+            </p>
+            <div className={css.activityWrapper}>
               <svg width="18" height="18">
                 <use xlinkHref={`${icons}#icon-upload-18x18`}></use>
               </svg>
-            </span>
-            Woman
-          </label>
-          <label>
-            <input type="radio" name="gender" value="man" {...register('gender')} />
-            <span>
-              <svg width="18" height="18">
-                <use xlinkHref={`${icons}#icon-upload-18x18`}></use>
-              </svg>
-            </span>
-            Man
-          </label>
-        </div>
-      </div>
-
-      <div>
-        <div>
-          <label htmlFor="name">Name</label>
-          <input type="text" name="name" id="name" {...register('name')} />
-        </div>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input type="email" name="email" id="email" {...register('email')} />
-        </div>
-
-        <div>
-          <h2>My daily norma</h2>
-          <div>
-            <h3>For woman:</h3>
-            <p>V=(M*0,03) + (T*0,4)</p>
+              <p className={css.text}>Active time in hours</p>
+            </div>
           </div>
-          <div>
-            <h3>For man:</h3>
-            <p>V=(M*0,04) + (T*0,6)</p>
+        </div>
+
+        <div className={css.waterNormaWrapper}>
+          <div className={css.userInputWrap}>
+            <label className={`${css.text} ${css.calcInput}`} htmlFor="weight">
+              Your weight in kilograms:
+            </label>
+            <input
+              className={`${css.userInput} ${css.text}`}
+              type="text"
+              name="weight"
+              placeholder="0"
+              {...register('weight')}
+            />
+            {errors.weight && <p className={css.error}>{errors.weight.message}</p>}
+          </div>
+          <div className={css.userInputWrap}>
+            <label className={`${css.text} ${css.calcInput}`} htmlFor="timeInSports">
+              The time of active participation in sports:
+            </label>
+            <input
+              className={`${css.userInput} ${css.text}`}
+              type="text"
+              name="timeInSports"
+              placeholder="0"
+              {...register('timeInSports')}
+            />
+            {errors.timeInSports && <p className={css.error}>{errors.timeInSports.message}</p>}
           </div>
         </div>
         <div>
-          <p>
-            <span>*</span>V is the volume of the water norm in liters per day, M is your body
-            weight, T is the time of active sports, or another type of activity commensurate in
-            terms of loads (in the absence of these, you must set 0)
-          </p>
-          <svg width="18" height="18">
-            <use xlinkHref={`${icons}#icon-upload-18x18`}></use>
-          </svg>
-          <p>Active time in hours</p>
+          <div className={css.amountWrap}>
+            <h3 className={css.text}>The required amount of water in liters per day:</h3>
+            <p className={css.accentText}> L</p>
+          </div>
+          <div className={css.userInputWrap}>
+            <label className={css.userInputTitle} htmlFor="dailyWaterNorma">
+              Write down how much water you will drink:
+            </label>
+            <input
+              className={`${css.userInput} ${css.text}`}
+              name="dailyWaterNorma"
+              step={0.1}
+              {...register('dailyWaterNorma')}
+            />
+            {errors.dailyWaterNorma && (
+              <p className={css.error}>{errors.dailyWaterNorma.message}</p>
+            )}
+          </div>
         </div>
       </div>
-
-      <div>
-        <label>Your weight in kilograms:</label>
-        <input type="number" name="weight" {...register('weight')} />
-        <label>The time of active participation in sports:</label>
-        <input type="number" name="timeInSports" {...register('timeInSports')} />
-        <h3>The required amount of water in liters per day:</h3>
-        <p> L</p>
-        <label>Write down how much water you will drink:</label>
-        <input name="dailyWaterNorma" step={0.1} {...register('dailyWaterNorma')} />
-      </div>
-
-      <button type="submit">Save</button>
+      <button className={`${css.submitButton} ${css.text}`} type="submit">
+        Save
+      </button>
     </form>
   );
 };
