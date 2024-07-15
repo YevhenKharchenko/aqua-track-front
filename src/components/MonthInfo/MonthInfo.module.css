@@ -13,27 +13,14 @@
 }
 
 .monthPaginationContainer {
-  /* width: 100%; */
-  width: 179px;
-  height: 20px;
+  width: 100%;
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   align-items: center;
-  height: 24px;
-}
-
-@media only screen and (min-width: 320px) and (max-width: 374px) {
-}
-
-@media only screen and (min-width: 375px) {
+  margin-bottom: 24px;
 }
 
 @media only screen and (min-width: 768px) {
-  .monthPaginationContainer {
-    width: 205px;
-    height: 24px;
-  }
-
   .monthTitle {
     font-size: 28px;
     line-height: 114%;

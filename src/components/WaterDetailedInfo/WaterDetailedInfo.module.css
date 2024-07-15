@@ -2,10 +2,18 @@
   padding: 40px 20px;
   background-color: #f0eff4;
   border-radius: 30px;
+  width: 343px;
 }
 
 @media only screen and (min-width: 768px) {
   .waterDetailInfo {
     padding: 32px;
+    width: 704px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .waterDetailInfo {
+    width: 672px;
   }
 }
