@@ -1,0 +1,21 @@
+.backdrop {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: rgba(44, 39, 39, 0.4);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
+
+.active {
+  opacity: 1;
+}

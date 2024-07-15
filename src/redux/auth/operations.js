@@ -1,74 +1,119 @@
-import axios from 'axios';
-import toast from 'react-hot-toast';
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const setAuthHeader = token => {
+export const SetAuthHeader = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
-const clearAuthHeader = () => {
-  axios.defaults.headers.common.Authorization = '';
+const ClearAuthHeader = () => {
+  axios.defaults.headers.common.Authorization = "";
 };
 
-export const register = createAsyncThunk('auth/register', async (credentials, thunkAPI) => {
-  try {
-    const { data } = await axios.post('/users/signup', credentials);
-    setAuthHeader(data.token);
-    toast.success(`Congratulations! You have successfully registered.`);
-    return data;
-  } catch (e) {
-    toast.error(
-      `Oops! Something went wrong. Please try again later or contact support. Error details: ${e.message}`
-    );
-    return thunkAPI.rejectWithValue(e.message);
+axios.defaults.baseURL = "https://project6-back.onrender.com"; //адрес бк
+
+
+axios.interceptors.response.use(res => res, async (err) => {
+  const originalRequest = err.config;
+
+  if (err.response.status === 401 && !originalRequest._retry) {
+    originalRequest._retry = true;
+
+    const refreshToken = localStorage.getItem("refreshToken");
+
+    if (refreshToken.length > 0) {
+      try {
+        const res = await axios.post("/users/refresh", { refreshToken });
+
+        SetAuthHeader(res.data.accessToken);
+        localStorage.setItem("refreshToken", res.data.refreshToken);
+        originalRequest.headers.Authorization = `Bearer ${res.data.accessToken}`;
+
+        return axios(originalRequest);
+      } catch (refreshError) {
+        localStorage.setItem("refreshToken", "");
+        ClearAuthHeader();
+        return Promise.reject(refreshError);
+      }
+    }
   }
+  return Promise.reject(err);
 });
 
-export const login = createAsyncThunk('auth/login', async (credentials, thunkAPI) => {
-  try {
-    const { data } = await axios.post('/users/login', credentials);
-    setAuthHeader(data.token);
-    toast.success(`You have successfully logged in.`);
-    return data;
-  } catch (e) {
-    if (e.response.status === 400) {
-      toast.error('Invalid email or password');
+
+export const registerUser = createAsyncThunk(
+  "auth/register",
+  async ({ email, password }, thunkAPI) => {
+    try {
+      const res = await axios.post("/users/register", { email, password });
+
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+export const loginUser = createAsyncThunk(
+  "auth/login",
+  async ({ email, password }, thunkAPI) => {
+    try {
+      const res = await axios.post("/users/login", { email, password });
+      SetAuthHeader(res.data.accessToken);
+
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+export const logoutUser = createAsyncThunk(
+  "auth/logout",
+  async (_, thunkAPI) => {
+    try {
+      const res = await axios.get("/users/logout");
+      ClearAuthHeader();
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+export const refreshUser = createAsyncThunk(
+  "auth/refresh",
+  async (_, thunkAPI) => {
+    ///////////////////
+    const persistedToken = localStorage.getItem("refreshToken");
+
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue("Unable to fetch user");
+    }
+
+    try {
+      const res = await axios.post("/users/refresh", {
+        refreshToken: persistedToken,
+      });
+
+      SetAuthHeader(res.data.accessToken);
+
+      return res.data;
+    } catch (e) {
+      localStorage.setItem("refreshToken", "");
       return thunkAPI.rejectWithValue(e.message);
     }
-    toast.error(
-      `Oops! Something went wrong. Please try again later or contact support. Error details: ${e.message}`
-    );
-    return thunkAPI.rejectWithValue(e.message);
   }
-});
+);
+export const updateUser = createAsyncThunk(
+  "auth/update",
+  async (data, thunkAPI) => {
+    try {
+      const res = await axios.put("users/update", data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
-export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
-  try {
-    await axios.post('/users/logout');
-    clearAuthHeader();
-    toast.success('You have been successfully logged out.');
-  } catch (e) {
-    toast.error(
-      `Oops! Something went wrong. Please try again later or contact support. Error details: ${e.message}`
-    );
-    return thunkAPI.rejectWithValue(e.message);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
-});
-
-export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
-  const state = thunkAPI.getState();
-  const persistedToken = state.auth.token;
-  if (persistedToken === null) {
-    return thunkAPI.rejectWithValue('Unable to fetch user');
-  }
-
-  try {
-    setAuthHeader(persistedToken);
-    const { data } = await axios.get('/users/current');
-    toast.success(`Session refreshed successfully.`);
-    return data;
-  } catch (e) {
-    toast.error(`Unable to retrieve user information, please log in or register to continue`);
-    return thunkAPI.rejectWithValue(e.message);
-  }
-});
+);

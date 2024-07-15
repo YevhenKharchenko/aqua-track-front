@@ -10,6 +10,12 @@ import HomePage from './pages/HomePage/HomePage.jsx';
 import SignUpPage from './pages/SignUpPage/SignUpPage.jsx';
 import SignInPage from './pages/SignInPage/SignInPage.jsx';
 import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
+import ExampleModal from './components/ExampleModal.jsx';
+
+import LogOutModal from './components/LogOutModal/LogOutModal.jsx';
+
+import TrackerPage from './pages/TrackerPage/TrackerPage.jsx';
+
 
 function App() {
   return (
@@ -19,12 +25,20 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route
           path="/signup"
-          element={<RestrictedRoute redirectTo="/tracker" component={<SignUpPage />} />}
+          element={<RestrictedRoute redirectTo="/tracker" component={<SignUpPage />}
+          // element={<RestrictedRoute component={<SignUpPage />}
+          />}
+          // element={<SignUpPage />}
         />
         <Route
           path="/signin"
           element={<RestrictedRoute redirectTo="/tracker" component={<SignInPage />} />}
+          // element={<RestrictedRoute component={<SignInPage />} />}
+          // element={<SignInPage />}
         />
+        <Route path="/tracker" element={<TrackerPage />} />
+        <Route path="/modal" element={<ExampleModal />} />
+        <Route path="/logout" element={<LogOutModal />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </SharedLayout>

@@ -1,0 +1,28 @@
+.backdrop {
+  border-radius: 30px;
+  background: #f0eff4;
+  padding-left: 16px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  max-width: 343px;
+}
+
+@media (min-width: 768px) {
+  .backdrop {
+    padding-left: 32px;
+    padding-top: 32px;
+    max-width: 704px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .backdrop {
+    width: 672px;
+    height: 736px;
+  }
+  .wrapper {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+  }
+}
