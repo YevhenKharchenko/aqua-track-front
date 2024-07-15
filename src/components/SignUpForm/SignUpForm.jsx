@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate  } from 'react-router-dom';
 import css from './SignUpForm.module.css';
 import sprite from '../../assets/icons/sprite.svg';
 import { useDispatch } from 'react-redux';
@@ -11,6 +11,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 const SignUpForm = () => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email format').required('Email is required'),
@@ -40,6 +41,7 @@ const SignUpForm = () => {
       })
     );
     reset();
+    navigate('/signin');
   };
 
   const [showPassword, setShowPassword] = useState(false);
