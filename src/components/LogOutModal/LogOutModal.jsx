@@ -5,15 +5,22 @@ import { logoutUser } from '../../redux/auth/operations';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { icons as sprite } from '../../assets/icons/index.js';
 
-const LogOutModalContent = ({ closeModal }) => {
+const LogOutModal = ({ closeModal }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogOut = () => {
+    dispatch(logoutUser())
+      .then(() => {
+        console.log('logout success');
+        closeModal();
+        navigate('/');
+      })
+      .catch(error => console.log(error));
+  };
   const [closeIcon, setCloseIcon] = useState('icon-close-24x24');
   const svgRef = useRef(null);
 
-  const handleLogOut = () => {
-    dispatch(logoutUser());
-    closeModal();
-  };
+ 
 
   const updateCloseIconSize = () => {
     const svgElement = svgRef.current;
@@ -71,30 +78,4 @@ const LogOutModalContent = ({ closeModal }) => {
     </div>
   );
 };
-const LogOutModal = () => {
-  // const dispatch = useDispatch();
-  const handleLogOut = () => {
-    // dispatch(logoutUser());
-    // closeModal();
-  };
-  const setModal = useModal();
-  const closeModal = useCallback(() => {
-    setModal(null);
-  }, [setModal]);
-  const openModal = useCallback(() => {
-    setModal(<LogOutModalContent closeModal={closeModal} handleLogOut={handleLogOut} />);
-  }, [setModal, closeModal]);
-
-  return (
-    <>
-      <button type="button" onClick={openModal}>
-        LogOut
-        <svg style={{ width: 20, height: 20 }}>
-          <use xlinkHref={`${sprite}#icon-arrow-right-18x18`}></use>
-        </svg>
-      </button>
-    </>
-  );
-};
-
-export default LogOutModalContent;
+export default LogOutModal;
