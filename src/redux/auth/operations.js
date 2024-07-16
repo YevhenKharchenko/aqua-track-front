@@ -80,10 +80,9 @@ export const loginUser = createAsyncThunk('auth/login', async ({ email, password
 
 export const logoutUser = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
-    const res = await axios.post('/users/logout', {
-      withCredentials: true,
-    });
+    const res = await axios.post('/users/logout');
     clearAuthHeader();
+    localStorage.removeItem('accessToken');
     console.log('Successfully logout');
     toast.success('You are successfully logged out!', {
       autoClose: 5000,
@@ -112,10 +111,16 @@ export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) 
   // }
 
   try {
-    const response = await axios.post('/users/refresh', null, {
-      withCredentials: true,
-    });
-    return response.data.data.accessToken;
+    const res = await axios.post(
+      '/users/refresh',
+      {},
+      {
+        withCredentials: true,
+      }
+    );
+
+    console.log(res);
+    return res.data.data.accessToken;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.response.data);
   }
@@ -123,7 +128,7 @@ export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) 
 
 export const updateUser = createAsyncThunk('auth/update', async (data, thunkAPI) => {
   try {
-    const res = await axios.put('users/update', data, {
+    const res = await axios.put('/users/update', data, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -137,11 +142,11 @@ export const updateUser = createAsyncThunk('auth/update', async (data, thunkAPI)
 
 export const getCurrentUser = createAsyncThunk('auth/getUserInfo', async (_, thunkAPI) => {
   try {
-    const res = await axios.get('users/current-user-data');
+    const res = await axios.get('/users/current-user-data');
 
-    console.log(res.data);
+    console.log(res.data.data);
 
-    return res.data.data.userData;
+    return res.data.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
@@ -149,11 +154,11 @@ export const getCurrentUser = createAsyncThunk('auth/getUserInfo', async (_, thu
 
 export const getAllUsers = createAsyncThunk('auth/getAllUsers', async (_, thunkAPI) => {
   try {
-    const res = await axios.get('users/registered-users');
+    const res = await axios.get('/users/registered-users');
 
-    console.log(res.data);
+    console.log(res.data.data);
 
-    return res.data.data.userData;
+    return res.data.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }

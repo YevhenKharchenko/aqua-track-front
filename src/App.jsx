@@ -39,7 +39,7 @@ function App() {
     dispatch(getCurrentUser());
     dispatch(getAllUsers());
 
-    dispatch(refreshUser());
+    // dispatch(refreshUser());
   }, [dispatch]);
 
   return (
