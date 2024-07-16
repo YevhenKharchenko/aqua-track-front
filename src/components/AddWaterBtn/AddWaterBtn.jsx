@@ -3,6 +3,7 @@ import { useModal } from '../../hooks/useModal.jsx';
 import { useCallback } from 'react';
 import { useState } from 'react';
 import WaterModal from '../WaterModal/WaterModal';
+import sprite from '../../assets/icons/sprite.svg';
 import css from './AddWaterBtn.module.css';
 
 const AddWaterBtn = ({ className }) => {
@@ -33,7 +34,7 @@ const AddWaterBtn = ({ className }) => {
         onClick={openModal}
       >
         <svg className={css.icon}>
-          <use href="../../assets/icons/sprite.svg#icon-plus16x16"></use>
+          <use href={`${sprite}#icon-plus16x16`}></use>
         </svg>
         Add water
       </button>
