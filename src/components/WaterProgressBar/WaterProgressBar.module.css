@@ -88,6 +88,18 @@
   line-height: 1em;
 }
 
+.dynamicPercentageLabel {
+  position: absolute;
+  top: 18px; /* Adjust to position above the progress bar */
+  transform: translateX(-50%);
+  color: #9be1a0;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
 @media (min-width: 768px) {
   .progressBarContainer {
     margin-bottom: 26px;

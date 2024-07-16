@@ -14,7 +14,14 @@ const daysInMonth = (month, year) => {
 const Calendar = () => {
   const dispatch = useDispatch();
   const currentDate = useSelector(selectCurrentDate);
-  const waterPerMonth = useSelector(selectWaterPerMonth);
+
+  // я додав
+  const waterPerMonth = useSelector(selectWaterPerMonth) || [];
+  //
+
+  // код Андрія
+  // const waterPerMonth = useSelector(selectWaterPerMonth);
+
   const activeDay = useSelector(state => state.water.activeDay);
 
   const user = useAuth().user;
@@ -38,9 +45,35 @@ const Calendar = () => {
   const year = new Date(currentDate).getFullYear();
   const numberOfDays = daysInMonth(month, year);
 
+  // я додав
+  function formatDateForMonth(originalDate) {
+    const [month, day, year] = originalDate.split('/');
+    const paddedMonth = month.padStart(2, '0');
+    const paddedDay = day.padStart(2, '0');
+    const formattedDate = `${paddedDay}-${paddedMonth}-${year}`;
+
+    return formattedDate;
+  }
+  function formatDateForDay(originalDate) {
+    const [day, month, year] = originalDate.split('.');
+    const formattedDate = `${day}-${month}-${year}`;
+
+    return formattedDate;
+  }
+  //
+
   useEffect(() => {
     const localDate = new Date(currentDate).toLocaleDateString();
-    dispatch(fetchWaterPerMonth(localDate));
+
+    // я додав
+    const formattedDateForMonth = formatDateForMonth(localDate);
+    console.log(formattedDateForMonth);
+    console.log(localDate);
+    dispatch(fetchWaterPerMonth(formattedDateForMonth));
+    //
+
+    // код Андрія
+    // dispatch(fetchWaterPerMonth(localDate));
   }, [dispatch, currentDate]);
 
   const daysArray = Array.from({ length: numberOfDays }, (_, index) => index + 1);
@@ -51,8 +84,17 @@ const Calendar = () => {
       '0'
     )}.${year}`;
 
+    // я додав
+    const formattedDateForDay = formatDateForDay(formattedDay);
+    console.log(formattedDay);
+    console.log(formattedDateForDay);
     dispatch(setActiveDay(formattedDay));
-    dispatch(fetchWaterPerDay(formattedDay));
+    dispatch(fetchWaterPerDay(formattedDateForDay));
+    //
+
+    // код Андрія
+    // dispatch(setActiveDay(formattedDay));
+    // dispatch(fetchWaterPerDay(formattedDay));
   };
 
   return (

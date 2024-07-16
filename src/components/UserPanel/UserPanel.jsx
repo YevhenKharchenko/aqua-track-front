@@ -1,8 +1,10 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { useModal } from '../../hooks/useModal.jsx';
+import { icons as sprite } from '../../assets/icons/index.js';
 import UserBar from '../UserBar/UserBar';
 import UserBarPopover from '../UserBarPopover/UserBarPopover';
 import LogOutModal from '../LogOutModal/LogOutModal.jsx';
+import UserSettingsModal from '../UserSettingsModal/UserSettingsModal.jsx';
 import css from './UserPanel.module.css';
 
 const UserPanel = () => {
@@ -42,9 +44,16 @@ const UserPanel = () => {
   }, [setModal]);
 
   const openModal = useCallback(() => {
-    console.log('hello');
     setModal(<LogOutModal closeModal={closeModal} />);
   }, [setModal, closeModal]);
+
+  const closeSettingModal = useCallback(() => {
+    setModal();
+  }, [setModal]);
+
+  const openSettingModal = useCallback(() => {
+    setModal(<UserSettingsModal onClose={closeSettingModal} />);
+  }, [setModal, closeSettingModal]);
 
   return (
     <>
@@ -56,21 +65,20 @@ const UserPanel = () => {
       </div>
       {showPopover && (
         <UserBarPopover showPopover={showPopover} referenceElement={userBarRef.current}>
-          <button className={css.popoverBtn} type="button" data-setting-button>
+          <button
+            className={css.popoverBtn}
+            type="button"
+            onClick={openSettingModal}
+            data-setting-button
+          >
             <svg width="16" height="16">
-              <use
-                className={css.iconSettings}
-                href="./src/assets/icons/sprite.svg#icon-settings-16x16"
-              ></use>
+              <use className={css.iconSettings} xlinkHref={`${sprite}#icon-settings-16x16`}></use>
             </svg>
             Setting
           </button>
           <button className={css.logoutBtn} type="button" onClick={openModal} data-logout-button>
             <svg width="16" height="16">
-              <use
-                className={css.iconLogout}
-                href="./src/assets/icons/sprite.svg#icon-log-out-16x16"
-              ></use>
+              <use className={css.iconLogout} xlinkHref={`${sprite}#icon-log-out-16x16`}></use>
             </svg>
             Log out
           </button>

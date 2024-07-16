@@ -1,7 +1,9 @@
-import { lazy, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import { Routes, Route } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { lazy, useEffect } from 'react';
+import { refreshUser, logoutUser, getCurrentUser, getAllUsers } from './redux/auth/operations.js';
+import { loginUserSuccess } from './redux/auth/slice.js';
 import { RestrictedRoute } from './components/RestrictedRoute';
 import { PrivateRoute } from './components/PrivateRoute';
 import Loader from './shared/components/Loader/Loader.jsx';
@@ -18,8 +20,22 @@ import TrackerPage from './pages/TrackerPage/TrackerPage.jsx';
 import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPasswordPage.jsx';
 import ResetPasswordPage from './pages/ResetPasswordPage/ResetPasswordPage.jsx';
 
-
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken');
+
+    if (token) {
+      dispatch(loginUserSuccess(token));
+      dispatch(getCurrentUser());
+    }
+
+    dispatch(getAllUsers());
+
+    // dispatch(refreshUser());
+  }, [dispatch]);
+
   return (
     <SharedLayout>
       <Toaster position="top-center" />
@@ -27,9 +43,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route
           path="/signup"
-          element={<RestrictedRoute redirectTo="/tracker" component={<SignUpPage />}
-          />}
-          
+          element={<RestrictedRoute redirectTo="/tracker" component={<SignUpPage />} />}
         />
         <Route
           path="/signin"
@@ -43,7 +57,10 @@ function App() {
           path="/reset-password"
           element={<RestrictedRoute component={<ResetPasswordPage />} />}
         />
-        <Route path="/tracker" element={<TrackerPage />} />
+        <Route
+          path="/tracker"
+          element={<PrivateRoute redirectTo="/signin" component={<TrackerPage />} />}
+        />
         <Route path="/modal" element={<ExampleModal />} />
         <Route path="/logout" element={<LogOutModal />} />
         <Route path="*" element={<NotFoundPage />} />
