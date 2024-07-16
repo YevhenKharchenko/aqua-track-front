@@ -2,7 +2,7 @@ import { Toaster } from 'react-hot-toast';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { lazy, useEffect } from 'react';
-import { refreshUser, logoutUser, getCurrentUser } from './redux/auth/operations.js';
+import { refreshUser, logoutUser, getCurrentUser, getAllUsers } from './redux/auth/operations.js';
 import { loginUserSuccess } from './redux/auth/slice.js';
 import { RestrictedRoute } from './components/RestrictedRoute';
 import { PrivateRoute } from './components/PrivateRoute';
@@ -37,6 +37,7 @@ function App() {
     }
 
     dispatch(getCurrentUser());
+    dispatch(getAllUsers());
 
     dispatch(refreshUser());
   }, [dispatch]);

@@ -6,6 +6,7 @@ import {
   registerUser,
   updateUser,
   getCurrentUser,
+  getAllUsers,
 } from './operations';
 
 export const initialState = {
@@ -104,10 +105,15 @@ const userSlice = createSlice({
       .addCase(getCurrentUser.pending, (state, action) => {
         state.isRefreshing = true;
       })
-      .addCase(getCurrentUser.fulfilled, (state, action) => {
-        console.log(action.payload);
-      })
+      .addCase(getCurrentUser.fulfilled, (state, action) => {})
       .addCase(getCurrentUser.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(getAllUsers.pending, (state, action) => {
+        state.isRefreshing = true;
+      })
+      .addCase(getAllUsers.fulfilled, (state, action) => {})
+      .addCase(getAllUsers.rejected, (state, action) => {
         state.error = action.payload;
       }),
 });

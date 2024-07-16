@@ -112,7 +112,9 @@ export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) 
   // }
 
   try {
-    const response = await axios.post('/users/refresh');
+    const response = await axios.post('/users/refresh', null, {
+      withCredentials: true,
+    });
     return response.data.data.accessToken;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.response.data);
@@ -133,11 +135,23 @@ export const updateUser = createAsyncThunk('auth/update', async (data, thunkAPI)
   }
 });
 
-export const getCurrentUser = createAsyncThunk('auth/getUseInfo', async (_, thunkAPI) => {
+export const getCurrentUser = createAsyncThunk('auth/getUserInfo', async (_, thunkAPI) => {
   try {
     const res = await axios.get('users/current-user-data');
 
-    console.log(res.data.data.userData);
+    console.log(res.data);
+
+    return res.data.data.userData;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+export const getAllUsers = createAsyncThunk('auth/getAllUsers', async (_, thunkAPI) => {
+  try {
+    const res = await axios.get('users/registered-users');
+
+    console.log(res.data);
 
     return res.data.data.userData;
   } catch (error) {
