@@ -2,6 +2,7 @@ import { lazy, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import { refreshUser } from './redux/auth/operations.js';
 import { RestrictedRoute } from './components/RestrictedRoute';
 import { PrivateRoute } from './components/PrivateRoute';
 import Loader from './shared/components/Loader/Loader.jsx';
@@ -16,8 +17,13 @@ import LogOutModal from './components/LogOutModal/LogOutModal.jsx';
 
 import TrackerPage from './pages/TrackerPage/TrackerPage.jsx';
 
-
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
   return (
     <SharedLayout>
       <Toaster position="top-center" />
@@ -25,18 +31,16 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route
           path="/signup"
-          element={<RestrictedRoute redirectTo="/tracker" component={<SignUpPage />}
-          // element={<RestrictedRoute component={<SignUpPage />}
-          />}
-          // element={<SignUpPage />}
+          element={<RestrictedRoute redirectTo="/tracker" component={<SignUpPage />} />}
         />
         <Route
           path="/signin"
           element={<RestrictedRoute redirectTo="/tracker" component={<SignInPage />} />}
-          // element={<RestrictedRoute component={<SignInPage />} />}
-          // element={<SignInPage />}
         />
-        <Route path="/tracker" element={<TrackerPage />} />
+        <Route
+          path="/tracker"
+          element={<PrivateRoute redirectTo="/signin" component={<TrackerPage />} />}
+        />
         <Route path="/modal" element={<ExampleModal />} />
         <Route path="/logout" element={<LogOutModal />} />
         <Route path="*" element={<NotFoundPage />} />

@@ -27,16 +27,15 @@ const userSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isLoggedIn = true;
         state.isRefreshing = false;
-        
+
         localStorage.setItem('accessToken', action.payload.data.accessToken);
         state.userInfo = action.payload.user;
-        console.log(action.payload.data.accessToken);
         state.token = action.payload.data.accessToken;
       })
 
       .addCase(logoutUser.fulfilled, state => {
         state.isLoggedIn = false;
-        state.userInfo= null;
+        state.userInfo = null;
         state.token = null;
         localStorage.setItem('accessToken', '');
       })
@@ -49,8 +48,8 @@ const userSlice = createSlice({
         state.isLoggedIn = true;
         state.isRefreshing = false;
 
-        state.token = action.payload.accessToken;
-        localStorage.setItem('accessToken', action.payload.accessToken);
+        state.token = action.payload.data.accessToken;
+        localStorage.setItem('accessToken', action.payload.data.accessToken);
 
         state.userInfo.email = action.payload.user.email;
         state.userInfo.name = action.payload.user.name;

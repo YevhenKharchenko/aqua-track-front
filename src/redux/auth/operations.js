@@ -63,7 +63,12 @@ export const registerUser = createAsyncThunk(
 export const loginUser = createAsyncThunk('auth/login', async ({ email, password }, thunkAPI) => {
   try {
     const res = await axios.post('/users/login', { email, password });
+
     SetAuthHeader(res.data.accessToken);
+
+    toast.success('You are successfully logged in!', {
+      autoClose: 5000,
+    });
 
     return res.data;
   } catch (error) {
@@ -78,9 +83,9 @@ export const logoutUser = createAsyncThunk('auth/logout', async (_, thunkAPI) =>
     });
     ClearAuthHeader();
     console.log('Successfully logout');
-    toast.success("You are successfully logged out!", {
-  autoClose: 5000
-});
+    toast.success('You are successfully logged out!', {
+      autoClose: 5000,
+    });
     return res.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -89,52 +94,26 @@ export const logoutUser = createAsyncThunk('auth/logout', async (_, thunkAPI) =>
 
 export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
   // const persistedToken = localStorage.getItem('refreshToken');
-
   // if (persistedToken === null) {
   //   return thunkAPI.rejectWithValue('Unable to fetch user');
   // }
-
   // try {
   //   const res = await axios.post('/users/refresh', {
   //     refreshToken: persistedToken,
   //     withCredentials: true,
   //   });
-
   //   SetAuthHeader(res.data.accessToken);
-
   //   return res.data;
   // } catch (e) {
   //   localStorage.setItem('refreshToken', '');
   //   return thunkAPI.rejectWithValue(e.message);
   // }
 
-  const state = thunkAPI.getState();
-
-  const persistedToken = state.auth.token;
-
-  if (persistedToken === null) {
-    return thunkAPI.rejectWithValue('Unable to fetch user');
-  }
-
-  // const persistedToken = localStorage.getItem('accessToken');
-
-  if (persistedToken === null) {
-    return thunkAPI.rejectWithValue('Unable to fetch user');
-  }
-
   try {
-    const res = await axios.post('/users/refresh', {
-      refreshToken: persistedToken,
-      withCredentials: true,
-    });
-
-    SetAuthHeader(res.data.accessToken);
-    localStorage.setItem('accessToken', res.data.accessToken);
-
-    return res.data;
-  } catch (e) {
-    localStorage.removeItem('accessToken');
-    return thunkAPI.rejectWithValue(e.message);
+    const response = await axios.post('water/users/refresh');
+    return response.data.data.accessToken;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response.data);
   }
 });
 
