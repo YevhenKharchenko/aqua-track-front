@@ -1,0 +1,44 @@
+.modalWrapper {
+  position: absolute;
+  bottom: 0;
+  min-width: 280px;
+  max-width: 343px;
+  max-height: 90vh;
+  overflow-y: auto;
+
+  padding: 40px 20px;
+  border-radius: 15px;
+
+  background-color: #ffffff;
+  scrollbar-width: thin;
+  scrollbar-color: #F0EFF4 transparent;
+}
+
+
+.modalWrapper::-webkit-scrollbar {
+ width: 6px;
+ border-radius: 30px;
+}
+
+.modalWrapper::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.modalWrapper::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+}
+
+.modalTitle {
+  font-weight: 700;
+  font-size: 20px;
+
+  margin-bottom: 20px;
+}
+
+.modalCloseButton {
+  position: absolute;
+  top: 20px;
+  right: 16px;
+  stroke: #2f2f2f;
+}
