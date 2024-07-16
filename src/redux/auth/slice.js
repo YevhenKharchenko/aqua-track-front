@@ -1,5 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { refreshUser, loginUser, logoutUser, registerUser, updateUser } from './operations';
+import {
+  refreshUser,
+  loginUser,
+  logoutUser,
+  registerUser,
+  updateUser,
+  getCurrentUser,
+} from './operations';
 
 export const initialState = {
   userInfo: {
@@ -93,7 +100,16 @@ const userSlice = createSlice({
         state.error = action.payload;
       })
 
-      .addCase(refreshUser.rejected, state => {}),
+      .addCase(refreshUser.rejected, state => {})
+      .addCase(getCurrentUser.pending, (state, action) => {
+        state.isRefreshing = true;
+      })
+      .addCase(getCurrentUser.fulfilled, (state, action) => {
+        console.log(action.payload);
+      })
+      .addCase(getCurrentUser.rejected, (state, action) => {
+        state.error = action.payload;
+      }),
 });
 
 export const { loginUserSuccess } = userSlice.actions;

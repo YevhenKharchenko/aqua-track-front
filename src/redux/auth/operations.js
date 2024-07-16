@@ -22,32 +22,32 @@ axios.interceptors.request.use(config => {
   return config;
 });
 
-axios.interceptors.response.use(
-  res => res,
-  async err => {
-    const originalRequest = err.config;
+// axios.interceptors.response.use(
+//   res => res,
+//   async err => {
+//     const originalRequest = err.config;
 
-    if (err.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
+//     if (err.response.status === 401 && !originalRequest._retry) {
+//       originalRequest._retry = true;
 
-      try {
-        const res = await axios.post('/users/refresh');
+//       try {
+//         const res = await axios.post('/users/refresh');
 
-        setAuthHeader(res.data.accessToken);
+//         setAuthHeader(res.data.accessToken);
 
-        localStorage.setItem('accessToken', res.data.accessToken);
-        originalRequest.headers.Authorization = `Bearer ${res.data.accessToken}`;
+//         localStorage.setItem('accessToken', res.data.accessToken);
+//         originalRequest.headers.Authorization = `Bearer ${res.data.accessToken}`;
 
-        return axios(originalRequest);
-      } catch (refreshError) {
-        localStorage.removeItem('accessToken');
-        clearAuthHeader();
-        return Promise.reject(refreshError);
-      }
-    }
-    return Promise.reject(err);
-  }
-);
+//         return axios(originalRequest);
+//       } catch (refreshError) {
+//         localStorage.removeItem('accessToken');
+//         clearAuthHeader();
+//         return Promise.reject(refreshError);
+//       }
+//     }
+//     return Promise.reject(err);
+//   }
+// );
 
 export const registerUser = createAsyncThunk(
   'auth/register',
@@ -128,6 +128,18 @@ export const updateUser = createAsyncThunk('auth/update', async (data, thunkAPI)
     });
 
     return res.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+export const getCurrentUser = createAsyncThunk('auth/getUseInfo', async (_, thunkAPI) => {
+  try {
+    const res = await axios.get('users/current-user-data');
+
+    console.log(res.data.data.userData);
+
+    return res.data.data.userData;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
