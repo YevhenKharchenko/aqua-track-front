@@ -21,15 +21,9 @@ import TrackerPage from './pages/TrackerPage/TrackerPage.jsx';
 function App() {
   const dispatch = useDispatch();
 
-  const token = localStorage.getItem('accessToken');
-  if (token) {
-    dispatch(loginUserSuccess(token));
-  } else {
-    dispatch(logoutUser());
-  }
-
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
+
     if (token) {
       dispatch(loginUserSuccess(token));
       dispatch(getCurrentUser());

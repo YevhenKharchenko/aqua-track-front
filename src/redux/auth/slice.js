@@ -33,12 +33,6 @@ const userSlice = createSlice({
       state.isLoggedIn = true;
       state.token = action.payload;
     },
-    logoutUser: state => {
-      state.isLoggedIn = false;
-      state.token = null;
-      state.userInfo = initialState.userInfo;
-      localStorage.removeItem('accessToken');
-    },
   },
   extraReducers: builder =>
     builder
