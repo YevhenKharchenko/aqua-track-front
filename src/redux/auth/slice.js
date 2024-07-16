@@ -20,7 +20,18 @@ export const initialState = {
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    loginUserSuccess: (state, action) => {
+      state.isLoggedIn = true;
+      state.token = action.payload;
+    },
+    logoutUser: state => {
+      state.isLoggedIn = false;
+      state.token = null;
+      state.userInfo = initialState.userInfo;
+      localStorage.removeItem('accessToken');
+    },
+  },
   extraReducers: builder =>
     builder
       .addCase(registerUser.fulfilled, (state, action) => {})
@@ -28,9 +39,9 @@ const userSlice = createSlice({
         state.isLoggedIn = true;
         state.isRefreshing = false;
 
+        state.token = action.payload.data.accessToken;
         localStorage.setItem('accessToken', action.payload.data.accessToken);
         state.userInfo = action.payload.user;
-        state.token = action.payload.data.accessToken;
       })
 
       .addCase(logoutUser.fulfilled, state => {
@@ -85,8 +96,6 @@ const userSlice = createSlice({
       .addCase(refreshUser.rejected, state => {}),
 });
 
-export const {
-  ///////
-} = userSlice.actions;
+export const { loginUserSuccess } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;

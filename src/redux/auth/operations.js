@@ -2,11 +2,11 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-hot-toast';
 
-export const SetAuthHeader = token => {
+export const setAuthHeader = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
-const ClearAuthHeader = () => {
+const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = '';
 };
 
@@ -14,38 +14,40 @@ axios.defaults.baseURL = 'https://project6-back.onrender.com'; //адрес бк
 
 axios.interceptors.request.use(config => {
   const token = localStorage.getItem('accessToken');
+  // const token = store.getState().user.token;
+
   if (token) {
     config.headers['Authorization'] = `Bearer ${token}`;
   }
   return config;
 });
 
-// axios.interceptors.response.use(
-//   res => res,
-//   async err => {
-//     const originalRequest = err.config;
+axios.interceptors.response.use(
+  res => res,
+  async err => {
+    const originalRequest = err.config;
 
-//     if (err.response.status === 401 && !originalRequest._retry) {
-//       originalRequest._retry = true;
+    if (err.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
 
-//       try {
-//         const res = await axios.post('/users/refresh');
+      try {
+        const res = await axios.post('/users/refresh');
 
-//         SetAuthHeader(res.data.accessToken);
+        setAuthHeader(res.data.accessToken);
 
-//         localStorage.setItem('accessToken', res.data.accessToken);
-//         originalRequest.headers.Authorization = `Bearer ${res.data.accessToken}`;
+        localStorage.setItem('accessToken', res.data.accessToken);
+        originalRequest.headers.Authorization = `Bearer ${res.data.accessToken}`;
 
-//         return axios(originalRequest);
-//       } catch (refreshError) {
-//         localStorage.removeItem('accessToken');
-//         ClearAuthHeader();
-//         return Promise.reject(refreshError);
-//       }
-//     }
-//     return Promise.reject(err);
-//   }
-// );
+        return axios(originalRequest);
+      } catch (refreshError) {
+        localStorage.removeItem('accessToken');
+        clearAuthHeader();
+        return Promise.reject(refreshError);
+      }
+    }
+    return Promise.reject(err);
+  }
+);
 
 export const registerUser = createAsyncThunk(
   'auth/register',
@@ -64,7 +66,7 @@ export const loginUser = createAsyncThunk('auth/login', async ({ email, password
   try {
     const res = await axios.post('/users/login', { email, password });
 
-    SetAuthHeader(res.data.accessToken);
+    setAuthHeader(res.data.accessToken);
 
     toast.success('You are successfully logged in!', {
       autoClose: 5000,
@@ -81,7 +83,7 @@ export const logoutUser = createAsyncThunk('auth/logout', async (_, thunkAPI) =>
     const res = await axios.post('/users/logout', {
       withCredentials: true,
     });
-    ClearAuthHeader();
+    clearAuthHeader();
     console.log('Successfully logout');
     toast.success('You are successfully logged out!', {
       autoClose: 5000,
@@ -102,7 +104,7 @@ export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) 
   //     refreshToken: persistedToken,
   //     withCredentials: true,
   //   });
-  //   SetAuthHeader(res.data.accessToken);
+  //   setAuthHeader(res.data.accessToken);
   //   return res.data;
   // } catch (e) {
   //   localStorage.setItem('refreshToken', '');
@@ -110,7 +112,7 @@ export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) 
   // }
 
   try {
-    const response = await axios.post('water/users/refresh');
+    const response = await axios.post('/users/refresh');
     return response.data.data.accessToken;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.response.data);

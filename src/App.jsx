@@ -1,8 +1,9 @@
-import { lazy, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import { refreshUser } from './redux/auth/operations.js';
+import { Routes, Route } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { lazy, useEffect } from 'react';
+import { refreshUser, logoutUser } from './redux/auth/operations.js';
+import { loginUserSuccess } from './redux/auth/slice.js';
 import { RestrictedRoute } from './components/RestrictedRoute';
 import { PrivateRoute } from './components/PrivateRoute';
 import Loader from './shared/components/Loader/Loader.jsx';
@@ -20,7 +21,21 @@ import TrackerPage from './pages/TrackerPage/TrackerPage.jsx';
 function App() {
   const dispatch = useDispatch();
 
+  const token = localStorage.getItem('accessToken');
+  if (token) {
+    dispatch(loginUserSuccess(token));
+  } else {
+    dispatch(logoutUser());
+  }
+
   useEffect(() => {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      dispatch(loginUserSuccess(token));
+    } else {
+      dispatch(logoutUser());
+    }
+
     dispatch(refreshUser());
   }, [dispatch]);
 
