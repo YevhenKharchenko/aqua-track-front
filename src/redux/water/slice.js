@@ -86,12 +86,33 @@ const waterSlice = createSlice({
       .addCase(addWater.fulfilled, (state, action) => {
         state.loading = false;
         state.error = false;
-        state.waters.waterPerDay.waterRecord.push(action.payload.waterRecord);
+
+        //код Андрія
+        // state.waters.waterPerDay.waterRecord.push(action.payload.waterRecord);
+
+        // const date = new Date(state.currentDate);
+        // const month =
+        //   date.getMonth() < 9 ? '0' + (date.getMonth() + 1) : String(date.getMonth() + 1);
+        // if (state.waters.waterPerMonth[action.payload.waterRecord.localDate]) {
+        //   state.waters.waterPerMonth[action.payload.waterRecord.localDate].push(
+        //     action.payload.waterRecord
+        //   );
+        // } else if (action.payload.waterRecord.localDate.split('.')[1] === month) {
+        //   state.waters.waterPerMonth[action.payload.waterRecord.localDate] = [
+        //     action.payload.waterRecord,
+        //   ];
+        // }
+
+        // я додав
+        state.waters.waterPerDay.waterRecord.push(action.payload);
+        console.log(action.payload);
 
         const date = new Date(state.currentDate);
         const month =
           date.getMonth() < 9 ? '0' + (date.getMonth() + 1) : String(date.getMonth() + 1);
-        if (state.waters.waterPerMonth[action.payload.waterRecord.localDate]) {
+        console.log(JSON.parse(JSON.stringify(state.waters.waterPerDay.waterRecord)));
+
+        if (state.waters.waterPerMonth?.[action.payload.date]) {
           state.waters.waterPerMonth[action.payload.waterRecord.localDate].push(
             action.payload.waterRecord
           );
@@ -100,6 +121,7 @@ const waterSlice = createSlice({
             action.payload.waterRecord,
           ];
         }
+        //
       })
       .addCase(addWater.rejected, handleError)
       .addCase(changeWater.pending, handleLoading)

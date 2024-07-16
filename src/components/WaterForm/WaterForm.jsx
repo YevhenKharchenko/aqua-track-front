@@ -63,6 +63,11 @@ export const WaterForm = ({ mode, onClose, water = {} }) => {
       waterValue: watch('waterValue'),
       localTime: watch('localTime'),
     };
+
+    // я додав
+    console.log(newData);
+    //
+
     try {
       if (mode === 'add') {
         dispatch(addWater(newData));
