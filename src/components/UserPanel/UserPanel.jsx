@@ -3,6 +3,7 @@ import { useModal } from '../../hooks/useModal.jsx';
 import UserBar from '../UserBar/UserBar';
 import UserBarPopover from '../UserBarPopover/UserBarPopover';
 import LogOutModal from '../LogOutModal/LogOutModal.jsx';
+import UserSettingsModal from '../UserSettingsModal/UserSettingsModal.jsx';
 import css from './UserPanel.module.css';
 
 const UserPanel = () => {
@@ -45,6 +46,14 @@ const UserPanel = () => {
     setModal(<LogOutModal closeModal={closeModal} />);
   }, [setModal, closeModal]);
 
+  const closeSettingModal = useCallback(() => {
+    setModal();
+  }, [setModal]);
+
+  const openSettingModal = useCallback(() => {
+    setModal(<UserSettingsModal onClose={closeSettingModal} />);
+  }, [setModal, closeSettingModal]);
+
   return (
     <>
       <div className={css.tabletThumb}>
@@ -55,7 +64,12 @@ const UserPanel = () => {
       </div>
       {showPopover && (
         <UserBarPopover showPopover={showPopover} referenceElement={userBarRef.current}>
-          <button className={css.popoverBtn} type="button" data-setting-button>
+          <button
+            className={css.popoverBtn}
+            type="button"
+            onClick={openSettingModal}
+            data-setting-button
+          >
             <svg width="16" height="16">
               <use
                 className={css.iconSettings}
