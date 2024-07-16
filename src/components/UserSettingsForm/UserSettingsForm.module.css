@@ -78,8 +78,14 @@
 .iconWrapper {
 }
 
-.radioIcon {
-}
+/* .radioIcon {
+  stroke: #9be1a0;
+  fill: transparent;
+} */
+
+/* .radioIcon:checked {
+  fill: #9be1a0;
+} */
 
 .userInroWrapper {
   display: flex;
@@ -144,6 +150,10 @@
 .activityWrapper {
   display: flex;
   gap: 4px;
+}
+
+.iconImportant {
+  fill: #9be1a0;
 }
 
 .waterNormaWrapper {

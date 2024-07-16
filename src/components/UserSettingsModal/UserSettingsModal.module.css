@@ -11,8 +11,9 @@
 
   background-color: #ffffff;
   scrollbar-width: thin;
-  scrollbar-color: #888 transparent;
+  scrollbar-color: #F0EFF4 transparent;
 }
+
 
 .modalWrapper::-webkit-scrollbar {
  width: 6px;

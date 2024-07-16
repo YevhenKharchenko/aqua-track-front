@@ -1,4 +1,3 @@
-// import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { icons } from '../../assets/icons';
 
@@ -7,7 +6,6 @@ import { userSettingsFormSchema } from '../../schemas/UserSettingsFormSchema';
 
 import avatar from '../../assets/images/avatar.png';
 import css from './UserSettingsForm.module.css';
-
 
 const UserSettingsForm = () => {
   // avatar change
@@ -37,29 +35,31 @@ const UserSettingsForm = () => {
     },
   });
 
- const calcWaterByGender = () => {
-   const weight = parseFloat(watch('weight')) || 0;
-   const sportTime = parseFloat(watch('sportTime')) || 0;
-   const gender = watch('gender');
+  const gender = watch('gender');
 
-   const coefficients = {
-     woman: { weight: 0.03, sport: 0.4 },
-     man: { weight: 0.04, sport: 0.6 },
-   };
+  const calcWaterByGender = gender => {
+    const weight = parseFloat(watch('weight')) || 0;
+    const sportTime = parseFloat(watch('sportTime')) || 0;
 
-   if (gender && coefficients[gender]) {
-     const { weight: weightCoeff, sport: sportCoeff } = coefficients[gender];
-     return (weight * weightCoeff + sportTime * sportCoeff).toFixed(1);
-   }
+    const coefficients = {
+      woman: { weight: 0.03, sport: 0.4 },
+      man: { weight: 0.04, sport: 0.6 },
+    };
 
-   return 0;
- };
+    if (gender && coefficients[gender]) {
+      const { weight: weightCoeff, sport: sportCoeff } = coefficients[gender];
+      return (weight * weightCoeff + sportTime * sportCoeff).toFixed(1);
+    }
 
-  const onSubmit = data => console.log(data);
+    return 0;
+  };
+
+  const onSubmit = data => {
+    console.log(data);
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-
       <div className={css.imageWrapper}>
         <div className={css.imageContainer}>
           <img className={css.image} src={avatar} alt="User avatar" width="75" height="75" />
@@ -89,7 +89,11 @@ const UserSettingsForm = () => {
               {errors.gender && <p className={css.error}>{errors.gender.message}</p>}
               <span className={css.iconWrapper}>
                 <svg className={css.radioIcon} width="18" height="18">
-                  <use xlinkHref={`${icons}#icon-upload-18x18`}></use>
+                  <use
+                    xlinkHref={`${icons}#icon-checkbox-${
+                      gender === 'woman' ? 'checked' : 'unchecked'
+                    }`}
+                  ></use>
                 </svg>
               </span>
               Woman
@@ -99,13 +103,17 @@ const UserSettingsForm = () => {
                 className={css.genderInput}
                 type="radio"
                 name="gender"
-                value="woman"
+                value="man"
                 {...register('gender')}
               />
               {errors.gender && <p className={css.error}>{errors.gender.message}</p>}
               <span className={css.iconWrapper}>
                 <svg className={css.radioIcon} width="18" height="18">
-                  <use xlinkHref={`${icons}#icon-upload-18x18`}></use>
+                  <use
+                    xlinkHref={`${icons}#icon-checkbox-${
+                      gender === 'man' ? 'checked' : 'unchecked'
+                    }`}
+                  ></use>
                 </svg>
               </span>
               Man
@@ -122,7 +130,6 @@ const UserSettingsForm = () => {
               className={`${css.userInput} ${css.text}`}
               type="text"
               name="name"
-              placeholder="Nadia"
               id="name"
               {...register('name')}
             />
@@ -137,7 +144,6 @@ const UserSettingsForm = () => {
               className={`${css.userInput} ${css.text}`}
               type="email"
               name="email"
-              placeholder="nadia10@gmail.com"
               id="email"
               {...register('email')}
             />
@@ -163,8 +169,8 @@ const UserSettingsForm = () => {
               activity commensurate in terms of loads (in the absence of these, you must set 0)
             </p>
             <div className={css.activityWrapper}>
-              <svg width="18" height="18">
-                <use xlinkHref={`${icons}#icon-upload-18x18`}></use>
+              <svg className={css.iconImportant} width="18" height="18">
+                <use xlinkHref={`${icons}#icon-important`}></use>
               </svg>
               <p className={css.text}>Active time in hours</p>
             </div>
@@ -179,7 +185,6 @@ const UserSettingsForm = () => {
             <input
               className={`${css.userInput} ${css.text}`}
               name="weight"
-              placeholder="0"
               {...register('weight')}
             />
             {errors.weight && <p className={css.error}>{errors.weight.message}</p>}
@@ -192,7 +197,6 @@ const UserSettingsForm = () => {
             <input
               className={`${css.userInput} ${css.text}`}
               name="sportTime"
-              placeholder="0"
               {...register('sportTime')}
             />
             {errors.timeInSports && <p className={css.error}>{errors.timeInSports.message}</p>}
@@ -202,7 +206,7 @@ const UserSettingsForm = () => {
         <div>
           <div className={css.amountWrap}>
             <h3 className={css.text}>The required amount of water in liters per day:</h3>
-            <p className={css.accentText}>{calcWaterByGender()} L</p>
+            <p className={css.accentText}>{calcWaterByGender(gender)} L</p>
           </div>
           <div className={css.userInputWrap}>
             <label className={css.userInputTitle} htmlFor="dailyNorma">
