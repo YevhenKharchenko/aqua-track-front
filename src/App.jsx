@@ -15,6 +15,8 @@ import ExampleModal from './components/ExampleModal.jsx';
 import LogOutModal from './components/LogOutModal/LogOutModal.jsx';
 
 import TrackerPage from './pages/TrackerPage/TrackerPage.jsx';
+import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPasswordPage.jsx';
+import ResetPasswordPage from './pages/ResetPasswordPage/ResetPasswordPage.jsx';
 
 
 function App() {
@@ -26,15 +28,20 @@ function App() {
         <Route
           path="/signup"
           element={<RestrictedRoute redirectTo="/tracker" component={<SignUpPage />}
-          // element={<RestrictedRoute component={<SignUpPage />}
           />}
-          // element={<SignUpPage />}
+          
         />
         <Route
           path="/signin"
           element={<RestrictedRoute redirectTo="/tracker" component={<SignInPage />} />}
-          // element={<RestrictedRoute component={<SignInPage />} />}
-          // element={<SignInPage />}
+        />
+        <Route
+          path="/request-reset"
+          element={<RestrictedRoute component={<ForgotPasswordPage />} />}
+        />
+        <Route
+          path="/reset-password"
+          element={<RestrictedRoute component={<ResetPasswordPage />} />}
         />
         <Route path="/tracker" element={<TrackerPage />} />
         <Route path="/modal" element={<ExampleModal />} />

@@ -18,8 +18,6 @@ const SignInPage = () => {
     };
   }, []);
 
-
-
   return (
     <div className={css.wrapper}>
       <div className={css.backdrop}>
