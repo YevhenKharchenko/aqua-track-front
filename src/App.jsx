@@ -32,11 +32,9 @@ function App() {
     const token = localStorage.getItem('accessToken');
     if (token) {
       dispatch(loginUserSuccess(token));
-    } else {
-      dispatch(logoutUser());
+      dispatch(getCurrentUser());
     }
 
-    dispatch(getCurrentUser());
     dispatch(getAllUsers());
 
     // dispatch(refreshUser());
