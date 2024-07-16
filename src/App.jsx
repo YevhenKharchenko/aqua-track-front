@@ -17,6 +17,8 @@ import ExampleModal from './components/ExampleModal.jsx';
 import LogOutModal from './components/LogOutModal/LogOutModal.jsx';
 
 import TrackerPage from './pages/TrackerPage/TrackerPage.jsx';
+import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPasswordPage.jsx';
+import ResetPasswordPage from './pages/ResetPasswordPage/ResetPasswordPage.jsx';
 
 function App() {
   const dispatch = useDispatch();
@@ -46,6 +48,14 @@ function App() {
         <Route
           path="/signin"
           element={<RestrictedRoute redirectTo="/tracker" component={<SignInPage />} />}
+        />
+        <Route
+          path="/request-reset"
+          element={<RestrictedRoute component={<ForgotPasswordPage />} />}
+        />
+        <Route
+          path="/reset-password"
+          element={<RestrictedRoute component={<ResetPasswordPage />} />}
         />
         <Route
           path="/tracker"

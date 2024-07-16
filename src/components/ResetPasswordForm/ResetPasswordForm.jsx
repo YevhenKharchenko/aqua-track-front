@@ -1,21 +1,25 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { NavLink, useNavigate  } from 'react-router-dom';
-import css from './SignUpForm.module.css';
+import { useLocation, useNavigate } from 'react-router-dom';
+import css from './ResetPasswordForm.module.css';
 import sprite from '../../assets/icons/sprite.svg';
-import { useDispatch } from 'react-redux';
-import { registerUser } from '../../redux/auth/operations';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import axios from 'axios';
 import toast from 'react-hot-toast';
 
-const SignUpForm = () => {
-
-  const dispatch = useDispatch();
+const ResetPasswordForm = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [token, setToken] = useState('');
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const tokenFromUrl = queryParams.get('token');
+    setToken(tokenFromUrl);
+  }, [location]);
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email('Invalid email format').required('Email is required'),
     password: Yup.string()
       .min(8, 'Password must be at least 8 characters')
       .required('Password is required'),
@@ -24,33 +28,54 @@ const SignUpForm = () => {
       .required('Repeat password is required'),
   });
 
-
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset, 
+    reset,
   } = useForm({
     resolver: yupResolver(validationSchema),
   });
 
-  const onSubmit = (data) => {
-    dispatch(
-      registerUser({
-        email: data.email,
+  const onSubmit = async data => {
+    try {
+      const response = await axios.post('https://project6-back.onrender.com/users/reset-password', {
+        token,
         password: data.password,
-      })
-    );
-    toast.success(`Successfully created user!`, {
-      duration: 4000,
-      position: 'top-center',
-      style: {
-        textAlign: 'center',
-        boxShadow: '8px 11px 27px -8px rgba(66, 68, 90, 1)',
-      },
-    });
-    reset();
-    navigate('/signin');
+      });
+
+      if (response.status === 200) {
+        toast.success(`Password reset successful`, {
+          duration: 4000,
+          position: 'top-center',
+          style: {
+            textAlign: 'center',
+            boxShadow: '8px 11px 27px -8px rgba(66, 68, 90, 1)',
+          },
+        });
+        reset();
+        navigate('/signin');
+      } else {
+        toast.error(`Something went wrong. Please try again.`, {
+          duration: 4000,
+          position: 'top-center',
+          style: {
+            textAlign: 'center',
+            boxShadow: '8px 11px 27px -8px rgba(66, 68, 90, 1)',
+          },
+        });
+      }
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || error.message;
+      toast.error(`Error: ${errorMessage}`, {
+        duration: 4000,
+        position: 'top-center',
+        style: {
+          textAlign: 'center',
+          boxShadow: '8px 11px 27px -8px rgba(66, 68, 90, 1)',
+        },
+      });
+    }
   };
 
   const [showPassword, setShowPassword] = useState(false);
@@ -67,24 +92,10 @@ const SignUpForm = () => {
   return (
     <div className={css.container}>
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-        <h2 className={css.header}>Sign Up</h2>
-
-        <div className={css.signupFormEmail}>
-          <label className={css.label}>Email:</label>
-          <div className={css.signupInputWrap}>
-            <input
-              className={`${css.signupInput} ${errors.email ? css.error : ''}`}
-              type="email"
-              name="email"
-              placeholder="Enter your email"
-              {...register('email')}
-            />
-          </div>
-          {errors.email && <p className={css.errorMessage}>{errors.email.message}</p>}
-        </div>
+        <h2 className={css.header}>Change the password</h2>
 
         <div className={css.signupFormPass}>
-          <label className={css.label}>Password:</label>
+          <label className={css.label}>New password:</label>
           <div className={css.signupInputWrap}>
             <input
               className={`${css.signupInput} ${errors.password ? css.error : ''}`}
@@ -106,12 +117,13 @@ const SignUpForm = () => {
         </div>
 
         <div className={css.signupFormPass}>
-          <label className={css.label}>Repeat Password:</label>
+          <label className={css.label}>Repeat new password:</label>
           <div className={css.signupInputWrap}>
             <input
               className={`${css.signupInput} ${errors.repeatPassword ? css.error : ''}`}
               type={showRepeatPassword ? 'text' : 'password'}
               placeholder="Repeat password"
+              name="repeatPassword"
               {...register('repeatPassword')}
             />
             <svg
@@ -130,18 +142,12 @@ const SignUpForm = () => {
 
         <div className={css.btnWrap}>
           <button className={css.signupBtn} type="submit">
-            Sign Up
+            Change
           </button>
         </div>
       </form>
-      <div className={css.textWrap}>
-        Already have an account?
-        <NavLink className={css.linkText} to="/signin">
-          Sign In
-        </NavLink>
-      </div>
     </div>
   );
 };
 
-export default SignUpForm;
+export default ResetPasswordForm;

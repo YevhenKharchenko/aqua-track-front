@@ -106,6 +106,9 @@ const SignInForm = () => {
           Sign Up
         </NavLink>
       </div>
+      <NavLink className={css.forgetText} to="/request-reset">
+      Forgot password?
+        </NavLink>
     </div>
   );
 };
