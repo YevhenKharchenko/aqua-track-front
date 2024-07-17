@@ -58,7 +58,6 @@ function App() {
           element={<PrivateRoute redirectTo="/signin" component={<TrackerPage />} />}
         />
         <Route path="/modal" element={<ExampleModal />} />
-        <Route path="/logout" element={<LogOutModal />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </SharedLayout>

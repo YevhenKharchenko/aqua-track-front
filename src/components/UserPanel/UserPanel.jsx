@@ -11,7 +11,6 @@ import { selectUser } from '../../redux/selectors.js';
 
 const UserPanel = () => {
   const currentUser = useSelector(selectUser);
-  console.log(currentUser);
 
   const [showPopover, setShowPopover] = useState(false);
   const userBarRef = useRef(null);
