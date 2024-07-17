@@ -52,10 +52,18 @@ export const fetchWaterPerMonth = createAsyncThunk(
   }
 );
 
+// код Андрія
+// export const deleteWater = createAsyncThunk('water/delete', async id => {
+//   const response = await axios.delete(`/water/day/${id}`);
+//   return response.data;
+// });
+
+// я додав
 export const deleteWater = createAsyncThunk('water/delete', async id => {
-  const response = await axios.delete(`/water/day/${id}`);
+  const response = await axios.delete(`/water/remove/${id}`);
   return response.data;
 });
+//
 
 // код Андрія
 // export const addWater = createAsyncThunk(
@@ -105,14 +113,44 @@ export const addWater = createAsyncThunk(
 );
 //
 
+// код Андрія
+// export const changeWater = createAsyncThunk(
+//   'water/change',
+//   async ({ localDate, localTime, _id, waterValue }, thunkAPI) => {
+//     try {
+//       const response = await axios.patch(`/water/day/${_id}`, {
+//         localDate,
+//         localTime,
+//         waterValue,
+//       });
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
+
+// я додав
 export const changeWater = createAsyncThunk(
   'water/change',
-  async ({ localDate, localTime, _id, waterValue }, thunkAPI) => {
+  async ({ localDate, localTime: time, _id, waterValue: amount }, thunkAPI) => {
+    function formatDateForAdd(originalDate) {
+      const [month, day, year] = originalDate.split('/');
+      const paddedMonth = month.padStart(2, '0');
+      const paddedDay = day.padStart(2, '0');
+      const formattedDate = `${paddedDay}-${paddedMonth}-${year}`;
+
+      return formattedDate;
+    }
+
+    const date = formatDateForAdd(localDate);
+    console.log(date, time, amount);
+
     try {
-      const response = await axios.patch(`/water/day/${_id}`, {
-        localDate,
-        localTime,
-        waterValue,
+      const response = await axios.patch(`/water/edit/${_id}`, {
+        date,
+        time,
+        amount,
       });
       return response.data;
     } catch (error) {
@@ -120,3 +158,4 @@ export const changeWater = createAsyncThunk(
     }
   }
 );
+//
