@@ -4,7 +4,8 @@
   padding-left: 16px;
   padding-top: 24px;
   padding-bottom: 24px;
-  max-width: 343px;
+  width: 343px;
+  margin: 0 auto;
 }
 .welcomeText {
   font-family: var(--font-family);

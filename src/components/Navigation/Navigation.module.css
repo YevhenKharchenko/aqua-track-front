@@ -29,7 +29,7 @@
 .navBtnIn {
   border: 1px solid #323f47;
   border-radius: 30px;
-  padding: 14px 28px;
+  padding: 14px 10px;
   width: 104px;
   height: 46px;
   font-family: var(--font-family);

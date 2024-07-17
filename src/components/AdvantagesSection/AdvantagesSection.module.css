@@ -5,6 +5,7 @@
   border-radius: 30px;
   width: 343px;
   height: 353px;
+  margin: 0 auto;
 }
 
 @media (min-width: 768px) {

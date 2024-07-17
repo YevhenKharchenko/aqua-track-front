@@ -4,7 +4,8 @@
   padding-left: 16px;
   padding-top: 24px;
   padding-bottom: 24px;
-  max-width: 343px;
+  width: 343px;
+  margin: 0 auto;
 }
 
 @media (min-width: 768px) {
@@ -32,9 +33,10 @@
   max-width: 1440px;
   min-height: 100vh;
   display: flex;
-  gap: 16px;
   flex-direction: column;
-  padding: 16px;
+  /* padding: 16px; */
+  padding-top: 16px;
+  padding-bottom: 16px;
   margin: 0 auto;
   gap: 16px;
 }

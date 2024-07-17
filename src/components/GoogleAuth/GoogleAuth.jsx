@@ -2,6 +2,9 @@
 import css from './GoogleAuth.module.css';
 import sprite from '../../assets/icons/sprite.svg';
 import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
+
+
 
 
 const GoogleAuth = () => {
@@ -15,10 +18,24 @@ const GoogleAuth = () => {
                 if (response.ok) {
                     setGoogleAuthUrl(data.data.url);
                 } else {
-                    console.error('Failed to get Google OAuth URL:', data.message);
+                    toast.error(`Failed to get Google OAuth URL: ${data.message}`, {
+                        duration: 4000,
+                        position: 'top-center',
+                        style: {
+                          textAlign: 'center',
+                          boxShadow: '8px 11px 27px -8px rgba(66, 68, 90, 1)',
+                        },
+                      });
                 }
             } catch (error) {
-                console.error('Error fetching Google OAuth URL:', error);
+                toast.error(`Error fetching Google OAuth URL: ${error}`, {
+                    duration: 4000,
+                    position: 'top-center',
+                    style: {
+                      textAlign: 'center',
+                      boxShadow: '8px 11px 27px -8px rgba(66, 68, 90, 1)',
+                    },
+                  });
             }
         };
 
