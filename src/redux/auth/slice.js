@@ -58,11 +58,7 @@ const userSlice = createSlice({
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.isLoggedIn = true;
         state.isRefreshing = false;
-
-        // state.token = action.payload.data.accessToken;
-        // localStorage.setItem('accessToken', action.payload.data.accessToken);
-
-        state.userInfo = action.payload.user;
+        state.userInfo = action.payload;
       })
       .addCase(updateUser.pending, state => {
         state.isRefreshing = true;
