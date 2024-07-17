@@ -16,8 +16,8 @@ export const initialState = {
     gender: null,
     avatar: null,
     weight: null,
-    sportsActivity: null,
-    waterRate: null,
+    sportTime: null,
+    waterNorma: null,
   },
   token: null,
   isLoggedIn: false,
@@ -75,8 +75,8 @@ const userSlice = createSlice({
         state.userInfo.gender = action.payload.gender;
         state.userInfo.avatar = action.payload.avatarUrl;
         state.userInfo.weight = action.payload.weight;
-        state.userInfo.sportsActivity = action.payload.sportsActivity;
-        state.userInfo.waterRate = action.payload.waterRate;
+        state.userInfo.sportTime = action.payload.sportsActivity;
+        state.userInfo.waterNorma = action.payload.waterRate;
       })
 
       .addCase(updateUser.rejected, (state, action) => {
@@ -86,7 +86,10 @@ const userSlice = createSlice({
       .addCase(getCurrentUser.pending, (state, action) => {
         state.isRefreshing = true;
       })
-      .addCase(getCurrentUser.fulfilled, (state, action) => {})
+      .addCase(getCurrentUser.fulfilled, (state, action) => {
+        state.userInfo = action.payload;
+        console.log(JSON.parse(JSON.stringify(state.userInfo)));
+      })
       .addCase(getCurrentUser.rejected, (state, action) => {
         state.error = action.payload;
       })
