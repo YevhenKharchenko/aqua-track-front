@@ -14,7 +14,7 @@ const WaterMainInfo = () => {
   return (
     <Container className={css.infoContainer}>
       <Logo className={css.logoContainer} />
-      <WaterDailyNorma className={css.dailyNormaContainer} dailyNorm={currentUser.waterNorma} />
+      <WaterDailyNorma className={css.dailyNormaContainer} dailyNorm={currentUser?.waterNorma} />
       <WaterProgressBar className={css.progressBarContainer} />
       <AddWaterBtn className={css.addWaterBtn} />
     </Container>

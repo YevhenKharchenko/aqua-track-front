@@ -111,42 +111,26 @@ export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) 
   // }
 
   try {
-    const res = await axios.post(
-      '/users/refresh',
-      {},
-      {
-        withCredentials: true,
-      }
-    );
+    const persistedToken = localStorage.getItem('refreshToken');
 
-    console.log(res);
-    return res.data.data.accessToken;
+    setAuthHeader(persistedToken);
+
+    const res = await axios.get('/users/current-user-data');
+    return res.data.data;
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.response.data);
+    return thunkAPI.rejectWithValue(error.message);
   }
 });
 
 export const updateUser = createAsyncThunk('auth/update', async (data, thunkAPI) => {
   try {
-    const res = await axios.put('/users/update', data, {
+    const res = await axios.patch('/users/update', data, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
 
     return res.data;
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
-  }
-});
-
-export const getCurrentUser = createAsyncThunk('auth/getUserInfo', async (_, thunkAPI) => {
-  try {
-    const res = await axios.get('/users/current-user-data');
-
-    console.log(res.data.data);
-
-    return res.data.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }

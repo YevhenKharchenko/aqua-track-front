@@ -2,7 +2,8 @@ import { Toaster } from 'react-hot-toast';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { lazy, useEffect } from 'react';
-import { refreshUser, logoutUser, getCurrentUser, getAllUsers } from './redux/auth/operations.js';
+import { refreshUser, getAllUsers } from './redux/auth/operations.js';
+import { selectIsRefreshing, selectIsLoggedIn } from './redux/selectors.js';
 import { loginUserSuccess } from './redux/auth/slice.js';
 import { RestrictedRoute } from './components/RestrictedRoute';
 import { PrivateRoute } from './components/PrivateRoute';
@@ -22,21 +23,16 @@ import ResetPasswordPage from './pages/ResetPasswordPage/ResetPasswordPage.jsx';
 
 function App() {
   const dispatch = useDispatch();
+  const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(() => {
-    const token = localStorage.getItem('accessToken');
-
-    if (token) {
-      dispatch(loginUserSuccess(token));
-      dispatch(getCurrentUser());
-    }
-
+    dispatch(refreshUser());
     dispatch(getAllUsers());
-
-    // dispatch(refreshUser());
   }, [dispatch]);
 
-  return (
+  return isRefreshing ? (
+    <Loader />
+  ) : (
     <SharedLayout>
       <Toaster position="top-center" />
       <Routes>

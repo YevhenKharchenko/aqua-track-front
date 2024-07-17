@@ -63,13 +63,13 @@ const UserPanel = () => {
     <>
       <div className={css.tabletThumb}>
         <h2 className={css.greeting}>
-          Hello, <span className={css.greetName}>{currentUser.name}</span>
+          Hello, <span className={css.greetName}>{currentUser?.name}</span>
         </h2>
         <UserBar
           ref={userBarRef}
           onClick={togglePopover}
-          name={currentUser.name}
-          avatar={currentUser.avatar}
+          name={currentUser?.name}
+          avatar={currentUser?.avatar}
         />
       </div>
       {showPopover && (
