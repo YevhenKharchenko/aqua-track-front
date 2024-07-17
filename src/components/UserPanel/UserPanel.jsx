@@ -6,8 +6,12 @@ import UserBarPopover from '../UserBarPopover/UserBarPopover';
 import LogOutModal from '../LogOutModal/LogOutModal.jsx';
 import UserSettingsModal from '../UserSettingsModal/UserSettingsModal.jsx';
 import css from './UserPanel.module.css';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../redux/selectors.js';
 
 const UserPanel = () => {
+  const currentUser = useSelector(selectUser);
+
   const [showPopover, setShowPopover] = useState(false);
   const userBarRef = useRef(null);
   const togglePopover = () => {
@@ -59,9 +63,14 @@ const UserPanel = () => {
     <>
       <div className={css.tabletThumb}>
         <h2 className={css.greeting}>
-          Hello, <span className={css.greetName}>Nadia</span>
+          Hello, <span className={css.greetName}>{currentUser.name}</span>
         </h2>
-        <UserBar ref={userBarRef} onClick={togglePopover} />
+        <UserBar
+          ref={userBarRef}
+          onClick={togglePopover}
+          name={currentUser.name}
+          avatar={currentUser.avatar}
+        />
       </div>
       {showPopover && (
         <UserBarPopover showPopover={showPopover} referenceElement={userBarRef.current}>

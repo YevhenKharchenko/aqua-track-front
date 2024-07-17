@@ -88,7 +88,7 @@ const userSlice = createSlice({
       })
       .addCase(getCurrentUser.fulfilled, (state, action) => {
         state.userInfo = action.payload;
-        console.log(JSON.parse(JSON.stringify(state.userInfo)));
+        // console.log(JSON.parse(JSON.stringify(state.userInfo)));
       })
       .addCase(getCurrentUser.rejected, (state, action) => {
         state.error = action.payload;
