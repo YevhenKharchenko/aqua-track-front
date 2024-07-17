@@ -3,16 +3,13 @@
   max-width: 1440px;
   padding-right: 15px;
   padding-left: 15px;
-  padding-top: 15px;  /* Добавил Олег */
-  padding-bottom: 15px; /* Добавил Олег */
   margin-left: auto;
   margin-right: auto;
 }
-@media (min-width: 768px) { /* Добавил Олег */
+
+@media (min-width: 768px) {
   .container {
-    padding-right:32px;
+    padding-right: 32px;
     padding-left: 32px;
-    padding-top: 32px;  
-    padding-bottom: 32px; 
   }
 }

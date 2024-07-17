@@ -5,6 +5,8 @@
   border-radius: 30px;
   background: #9be1a0 url(../../assets/images/transparent_bottle_for_water_1.png) no-repeat center
     50px/262px 335px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 @media (min-width: 768px) {
