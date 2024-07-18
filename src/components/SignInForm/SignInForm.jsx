@@ -8,6 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { loginUser } from '../../redux/auth/operations';
 import { useDispatch } from 'react-redux';
 import GoogleAuth from '../GoogleAuth/GoogleAuth';
+import toast from 'react-hot-toast';
 
 const SignInForm = () => {
   const dispatch = useDispatch();
@@ -37,10 +38,24 @@ const SignInForm = () => {
     )
       .unwrap()
       .then(() => {
-        console.log('login success');
+        toast.success(`You are successfully logged in!`, {
+          duration: 4000,
+          position: 'top-center',
+          style: {
+            textAlign: 'center',
+            boxShadow: '8px 11px 27px -8px rgba(66, 68, 90, 1)',
+          },
+        });
       })
       .catch(() => {
-        console.log('login error');
+        toast.error(`Account not found. Please sign up.`, {
+          duration: 4000,
+          position: 'top-center',
+          style: {
+            textAlign: 'center',
+            boxShadow: '8px 11px 27px -8px rgba(66, 68, 90, 1)',
+          },
+        });
       });
     reset();
   };
