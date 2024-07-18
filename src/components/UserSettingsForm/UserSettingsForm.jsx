@@ -6,17 +6,28 @@ import { userSettingsFormSchema } from '../../schemas/UserSettingsFormSchema';
 
 import avatar from '../../assets/images/avatar.png';
 import css from './UserSettingsForm.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectUser, selectUserAvatar } from '../../redux/selectors';
+import { updateUser } from '../../redux/auth/operations';
+import { useRef, useState } from 'react';
 
 const UserSettingsForm = () => {
+  const dispatch = useDispatch();
+
+  const currentUser = useSelector(selectUser);
+
   // avatar change
+  const currentAvatar = useSelector(selectUserAvatar);
+  const fileInputRef = useRef(null);
 
-  // const [userAvatar, setUserAvatar] = useState(null);
-  // const avatarRef = useRef(null);
+  const [preview, setPreview] = useState(currentAvatar);
 
-  // const onAvatarChange = event => {
-  //   const avatarUpload = event.target.files[0];
-  //   setUserAvatar(avatarUpload);
-  // };
+  const onFileChange = event => {
+    const selectedAvatar = event.target.files[0];
+    if (selectedAvatar) {
+      setPreview(URL.createObjectURL(selectedAvatar));
+    }
+  };
 
   const {
     register,
@@ -26,12 +37,12 @@ const UserSettingsForm = () => {
   } = useForm({
     resolver: yupResolver(userSettingsFormSchema),
     defaultValues: {
-      name: '',
-      email: '',
-      gender: 'woman',
-      weight: 0,
-      sportTime: 0,
-      dailyNorma: 0,
+      name: currentUser?.name,
+      email: currentUser?.email,
+      gender: currentUser?.gender || 'woman',
+      weight: currentUser?.weight || '',
+      sportTime: currentUser?.sportTime || '',
+      dailyNorma: currentUser?.dailyNorma || '',
     },
   });
 
@@ -54,18 +65,26 @@ const UserSettingsForm = () => {
     return 0;
   };
 
-  const onSubmit = data => {
-    console.log(data);
+  const onSubmit = async formData => {
+    console.log(formData);
+    dispatch(updateUser(formData));
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={css.imageWrapper}>
         <div className={css.imageContainer}>
-          <img className={css.image} src={avatar} alt="User avatar" width="75" height="75" />
+          <img className={css.image} src={preview} alt="User avatar" width="75" height="75" />
         </div>
         <label className={css.upload}>
-          <input className={css.imageInput} type="file" accept="image/*" />
+          <input
+            className={css.imageInput}
+            type="file"
+            accept="image/*"
+            onChange={onFileChange}
+            ref={fileInputRef}
+            // {...register('avatar')}
+          />
           <svg className={css.uploadIcon} width="18" height="18">
             <use xlinkHref={`${icons}#icon-upload-18x18`}></use>
           </svg>
