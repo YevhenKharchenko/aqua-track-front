@@ -8,7 +8,7 @@ const UserSettingsModal = ({ onClose }) => {
     <div className={css.modalWrapper}>
       <h2 className={css.modalTitle}>Setting</h2>
       <button className={css.modalCloseButton} type="button" onClick={onClose}>
-        <svg width="24" height="24">
+        <svg className={css.closeIcon} width="18" height="18">
           <use xlinkHref={`${icons}#icon-close-24x24`}></use>
         </svg>
       </button>
