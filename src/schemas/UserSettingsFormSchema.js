@@ -26,7 +26,7 @@ export const userSettingsFormSchema = yup.object().shape({
     .min(0, 'Active sport time must be a positive number.')
     .max(12, 'Active sport time must be less than or equal to 12 hours.')
     .nullable(),
-  dailyNorma: yup
+  waterNorma: yup
     .number()
     .typeError('Daily water consumption must be a number.')
     .positive('Daily water consumption must be a positive number.')

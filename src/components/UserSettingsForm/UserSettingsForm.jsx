@@ -9,26 +9,39 @@ import css from './UserSettingsForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser, selectUserAvatar } from '../../redux/selectors';
 import { updateUser } from '../../redux/auth/operations';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
+import { toast } from 'react-hot-toast';
 
-const UserSettingsForm = () => {
+const UserSettingsForm = ({ onClose}) => {
   const dispatch = useDispatch();
 
   const currentUser = useSelector(selectUser);
 
   // avatar change
   const currentAvatar = useSelector(selectUserAvatar);
+  
   const fileInputRef = useRef(null);
 
   const [preview, setPreview] = useState(currentAvatar);
+  console.log('Preview URL:', preview);
+
+
+  useEffect(() => {
+    if (currentAvatar) {
+      setPreview(currentAvatar);
+    }
+  }, [currentAvatar]);
 
   const onFileChange = event => {
-    const selectedAvatar = event.target.files[0];
-    if (selectedAvatar) {
-      setPreview(URL.createObjectURL(selectedAvatar));
-    }
-  };
+  const selectedAvatar = event.target.files[0];
+  console.log('Selected file:', selectedAvatar);
 
+  if (selectedAvatar) {
+    const objectURL = URL.createObjectURL(selectedAvatar);
+    console.log('Preview URL:', objectURL);
+    setPreview(objectURL);
+  }
+};
   const {
     register,
     handleSubmit,
@@ -42,7 +55,7 @@ const UserSettingsForm = () => {
       gender: currentUser?.gender || 'woman',
       weight: currentUser?.weight || '',
       sportTime: currentUser?.sportTime || '',
-      dailyNorma: currentUser?.dailyNorma || '',
+      waterNorma: currentUser?.waterNorma || '',
     },
   });
 
@@ -66,8 +79,20 @@ const UserSettingsForm = () => {
   };
 
   const onSubmit = async formData => {
-    console.log(formData);
-    dispatch(updateUser(formData));
+    const data = new FormData();
+    data.append('name', formData.name);
+    data.append('email', formData.email);
+    data.append('gender', formData.gender);
+    data.append('weight', formData.weight);
+    data.append('sportTime', formData.sportTime);
+    data.append('waterNorma', formData.waterNorma);
+    if (fileInputRef.current.files[0]) {
+      data.append('avatar', fileInputRef.current.files[0]);
+    }
+    dispatch(updateUser(data)).then(() => {   onClose(); toast.success('We successfully updated your data on server', {
+      autoClose: 5000,
+    }); }).catch (error => { console.log(error); toast.error(`Something went wrong. During sending your data to server. Error: ${error.message}`, { duration: 8000}); });
+    
   };
 
   return (
@@ -236,17 +261,17 @@ const UserSettingsForm = () => {
               </h3>
             </div>
             <div className={css.userInputWrap}>
-              <label className={css.userInputTitle} htmlFor="dailyNorma">
+              <label className={css.userInputTitle} htmlFor="waterNorma">
                 Write down how much water you will drink:
               </label>
               <input
                 className={`${css.userInput} ${css.text}`}
-                name="dailyNorma"
+                name="waterNorma"
                 step={0.1}
-                {...register('dailyNorma')}
+                {...register('waterNorma')}
               />
-              {errors.dailyWaterNorma && (
-                <p className={css.error}>{errors.dailyWaterNorma.message}</p>
+              {errors.waterNorma && (
+                <p className={css.error}>{errors.waterNorma.message}</p>
               )}
             </div>
           </div>

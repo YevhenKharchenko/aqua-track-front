@@ -6,11 +6,14 @@ import UserBarPopover from '../UserBarPopover/UserBarPopover';
 import LogOutModal from '../LogOutModal/LogOutModal.jsx';
 import UserSettingsModal from '../UserSettingsModal/UserSettingsModal.jsx';
 import css from './UserPanel.module.css';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { selectUser } from '../../redux/selectors.js';
+import { refreshUser } from '../../redux/auth/operations.js';
+import toast from 'react-hot-toast';
 
 const UserPanel = () => {
   const currentUser = useSelector(selectUser);
+  const dispatch = useDispatch();
 
   const [showPopover, setShowPopover] = useState(false);
   const userBarRef = useRef(null);
@@ -55,8 +58,17 @@ const UserPanel = () => {
     setModal();
   }, [setModal]);
 
-  const openSettingModal = useCallback(() => {
-    setModal(<UserSettingsModal onClose={closeSettingModal} />);
+ const openSettingModal = useCallback(() => {
+   dispatch(refreshUser())
+     .then(() => {
+       toast.success('We successfully received your previous data from the server', {
+      autoClose: 5000,
+    });
+       setModal(<UserSettingsModal onClose={closeSettingModal} />);
+       console.log('currentUser', currentUser);
+     })
+     .catch(error => { console.log(error); toast.error('Something went wrong. During getting your data from server.', { duration: 8000}); } );
+    
   }, [setModal, closeSettingModal]);
 
   return (
