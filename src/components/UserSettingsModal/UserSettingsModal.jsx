@@ -12,7 +12,7 @@ const UserSettingsModal = ({ onClose }) => {
           <use xlinkHref={`${icons}#icon-close-24x24`}></use>
         </svg>
       </button>
-      <UserSettingsForm />
+      <UserSettingsForm onClose={onClose} />
     </div>
   );
 };
