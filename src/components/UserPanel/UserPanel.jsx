@@ -70,6 +70,7 @@ const UserPanel = () => {
           onClick={togglePopover}
           name={currentUser?.name}
           avatar={currentUser?.avatar}
+          showPopover={showPopover}
         />
       </div>
       {showPopover && (
