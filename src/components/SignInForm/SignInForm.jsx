@@ -55,12 +55,12 @@ const SignInForm = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <h2 className={css.header}>Sign In</h2>
 
-        <div className={css.signupFormEmail}>
+        <div className={css.formGroup}>
           <label className={css.label}>Email:</label>
-          <div className={css.signupInputWrap}>
+          <div className={css.inputWrapper}>
             <input
-              className={`${css.signupInput} ${errors.email ? css.error : ''}`}
-              type="email"
+              className={`${css.input} ${errors.email ? css.error : ''}`}
+              type="text"
               name="email"
               placeholder="Enter your email"
               {...register('email')}
@@ -69,11 +69,11 @@ const SignInForm = () => {
           {errors.email && <p className={css.errorMessage}>{errors.email.message}</p>}
         </div>
 
-        <div className={css.signupFormPass}>
+        <div className={css.formGroupPassword}>
           <label className={css.label}>Password:</label>
-          <div className={css.signupInputWrap}>
+          <div className={css.inputWrapper}>
             <input
-              className={`${css.signupInput} ${errors.password ? css.error : ''}`}
+              className={`${css.input} ${errors.password ? css.error : ''}`}
               type={showPassword ? 'text' : 'password'}
               name="password"
               placeholder="Enter your password"
@@ -91,8 +91,8 @@ const SignInForm = () => {
           {errors.password && <p className={css.errorMessage}>{errors.password.message}</p>}
         </div>
 
-        <div className={css.btnWrap}>
-          <button className={css.signupBtn} type="submit">
+        <div className={css.buttonWrapper}>
+          <button className={css.submitButton} type="submit">
             Sign In
           </button>
         </div>
@@ -100,15 +100,15 @@ const SignInForm = () => {
 
       <GoogleAuth />
 
-      <div className={css.textWrap}>
+      <div className={css.textWrapper}>
         Don’t have an account?
-        <NavLink className={css.linkText} to="/signup">
+        <NavLink className={css.link} to="/signup">
           Sign Up
         </NavLink>
       </div>
-      <NavLink className={css.forgetText} to="/request-reset">
-      Forgot password?
-        </NavLink>
+      <NavLink className={css.forgotPassword} to="/request-reset">
+        Forgot password?
+      </NavLink>
     </div>
   );
 };

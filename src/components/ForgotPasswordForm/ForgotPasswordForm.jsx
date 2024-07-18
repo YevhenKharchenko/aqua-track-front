@@ -55,12 +55,12 @@ const ForgotPasswordForm = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <h2 className={css.header}>Account recovery</h2>
 
-        <div className={css.signupFormEmail}>
+        <div className={css.formGroup}>
           <label className={css.label}>Enter your email:</label>
-          <div className={css.signupInputWrap}>
+          <div className={css.inputWrapper}>
             <input
-              className={`${css.signupInput} ${errors.email ? css.error : ''}`}
-              type="email"
+              className={`${css.input} ${errors.email ? css.error : ''}`}
+              type="text"
               name="email"
               placeholder="Enter your email"
               {...register('email')}
@@ -68,8 +68,8 @@ const ForgotPasswordForm = () => {
           </div>
           {errors.email && <p className={css.errorMessage}>{errors.email.message}</p>}
         </div>
-        <div className={css.btnWrap}>
-          <button className={css.signupBtn} type="submit">
+        <div className={css.buttonWrapper}>
+          <button className={css.submitButton} type="submit">
             Send
           </button>
         </div>

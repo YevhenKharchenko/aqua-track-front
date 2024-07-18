@@ -4,7 +4,8 @@
   padding-left: 16px;
   padding-top: 24px;
   padding-bottom: 24px;
-  max-width: 343px;
+  width: 343px;
+  margin: 0 auto;
 }
 .welcomeText {
   font-family: var(--font-family);
@@ -30,7 +31,7 @@
   .backdrop {
     padding-left: 32px;
     padding-top: 32px;
-    max-width: 704px;
+    width: 704px;
   }
   .welcomeText {
     font-size: 16px;
