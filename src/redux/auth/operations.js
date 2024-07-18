@@ -111,7 +111,11 @@ export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) 
   // }
 
   try {
-    const persistedToken = localStorage.getItem('refreshToken');
+    const persistedToken = localStorage.getItem('accessToken');
+
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue('Unable to fetch user');
+    }
 
     setAuthHeader(persistedToken);
 
