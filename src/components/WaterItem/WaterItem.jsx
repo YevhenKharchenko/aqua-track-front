@@ -23,11 +23,9 @@ export function WaterItem({ item }) {
   const closeModalDelete = () => {
     setIsOpenDelete(false);
   };
-
+  // console.log('waterItem:', item);
   const water =
-    item.waterValue >= 999
-      ? Math.round((item.waterValue / 1000) * 100) / 100 + ' L'
-      : item.waterValue + ' ml';
+    item.amount >= 999 ? Math.round((item.amount / 1000) * 100) / 100 + ' L' : item.amount + ' ml';
 
   return (
     <div className={css.card}>
@@ -36,7 +34,7 @@ export function WaterItem({ item }) {
       </svg>
       <div className={css.textBox}>
         <p className={css.ml}>{water}</p>
-        <p className={css.time}>{item.localTime}</p>
+        <p className={css.time}>{item.time}</p>
       </div>
       <div className={css.btnBox}>
         <button className={css.button} type="button" onClick={openModal}>

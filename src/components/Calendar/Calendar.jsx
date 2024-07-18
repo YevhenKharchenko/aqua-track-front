@@ -16,7 +16,8 @@ const Calendar = () => {
   const currentDate = useSelector(selectCurrentDate);
 
   // я додав
-  const waterPerMonth = useSelector(selectWaterPerMonth) || [];
+  const waterPerMonth = useSelector(selectWaterPerMonth);
+  // console.log(waterPerMonth);
   //
 
   // код Андрія
@@ -31,10 +32,10 @@ const Calendar = () => {
 
     let totalValue = 0;
     dayData.forEach(record => {
-      totalValue += record.waterValue;
+      totalValue += record.amount;
     });
-
-    const userWaterRate = Number(user.waterRate) * 1000;
+    // console.log(totalValue);
+    const userWaterRate = Number(user.waterNorma) * 1000;
     if (totalValue >= userWaterRate) return 100;
 
     const feasibility = (totalValue / userWaterRate) * 100;
@@ -126,7 +127,20 @@ const Calendar = () => {
             2,
             '0'
           )}.${year}`;
-          const dayData = waterPerMonth[dayKey] || [];
+          function convertDateFormat(dateString) {
+            // Split the input date string by '.' to get the day, month, and year
+            const [day, month, year] = dateString.split('.');
+
+            // Return the formatted date string
+            return `${day}-${month}-${year}`;
+          }
+          const formattedDayKey = convertDateFormat(dayKey);
+          function findObjectByDate(arr, targetDate) {
+            // console.log(arr, targetDate);
+            return arr.filter(obj => obj.date === targetDate);
+          }
+          // console.log(waterPerMonth);
+          const dayData = findObjectByDate(waterPerMonth, formattedDayKey) || [];
           const feasibility = calculateFeasibility(dayData);
 
           return (

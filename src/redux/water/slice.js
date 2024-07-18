@@ -20,6 +20,7 @@ function handleLoading(state) {
 }
 
 function handleError(state, action) {
+  state.waters.waterPerDay.waterRecord = [];
   state.error = action.payload;
   state.loading = false;
 }
@@ -28,9 +29,9 @@ const waterSlice = createSlice({
   name: 'water',
   initialState: {
     waters: {
-      waterPerMonth: {},
+      waterPerMonth: [],
       waterPerDay: {
-        waterRate: {},
+        waterRate: 1.5,
         waterRecord: [],
       },
     },
@@ -51,18 +52,16 @@ const waterSlice = createSlice({
     builder
       .addCase(fetchWaterPerDay.pending, handleLoading)
       .addCase(fetchWaterPerDay.fulfilled, (state, action) => {
-        const { waterRate, waterRecord } = action.payload;
         state.error = false;
         state.loading = false;
-        state.waters.waterPerDay.waterRate = waterRate;
-        state.waters.waterPerDay.waterRecord = waterRecord;
+        state.waters.waterPerDay.waterRecord = action.payload;
       })
       .addCase(fetchWaterPerDay.rejected, handleError)
       .addCase(fetchWaterPerMonth.pending, handleLoading)
       .addCase(fetchWaterPerMonth.fulfilled, (state, action) => {
         state.error = false;
         state.loading = false;
-        state.waters.waterPerMonth = action.payload.waterRecord;
+        state.waters.waterPerMonth = action.payload;
       })
       .addCase(fetchWaterPerMonth.rejected, handleError)
       .addCase(deleteWater.pending, handleLoading)
@@ -112,14 +111,11 @@ const waterSlice = createSlice({
           date.getMonth() < 9 ? '0' + (date.getMonth() + 1) : String(date.getMonth() + 1);
         console.log(JSON.parse(JSON.stringify(state.waters.waterPerDay.waterRecord)));
 
+        console.log(action.payload.date);
         if (state.waters.waterPerMonth?.[action.payload.date]) {
-          state.waters.waterPerMonth[action.payload.waterRecord.localDate].push(
-            action.payload.waterRecord
-          );
-        } else if (action.payload.waterRecord.localDate.split('.')[1] === month) {
-          state.waters.waterPerMonth[action.payload.waterRecord.localDate] = [
-            action.payload.waterRecord,
-          ];
+          state.waters.waterPerMonth[action.payload.date].push(action.payload);
+        } else if (action.payload.date.split('.')[1] === month) {
+          state.waters.waterPerMonth[action.payload.date] = [action.payload];
         }
         //
       })
