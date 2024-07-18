@@ -2,11 +2,13 @@
   display: flex;
   flex-direction: column;
   height: fit-content;
+  width: 343px;
   border-radius: 30px;
   background: #9be1a0 url(../../assets/images/transparent_bottle_for_water_1.png) no-repeat center
     50px/262px 335px;
-  padding-top: 0;
-  padding-bottom: 0;
+  padding: 24px 16px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .addWaterBtn:hover {
@@ -17,6 +19,7 @@
   .infoContainer {
     width: 704px;
     height: 578px;
+    padding: 32px;
     background: #9be1a0 url(../../assets/images/transparent_bottle_for_water_1.png) no-repeat center
       69px/374px 477px;
   }

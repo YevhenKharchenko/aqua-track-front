@@ -3,8 +3,6 @@
 import css from './WaterDailyNorma.module.css';
 
 const WaterDailyNorma = ({ dailyNorm }) => {
-  const dailyNormValue = 1.5; //delete this line after adding selector
-
   return (
     <div className={css.dailyNormaWrapper}>
       <p className={css.normaValue}>{dailyNorm} L</p>
