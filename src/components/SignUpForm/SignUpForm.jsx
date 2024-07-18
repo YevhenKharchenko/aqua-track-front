@@ -69,12 +69,12 @@ const SignUpForm = () => {
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
         <h2 className={css.header}>Sign Up</h2>
 
-        <div className={css.signupFormEmail}>
+        <div className={css.formGroup}>
           <label className={css.label}>Email:</label>
-          <div className={css.signupInputWrap}>
+          <div className={css.inputWrapper}>
             <input
-              className={`${css.signupInput} ${errors.email ? css.error : ''}`}
-              type="email"
+              className={`${css.input} ${errors.email ? css.error : ''}`}
+              type="text"
               name="email"
               placeholder="Enter your email"
               {...register('email')}
@@ -83,11 +83,11 @@ const SignUpForm = () => {
           {errors.email && <p className={css.errorMessage}>{errors.email.message}</p>}
         </div>
 
-        <div className={css.signupFormPass}>
+        <div className={css.formGroupPassword}>
           <label className={css.label}>Password:</label>
-          <div className={css.signupInputWrap}>
+          <div className={css.inputWrapper}>
             <input
-              className={`${css.signupInput} ${errors.password ? css.error : ''}`}
+              className={`${css.input} ${errors.password ? css.error : ''}`}
               type={showPassword ? 'text' : 'password'}
               name="password"
               placeholder="Enter your password"
@@ -105,11 +105,11 @@ const SignUpForm = () => {
           {errors.password && <p className={css.errorMessage}>{errors.password.message}</p>}
         </div>
 
-        <div className={css.signupFormPass}>
+        <div className={css.formGroupPassword}>
           <label className={css.label}>Repeat Password:</label>
-          <div className={css.signupInputWrap}>
+          <div className={css.inputWrapper}>
             <input
-              className={`${css.signupInput} ${errors.repeatPassword ? css.error : ''}`}
+              className={`${css.input} ${errors.repeatPassword ? css.error : ''}`}
               type={showRepeatPassword ? 'text' : 'password'}
               placeholder="Repeat password"
               {...register('repeatPassword')}
@@ -128,15 +128,15 @@ const SignUpForm = () => {
           )}
         </div>
 
-        <div className={css.btnWrap}>
-          <button className={css.signupBtn} type="submit">
+        <div className={css.buttonWrapper}>
+          <button className={css.submitButton} type="submit">
             Sign Up
           </button>
         </div>
       </form>
-      <div className={css.textWrap}>
+      <div className={css.textWrapper}>
         Already have an account?
-        <NavLink className={css.linkText} to="/signin">
+        <NavLink className={css.link} to="/signin">
           Sign In
         </NavLink>
       </div>

@@ -1,9 +1,8 @@
 .container {
   padding-top: 172px;
-  padding-bottom: 164px;
+  padding-bottom: 144px;
 }
 .header {
-  font-family: var(--font-family);
   font-weight: 700;
   font-size: 32px;
   line-height: 100%;
@@ -11,24 +10,23 @@
   color: #323f47;
 }
 .label {
-  font-family: var(--font-family);
   font-weight: 700;
   font-size: 14px;
   line-height: 129%;
   letter-spacing: -0.01em;
   color: #2f2f2f;
 }
-.signupFormEmail {
+.formGroup {
   width: 311px;
   padding-top: 32px;
 }
-.signupFormPass {
+.formGroupPassword {
   display: flex;
   flex-direction: column;
   width: 311px;
   padding-top: 16px;
 }
-.signupInput {
+.input {
   border-radius: 15px;
   border: 1px solid rgba(47, 47, 47, 0.2);
   outline: none;
@@ -45,20 +43,19 @@
   background-color: transparent;
   padding-right: 40px;
 }
-.signupInput::placeholder {
+.input::placeholder {
   color: rgba(47, 47, 47, 0.6);
 }
-.signupInputWrap {
+.inputWrapper {
   padding-top: 8px;
   position: relative;
 }
-.signupBtn {
+.submitButton {
   border-radius: 30px;
   padding: 16px 129px;
   width: 311px;
   height: 50px;
   background-color: #9be1a0;
-  font-family: var(--font-family);
   font-weight: 700;
   font-size: 14px;
   line-height: 129%;
@@ -67,14 +64,14 @@
   display: flex;
   justify-content: center;
 }
-.signupBtn:hover,
-.signupBtn:focus {
+.submitButton:hover,
+.submitButton:focus {
   background-color: #87d28d;
 }
-.btnWrap {
+.buttonWrapper {
   padding-top: 32px;
 }
-.textWrap {
+.textWrapper {
   width: 311px;
   font-weight: 400;
   font-size: 14px;
@@ -85,25 +82,24 @@
   display: flex;
   justify-content: center;
 }
-.linkText {
+.link {
   font-weight: 700;
   text-decoration: underline;
   text-decoration-skip-ink: none;
   color: #2f2f2f;
   padding-left: 3px;
 }
-.signupInput.error {
+.input.error {
   border-color: #ef5050;
   color: #ef5050;
 }
 .errorMessage {
   padding-top: 10px;
-  font-family: var(--font-family);
-font-weight: 400;
-font-size: 14px;
-line-height: 129%;
-letter-spacing: -0.01em;
-color: #ef5050;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: #ef5050;
 }
 .passwordToggleIcon {
   position: absolute;
@@ -113,7 +109,7 @@ color: #ef5050;
   cursor: pointer;
   display: none;
 }
-.forgetText {
+.forgotPassword {
   display: flex;
   justify-content: center;
   width: 311px;
@@ -139,21 +135,21 @@ color: #ef5050;
     font-size: 16px;
     line-height: 150%;
   }
-  .signupInput {
+  .input {
     width: 436px;
     height: 56px;
     font-size: 16px;
     line-height: 150%;
     padding-right: 40px;
   }
-  .signupFormEmail {
+  .formGroup {
     width: 434px;
   }
-  .signupFormPass {
+  .formGroupPassword {
     width: 434px;
     padding-top: 20px;
   }
-  .textWrap {
+  .textWrapper {
     width: 436px;
     font-size: 16px;
     line-height: 150%;
@@ -161,18 +157,17 @@ color: #ef5050;
   .passwordToggleIcon {
     display: block;
   }
-  .signupBtn {
+  .submitButton {
     padding: 18px 189px;
     width: 436px;
     height: 60px;
     font-size: 16px;
     line-height: 150%;
   }
-  .forgetText {
+  .forgotPassword {
     width: 436px;
   }
 }
-
 
 @media (min-width: 1440px) {
   .container {
@@ -181,4 +176,3 @@ color: #ef5050;
     padding-left: 86px;
   }
 }
-

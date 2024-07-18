@@ -6,7 +6,7 @@
   display: flex;
   gap: 10px;
 }
-.navBtnUp {
+.navButtonSignup {
   border-radius: 30px;
   padding: 14px 19px;
   width: 116px;
@@ -22,11 +22,11 @@
   display: flex;
   justify-content: center;
 }
-.navBtnUp:hover,
-.navBtnUp:focus {
+.navButtonSignup:hover,
+.navButtonSignup:focus {
   background-color: #87d28d;
 }
-.navBtnIn {
+.navButtonSignin {
   border: 1px solid #323f47;
   border-radius: 30px;
   padding: 14px 10px;
@@ -42,8 +42,8 @@
   display: flex;
   justify-content: center;
 }
-.navBtnIn:hover,
-.navBtnIn:focus {
+.navButtonSignin:hover,
+.navButtonSignin:focus {
   border: 1px solid #87d28d;
   color: #87d28d;
 }
@@ -53,7 +53,7 @@
     gap: 16px;
     padding-left: 32px;
   }
-  .navBtnUp {
+  .navButtonSignup {
     border-radius: 30px;
     padding: 18px 40px;
     width: 169px;
@@ -61,7 +61,7 @@
     font-size: 16px;
     line-height: 150%;
   }
-  .navBtnIn {
+  .navButtonSignin {
     padding: 18px 30px;
     width: 135px;
     height: 60px;

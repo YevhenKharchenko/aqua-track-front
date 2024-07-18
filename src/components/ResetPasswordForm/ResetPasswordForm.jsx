@@ -94,11 +94,11 @@ const ResetPasswordForm = () => {
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
         <h2 className={css.header}>Change the password</h2>
 
-        <div className={css.signupFormPass}>
+        <div className={css.formGroupPassword}>
           <label className={css.label}>New password:</label>
-          <div className={css.signupInputWrap}>
+          <div className={css.inputWrapper}>
             <input
-              className={`${css.signupInput} ${errors.password ? css.error : ''}`}
+              className={`${css.input} ${errors.password ? css.error : ''}`}
               type={showPassword ? 'text' : 'password'}
               name="password"
               placeholder="Enter your password"
@@ -116,11 +116,11 @@ const ResetPasswordForm = () => {
           {errors.password && <p className={css.errorMessage}>{errors.password.message}</p>}
         </div>
 
-        <div className={css.signupFormPass}>
+        <div className={css.formGroupPassword}>
           <label className={css.label}>Repeat new password:</label>
-          <div className={css.signupInputWrap}>
+          <div className={css.inputWrapper}>
             <input
-              className={`${css.signupInput} ${errors.repeatPassword ? css.error : ''}`}
+              className={`${css.input} ${errors.repeatPassword ? css.error : ''}`}
               type={showRepeatPassword ? 'text' : 'password'}
               placeholder="Repeat password"
               name="repeatPassword"
@@ -140,8 +140,8 @@ const ResetPasswordForm = () => {
           )}
         </div>
 
-        <div className={css.btnWrap}>
-          <button className={css.signupBtn} type="submit">
+        <div className={css.buttonWrapper}>
+          <button className={css.submitButton} type="submit">
             Change
           </button>
         </div>
