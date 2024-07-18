@@ -68,6 +68,7 @@ const waterSlice = createSlice({
       .addCase(deleteWater.fulfilled, (state, action) => {
         state.loading = false;
         state.error = false;
+        console.log(action.payload);
         const index = state.waters.waterPerDay.waterRecord.findIndex(
           water => water._id === action.payload.waterRecord._id
         );

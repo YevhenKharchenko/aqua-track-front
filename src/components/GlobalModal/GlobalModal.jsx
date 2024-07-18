@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import Modal from 'react-modal';
 import css from './GlobalModal.module.css';
-import sprite from '../../assets/icons/sprite.svg';
+import { icons as sprite } from '../../assets/icons/index.js';
 
 const customStyles = {
   overlay: {
@@ -49,15 +49,11 @@ export const GlobalModal = ({ isOpen, onRequestClose, children, title }) => {
           </div>
         )}
 
-        <div className={css.closeBtn}>
-          <svg>
-            <use
-              xlinkHref={`${sprite}#icon-close-24x24`}
-              onClick={onRequestClose}
-              size={'24px'}
-            ></use>
+        <button className={css.closeBtn} onClick={onRequestClose}>
+          <svg className={css.closeIcon}>
+            <use xlinkHref={`${sprite}#icon-close-24x24`}></use>
           </svg>
-        </div>
+        </button>
       </div>
       {(title === 'Log out' || title === 'Delete') && (
         <div className={css.textBox}>

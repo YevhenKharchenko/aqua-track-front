@@ -15,13 +15,7 @@ const Calendar = () => {
   const dispatch = useDispatch();
   const currentDate = useSelector(selectCurrentDate);
 
-  // я додав
   const waterPerMonth = useSelector(selectWaterPerMonth);
-  // console.log(waterPerMonth);
-  //
-
-  // код Андрія
-  // const waterPerMonth = useSelector(selectWaterPerMonth);
 
   const activeDay = useSelector(state => state.water.activeDay);
 
@@ -34,11 +28,13 @@ const Calendar = () => {
     dayData.forEach(record => {
       totalValue += record.amount;
     });
-    // console.log(totalValue);
-    const userWaterRate = Number(user.waterNorma) * 1000;
+
+    const userWaterRate = Number(user?.waterNorma) * 1000 || 1500;
+
     if (totalValue >= userWaterRate) return 100;
 
     const feasibility = (totalValue / userWaterRate) * 100;
+
     return Math.round(feasibility);
   };
 
@@ -82,14 +78,24 @@ const Calendar = () => {
 
     return formattedDate;
   }
+
+  function convertDateFormat(dateString) {
+    const [day, month, year] = dateString.split('.');
+
+    return `${day}-${month}-${year}`;
+  }
+
+  function findObjectByDate(arr, targetDate) {
+    return arr.filter(obj => obj.date === targetDate);
+  }
   //
 
   useEffect(() => {
     const localDate = new Date(currentDate).toLocaleDateString();
 
     // я додав
-    console.log(localDate);
     const formattedDateForMonth = formatDateForMonth(localDate);
+    console.log(localDate);
     console.log(formattedDateForMonth);
     dispatch(fetchWaterPerMonth(formattedDateForMonth));
     //
@@ -127,19 +133,9 @@ const Calendar = () => {
             2,
             '0'
           )}.${year}`;
-          function convertDateFormat(dateString) {
-            // Split the input date string by '.' to get the day, month, and year
-            const [day, month, year] = dateString.split('.');
 
-            // Return the formatted date string
-            return `${day}-${month}-${year}`;
-          }
           const formattedDayKey = convertDateFormat(dayKey);
-          function findObjectByDate(arr, targetDate) {
-            // console.log(arr, targetDate);
-            return arr.filter(obj => obj.date === targetDate);
-          }
-          // console.log(waterPerMonth);
+
           const dayData = findObjectByDate(waterPerMonth, formattedDayKey) || [];
           const feasibility = calculateFeasibility(dayData);
 
