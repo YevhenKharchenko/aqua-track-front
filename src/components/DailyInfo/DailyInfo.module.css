@@ -21,9 +21,17 @@
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: -0.01em;
-  text-align: center;
-  color: #323f47;
   margin-right: 0;
   margin-bottom: 0;
   align-self: normal;
+}
+.icon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  fill: #9be1a0;
+}
+.addBtn:hover .icon {
+  stroke: #fff;
+  fill: #323f47;
 }

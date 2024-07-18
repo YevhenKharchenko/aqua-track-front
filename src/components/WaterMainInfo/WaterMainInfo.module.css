@@ -9,6 +9,10 @@
   padding-bottom: 0;
 }
 
+.addWaterBtn:hover {
+  color: #9be1a0;
+}
+
 @media (min-width: 768px) {
   .infoContainer {
     width: 704px;
