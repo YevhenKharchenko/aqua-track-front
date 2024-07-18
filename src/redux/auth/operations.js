@@ -68,9 +68,8 @@ export const loginUser = createAsyncThunk('auth/login', async ({ email, password
 
     setAuthHeader(res.data.accessToken);
 
-    toast.success('You are successfully logged in!', {
-      autoClose: 5000,
-    });
+   
+    
 
     return res.data;
   } catch (error) {
