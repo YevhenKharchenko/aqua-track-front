@@ -27,8 +27,9 @@ export const fetchWaterPerMonth = createAsyncThunk(
 );
 
 export const deleteWater = createAsyncThunk('water/delete', async id => {
+  console.log(id);
   const response = await axios.delete(`/water/remove/${id}`);
-  console.log({ id, ...response.data });
+  console.log(response.data);
 
   return response.data;
 });

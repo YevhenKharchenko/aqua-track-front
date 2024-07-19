@@ -69,6 +69,7 @@ export const WaterForm = ({ mode, onClose, water = {} }) => {
         dispatch(addWater(newData));
         toast.success(`The amount of water consumed has been added successfully.`);
       } else if (mode === 'edit') {
+        console.log({ _id: water._id, ...newData });
         dispatch(changeWater({ _id: water._id, ...newData }));
         toast.success('The amount of water consumed has been successfully updated.');
       }

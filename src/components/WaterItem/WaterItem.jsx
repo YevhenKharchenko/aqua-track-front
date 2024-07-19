@@ -17,16 +17,18 @@ export function WaterItem({ item }) {
   };
 
   const [isOpenDelete, setIsOpenDelete] = useState(false);
+
   const openModalDelete = () => {
     setIsOpenDelete(true);
   };
+
   const closeModalDelete = () => {
     setIsOpenDelete(false);
   };
-  // console.log('waterItem:', item);
+
   const water =
     item.amount >= 999 ? Math.round((item.amount / 1000) * 100) / 100 + ' L' : item.amount + ' ml';
-
+  console.log(item._id);
   return (
     <div className={css.card}>
       <svg className={css.bottleIcon}>

@@ -29,7 +29,8 @@ const Calendar = () => {
       totalValue += record.amount;
     });
 
-    const userWaterRate = Number(user?.waterNorma) * 1000 || 1500;
+    // const userWaterRate = Number(user?.waterNorma) * 1000 || 1500;
+    const userWaterRate = Number(user?.waterNorma) * 1000;
 
     if (totalValue >= userWaterRate) return 100;
 
