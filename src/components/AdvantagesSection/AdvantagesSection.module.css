@@ -1,7 +1,9 @@
 .container {
+  position: relative;
   background-image: url('../../assets/images/Rectangle19_mob-min.png');
   background-size: cover;
   background-position: center;
+  background-color: #323f47;
   border-radius: 30px;
   width: 343px;
   height: 353px;
@@ -11,7 +13,7 @@
   .container {
     background-image: url('../../assets/images/Rectangle19_tab-min.png');
     width: 704px;
-height: 446px;
+    height: 446px;
   }
 }
 
@@ -19,6 +21,85 @@ height: 446px;
   .container {
     background-image: url('../../assets/images/Rectangle19_dt-min.png');
     width: 672px;
-height: 736px;
+    height: 736px;
   }
+}
+
+.usersContainer {
+  position: absolute;
+  left: 16px;
+  bottom: 96px;
+  display: flex;
+  align-items: center;
+  border-radius: 30px;
+  padding: 10px 14px 10px 75px;
+  width: 160px;
+  height: 48px;
+  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+
+  cursor: pointer;
+  /* position: relative; */
+}
+.text {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.17;
+  color: #323f47;
+}
+
+.accentText {
+  color: #9be1a0;
+}
+
+.imageThumb {
+  /* position: relative; */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.avatar {
+  display: inline-block;
+  width: 26px;
+  height: 28px;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.avatar:nth-child(1) {
+  left: 14px;
+  z-index: 3; /* Highest z-index to appear on top */
+}
+
+.avatar:nth-child(2) {
+  left: 30px; /* Overlapping by half */
+  z-index: 2;
+}
+
+.avatar:nth-child(3) {
+  left: 45px; /* Overlapping by half */
+  z-index: 1;
+}
+
+.userList {
+  position: fixed;
+  right: 50%;
+  top: 50%;
+  transform: translate(-50% -50%);
+  width: 300px;
+  height: 400px;
+  padding: 15px;
+  background-color: white;
+  border: 1px solid #ccc;
+  overflow-y: auto;
+  z-index: 999;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 }

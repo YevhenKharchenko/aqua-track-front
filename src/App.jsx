@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { lazy, useEffect } from 'react';
 import { refreshUser, getAllUsers } from './redux/auth/operations.js';
 import { selectIsRefreshing, selectIsLoggedIn } from './redux/selectors.js';
-import { loginUserSuccess } from './redux/auth/slice.js';
+// import { loginUserSuccess } from './redux/auth/slice.js';
 import { RestrictedRoute } from './components/RestrictedRoute';
 import { PrivateRoute } from './components/PrivateRoute';
 import Loader from './shared/components/Loader/Loader.jsx';
@@ -15,11 +15,13 @@ import SignInPage from './pages/SignInPage/SignInPage.jsx';
 import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
 import ExampleModal from './components/ExampleModal.jsx';
 
-import LogOutModal from './components/LogOutModal/LogOutModal.jsx';
+// import LogOutModal from './components/LogOutModal/LogOutModal.jsx';
 
 import TrackerPage from './pages/TrackerPage/TrackerPage.jsx';
 import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPasswordPage.jsx';
 import ResetPasswordPage from './pages/ResetPasswordPage/ResetPasswordPage.jsx';
+
+// const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 
 function App() {
   const dispatch = useDispatch();

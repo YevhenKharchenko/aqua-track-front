@@ -22,6 +22,7 @@ export const initialState = {
   isLoggedIn: false,
   isRefreshing: false,
   error: '',
+  loading: false,
 };
 
 const userSlice = createSlice({
@@ -37,7 +38,7 @@ const userSlice = createSlice({
   extraReducers: builder =>
     builder
       .addCase(registerUser.fulfilled, (state, action) => {})
-      .addCase(loginUser.pending, (state, action) => {
+      .addCase(loginUser.pending, state => {
         state.isRefreshing = true;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
@@ -77,14 +78,19 @@ const userSlice = createSlice({
         state.isRefreshing = false;
       })
 
-      .addCase(getAllUsers.pending, (state, action) => {
+      .addCase(getAllUsers.pending, state => {
+        state.loading = true;
+        state.error = null;
         state.isRefreshing = true;
       })
       .addCase(getAllUsers.fulfilled, (state, action) => {
+        state.loading = false;
+        state.userInfo = action.payload;
         state.isRefreshing = false;
       })
       .addCase(getAllUsers.rejected, (state, action) => {
         state.isRefreshing = false;
+        state.loading = false;
         state.error = action.payload;
       }),
 });
