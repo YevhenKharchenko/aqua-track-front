@@ -16,13 +16,14 @@ export const initialState = {
     avatar: null,
     weight: null,
     sportTime: null,
-    waterNorma: null,
+    waterNorma: 1.5,
   },
-  token: null,
+  token: localStorage.getItem('accessToken') || null,
   isLoggedIn: false,
   isRefreshing: false,
   error: '',
   loading: false,
+  countUsers: null,
 };
 
 const userSlice = createSlice({
@@ -42,43 +43,43 @@ const userSlice = createSlice({
         state.isRefreshing = true;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        state.isLoggedIn = true;
         state.isRefreshing = false;
-
         state.token = action.payload.data.accessToken;
-        localStorage.setItem('accessToken', action.payload.data.accessToken);
+        state.isLoggedIn = true;
 
-        state.userInfo = action.payload.user;
+        localStorage.setItem('accessToken', action.payload.data.accessToken);
+      })
+      .addCase(loginUser.rejected, (state, action) => {
+        state.error = action.payload;
+        state.isRefreshing = false;
       })
       .addCase(logoutUser.fulfilled, state => {
         state.isLoggedIn = false;
         state.userInfo = null;
         state.token = null;
-        localStorage.setItem('accessToken', '');
+        localStorage.removeItem('accessToken');
       })
       .addCase(refreshUser.fulfilled, (state, action) => {
-        state.isLoggedIn = true;
         state.isRefreshing = false;
+        state.isLoggedIn = true;
         state.userInfo = action.payload;
+        state.userInfo.waterNorma = 1.5;
       })
       .addCase(updateUser.pending, state => {
         state.isRefreshing = true;
       })
       .addCase(updateUser.fulfilled, (state, action) => {
-        state.error = '';
-        state.isRefreshing = false;
-
-        state.userInfo = action.payload;
         state.isRefreshing = false;
         state.isLoggedIn = true;
+        state.userInfo = action.payload;
+        state.error = '';
       })
-
       .addCase(updateUser.rejected, (state, action) => {
-        state.error = action.payload;
         state.isRefreshing = false;
+        state.error = action.payload;
       })
 
-      .addCase(getAllUsers.pending, state => {
+     .addCase(getAllUsers.pending, state => {
         state.loading = true;
         state.error = null;
         state.isRefreshing = true;
@@ -91,6 +92,11 @@ const userSlice = createSlice({
       .addCase(getAllUsers.rejected, (state, action) => {
         state.isRefreshing = false;
         state.loading = false;
+      .addCase(getAllUsers.pending, (state, action) => {})
+      .addCase(getAllUsers.fulfilled, (state, action) => {
+        state.countUsers = action.payload;
+      })
+      .addCase(getAllUsers.rejected, (state, action) => {
         state.error = action.payload;
       }),
 });

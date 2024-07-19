@@ -20,6 +20,7 @@ import ExampleModal from './components/ExampleModal.jsx';
 import TrackerPage from './pages/TrackerPage/TrackerPage.jsx';
 import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPasswordPage.jsx';
 import ResetPasswordPage from './pages/ResetPasswordPage/ResetPasswordPage.jsx';
+import GoogleAuth from './components/GoogleAuth/GoogleAuth.jsx';
 
 // const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 
@@ -55,6 +56,7 @@ function App() {
           path="/reset-password"
           element={<RestrictedRoute component={<ResetPasswordPage />} />}
         />
+        <Route path="/google-auth" component={GoogleAuth} />
         <Route
           path="/tracker"
           element={<PrivateRoute redirectTo="/signin" component={<TrackerPage />} />}

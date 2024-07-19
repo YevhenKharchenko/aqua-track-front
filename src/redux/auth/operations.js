@@ -68,9 +68,8 @@ export const loginUser = createAsyncThunk('auth/login', async ({ email, password
 
     setAuthHeader(res.data.accessToken);
 
-    toast.success('You are successfully logged in!', {
-      autoClose: 5000,
-    });
+   
+    
 
     return res.data;
   } catch (error) {
@@ -111,7 +110,11 @@ export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) 
   // }
 
   try {
-    const persistedToken = localStorage.getItem('refreshToken');
+    const persistedToken = localStorage.getItem('accessToken');
+
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue('Unable to fetch user');
+    }
 
     setAuthHeader(persistedToken);
 
@@ -140,7 +143,7 @@ export const updateUser = createAsyncThunk('auth/update', async (data, thunkAPI)
 export const getAllUsers = createAsyncThunk('auth/getAllUsers', async (_, thunkAPI) => {
   try {
     const res = await axios.get('/users/registered-users');
-    // console.log(res.data.data);
+
     return res.data.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);

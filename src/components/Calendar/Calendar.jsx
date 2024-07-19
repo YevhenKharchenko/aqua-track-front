@@ -15,12 +15,7 @@ const Calendar = () => {
   const dispatch = useDispatch();
   const currentDate = useSelector(selectCurrentDate);
 
-  // я додав
-  const waterPerMonth = useSelector(selectWaterPerMonth) || [];
-  //
-
-  // код Андрія
-  // const waterPerMonth = useSelector(selectWaterPerMonth);
+  const waterPerMonth = useSelector(selectWaterPerMonth);
 
   const activeDay = useSelector(state => state.water.activeDay);
 
@@ -31,13 +26,15 @@ const Calendar = () => {
 
     let totalValue = 0;
     dayData.forEach(record => {
-      totalValue += record.waterValue;
+      totalValue += record.amount;
     });
 
-    const userWaterRate = Number(user.waterRate) * 1000;
+    const userWaterRate = Number(user?.waterNorma) * 1000 || 1500;
+
     if (totalValue >= userWaterRate) return 100;
 
     const feasibility = (totalValue / userWaterRate) * 100;
+
     return Math.round(feasibility);
   };
 
@@ -45,20 +42,51 @@ const Calendar = () => {
   const year = new Date(currentDate).getFullYear();
   const numberOfDays = daysInMonth(month, year);
 
-  // я додав
+  // я додав, це обов'язкова функція для того щоб була універсальна дата для будь-яких локалізацій браузера
   function formatDateForMonth(originalDate) {
-    const [month, day, year] = originalDate.split('/');
-    const paddedMonth = month.padStart(2, '0');
-    const paddedDay = day.padStart(2, '0');
-    const formattedDate = `${paddedDay}-${paddedMonth}-${year}`;
+    if (!originalDate || typeof originalDate !== 'string') {
+      throw new Error('Invalid date format');
+    }
 
-    return formattedDate;
+    let dateParts;
+    if (originalDate.includes('/')) {
+      dateParts = originalDate.split('/');
+      if (dateParts.length !== 3) {
+        throw new Error('Date must be in MM/DD/YYYY format');
+      }
+      const [month, day, year] = dateParts;
+      const paddedMonth = month.padStart(2, '0');
+      const paddedDay = day.padStart(2, '0');
+      return `${paddedDay}-${paddedMonth}-${year}`;
+    } else if (originalDate.includes('.')) {
+      dateParts = originalDate.split('.');
+      if (dateParts.length !== 3) {
+        throw new Error('Date must be in DD.MM.YYYY format');
+      }
+      const [day, month, year] = dateParts;
+      const paddedMonth = month.padStart(2, '0');
+      const paddedDay = day.padStart(2, '0');
+      return `${paddedDay}-${paddedMonth}-${year}`;
+    } else {
+      throw new Error('Date format not recognized. Use MM/DD/YYYY or DD.MM.YYYY');
+    }
   }
+
   function formatDateForDay(originalDate) {
     const [day, month, year] = originalDate.split('.');
     const formattedDate = `${day}-${month}-${year}`;
 
     return formattedDate;
+  }
+
+  function convertDateFormat(dateString) {
+    const [day, month, year] = dateString.split('.');
+
+    return `${day}-${month}-${year}`;
+  }
+
+  function findObjectByDate(arr, targetDate) {
+    return arr.filter(obj => obj.date === targetDate);
   }
   //
 
@@ -67,8 +95,8 @@ const Calendar = () => {
 
     // я додав
     const formattedDateForMonth = formatDateForMonth(localDate);
-    console.log(formattedDateForMonth);
     console.log(localDate);
+    console.log(formattedDateForMonth);
     dispatch(fetchWaterPerMonth(formattedDateForMonth));
     //
 
@@ -105,7 +133,10 @@ const Calendar = () => {
             2,
             '0'
           )}.${year}`;
-          const dayData = waterPerMonth[dayKey] || [];
+
+          const formattedDayKey = convertDateFormat(dayKey);
+
+          const dayData = findObjectByDate(waterPerMonth, formattedDayKey) || [];
           const feasibility = calculateFeasibility(dayData);
 
           return (

@@ -12,12 +12,15 @@
 }
 
 .imagecontainer {
+  width: 75px;
+  height: 75px;
 }
 
 .image {
   width: 75px;
   height: 75px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .upload {
@@ -34,6 +37,9 @@
 .uploadIcon {
   stroke: #2f2f2f;
   fill: transparent;
+
+  width: 18px;
+  height: 18px;
 }
 
 .text {
@@ -72,10 +78,12 @@
 
 .genderInput {
   display: none;
-  
 }
 
 .iconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* .radioIcon {
@@ -145,6 +153,7 @@
   padding: 16px;
 
   margin-bottom: 14px;
+  color: #2f2f2f99;
 }
 
 .activityWrapper {
@@ -157,9 +166,9 @@
 }
 
 .waterNormaWrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
   margin-bottom: 24px;
 }
 
@@ -171,6 +180,13 @@
   margin-bottom: 14px;
 }
 
+.accentTextL {
+  font-size: 14px;
+  line-height: 1.29;
+  color: #9be1a0;
+  font-weight: 700;
+}
+
 .submitButton {
   border-radius: 30px;
   padding: 14px 40px;
@@ -179,10 +195,114 @@
   background-color: #9be1a0;
 
   font-weight: 700;
+
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
 }
 
 .error {
-    color: red;
-    font-size: 12px;
-    font-weight: 400;
+  color: red;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+@media only screen and (min-width: 768px) {
+  .imagecontainer {
+    width: 100px;
+    height: 100px;
+  }
+
+  .image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .uploadIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .text {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .inputTitle {
+    font-size: 18px;
+    line-height: 1.33;
+  }
+
+  /* .radioIcon {
+    stroke: #9be1a0;
+    fill: transparent;
+  } */
+
+  /* .radioIcon:checked {
+    fill: #9be1a0;
+  } */
+
+  .userInputTitle {
+    font-size: 18px;
+    line-height: 1.33;
+  }
+
+  .userInput {
+    padding: 16px;
+  }
+
+  .flexWrap {
+    display: flex;
+
+    gap: 28px;
+  }
+
+  .dailyInfoWrapper {
+    margin-bottom: 14px;
+  }
+
+  .accentText {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .iconImportant {
+    fill: #9be1a0;
+
+    width: 22px;
+    height: 22px;
+  }
+
+  .submitButton {
+    padding: 16px 50px;
+    width: 141px;
+    height: 56px;
+
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .error {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .dailyNormaWrap {
+    margin-bottom: 0;
+  }
+
+  .formFlexWrapper {
+    display: flex;
+    gap: 40px;
+  }
+
+  .formFlexItem {
+    flex-basis: calc((100% - 40px) / 2);
+  }
+
+  .accentTextL {
+    font-size: 15px;
+    line-height: 1.3;
+  }
 }

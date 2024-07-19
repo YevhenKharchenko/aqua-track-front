@@ -5,11 +5,11 @@
 import { useState } from 'react';
 import css from './WaterProgressBar.module.css';
 
-const WaterProgressBar = ({ currentIntake = 1500, dailyNormValue = 2000 }) => {
+const WaterProgressBar = ({ currentIntake, dailyNorm }) => {
   //const currentIntake = useSelector(selectWaterPerDay);
   //const dailyNormValue = useSelector(selectDailyNormValue);
   const [showDynamicLabel, setShowDynamicLabel] = useState(false);
-  const progress = (currentIntake / dailyNormValue) * 100;
+  const progress = (currentIntake / dailyNorm) * 100;
 
   return (
     <div className={css.progressBarContainer}>

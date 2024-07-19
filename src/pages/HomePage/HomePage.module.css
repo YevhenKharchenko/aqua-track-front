@@ -20,9 +20,10 @@
   display: flex;
   gap: 16px;
   flex-direction: column;
-  padding: 16px;
+  /* padding: 16px; */
+  padding-top: 16px;
+  padding-bottom: 16px;
   margin: 0 auto;
-  gap: 16px;
 }
 
 @media screen and (min-width: 768px) {
