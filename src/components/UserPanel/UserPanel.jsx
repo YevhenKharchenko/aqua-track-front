@@ -59,21 +59,21 @@ const UserPanel = () => {
   }, [setModal]);
 
   const openSettingModal = useCallback(() => {
-    dispatch(refreshUser())
-      .then(() => {
-        toast.success('We successfully received your previous data from the server', {
-          autoClose: 5000,
-        });
-        setModal(<UserSettingsModal onClose={closeSettingModal} />);
-        console.log('currentUser', currentUser);
-      })
-      .catch(error => {
-        console.log(error);
-        toast.error('Something went wrong. During getting your data from server.', {
-          duration: 8000,
-        });
-      });
-  }, [setModal, currentUser, closeSettingModal, dispatch]);
+    // dispatch(refreshUser())
+    //   .then(() => {
+    //     toast.success('We successfully received your previous data from the server', {
+    //       autoClose: 5000,
+    //     });
+    //     console.log('currentUser', currentUser);
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //     toast.error('Something went wrong. During getting your data from server.', {
+    //       duration: 8000,
+    //     });
+    //   });
+    setModal(<UserSettingsModal onClose={closeSettingModal} />);
+  }, [setModal, closeSettingModal]);
 
   return (
     <>
