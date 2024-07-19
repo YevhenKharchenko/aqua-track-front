@@ -12,19 +12,18 @@ import { updateUser } from '../../redux/auth/operations';
 import { useRef, useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 
-const UserSettingsForm = ({ onClose}) => {
+const UserSettingsForm = ({ onClose }) => {
   const dispatch = useDispatch();
 
   const currentUser = useSelector(selectUser);
 
   // avatar change
   const currentAvatar = useSelector(selectUserAvatar);
-  
+
   const fileInputRef = useRef(null);
 
   const [preview, setPreview] = useState(currentAvatar);
-  console.log('Preview URL:', preview);
-
+  // console.log('Preview URL:', preview);
 
   useEffect(() => {
     if (currentAvatar) {
@@ -33,15 +32,15 @@ const UserSettingsForm = ({ onClose}) => {
   }, [currentAvatar]);
 
   const onFileChange = event => {
-  const selectedAvatar = event.target.files[0];
-  console.log('Selected file:', selectedAvatar);
+    const selectedAvatar = event.target.files[0];
+    console.log('Selected file:', selectedAvatar);
 
-  if (selectedAvatar) {
-    const objectURL = URL.createObjectURL(selectedAvatar);
-    console.log('Preview URL:', objectURL);
-    setPreview(objectURL);
-  }
-};
+    if (selectedAvatar) {
+      const objectURL = URL.createObjectURL(selectedAvatar);
+      console.log('Preview URL:', objectURL);
+      setPreview(objectURL);
+    }
+  };
   const {
     register,
     handleSubmit,
@@ -89,10 +88,20 @@ const UserSettingsForm = ({ onClose}) => {
     if (fileInputRef.current.files[0]) {
       data.append('avatar', fileInputRef.current.files[0]);
     }
-    dispatch(updateUser(data)).then(() => {   onClose(); toast.success('We successfully updated your data on server', {
-      autoClose: 5000,
-    }); }).catch (error => { console.log(error); toast.error(`Something went wrong. During sending your data to server. Error: ${error.message}`, { duration: 8000}); });
-    
+    dispatch(updateUser(data))
+      .then(() => {
+        onClose();
+        toast.success('We successfully updated your data on server', {
+          autoClose: 5000,
+        });
+      })
+      .catch(error => {
+        console.log(error);
+        toast.error(
+          `Something went wrong. During sending your data to server. Error: ${error.message}`,
+          { duration: 8000 }
+        );
+      });
   };
 
   return (
@@ -270,9 +279,7 @@ const UserSettingsForm = ({ onClose}) => {
                 step={0.1}
                 {...register('waterNorma')}
               />
-              {errors.waterNorma && (
-                <p className={css.error}>{errors.waterNorma.message}</p>
-              )}
+              {errors.waterNorma && <p className={css.error}>{errors.waterNorma.message}</p>}
             </div>
           </div>
         </div>

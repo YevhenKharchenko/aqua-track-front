@@ -68,9 +68,6 @@ export const loginUser = createAsyncThunk('auth/login', async ({ email, password
 
     setAuthHeader(res.data.accessToken);
 
-   
-    
-
     return res.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -127,6 +124,7 @@ export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) 
 });
 
 export const updateUser = createAsyncThunk('auth/update', async (data, thunkAPI) => {
+  console.log(data);
   try {
     const res = await axios.patch('/users/update', data, {
       headers: {
