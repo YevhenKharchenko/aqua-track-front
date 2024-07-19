@@ -29,7 +29,7 @@ export const fetchWaterPerMonth = createAsyncThunk(
 export const deleteWater = createAsyncThunk('water/delete', async id => {
   console.log(id);
   const response = await axios.delete(`/water/remove/${id}`);
-  console.log(response.data);
+  console.log(response.data._id);
 
   return response.data;
 });
@@ -55,7 +55,7 @@ export const addWater = createAsyncThunk(
         time,
         amount,
       });
-      console.log(response);
+
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

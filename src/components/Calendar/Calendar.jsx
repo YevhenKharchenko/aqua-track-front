@@ -90,19 +90,18 @@ const Calendar = () => {
     return arr.filter(obj => obj.date === targetDate);
   }
   //
+  const localDate = new Date(currentDate).toLocaleDateString();
+  const formattedDateForMonth = formatDateForMonth(localDate);
+  console.log(formattedDateForMonth);
 
   useEffect(() => {
-    const localDate = new Date(currentDate).toLocaleDateString();
-
     // я додав
-    const formattedDateForMonth = formatDateForMonth(localDate);
     dispatch(fetchWaterPerMonth(formattedDateForMonth));
     dispatch(fetchWaterPerDay(formattedDateForMonth));
     //
-
     // код Андрія
     // dispatch(fetchWaterPerMonth(localDate));
-  }, [dispatch, currentDate]);
+  }, [dispatch, formattedDateForMonth]);
 
   const daysArray = Array.from({ length: numberOfDays }, (_, index) => index + 1);
 

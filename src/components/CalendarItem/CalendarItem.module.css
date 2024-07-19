@@ -1,4 +1,4 @@
-.container{
+.container {
   display: flex;
   flex-direction: column;
   width: 28px;
@@ -7,7 +7,7 @@
   justify-content: space-between;
 }
 
-.button{
+.button {
   border: none;
   align-content: center;
   display: flex;
@@ -18,7 +18,7 @@
   border-radius: 50%;
   background-color: #fff;
 
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 700;
   font-size: 14px;
   line-height: 129%;
@@ -27,8 +27,8 @@
   color: #323f47;
 }
 
-.text{
-  font-family: "Poppins", sans-serif;
+.text {
+  font-family: 'Poppins', sans-serif;
   font-weight: 400;
   font-size: 10px;
   line-height: 100%;
@@ -36,30 +36,27 @@
 }
 
 @media only screen and (min-width: 320px) and (max-width: 374px) {
-
 }
 
 @media only screen and (min-width: 375px) {
-
 }
 
 @media only screen and (min-width: 768px) {
-  .container{
-      width: 38px;
-      height: 65px;
+  .container {
+    width: 38px;
+    height: 65px;
   }
-  .button{
-      width: 38px;
-      height: 38px;
-      font-size: 16px;
-      line-height: 150%;
+  .button {
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+    line-height: 150%;
   }
-  .text{
-      font-size: 12px;
-      line-height: 187%;
+  .text {
+    font-size: 12px;
+    line-height: 187%;
   }
 }
 
 @media only screen and (min-width: 1440px) {
-
 }
