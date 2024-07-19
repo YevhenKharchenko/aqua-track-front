@@ -6,6 +6,7 @@
   width: 343px;
   height: 353px;
   margin: 0 auto;
+  position: relative;
 }
 @media (min-resolution: 192dpi) {
   .container {
@@ -37,4 +38,93 @@
   .container {
     background-image: url('../../assets/images/Rectangle19_dt-min-2x.png');
   }
+}
+
+.usersContainer {
+  position: absolute;
+  left: 16px;
+  bottom: 96px;
+  display: flex;
+  align-items: center;
+  border-radius: 30px;
+  padding: 10px 14px 10px 75px;
+  width: 160px;
+  height: 48px;
+  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  cursor: pointer;
+}
+.text {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.17;
+  color: #323f47;
+}
+
+.accentText {
+  color: #9be1a0;
+}
+
+.imageThumb {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.avatar {
+  display: inline-block;
+  width: 26px;
+  height: 28px;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.avatar:nth-child(1) {
+  left: 14px;
+  z-index: 3; /* Highest z-index to appear on top */
+}
+
+.avatar:nth-child(2) {
+  left: 30px; /* Overlapping by half */
+  z-index: 2;
+}
+
+.avatar:nth-child(3) {
+  left: 45px; /* Overlapping by half */
+  z-index: 1;
+}
+
+.userContainer {
+  position: fixed;
+  right: 40%;
+  top: 10%;
+  transform: translate(-50% -50%);
+  width: 300px;
+  height: 300px;
+  padding: 15px;
+  background-color: white;
+  border: 1px solid #ccc;
+  overflow-y: auto;
+  z-index: 999;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.userItem {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 10px;
+}
+
+.userPhoto {
+  border-radius: 50%;
+  border: 2px solid #323f47;
 }
