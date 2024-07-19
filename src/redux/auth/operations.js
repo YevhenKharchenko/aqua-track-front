@@ -79,7 +79,6 @@ export const logoutUser = createAsyncThunk('auth/logout', async (_, thunkAPI) =>
     const res = await axios.post('/users/logout');
     clearAuthHeader();
     localStorage.removeItem('accessToken');
-    console.log('Successfully logout');
     toast.success('You are successfully logged out!', {
       autoClose: 5000,
     });

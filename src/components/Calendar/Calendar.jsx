@@ -96,9 +96,8 @@ const Calendar = () => {
 
     // я додав
     const formattedDateForMonth = formatDateForMonth(localDate);
-    console.log(localDate);
-    console.log(formattedDateForMonth);
     dispatch(fetchWaterPerMonth(formattedDateForMonth));
+    dispatch(fetchWaterPerDay(formattedDateForMonth));
     //
 
     // код Андрія
