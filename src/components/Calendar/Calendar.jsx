@@ -6,6 +6,9 @@ import { selectCurrentDate, selectWaterPerMonth } from '../../redux/selectors';
 import { fetchWaterPerMonth, fetchWaterPerDay } from '../../redux/water/operations';
 import { useAuth } from '../../hooks/useAuth';
 import { setActiveDay } from '../../redux/water/slice';
+import { formatDateToDayMonthYear } from '../../helpers/formatDateToDayMonthYear.js';
+import { getCurrentDateDotFormatted } from '../../helpers/getCurrentDateDotFormatted.js';
+import { isDateAfterToday } from '../../helpers/isDateAfterToday.js';
 
 const daysInMonth = (month, year) => {
   return new Date(year, month + 1, 0).getDate();
@@ -44,35 +47,6 @@ const Calendar = () => {
   const numberOfDays = daysInMonth(month, year);
 
   // я додав, це обов'язкова функція для того щоб була універсальна дата для будь-яких локалізацій браузера
-  function formatDateForMonth(originalDate) {
-    if (!originalDate || typeof originalDate !== 'string') {
-      throw new Error('Invalid date format');
-    }
-
-    let dateParts;
-    if (originalDate.includes('/')) {
-      dateParts = originalDate.split('/');
-      if (dateParts.length !== 3) {
-        throw new Error('Date must be in MM/DD/YYYY format');
-      }
-      const [month, day, year] = dateParts;
-      const paddedMonth = month.padStart(2, '0');
-      const paddedDay = day.padStart(2, '0');
-      return `${paddedDay}-${paddedMonth}-${year}`;
-    } else if (originalDate.includes('.')) {
-      dateParts = originalDate.split('.');
-      if (dateParts.length !== 3) {
-        throw new Error('Date must be in DD.MM.YYYY format');
-      }
-      const [day, month, year] = dateParts;
-      const paddedMonth = month.padStart(2, '0');
-      const paddedDay = day.padStart(2, '0');
-      return `${paddedDay}-${paddedMonth}-${year}`;
-    } else {
-      throw new Error('Date format not recognized. Use MM/DD/YYYY or DD.MM.YYYY');
-    }
-  }
-
   function formatDateForDay(originalDate) {
     const [day, month, year] = originalDate.split('.');
     const formattedDate = `${day}-${month}-${year}`;
@@ -91,8 +65,7 @@ const Calendar = () => {
   }
   //
   const localDate = new Date(currentDate).toLocaleDateString();
-  const formattedDateForMonth = formatDateForMonth(localDate);
-  console.log(formattedDateForMonth);
+  const formattedDateForMonth = formatDateToDayMonthYear(localDate);
 
   useEffect(() => {
     // я додав
@@ -113,8 +86,7 @@ const Calendar = () => {
 
     // я додав
     const formattedDateForDay = formatDateForDay(formattedDay);
-    console.log(formattedDay);
-    console.log(formattedDateForDay);
+
     dispatch(setActiveDay(formattedDay));
     dispatch(fetchWaterPerDay(formattedDateForDay));
     //
@@ -123,6 +95,25 @@ const Calendar = () => {
     // dispatch(setActiveDay(formattedDay));
     // dispatch(fetchWaterPerDay(formattedDay));
   };
+
+  // experimental function
+  function convertSlashDateToDotDate(originalDate) {
+    if (!originalDate || typeof originalDate !== 'string') {
+      throw new Error('Invalid date format');
+    }
+
+    const dateParts = originalDate.split('/');
+    if (dateParts.length !== 3) {
+      throw new Error('Date must be in MM/DD/YYYY format');
+    }
+
+    const [month, day, year] = dateParts;
+    const paddedDay = day.padStart(2, '0');
+    const paddedMonth = month.padStart(2, '0');
+    const formattedDate = `${paddedDay}.${paddedMonth}.${year}`;
+
+    return formattedDate;
+  }
 
   return (
     <div className={css.container}>
@@ -138,6 +129,8 @@ const Calendar = () => {
           const dayData = findObjectByDate(waterPerMonth, formattedDayKey) || [];
           const feasibility = calculateFeasibility(dayData);
 
+          const isDisabled = isDateAfterToday(dayKey);
+
           return (
             <li key={day} className={css.item}>
               <CalendarItem
@@ -147,6 +140,7 @@ const Calendar = () => {
                 feasibility={feasibility}
                 onClick={() => handleDayClick(day)}
                 isActive={dayKey === activeDay}
+                isDisabled={isDisabled}
               />
             </li>
           );

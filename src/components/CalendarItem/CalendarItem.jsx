@@ -2,11 +2,8 @@ import { useDispatch } from 'react-redux';
 import css from './CalendarItem.module.css';
 import { setActiveDay } from '../../redux/water/slice';
 
-const CalendarItem = ({ feasibility = 0, day, isActive, onClick }) => {
+const CalendarItem = ({ feasibility = 0, day, isActive, onClick, isDisabled }) => {
   const dispatch = useDispatch();
-
-  const todayDate = getTodayDateNumber();
-  const isDisabled = day > todayDate;
 
   const containerStyle = {
     backgroundColor: isActive ? '#323f47' : feasibility < 100 ? 'rgba(50, 63, 71, 0.2)' : '#FFFFFF',
@@ -19,11 +16,6 @@ const CalendarItem = ({ feasibility = 0, day, isActive, onClick }) => {
     dispatch(setActiveDay(day));
     onClick();
   };
-
-  function getTodayDateNumber() {
-    const today = new Date();
-    return today.getDate();
-  }
 
   return (
     <div className={css.container}>

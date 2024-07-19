@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { formatDateForAddOrEditWater } from '../../helpers/formatDateForAddOrEditWater.js';
 
 export const fetchWaterPerDay = createAsyncThunk(
   'waterPerDay/fetch',
@@ -19,6 +20,7 @@ export const fetchWaterPerMonth = createAsyncThunk(
   async (localDate, thunkAPI) => {
     try {
       const response = await axios.get(`/water/month/${localDate}`);
+
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -37,16 +39,7 @@ export const deleteWater = createAsyncThunk('water/delete', async id => {
 export const addWater = createAsyncThunk(
   'water/add',
   async ({ localDate, localTime: time, waterValue: amount }, thunkAPI) => {
-    function formatDateForAdd(originalDate) {
-      const [month, day, year] = originalDate.split('.');
-      const paddedMonth = month.padStart(2, '0');
-      const paddedDay = day.padStart(2, '0');
-      const formattedDate = `${paddedMonth}-${paddedDay}-${year}`;
-
-      return formattedDate;
-    }
-
-    const date = formatDateForAdd(localDate);
+    const date = formatDateForAddOrEditWater(localDate);
     console.log(localDate, date, time, amount);
 
     try {
@@ -84,16 +77,9 @@ export const addWater = createAsyncThunk(
 export const changeWater = createAsyncThunk(
   'water/change',
   async ({ localDate, localTime: time, _id, waterValue: amount }, thunkAPI) => {
-    function formatDateForAdd(originalDate) {
-      const [month, day, year] = originalDate.split('.');
-      const paddedMonth = month.padStart(2, '0');
-      const paddedDay = day.padStart(2, '0');
-      const formattedDate = `${paddedMonth}-${paddedDay}-${year}`;
-
-      return formattedDate;
-    }
-    const date = formatDateForAdd(localDate);
+    const date = formatDateForAddOrEditWater(localDate);
     console.log(date, time, amount, _id);
+
     try {
       const response = await axios.patch(`/water/edit/${_id}`, {
         date,
