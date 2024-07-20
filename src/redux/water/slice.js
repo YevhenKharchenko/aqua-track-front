@@ -140,7 +140,7 @@ const waterSlice = createSlice({
         state.loading = false;
         state.error = false;
 
-        const updatedWater = action.payload.water;
+        const updatedWater = action.payload;
         const { _id, date } = updatedWater;
 
         const dailyIndex = state.waters.waterPerDay.waterRecord.findIndex(

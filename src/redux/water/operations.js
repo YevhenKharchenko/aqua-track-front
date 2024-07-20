@@ -40,7 +40,6 @@ export const addWater = createAsyncThunk(
   'water/add',
   async ({ localDate, localTime: time, waterValue: amount }, thunkAPI) => {
     const date = formatDateForAddOrEditWater(localDate);
-    console.log(localDate, date, time, amount);
 
     try {
       const response = await axios.post('/water/add', {
@@ -78,7 +77,7 @@ export const changeWater = createAsyncThunk(
   'water/change',
   async ({ localDate, localTime: time, _id, waterValue: amount }, thunkAPI) => {
     const date = formatDateForAddOrEditWater(localDate);
-    console.log(date, time, amount, _id);
+    console.log(_id);
 
     try {
       const response = await axios.patch(`/water/edit/${_id}`, {
@@ -86,7 +85,7 @@ export const changeWater = createAsyncThunk(
         time,
         amount,
       });
-      console.log(response);
+      console.log(response.data._id);
 
       return response.data;
     } catch (error) {
