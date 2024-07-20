@@ -97,23 +97,27 @@ const Calendar = () => {
   };
 
   // experimental function
-  function convertSlashDateToDotDate(originalDate) {
-    if (!originalDate || typeof originalDate !== 'string') {
-      throw new Error('Invalid date format');
+  function convertDateFormatForActiveDay(dateString) {
+    // Check if the input is already in 'DD.MM.YYYY' format
+    if (/^\d{2}\.\d{2}\.\d{4}$/.test(dateString)) {
+      return dateString;
     }
 
-    const dateParts = originalDate.split('/');
-    if (dateParts.length !== 3) {
-      throw new Error('Date must be in MM/DD/YYYY format');
-    }
+    // Split the input date string by '/'
+    const [month, day, year] = dateString.split('/');
 
-    const [month, day, year] = dateParts;
+    // Pad the month and day with leading zero if necessary
     const paddedDay = day.padStart(2, '0');
     const paddedMonth = month.padStart(2, '0');
+
+    // Construct the new date string in 'DD.MM.YYYY' format
     const formattedDate = `${paddedDay}.${paddedMonth}.${year}`;
 
     return formattedDate;
   }
+
+  const formattedActiveDay = convertDateFormatForActiveDay(activeDay);
+  console.log(formattedActiveDay);
 
   return (
     <div className={css.container}>
@@ -139,7 +143,7 @@ const Calendar = () => {
                 waterData={dayData}
                 feasibility={feasibility}
                 onClick={() => handleDayClick(day)}
-                isActive={dayKey === activeDay}
+                isActive={dayKey === formattedActiveDay}
                 isDisabled={isDisabled}
               />
             </li>
