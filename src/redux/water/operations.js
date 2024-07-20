@@ -1,5 +1,6 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { formatDateForAddOrEditWater } from '../../helpers/formatDateForAddOrEditWater.js';
 
 export const fetchWaterPerDay = createAsyncThunk(
@@ -7,6 +8,14 @@ export const fetchWaterPerDay = createAsyncThunk(
   async (localDate, thunkAPI) => {
     try {
       const response = await axios.get(`/water/day/${localDate}`);
+
+      if (!Array.isArray(response.data)) {
+        toast.error('Water records not found for this day!', {
+          autoClose: 5000,
+        });
+
+        return;
+      }
 
       return response.data;
     } catch (error) {
@@ -20,6 +29,14 @@ export const fetchWaterPerMonth = createAsyncThunk(
   async (localDate, thunkAPI) => {
     try {
       const response = await axios.get(`/water/month/${localDate}`);
+
+      if (!Array.isArray(response.data)) {
+        toast.error('Water records not found for this month!', {
+          autoClose: 5000,
+        });
+
+        return;
+      }
 
       return response.data;
     } catch (error) {

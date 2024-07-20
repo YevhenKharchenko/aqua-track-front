@@ -60,7 +60,7 @@ const Calendar = () => {
     return `${day}-${month}-${year}`;
   }
 
-  function findObjectByDate(arr, targetDate) {
+  function findObjectByDate(arr = [], targetDate) {
     return arr.filter(obj => obj.date === targetDate);
   }
   //
