@@ -54,7 +54,7 @@ function App() {
           path="/reset-password"
           element={<RestrictedRoute component={<ResetPasswordPage />} />}
         />
-        <Route path="/google-auth" component={GoogleAuth} />
+        <Route path="/google-auth" component={<GoogleAuth />} />
         <Route
           path="/tracker"
           element={<PrivateRoute redirectTo="/signin" component={<TrackerPage />} />}
