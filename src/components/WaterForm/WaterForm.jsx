@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { icons as sprite } from '../../assets/icons/index.js';
 import { addWater, changeWater } from '../../redux/water/operations';
 import { selectActiveDay } from '../../redux/selectors';
+import { convertDateFormatForActiveDay } from '../../helpers/convertDateFormatForActiveDay.js';
 import css from './WaterForm.module.css';
 
 const schema = Yup.object().shape({
@@ -61,13 +62,15 @@ export const WaterForm = ({ mode, onClose, water = {} }) => {
 
   const onSubmit = () => {
     const newData = {
-      localDate: activeDay,
+      // localDate: activeDay,
+      localDate: convertDateFormatForActiveDay(activeDay),
       waterValue: watch('waterValue'),
       localTime: watch('localTime'),
     };
 
     try {
       if (mode === 'add') {
+        console.log(newData);
         dispatch(addWater(newData));
         toast.success(`The amount of water consumed has been added successfully.`);
       } else if (mode === 'edit') {

@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import CalendarItem from '../CalendarItem/CalendarItem';
-import css from './Calendar.module.css';
 import { selectCurrentDate, selectWaterPerMonth } from '../../redux/selectors';
 import { fetchWaterPerMonth, fetchWaterPerDay } from '../../redux/water/operations';
 import { useAuth } from '../../hooks/useAuth';
 import { setActiveDay } from '../../redux/water/slice';
 import { formatDateToDayMonthYear } from '../../helpers/formatDateToDayMonthYear.js';
-import { getCurrentDateDotFormatted } from '../../helpers/getCurrentDateDotFormatted.js';
+import { convertDateFormatForActiveDay } from '../../helpers/convertDateFormatForActiveDay.js';
 import { isDateAfterToday } from '../../helpers/isDateAfterToday.js';
+import CalendarItem from '../CalendarItem/CalendarItem';
+import css from './Calendar.module.css';
 
 const daysInMonth = (month, year) => {
   return new Date(year, month + 1, 0).getDate();
@@ -96,28 +96,7 @@ const Calendar = () => {
     // dispatch(fetchWaterPerDay(formattedDay));
   };
 
-  // experimental function
-  function convertDateFormatForActiveDay(dateString) {
-    // Check if the input is already in 'DD.MM.YYYY' format
-    if (/^\d{2}\.\d{2}\.\d{4}$/.test(dateString)) {
-      return dateString;
-    }
-
-    // Split the input date string by '/'
-    const [month, day, year] = dateString.split('/');
-
-    // Pad the month and day with leading zero if necessary
-    const paddedDay = day.padStart(2, '0');
-    const paddedMonth = month.padStart(2, '0');
-
-    // Construct the new date string in 'DD.MM.YYYY' format
-    const formattedDate = `${paddedDay}.${paddedMonth}.${year}`;
-
-    return formattedDate;
-  }
-
   const formattedActiveDay = convertDateFormatForActiveDay(activeDay);
-  console.log(formattedActiveDay);
 
   return (
     <div className={css.container}>
