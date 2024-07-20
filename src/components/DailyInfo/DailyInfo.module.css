@@ -30,6 +30,7 @@
   width: 30px;
   height: 30px;
   fill: #9be1a0;
+  border: none;
 }
 .addBtn:hover .icon {
   stroke: #fff;

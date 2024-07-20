@@ -168,5 +168,12 @@
   </symbol> 
 </defs>
 </svg>
+<symbol id="icon-plus-40x40" viewBox="0 0 30 30">
+<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="30" height="30" rx="15" fill="#9BE1A0"/>
+<path d="M15 9.64288V20.3572" stroke="#323F47" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M9.64258 15H20.3569" stroke="#323F47" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</symbol >
 
 

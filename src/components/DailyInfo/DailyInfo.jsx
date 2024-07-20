@@ -12,7 +12,7 @@ export function DailyInfo() {
         <AddWaterBtn
           section="daily"
           className={css.addBtn}
-          icon={`${sprite}#icon-plus-green-30x30`}
+          icon={`${sprite}#icon-plus-40x40`}
           iconClassName={css.icon}
         />
       </div>
