@@ -14,7 +14,10 @@ const SignInForm = () => {
   const dispatch = useDispatch();
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email('Invalid email format').required('Email is required'),
+    email: Yup.string()
+    .email('Invalid email format')
+    .matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/, 'Invalid email format')
+    .required('Email is required'),
     password: Yup.string()
       .min(8, 'Password must be at least 8 characters')
       .required('Password is required'),
