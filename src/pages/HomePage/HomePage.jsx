@@ -6,7 +6,7 @@ import css from './HomePage.module.css';
 const HomePage = () => {
   return (
     <div className={css.container}>
-      <DocumentTitle>Contacts App - Home</DocumentTitle>
+      <DocumentTitle>Aqua Track - Home Page</DocumentTitle>
       <WelcomeSection />
       <AdvantagesSection />
     </div>
