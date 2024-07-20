@@ -140,8 +140,9 @@ export const updateUser = createAsyncThunk('auth/update', async (data, thunkAPI)
 export const getAllUsers = createAsyncThunk('auth/getAllUsers', async (_, thunkAPI) => {
   try {
     const res = await axios.get('/users/registered-users');
-    console.log('users:', res.data.data.users.length);
-    return res.data.data.users.length;
+    return res.data.data;
+    // console.log('users:', res.data.data.users.length);
+    // return res.data.data.users.length;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }

@@ -3,7 +3,7 @@ import {
   refreshUser,
   loginUser,
   logoutUser,
-  registerUser,
+  // registerUser,
   updateUser,
   getAllUsers,
 } from './operations';
@@ -37,8 +37,8 @@ const userSlice = createSlice({
   },
   extraReducers: builder =>
     builder
-      .addCase(registerUser.fulfilled, (state, action) => {})
-      .addCase(loginUser.pending, (state, action) => {
+      // .addCase(registerUser.fulfilled, (state, action) => {})
+      .addCase(loginUser.pending, state => {
         state.isRefreshing = true;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
@@ -77,11 +77,17 @@ const userSlice = createSlice({
         state.error = action.payload;
       })
 
-      .addCase(getAllUsers.pending, (state, action) => {})
+      .addCase(getAllUsers.pending, state => {
+        state.error = '';
+        state.isRefreshing = true;
+      })
       .addCase(getAllUsers.fulfilled, (state, action) => {
-        state.countUsers = action.payload;
+        // state.countUsers = action.payload;
+        state.isRefreshing = false;
+        state.userInfo = action.payload;
       })
       .addCase(getAllUsers.rejected, (state, action) => {
+        state.isRefreshing = false;
         state.error = action.payload;
       }),
 });
