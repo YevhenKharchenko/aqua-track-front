@@ -127,6 +127,11 @@
   color: #2f2f2f;
 }
 
+.userInput.error {
+  border-color: #ef5050;
+  color: #ef5050;
+}
+
 .dailyNormaWrap {
   margin-bottom: 24px;
 }
@@ -201,8 +206,12 @@
   letter-spacing: -0.01em;
 }
 
+.submitButton:hover, .submitButton:focus {
+  background-color: #87D28D;
+}
+
 .error {
-  color: red;
+  color: #ef5050;
   font-size: 12px;
   font-weight: 400;
 }
