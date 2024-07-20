@@ -10,7 +10,7 @@ import sprite from '../../assets/icons/sprite.svg';
 import css from './WaterMainInfo.module.css';
 
 const WaterMainInfo = () => {
-  const dailyNorma = useSelector(selectWaterNorma);
+  const dailyNorma = useSelector(selectWaterNorma) || 1.5;
 
   return (
     <div className={css.infoContainer}>
