@@ -1,4 +1,4 @@
-import toast from 'react-hot-toast';
+// import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { useModal } from '../../hooks/useModal.jsx';
@@ -64,7 +64,7 @@ const UserPanel = () => {
     <>
       <div className={css.tabletThumb}>
         <h2 className={css.greeting}>
-          Hello, <span className={css.greetName}>{currentUser?.name}</span>
+          Hello, <span className={css.greetName}>{currentUser?.name}!</span>
         </h2>
         <UserBar
           ref={userBarRef}
