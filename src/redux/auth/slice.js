@@ -32,7 +32,7 @@ const userSlice = createSlice({
     // loginUserSuccess: (state, action) => {
     //   state.isLoggedIn = true;
     //   state.token = action.payload;
-    //   state.isRefreshing = false;
+    //   localStorage.setItem('accessToken', action.payload);
     // },
   },
   extraReducers: builder =>
