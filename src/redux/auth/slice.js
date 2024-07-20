@@ -3,7 +3,7 @@ import {
   refreshUser,
   loginUser,
   logoutUser,
-  // registerUser,
+  registerUser,
   updateUser,
   getAllUsers,
 } from './operations';
@@ -37,7 +37,7 @@ const userSlice = createSlice({
   },
   extraReducers: builder =>
     builder
-      // .addCase(registerUser.fulfilled, (state, action) => {})
+      .addCase(registerUser.fulfilled, (state, action) => {})
       .addCase(loginUser.pending, state => {
         state.isRefreshing = true;
       })

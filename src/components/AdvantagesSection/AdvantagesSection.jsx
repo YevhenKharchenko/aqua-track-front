@@ -12,7 +12,7 @@ const AdvantagesSection = () => {
   const loading = useSelector(selectIsRefreshing);
   const error = useSelector(selectUserError);
   const userContainerRef = useRef(null);
-  console.log(allUsers.users);
+  // console.log(allUsers.users);
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => {

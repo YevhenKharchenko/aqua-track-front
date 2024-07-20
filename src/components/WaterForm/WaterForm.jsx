@@ -87,7 +87,7 @@ export const WaterForm = ({ mode, onClose, water = {} }) => {
           type="button"
           className={css.quantityBtn}
           onClick={handleClickMinus}
-          disabled={getValues('waterValue') === 0}
+          disabled={getValues('waterValue') === 50}
         >
           <svg className={css.quantityIcon}>
             <use xlinkHref={`${sprite}#icon-minus-40x40`}></use>
@@ -98,7 +98,12 @@ export const WaterForm = ({ mode, onClose, water = {} }) => {
             ? `${(Math.round((watch('waterValue') / 1000) * 100) / 100).toFixed(2)} L`
             : `${watch('waterValue')} ml`}
         </span>
-        <button type="button" className={css.quantityBtn} onClick={handleClickPlus}>
+        <button
+          type="button"
+          className={css.quantityBtn}
+          onClick={handleClickPlus}
+          disabled={getValues('waterValue') === 1500}
+        >
           <svg className={css.quantityIcon}>
             <use xlinkHref={`${sprite}#icon-plus-40x40`}></use>
           </svg>

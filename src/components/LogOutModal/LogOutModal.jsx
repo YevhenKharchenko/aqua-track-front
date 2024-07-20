@@ -1,5 +1,5 @@
 import css from './LogOutModal.module.css';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../redux/auth/operations';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -11,7 +11,6 @@ const LogOutModal = ({ closeModal }) => {
   const handleLogOut = () => {
     dispatch(logoutUser())
       .then(() => {
-        console.log('logout success');
         closeModal();
         navigate('/');
       })
@@ -19,8 +18,6 @@ const LogOutModal = ({ closeModal }) => {
   };
   const [closeIcon, setCloseIcon] = useState('icon-close-24x24');
   const svgRef = useRef(null);
-
- 
 
   const updateCloseIconSize = () => {
     const svgElement = svgRef.current;
@@ -52,11 +49,9 @@ const LogOutModal = ({ closeModal }) => {
       window.removeEventListener('resize', updateCloseIconSize);
     };
   }, []);
-  
 
   return (
     <div className={css.logOutModalContainer}>
-       
       <button className={css.logOutModalCloseButton} type="button" onClick={closeModal}>
         <svg ref={svgRef}>
           <use xlinkHref={`${sprite}#${closeIcon}`}></use>

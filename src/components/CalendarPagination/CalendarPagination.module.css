@@ -53,6 +53,11 @@
   stroke: var(--color-lightgreen);
 }
 
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .buttonDisabled {
   display: flex;
   justify-content: center;

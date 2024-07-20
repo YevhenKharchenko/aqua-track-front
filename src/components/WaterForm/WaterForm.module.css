@@ -35,6 +35,11 @@
   background-color: transparent;
 }
 
+.quantityBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .quantityIcon {
   width: 40px;
   height: 40px;
