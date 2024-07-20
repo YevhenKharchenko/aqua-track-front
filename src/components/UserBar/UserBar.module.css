@@ -42,7 +42,6 @@
   line-height: 1.29;
   letter-spacing: -0.01em;
   color: #fff;
-  flex-grow: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -55,6 +54,7 @@
 }
 
 .avatar {
+  display: inline-block;
   border-radius: 50%;
 }
 @media only screen and (min-width: 768px) {
@@ -66,8 +66,12 @@
 
 .iconArrowDown,
 .iconArrowUp {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
   fill: #323f47;
   stroke: #fff;
+  flex-shrink: 0;
 }
 
 @media only screen and (min-width: 768px) {
