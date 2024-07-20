@@ -3,6 +3,7 @@ import Logo from '../../components/Logo/Logo';
 import SignUpForm from '../../components/SignUpForm/SignUpForm';
 import css from './SignUpPage.module.css';
 import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection';
+import DocumentTitle from '../../components/DocumentTitle';
 
 const SignUpPage = () => {
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 1440);
@@ -19,13 +20,13 @@ const SignUpPage = () => {
   }, []);
   return (
     <div className={css.wrapper}>
+      <DocumentTitle>Aqua Track - Register</DocumentTitle>
       <div className={css.backdrop}>
-      <Logo />
-      <SignUpForm />
+        <Logo />
+        <SignUpForm />
+      </div>
+      {isWideScreen && <AdvantagesSection />}
     </div>
-    {isWideScreen && <AdvantagesSection />}
-    </div>
-    
   );
 };
 

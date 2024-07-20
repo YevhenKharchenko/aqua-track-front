@@ -123,7 +123,6 @@ export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) 
 });
 
 export const updateUser = createAsyncThunk('auth/update', async (data, thunkAPI) => {
-  console.log(data);
   try {
     const res = await axios.patch('/users/update', data, {
       headers: {

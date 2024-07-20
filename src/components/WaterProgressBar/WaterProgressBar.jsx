@@ -1,21 +1,16 @@
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 
-import { selectWaterPerDayArr, selectWaterNorma } from '../../redux/selectors.js';
+import { selectWaterPerDayArr } from '../../redux/selectors.js';
 import { calculateFeasibility } from '../../helpers/calculateFeasibility.js';
 
 import css from './WaterProgressBar.module.css';
 
-const WaterProgressBar = ({ currentIntake, dailyNorm }) => {
-  //const currentIntake = useSelector(selectWaterPerDay);
-  //const dailyNormValue = useSelector(selectDailyNormValue);
+const WaterProgressBar = ({ dailyNorm }) => {
   const [showDynamicLabel, setShowDynamicLabel] = useState(false);
-  // const progress = (currentIntake / dailyNorm) * 100;
 
   const waterPerDay = useSelector(selectWaterPerDayArr);
-  const dailyNorma = useSelector(selectWaterNorma);
-
-  const feasibility = calculateFeasibility(waterPerDay, dailyNorma);
+  const feasibility = calculateFeasibility(waterPerDay, dailyNorm);
 
   return (
     <div className={css.progressBarContainer}>
