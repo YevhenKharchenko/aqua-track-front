@@ -16,7 +16,7 @@ export const initialState = {
     avatar: null,
     weight: null,
     sportTime: null,
-    waterNorma: 1.5,
+    waterNorma: null,
   },
   token: localStorage.getItem('accessToken') || null,
   isLoggedIn: false,

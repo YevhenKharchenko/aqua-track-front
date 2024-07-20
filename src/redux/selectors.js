@@ -14,7 +14,11 @@ export const selectUserError = state => state.user.error;
 
 export const selectUserAvatar = state => state.user.userInfo.avatar;
 
+export const selectWaterNorma = state => state.user.userInfo.waterNorma;
+
 export const selectWaterPerDay = state => state.water.waters.waterPerDay;
+
+export const selectWaterPerDayArr = state => state.water.waters.waterPerDay.waterRecord;
 
 export const selectWaterPerMonth = state => state.water.waters.waterPerMonth;
 

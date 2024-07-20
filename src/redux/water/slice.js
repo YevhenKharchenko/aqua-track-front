@@ -31,7 +31,7 @@ const waterSlice = createSlice({
     waters: {
       waterPerMonth: [],
       waterPerDay: {
-        waterRate: 1.5,
+        // waterRate: 1.5,
         waterRecord: [],
       },
     },
