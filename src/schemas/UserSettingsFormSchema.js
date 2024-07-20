@@ -9,23 +9,19 @@ export const userSettingsFormSchema = yup.object().shape({
   email: yup
     .string()
     .required('Please enter your email address.')
-    .email('Please enter a valid email address.'),
-  gender: yup
-    .string()
-    .oneOf(['woman', 'man', ''], 'Gender must be either "woman" or "man".')
-    .nullable(),
+    .matches(/^[^@]+@[^@]+\.[^@]+$/, 'Please enter a valid email address.')
+    .email('Invalid email.'),
+  gender: yup.string().oneOf(['woman', 'man', ''], 'Gender must be either "woman" or "man".'),
   weight: yup
     .number()
     .typeError('Weight must be a number.')
     .min(10, 'Weight must be 10 or more.')
-    .max(300, 'Weight must be less than or equal to 300 kg.')
-    .nullable(),
+    .max(300, 'Weight must be less than or equal to 300 kg.'),
   sportTime: yup
     .number()
     .typeError('Active sport time must be a number.')
     .min(0, 'Active sport time must be a positive number.')
-    .max(12, 'Active sport time must be less than or equal to 12 hours.')
-    .nullable(),
+    .max(12, 'Active sport time must be less than or equal to 12 hours.'),
   waterNorma: yup
     .number()
     .typeError('Daily water consumption must be a number.')

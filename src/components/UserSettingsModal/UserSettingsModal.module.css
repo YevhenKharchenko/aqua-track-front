@@ -1,10 +1,11 @@
 .modalWrapper {
   position: absolute;
-  bottom: 0;
+  top: 80px;
+  bottom: 0px;
   min-width: 280px;
   max-width: 343px;
-  max-height: 90vh;
-  overflow-y: auto;
+
+  overflow-y: scroll;
 
   padding: 40px 20px;
   border-radius: 15px;
@@ -73,6 +74,11 @@
     height: 28px;
     top: 40px;
     right: 40px;
+  }
+
+  .closeIcon {
+    width: 28px;
+    height: 28px;
   }
 }
 

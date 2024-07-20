@@ -1,16 +1,17 @@
 import { useForm } from 'react-hook-form';
-import { icons } from '../../assets/icons';
+import { useRef, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { userSettingsFormSchema } from '../../schemas/UserSettingsFormSchema';
+import { icons } from '../../assets/icons';
 
-import avatar from '../../assets/images/avatar.png';
-import css from './UserSettingsForm.module.css';
-import { useDispatch, useSelector } from 'react-redux';
 import { selectUser, selectUserAvatar } from '../../redux/selectors';
 import { updateUser } from '../../redux/auth/operations';
-import { useRef, useState, useEffect } from 'react';
+
 import { toast } from 'react-hot-toast';
+
+import css from './UserSettingsForm.module.css';
 
 const UserSettingsForm = ({ onClose }) => {
   const dispatch = useDispatch();
@@ -33,19 +34,21 @@ const UserSettingsForm = ({ onClose }) => {
 
   const onFileChange = event => {
     const selectedAvatar = event.target.files[0];
-    console.log('Selected file:', selectedAvatar);
+    // console.log('Selected file:', selectedAvatar);
 
     if (selectedAvatar) {
       const objectURL = URL.createObjectURL(selectedAvatar);
-      console.log('Preview URL:', objectURL);
+      // console.log('Preview URL:', objectURL);
       setPreview(objectURL);
     }
   };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
+    trigger,
   } = useForm({
     resolver: yupResolver(userSettingsFormSchema),
     defaultValues: {
@@ -117,7 +120,6 @@ const UserSettingsForm = ({ onClose }) => {
             accept="image/*"
             onChange={onFileChange}
             ref={fileInputRef}
-            // {...register('avatar')}
           />
           <svg className={css.uploadIcon} width="18" height="18">
             <use xlinkHref={`${icons}#icon-upload-18x18`}></use>
@@ -182,11 +184,12 @@ const UserSettingsForm = ({ onClose }) => {
                   Your name
                 </label>
                 <input
-                  className={`${css.userInput} ${css.text}`}
+                  className={`${css.userInput} ${css.text} ${errors.name ? css.error : ''}`}
                   type="text"
                   name="name"
                   id="name"
                   {...register('name')}
+                  onBlur={() => trigger('name')}
                 />
                 {errors.name && <p className={css.error}>{errors.name.message}</p>}
               </div>
@@ -196,11 +199,12 @@ const UserSettingsForm = ({ onClose }) => {
                   Email
                 </label>
                 <input
-                  className={`${css.userInput} ${css.text}`}
-                  type="email"
+                  className={`${css.userInput} ${css.text} ${errors.email ? css.error : ''}`}
+                  type="text"
                   name="email"
                   id="email"
                   {...register('email')}
+                  onBlur={() => trigger('email')}
                 />
                 {errors.email && <p className={css.error}>{errors.email.message}</p>}
               </div>
@@ -243,9 +247,12 @@ const UserSettingsForm = ({ onClose }) => {
                   Your weight in kilograms:
                 </label>
                 <input
-                  className={`${css.userInput} ${css.text}`}
+                  className={`${css.userInput} ${css.text} ${errors.weight ? css.error : ''}`}
                   name="weight"
+                  id="weight"
+                  step={0.1}
                   {...register('weight')}
+                  onBlur={() => trigger('weight')}
                 />
                 {errors.weight && <p className={css.error}>{errors.weight.message}</p>}
               </div>
@@ -255,11 +262,14 @@ const UserSettingsForm = ({ onClose }) => {
                   The time of active participation in sports:
                 </label>
                 <input
-                  className={`${css.userInput} ${css.text}`}
+                  className={`${css.userInput} ${css.text} ${errors.sportTime ? css.error : ''}`}
+                  id="sportTime"
                   name="sportTime"
+                  step={0.1}
                   {...register('sportTime')}
+                  onBlur={() => trigger('sportTime')}
                 />
-                {errors.timeInSports && <p className={css.error}>{errors.timeInSports.message}</p>}
+                {errors.sportTime && <p className={css.error}>{errors.sportTime.message}</p>}
               </div>
             </div>
 
@@ -274,10 +284,12 @@ const UserSettingsForm = ({ onClose }) => {
                 Write down how much water you will drink:
               </label>
               <input
-                className={`${css.userInput} ${css.text}`}
+                className={`${css.userInput} ${css.text} ${errors.waterNorma ? css.error : ''}`}
                 name="waterNorma"
+                id="waterNorma"
                 step={0.1}
                 {...register('waterNorma')}
+                onBlur={() => trigger('waterNorma')}
               />
               {errors.waterNorma && <p className={css.error}>{errors.waterNorma.message}</p>}
             </div>
