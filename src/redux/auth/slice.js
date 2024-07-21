@@ -23,6 +23,7 @@ export const initialState = {
   isRefreshing: false,
   error: '',
   countUsers: null,
+  usersInfo: [],
 };
 
 const userSlice = createSlice({
@@ -90,7 +91,7 @@ const userSlice = createSlice({
       .addCase(getAllUsers.fulfilled, (state, action) => {
         state.isRefreshing = false;
         state.countUsers = action.payload.totalRegisteredUsers;
-        state.userInfo = action.payload;
+        state.usersInfo = action.payload.users;
       })
       .addCase(getAllUsers.rejected, (state, action) => {
         state.isRefreshing = false;
