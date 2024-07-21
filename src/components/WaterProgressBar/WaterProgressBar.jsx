@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
+//import { useState } from 'react';
 
 import { selectWaterPerDayArr } from '../../redux/selectors.js';
 import { calculateFeasibility } from '../../helpers/calculateFeasibility.js';
@@ -7,25 +7,21 @@ import { calculateFeasibility } from '../../helpers/calculateFeasibility.js';
 import css from './WaterProgressBar.module.css';
 
 const WaterProgressBar = ({ dailyNorm }) => {
-  const [showDynamicLabel, setShowDynamicLabel] = useState(false);
-
   const waterPerDay = useSelector(selectWaterPerDayArr);
   const feasibility = calculateFeasibility(waterPerDay, dailyNorm);
+
+  const shouldShowDynamicLabel = feasibility !== 0 && feasibility !== 50 && feasibility !== 100;
 
   return (
     <div className={css.progressBarContainer}>
       <h3 className={css.progressTitle}>Today</h3>
 
-      <div
-        className={css.progressBar}
-        onMouseEnter={() => setShowDynamicLabel(true)}
-        onMouseLeave={() => setShowDynamicLabel(false)}
-      >
+      <div className={css.progressBar}>
         <div className={css.progressBarFill} style={{ width: `${feasibility}%` }}>
           <div className={css.progressIndicator}></div>
         </div>
       </div>
-      {showDynamicLabel && (
+      {shouldShowDynamicLabel && (
         <div className={css.dynamicPercentageLabel} style={{ left: `${feasibility}%` }}>
           {feasibility.toFixed(0)}%
         </div>
