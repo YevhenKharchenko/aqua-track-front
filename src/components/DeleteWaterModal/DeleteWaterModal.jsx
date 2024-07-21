@@ -1,61 +1,29 @@
-import { useState, useEffect } from 'react';
 import css from './DeleteWaterModal.module.css';
-import SharedSVG from '../../shared/components/SharedSVG/SharedSVG.jsx';
-import Button from '../../shared/components/Button/Button.jsx';
+import { useDispatch } from 'react-redux';
+import { ModalBtn } from '../ModalBtn/ModalBtn';
+import { deleteWater } from '../../redux/water/operations';
+import toast from 'react-hot-toast';
 
-const DeleteWaterModal = () => {
-  const [isOpen, setIsOpen] = useState(true);
+export const DeleteWaterModal = ({ onRequestClose, water }) => {
+  const dispatch = useDispatch();
 
-  const handleClose = () => {
-    setIsOpen(false);
-  };
-
-  const handleBackdropClick = event => {
-    if (event.target === event.currentTarget) {
-      handleClose();
+  const onDelete = () => {
+    try {
+      dispatch(deleteWater(water._id));
+      onRequestClose();
+      toast.success('The amount of water consumed has been successfully deleted.');
+    } catch (error) {
+      toast.error('Something went wrong. Please try again.');
     }
   };
 
-  useEffect(() => {
-    const handleKeyDown = event => {
-      if (event.key === 'Escape') {
-        handleClose();
-      }
-    };
-
-    document.addEventListener('keydown', handleKeyDown);
-    document.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
-
-  if (!isOpen) return null;
-
   return (
-    <div className={css.modalBackdrop} onClick={handleBackdropClick}>
-      <div className={css.deleteModal}>
-        <SharedSVG
-          className={css.closeIcon}
-          width="28"
-          height="28"
-          id="icon-cross"
-          onClick={handleClose}
-        />
-        <h3 className={css.modalDeleteTitle}>Delete entry</h3>
-        <p className={css.modalDeleteText}>
-          Are you sure you want to delete the entry?
-        </p>
-        <div className={css.modalButtonContainer}>
-          <Button variant="primary">Delete</Button>
-          <Button variant="default" onClick={handleClose}>
-            Cancel
-          </Button>
-        </div>
+    <>
+      <p className={css.text}>Are you sure you want to delete the entry?</p>
+      <div className={css.box}>
+        <ModalBtn text={'Delete'} onClick={onDelete}></ModalBtn>
+        <ModalBtn text={'Cancel'} onClick={onRequestClose}></ModalBtn>
       </div>
-    </div>
+    </>
   );
 };
-
-export default DeleteWaterModal;

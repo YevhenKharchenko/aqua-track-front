@@ -1,6 +1,56 @@
 .wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 24px;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.addBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  background-color: transparent;
+  color: #323f47;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  margin-right: 0;
+  margin-bottom: 0;
+  align-self: normal;
+  position: relative;
+}
+.icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  z-index: 2;
+}
+.addBtn::before {
+  content: '';
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  position: absolute;
+  left: -7px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #9be1a0;
+  z-index: 1;
+}
+
+.addBtn:hover::before {
+  background-color: #323f47;
+}
+
+.addBtn:hover .icon {
+  stroke: #fff;
+  fill: #323f47;
+}

@@ -1,172 +1,155 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 179px;
+}
+
 .paginationSection {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 24px;
-    position: relative;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.month {
+  color: var(--color-darkblue);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.2px;
+  position: absolute;
+  left: 0;
+}
+
+.chevron {
+  stroke: var(--color-darkblue);
+  stroke-width: 1;
+  transition: var(--animation);
+}
+
+.chevronDisabled {
+  color: rgba(50, 63, 71, 0.2);
+  stroke-width: 1;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  width: 18px;
+  height: 18px;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button:hover .chevron {
+  stroke: var(--color-lightgreen);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.buttonDisabled {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  stroke: #323f47;
+  fill: none;
+}
+
+.chooseMonth {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.span {
+  width: 110px;
+  width: 70px;
+
+  color: var(--color-darkblue);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.14px;
+}
+
+.statisticBtn img {
+  opacity: 0.4;
+  transition: var(--animation);
+}
+
+.statisticBtn img:hover {
+  opacity: 1;
+}
+
+.statisticBtnActive img {
+  opacity: 1;
+}
+
+.statisticBtn img {
+  width: 20px;
+  height: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    width: 205px;
   }
+
+  .text {
+    font-size: 16px;
+    line-height: 150%;
+  }
+
+  .paginationSection {
+    gap: 264px;
+  }
+
   .month {
-    color: var(--color-darkblue);
-    font-size: 20px;
+    font-size: 28px;
     font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: -0.2px;
-    position: absolute;
-    left: 0;
+    line-height: 1.14;
+    letter-spacing: -0.28px;
   }
-  .chevron {
-    stroke: var(--color-darkblue);
-    stroke-width: 1;
-    transition: var(--animation);
-  }
-  .chevronDisabled {
-    color: rgba(50, 63, 71, 0.2);
-    stroke-width: 1;
-  }
-  .button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    outline: none;
-  }
-  .button:focus {
-    outline: none;
-  }
-  .button:hover .chevron {
-    stroke: var(--color-lightgreen);
-  }
-  .buttonDisabled {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: default;
-  }
-  .chooseMonth {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+
   .span {
-    width: 110px;
-    color: var(--color-darkblue);
-    text-align: center;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
-    letter-spacing: -0.14px;
+    letter-spacing: -0.16px;
+    width: 130px;
   }
+
   .statisticBtn img {
-    opacity: 0.4;
-    transition: var(--animation);
+    width: 24px;
+    height: 24px;
   }
-  .statisticBtn img:hover {
-    opacity: 1;
+
+  .text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 129%;
+    letter-spacing: -0.01em;
+    text-align: center;
+    color: #323f47;
   }
-  .statisticBtnActive img {
-    opacity: 1;
-  }
-  
-  @media screen and (max-width: 342.98px) {
-    .span {
-      width: 70px;
-    }
-  }
-  .statisticBtn img {
-    width: 20px;
-    height: 20px;
-  }
-  @media (--tablet-bp) {
-    .paginationSection {
-      gap: 264px;
-    }
-    .month {
-      font-size: 28px;
-      font-weight: 700;
-      line-height: 1.14;
-      letter-spacing: -0.28px;
-    }
-    .span {
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: -0.16px;
-      width: 130px;
-    }
-    .statisticBtn img {
-      width: 24px;
-      height: 24px;
-    }.container{
-      display: flex;
-      align-items: center;
-      width: 179px;
-      justify-content: space-between;
-      height: 20px;
-  }
-  
-  .text{
-      font-family: "Poppins", sans-serif;
-      font-weight: bold;
-      font-size: 14px;
-      line-height: 129%;
-      letter-spacing: -0.01em;
-      text-align: center;
-      color: #323f47;
-  }
-  
-  .button{
-      border: none;
-      background-color: transparent;
-      align-content: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-  }
-  
-  .icons{
-      width: 18px;
-      height: 18px;
-      stroke: black;
-      fill: none;
-      align-items: center;
-      justify-content: center;
-      display: flex;
-  }
-  
-  
-  @media only screen and (min-width: 320px) and (max-width: 374px) {
-  
-  }
-  
-  @media only screen and (min-width: 375px) {
-   
-  }
-  
-  @media only screen and (min-width: 768px) {
-      .container{
-          width: 205px;
-          height: 24px;
-      }
-      
-      .text{
-          font-size: 16px;
-          line-height: 150%;
-      }
-      
-      .button{
-          width: 24px;
-          height: 24px;
-      }
-  }
-  
-  @media only screen and (min-width: 1440px) {
-  
-  }
-    .chooseMonth {
-      gap: 20px;
-    }
-  }
-  @media (--desktop-bp) {
-    .paginationSection {
-      gap: 255px;
-    }
-  }
+}
+
+@media only screen and (min-width: 1440px) {
+}

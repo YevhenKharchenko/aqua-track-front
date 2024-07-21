@@ -4,14 +4,15 @@
   padding-left: 16px;
   padding-top: 24px;
   padding-bottom: 24px;
-  max-width: 343px;
+  width: 343px;
+  margin: 0 auto;
 }
 
 @media (min-width: 768px) {
   .backdrop {
     padding-left: 32px;
     padding-top: 32px;
-    max-width: 704px;
+    width: 704px;
   }
 }
 
@@ -20,9 +21,31 @@
     width: 672px;
     height: 736px;
   }
-  .wrapper {
+  /* .wrapper {
     display: flex;
     gap: 32px;
     justify-content: center;
+  } */
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 1440px;
+  min-height: 100vh;
+  display: flex;;
+  flex-direction: column;
+  /* padding: 16px; */
+  padding-top: 16px;
+  padding-bottom: 16px;
+  margin: 0 auto;
+  gap: 16px;
+}
+
+@media screen and (min-width: 1440px) {
+  .wrapper {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
   }
 }

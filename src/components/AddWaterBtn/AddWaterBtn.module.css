@@ -1,5 +1,5 @@
 .btnContainer {
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -18,28 +18,20 @@
   align-self: flex-end;
 }
 
-.btnContainer:hover {
-  color: #9be1a0;
-}
-
 .icon {
-  stroke: #fff;
+  display: inline-block;
+  stroke: currentColor;
   width: 16px;
   height: 16px;
-}
-
-.icon:active,
-.icon:hover {
-  stroke: #9be1a0;
 }
 
 @media (min-width: 768px) {
   .btnContainer {
     padding: 14px 32px;
-    margin-right: 32px;
-    margin-bottom: 64px;
   }
+
   .icon {
+    display: inline-block;
     width: 24px;
     height: 24px;
   }

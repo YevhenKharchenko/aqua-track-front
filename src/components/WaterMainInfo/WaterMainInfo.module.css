@@ -1,20 +1,27 @@
 .infoContainer {
   display: flex;
   flex-direction: column;
+  height: fit-content;
   width: 343px;
-  height: 415px;
-  flex-shrink: 0;
   border-radius: 30px;
-  background: #9be1a0 url(../../assets/images/transparent_bottle_for_water_1.png) no-repeat center
-    50px/262px 335px;
+  background: #9be1a0 url(../../assets/images/transparent_bottle_for_water_mobile-min.png) no-repeat
+    center 50px/262px 335px;
+  padding: 24px 16px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.addWaterBtn:hover {
+  color: #9be1a0;
 }
 
 @media (min-width: 768px) {
   .infoContainer {
     width: 704px;
     height: 578px;
-    background: #9be1a0 url(../../assets/images/transparent_bottle_for_water_1.png) no-repeat center
-      69px/374px 477px;
+    padding: 32px;
+    background: #9be1a0 url(../../assets/images/transparent_bottle_for_water_tablet-min.png)
+      no-repeat center 69px/374px 477px;
   }
 }
 
@@ -22,7 +29,33 @@
   .infoContainer {
     width: 672px;
     height: 736px;
-    background: #9be1a0 url(../../assets/images/transparent_bottle_for_water_1.png) no-repeat center
-      92px/472px 604px;
+    background: #9be1a0 url(../../assets/images/transparent_bottle_for_water_desktop-min.png)
+      no-repeat center 92px/472px 604px;
+  }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min--moz-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2/1),
+  only screen and (min-device-pixel-ratio: 2),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+  .infoContainer {
+    background-image: url(../../assets/images/transparent_bottle_for_water_mobile_2x-min.png);
+    background-size: 262px 335px;
+  }
+
+  @media (min-width: 768px) {
+    .infoContainer {
+      background-image: url(../../assets/images/transparent_bottle_for_water_tablet_2x-min.png);
+      background-size: 374px 477px;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .infoContainer {
+      background-image: url(../../assets/images/transparent_bottle_for_water_desktop_2x-min.png);
+      background-size: 472px 604px;
+    }
   }
 }

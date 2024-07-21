@@ -1,0 +1,89 @@
+.modalWrapper {
+  position: absolute;
+  top: 80px;
+  bottom: 0px;
+  min-width: 280px;
+  max-width: 343px;
+
+  overflow-y: scroll;
+
+  padding: 40px 20px;
+  border-radius: 15px;
+
+  background-color: #ffffff;
+  scrollbar-width: thin;
+  scrollbar-color: #f0eff4 transparent;
+}
+
+.modalWrapper::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 30px;
+}
+
+.modalWrapper::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.modalWrapper::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+}
+
+.modalTitle {
+  font-weight: 700;
+  font-size: 20px;
+
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+
+  margin-bottom: 20px;
+}
+
+.modalCloseButton {
+  position: absolute;
+  top: 20px;
+  right: 16px;
+
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.closeIcon {
+  stroke: #2f2f2f;
+  fill: #2f2f2f;
+}
+
+@media only screen and (min-width: 768px) {
+  .modalWrapper {
+    min-width: 648px;
+
+    padding: 40px;
+  }
+
+  .modalTitle {
+    font-size: 28px;
+    line-height: 1.14;
+  }
+
+  .modalCloseButton {
+    width: 28px;
+    height: 28px;
+    top: 40px;
+    right: 40px;
+  }
+
+  .closeIcon {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .modalWrapper {
+    min-width: 920px;
+  }
+}

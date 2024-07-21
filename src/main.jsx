@@ -12,10 +12,14 @@ import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <ModalProvider>
-        <App />
-      </ModalProvider>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <ModalProvider>
+          <HelmetProvider>
+            <App />
+          </HelmetProvider>
+        </ModalProvider>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );

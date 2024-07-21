@@ -1,7 +1,7 @@
 .progressBarContainer {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   width: 198px;
   align-self: center;
   margin-bottom: 42px;
@@ -33,19 +33,41 @@
   border-radius: 9px;
   background-color: #9be1a0;
   transition: width 0.4s ease;
+  position: relative;
 }
 
-.progressBarFill::after {
-  content: '';
+.progressIndicator {
   width: 12px;
   height: 12px;
   background-color: #fff;
-  stroke: #9be1a0;
-  stroke-width: 1px;
+  border: 1px solid #9be1a0;
   border-radius: 50%;
   position: absolute;
-  top: -1.5px; /* Adjust to center the circle vertically */
-  right: -6px; /* Adjust to center the circle horizontally */
+  top: 50%;
+  right: 0;
+  transform: translateX(50%) translateY(-50%);
+  transition: left 0.4s ease;
+  cursor: pointer;
+}
+
+.progressIndicator::after {
+  content: attr(data-progress);
+  display: none;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #9be1a0;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  font-size: 10px;
+  color: #323f47;
+}
+
+.progressIndicator:hover::after {
+  display: block;
 }
 
 .percentageList {
@@ -59,10 +81,32 @@
   line-height: 1em;
 }
 
+/* .exactProgressText {
+  color: #9be1a0;
+  font-size: 8px;
+  font-weight: 400;
+  line-height: 1em;
+} */
+
+.dynamicPercentageLabel {
+  position: absolute;
+  bottom: 20px;
+  transform: translateX(-50%);
+  color: #9be1a0;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
 @media (min-width: 768px) {
   .progressBarContainer {
     margin-bottom: 26px;
     width: 295px;
+  }
+  .progressBar {
+    height: 8px;
   }
 }
 

@@ -1,59 +1,63 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate  } from 'react-router-dom';
 import css from './SignUpForm.module.css';
 import sprite from '../../assets/icons/sprite.svg';
+import { useDispatch } from 'react-redux';
+import { registerUser } from '../../redux/auth/operations';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import toast from 'react-hot-toast';
 
 const SignUpForm = () => {
 
-// const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-// const handleSubmit = (e) => {
-//   e.preventDefault();
-//   const form = e.target;
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+    .email('Invalid email format')
+    .matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/, 'Invalid email format')
+    .required('Email is required'),
+    password: Yup.string()
+      .min(8, 'Password must be at least 8 characters')
+      .required('Password is required'),
+    repeatPassword: Yup.string()
+      .oneOf([Yup.ref('password'), null], 'Passwords must match')
+      .required('Repeat password is required'),
+  });
 
-//   dispatch(
-//     register({
-//       email: form.elements.email.value,
-//       password: form.elements.password.value,
-//     })
-//   );
-
-//   form.reset();
-// };
-
-// if (isLoginSuccess) {
-  //     return <Navigate to="/profile" replace />;
-  //   }
-  
-  // fetch('https://your-api-url.com/register', {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  //   body: JSON.stringify(formData),
-  // })
-  // .then(response => response.json())
-  // .then(data => console.log(data))
-  // .catch(error => console.error('Error:', error));
-  //   };
-  
 
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
-  } = useForm();
+    reset, 
+  } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
+
+  const onSubmit = (data) => {
+    dispatch(
+      registerUser({
+        email: data.email,
+        password: data.password,
+      })
+    );
+    toast.success(`Successfully created user!`, {
+      duration: 4000,
+      position: 'top-center',
+      style: {
+        textAlign: 'center',
+        boxShadow: '8px 11px 27px -8px rgba(66, 68, 90, 1)',
+      },
+    });
+    reset();
+    navigate('/signin');
+  };
 
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
-
-  const onSubmit = data => {
-    const { email, password } = data;
-    const formData = { email, password };
-    console.log(formData);
-  };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -68,43 +72,30 @@ const SignUpForm = () => {
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
         <h2 className={css.header}>Sign Up</h2>
 
-        <div className={css.signupFormEmail}>
+        <div className={css.formGroup}>
           <label className={css.label}>Email:</label>
-          <div className={css.signupInputWrap}>
+          <div className={css.inputWrapper}>
             <input
-              className={`${css.signupInput} ${errors.email ? css.error : ''}`}
-              type="email"
+              className={`${css.input} ${errors.email ? css.error : ''}`}
+              type="text"
               name="email"
               placeholder="Enter your email"
-              {...register('email', {
-                required: 'Email is required',
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  message: 'Invalid email address',
-                },
-              })}
+              {...register('email')}
             />
           </div>
           {errors.email && <p className={css.errorMessage}>{errors.email.message}</p>}
         </div>
 
-        <div className={css.signupFormPass}>
+        <div className={css.formGroupPassword}>
           <label className={css.label}>Password:</label>
-          <div className={css.signupInputWrap}>
+          <div className={css.inputWrapper}>
             <input
-              className={`${css.signupInput} ${errors.password ? css.error : ''}`}
+              className={`${css.input} ${errors.password ? css.error : ''}`}
               type={showPassword ? 'text' : 'password'}
               name="password"
               placeholder="Enter your password"
-              {...register('password', {
-                required: 'Password is required',
-                minLength: {
-                  value: 8,
-                  message: 'Password must be at least 8 characters',
-                },
-              })}
+              {...register('password')}
             />
-
             <svg
               className={css.passwordToggleIcon}
               onClick={togglePasswordVisibility}
@@ -117,17 +108,14 @@ const SignUpForm = () => {
           {errors.password && <p className={css.errorMessage}>{errors.password.message}</p>}
         </div>
 
-        <div className={css.signupFormPass}>
+        <div className={css.formGroupPassword}>
           <label className={css.label}>Repeat Password:</label>
-          <div className={css.signupInputWrap}>
+          <div className={css.inputWrapper}>
             <input
-              className={`${css.signupInput} ${errors.repeatPassword ? css.error : ''}`}
+              className={`${css.input} ${errors.repeatPassword ? css.error : ''}`}
               type={showRepeatPassword ? 'text' : 'password'}
               placeholder="Repeat password"
-              {...register('repeatPassword', {
-                required: 'Repeat password is required',
-                validate: value => value === watch('password') || 'Passwords do not match',
-              })}
+              {...register('repeatPassword')}
             />
             <svg
               className={css.passwordToggleIcon}
@@ -143,15 +131,15 @@ const SignUpForm = () => {
           )}
         </div>
 
-        <div className={css.btnWrap}>
-          <button className={css.signupBtn} type="submit">
+        <div className={css.buttonWrapper}>
+          <button className={css.submitButton} type="submit">
             Sign Up
           </button>
         </div>
       </form>
-      <div className={css.textWrap}>
+      <div className={css.textWrapper}>
         Already have an account?
-        <NavLink className={css.linkText} to="/signin">
+        <NavLink className={css.link} to="/signin">
           Sign In
         </NavLink>
       </div>
