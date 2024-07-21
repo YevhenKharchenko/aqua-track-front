@@ -7,7 +7,10 @@ import toast from 'react-hot-toast';
 
 const ForgotPasswordForm = () => {
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email('Invalid email format').required('Email is required'),
+    email: Yup.string()
+    .email('Invalid email format')
+    .matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/, 'Invalid email format')
+    .required('Email is required'),
   });
 
   const {

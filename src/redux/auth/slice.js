@@ -29,17 +29,13 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    // loginUserSuccess: (state, action) => {
-    //   state.isLoggedIn = true;
-    //   state.token = action.payload;
-    //   localStorage.setItem('accessToken', action.payload);
-    // },
-    
-      loginUserSuccess(state, action) {
-        state.token = action.payload.token;
-        state.user = action.payload.user;
-        state.isAuthenticated = true;
-      },
+    loginUserSuccess: (state, action) => {
+      const { token, user } = action.payload;
+      state.isLoggedIn = true;
+      state.token = token;
+      state.userInfo = user;
+      localStorage.setItem('accessToken', token);
+    },
   },
   extraReducers: builder =>
     builder
