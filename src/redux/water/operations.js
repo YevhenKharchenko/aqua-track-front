@@ -30,13 +30,7 @@ export const fetchWaterPerMonth = createAsyncThunk(
     try {
       const response = await axios.get(`/water/month/${localDate}`);
 
-      if (!Array.isArray(response.data)) {
-        toast.error('Water records not found for this month!', {
-          autoClose: 5000,
-        });
-
-        return;
-      }
+      if (!Array.isArray(response.data)) return;
 
       return response.data;
     } catch (error) {

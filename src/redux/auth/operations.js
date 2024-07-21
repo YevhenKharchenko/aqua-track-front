@@ -10,7 +10,7 @@ const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = '';
 };
 
-axios.defaults.baseURL = 'https://project6-back.onrender.com'; //адрес бк
+axios.defaults.baseURL = 'https://project6-back.onrender.com';
 
 axios.interceptors.request.use(config => {
   const token = localStorage.getItem('accessToken');
