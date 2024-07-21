@@ -69,17 +69,25 @@ const waterSlice = createSlice({
         state.loading = false;
         state.error = false;
 
-        const index = state.waters.waterPerDay.waterRecord.findIndex(
-          water => water._id === action.payload._id
-        );
-        state.waters.waterPerDay.waterRecord.splice(index, 1);
+        // код Андрія
+        // const index = state.waters.waterPerDay.waterRecord.findIndex(
+        //   water => water._id === action.payload._id
+        // );
+        // state.waters.waterPerDay.waterRecord.splice(index, 1);
 
-        if (state.waters.waterPerMonth[action.payload.date]) {
-          const index = state.waters.waterPerMonth[action.payload.date].findIndex(
-            water => water._id === action.payload._id
-          );
-          state.waters.waterPerMonth[action.payload.date].splice(index, 1);
-        }
+        // if (state.waters.waterPerMonth[action.payload.date]) {
+        //   const index = state.waters.waterPerMonth[action.payload.date].findIndex(
+        //     water => water._id === action.payload._id
+        //   );
+        //   state.waters.waterPerMonth[action.payload.date].splice(index, 1);
+        // }
+
+        state.waters.waterPerDay.waterRecord = state.waters.waterPerDay.waterRecord.filter(
+          entry => entry._id !== action.payload._id
+        );
+        state.waters.waterPerMonth = state.waters.waterPerMonth.filter(
+          entry => entry._id !== action.payload._id
+        );
       })
       .addCase(deleteWater.rejected, handleError)
       .addCase(addWater.pending, handleLoading)
@@ -105,17 +113,17 @@ const waterSlice = createSlice({
 
         // я додав
         state.waters.waterPerDay.waterRecord.push(action.payload);
-        console.log(action.payload);
+        state.waters.waterPerMonth.push(action.payload);
 
-        const date = new Date(state.currentDate);
-        const month =
-          date.getMonth() < 9 ? '0' + (date.getMonth() + 1) : String(date.getMonth() + 1);
+        // const date = new Date(state.currentDate);
+        // const month =
+        //   date.getMonth() < 9 ? '0' + (date.getMonth() + 1) : String(date.getMonth() + 1);
 
-        if (state.waters.waterPerMonth?.[action.payload.date]) {
-          state.waters.waterPerMonth[action.payload.date].push(action.payload);
-        } else if (action.payload.date.split('.')[1] === month) {
-          state.waters.waterPerMonth[action.payload.date] = [action.payload];
-        }
+        // if (state.waters.waterPerMonth[action.payload.date]) {
+        //   state.waters.waterPerMonth[action.payload.date].push(action.payload);
+        // } else if (action.payload.date.split('.')[1] === month) {
+        //   state.waters.waterPerMonth[action.payload.date] = [action.payload];
+        // }
         //
       })
       .addCase(addWater.rejected, handleError)
@@ -139,26 +147,43 @@ const waterSlice = createSlice({
       .addCase(changeWater.fulfilled, (state, action) => {
         state.loading = false;
         state.error = false;
-
-        const updatedWater = action.payload;
-        const { _id, date } = updatedWater;
-
-        const dailyIndex = state.waters.waterPerDay.waterRecord.findIndex(
-          water => water._id === _id
+        console.log(action.payload);
+        const updatedEntry = action.payload;
+        const index = state.waters.waterPerDay.waterRecord.findIndex(
+          entry => entry._id === updatedEntry._id
         );
 
-        if (dailyIndex !== -1) {
-          state.waters.waterPerDay.waterRecord[dailyIndex] = updatedWater;
+        if (index !== -1) {
+          state.waters.waterPerDay.waterRecord[index] = updatedEntry;
         }
 
-        if (state.waters.waterPerMonth[date]) {
-          const monthlyIndex = state.waters.waterPerMonth[date].findIndex(
-            water => water._id === _id
-          );
-          if (monthlyIndex !== -1) {
-            state.waters.waterPerMonth[date][monthlyIndex] = updatedWater;
-          }
+        const indexMonth = state.waters.waterPerMonth.findIndex(
+          entry => entry._id === updatedEntry._id
+        );
+
+        if (indexMonth !== -1) {
+          state.waters.waterPerMonth[indexMonth] = updatedEntry;
         }
+
+        // const updatedWater = action.payload;
+        // const { _id, date } = updatedWater;
+
+        // const dailyIndex = state.waters.waterPerDay.waterRecord.findIndex(
+        //   water => water._id === _id
+        // );
+
+        // if (dailyIndex !== -1) {
+        //   state.waters.waterPerDay.waterRecord[dailyIndex] = updatedWater;
+        // }
+
+        // if (state.waters.waterPerMonth[date]) {
+        //   const monthlyIndex = state.waters.waterPerMonth[date].findIndex(
+        //     water => water._id === _id
+        //   );
+        //   if (monthlyIndex !== -1) {
+        //     state.waters.waterPerMonth[date][monthlyIndex] = updatedWater;
+        //   }
+        // }
       })
       .addCase(changeWater.rejected, handleError),
 });
