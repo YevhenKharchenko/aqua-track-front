@@ -29,3 +29,5 @@ export const selectError = state => state.water.error;
 export const selectActiveDay = state => state.water.activeDay;
 
 export const selectCurrentDate = state => state.water.currentDate;
+
+export const selectCountUsers = state => state.user.countUsers;

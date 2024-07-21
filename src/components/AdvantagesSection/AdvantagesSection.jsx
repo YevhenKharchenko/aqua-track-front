@@ -5,13 +5,15 @@ import Female from '../../assets/images/Female.png';
 import { useSelector } from 'react-redux';
 import { useState, useEffect, useRef } from 'react';
 import Loader from '../../shared/components/Loader/Loader';
-import { selectUser, selectIsRefreshing } from '../../redux/selectors';
+import { selectUser, selectIsRefreshing, selectCountUsers } from '../../redux/selectors';
 
 const AdvantagesSection = () => {
   const allUsers = useSelector(selectUser);
   const loading = useSelector(selectIsRefreshing);
   const userContainerRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+
+  const countUsers = useSelector(selectCountUsers);
 
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
@@ -43,7 +45,7 @@ const AdvantagesSection = () => {
           <img className={css.avatar} src={Female} width={26} height={28} alt="User's avatar" />
         </div>
         <p className={css.text}>
-          Our <span className={css.accentText}>happy</span> customers
+          Our <span className={css.accentText}>{countUsers} happy</span> customers
         </p>
       </div>
       <div className={css.advantages}>

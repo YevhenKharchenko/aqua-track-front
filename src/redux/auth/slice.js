@@ -34,12 +34,12 @@ const userSlice = createSlice({
     //   state.token = action.payload;
     //   localStorage.setItem('accessToken', action.payload);
     // },
-    
-      loginUserSuccess(state, action) {
-        state.token = action.payload.token;
-        state.user = action.payload.user;
-        state.isAuthenticated = true;
-      },
+
+    loginUserSuccess(state, action) {
+      state.token = action.payload.token;
+      state.user = action.payload.user;
+      state.isAuthenticated = true;
+    },
   },
   extraReducers: builder =>
     builder
@@ -88,8 +88,8 @@ const userSlice = createSlice({
         state.isRefreshing = true;
       })
       .addCase(getAllUsers.fulfilled, (state, action) => {
-        // state.countUsers = action.payload;
         state.isRefreshing = false;
+        state.countUsers = action.payload.totalRegisteredUsers;
         state.userInfo = action.payload;
       })
       .addCase(getAllUsers.rejected, (state, action) => {
