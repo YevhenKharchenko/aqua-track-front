@@ -6,6 +6,14 @@ const UserBarPopover = ({ showPopover, referenceElement, children }) => {
   const [popperElement, setPoperElement] = useState(false);
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
     placement: 'bottom-start', // Adjust placement as needed
+    modifiers: [
+      {
+        name: 'offset',
+        options: {
+          offset: [0, 8], // [skidding, distance]
+        },
+      },
+    ],
   });
 
   if (!showPopover) {

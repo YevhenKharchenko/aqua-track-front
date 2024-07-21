@@ -1,8 +1,9 @@
 .userBarBtn {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  justify-content: center;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
   margin-bottom: 40px;
   border-radius: 30px;
   padding: 6px 12px;
