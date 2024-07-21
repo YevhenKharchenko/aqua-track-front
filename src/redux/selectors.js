@@ -1,8 +1,6 @@
 export const selectIsLoggedIn = state => state.user.isLoggedIn;
 
-export const selectUser = state => {
-  return state.user.userInfo;
-};
+export const selectUser = state => state.user.userInfo;
 
 export const selectIsRefreshing = state => state.user.isRefreshing;
 
@@ -29,3 +27,7 @@ export const selectError = state => state.water.error;
 export const selectActiveDay = state => state.water.activeDay;
 
 export const selectCurrentDate = state => state.water.currentDate;
+
+export const selectCountUsers = state => state.user.countUsers;
+
+export const selectUsers = state => state.user.usersInfo;

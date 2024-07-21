@@ -16,13 +16,14 @@ export const initialState = {
     avatar: null,
     weight: null,
     sportTime: null,
-    waterNorma: null,
+    waterNorma: 1.5,
   },
   token: localStorage.getItem('accessToken') || null,
   isLoggedIn: false,
   isRefreshing: false,
   error: '',
   countUsers: null,
+  usersInfo: [],
 };
 
 const userSlice = createSlice({
@@ -84,9 +85,9 @@ const userSlice = createSlice({
         state.isRefreshing = true;
       })
       .addCase(getAllUsers.fulfilled, (state, action) => {
-        // state.countUsers = action.payload;
         state.isRefreshing = false;
-        state.userInfo = action.payload;
+        state.countUsers = action.payload.totalRegisteredUsers;
+        state.usersInfo = action.payload.users;
       })
       .addCase(getAllUsers.rejected, (state, action) => {
         state.isRefreshing = false;

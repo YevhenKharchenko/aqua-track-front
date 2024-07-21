@@ -6,10 +6,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { icons as sprite } from '../../assets/icons/index.js';
 import { addWater, changeWater } from '../../redux/water/operations';
 import { selectActiveDay } from '../../redux/selectors';
+import { convertDateFormatForActiveDay } from '../../helpers/convertDateFormatForActiveDay.js';
 import css from './WaterForm.module.css';
 
 const schema = Yup.object().shape({
   waterValue: Yup.number()
+    .min(50, 'The value must be at least 50 ml')
+    .max(1500, 'The value must be at most 1500 ml')
     .positive('The number must be a positive value')
     .required('Value is required'),
   localTime: Yup.string()
@@ -49,23 +52,25 @@ export const WaterForm = ({ mode, onClose, water = {} }) => {
 
   const handleClickMinus = () => {
     const current = getValues('waterValue');
-    setValue('waterValue', current - 50);
+    setValue('waterValue', current - 50, 50);
   };
 
   const handleClickPlus = () => {
     const current = getValues('waterValue');
-    setValue('waterValue', current + 50);
+    setValue('waterValue', current + 50, 1500);
   };
 
   const onSubmit = () => {
     const newData = {
-      localDate: activeDay,
+      // localDate: activeDay,
+      localDate: convertDateFormatForActiveDay(activeDay),
       waterValue: watch('waterValue'),
       localTime: watch('localTime'),
     };
 
     try {
       if (mode === 'add') {
+        console.log(newData);
         dispatch(addWater(newData));
         toast.success(`The amount of water consumed has been added successfully.`);
       } else if (mode === 'edit') {
@@ -76,6 +81,15 @@ export const WaterForm = ({ mode, onClose, water = {} }) => {
       onClose();
     } catch (error) {
       toast.error('Failed to save water data. Please try again.');
+    }
+  };
+
+  const handleBlur = () => {
+    const current = getValues('waterValue');
+    if (current < 50) {
+      setValue('waterValue', 50);
+    } else if (current > 1500) {
+      setValue('waterValue', 1500);
     }
   };
 
@@ -141,8 +155,8 @@ export const WaterForm = ({ mode, onClose, water = {} }) => {
                 isNaN(e.target.value) ? 0 : Math.max(Number(e.target.value), 0)
               )
             }
+            onBlur={handleBlur}
           />
-
           {errors.waterValue && <span className={css.error}>{errors.waterValue.message}</span>}
         </div>
       </div>

@@ -83,7 +83,7 @@ const UserPanel = () => {
             data-setting-button
           >
             <svg width="16" height="16">
-              <use className={css.iconSettings} xlinkHref={`${sprite}#icon-settings-16x16`}></use>
+              <use className={css.iconSettings} xlinkHref={`${sprite}#icon-settings`}></use>
             </svg>
             Setting
           </button>

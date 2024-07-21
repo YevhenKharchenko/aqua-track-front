@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection';
 import Logo from '../../components/Logo/Logo';
 import SignInForm from '../../components/SignInForm/SignInForm';
+import DocumentTitle from '../../components/DocumentTitle';
 import css from './SignInPage.module.css';
 
 const SignInPage = () => {
@@ -20,12 +21,12 @@ const SignInPage = () => {
 
   return (
     <div className={css.wrapper}>
+      <DocumentTitle>Aqua Track - Login</DocumentTitle>
       <div className={css.backdrop}>
-       <Logo />
-      <SignInForm /> 
-      
-    </div>
-    {isWideScreen && <AdvantagesSection />}
+        <Logo />
+        <SignInForm />
+      </div>
+      {isWideScreen && <AdvantagesSection />}
     </div>
   );
 };

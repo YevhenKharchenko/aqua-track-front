@@ -35,13 +35,6 @@
   background-color: inherit;
   transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-/* .popoverBtn:hover {
-  color: #2f2f2f;
-}
-
-.popoverBtn:hover .iconSettings {
-  stroke: #2f2f2f;
-} */
 
 .logoutBtn {
   display: flex;
@@ -68,7 +61,6 @@
 }
 
 .iconSettings {
-  fill: #fff;
   stroke: currentColor;
 }
 

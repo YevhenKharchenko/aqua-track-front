@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import CalendarItem from '../CalendarItem/CalendarItem';
-import css from './Calendar.module.css';
 import { selectCurrentDate, selectWaterPerMonth } from '../../redux/selectors';
 import { fetchWaterPerMonth, fetchWaterPerDay } from '../../redux/water/operations';
 import { useAuth } from '../../hooks/useAuth';
 import { setActiveDay } from '../../redux/water/slice';
 import { formatDateToDayMonthYear } from '../../helpers/formatDateToDayMonthYear.js';
-import { getCurrentDateDotFormatted } from '../../helpers/getCurrentDateDotFormatted.js';
+import { convertDateFormatForActiveDay } from '../../helpers/convertDateFormatForActiveDay.js';
 import { isDateAfterToday } from '../../helpers/isDateAfterToday.js';
+import CalendarItem from '../CalendarItem/CalendarItem';
+import css from './Calendar.module.css';
 
 const daysInMonth = (month, year) => {
   return new Date(year, month + 1, 0).getDate();
@@ -60,7 +60,7 @@ const Calendar = () => {
     return `${day}-${month}-${year}`;
   }
 
-  function findObjectByDate(arr, targetDate) {
+  function findObjectByDate(arr = [], targetDate) {
     return arr.filter(obj => obj.date === targetDate);
   }
   //
@@ -96,24 +96,7 @@ const Calendar = () => {
     // dispatch(fetchWaterPerDay(formattedDay));
   };
 
-  // experimental function
-  function convertSlashDateToDotDate(originalDate) {
-    if (!originalDate || typeof originalDate !== 'string') {
-      throw new Error('Invalid date format');
-    }
-
-    const dateParts = originalDate.split('/');
-    if (dateParts.length !== 3) {
-      throw new Error('Date must be in MM/DD/YYYY format');
-    }
-
-    const [month, day, year] = dateParts;
-    const paddedDay = day.padStart(2, '0');
-    const paddedMonth = month.padStart(2, '0');
-    const formattedDate = `${paddedDay}.${paddedMonth}.${year}`;
-
-    return formattedDate;
-  }
+  const formattedActiveDay = convertDateFormatForActiveDay(activeDay);
 
   return (
     <div className={css.container}>
@@ -139,7 +122,7 @@ const Calendar = () => {
                 waterData={dayData}
                 feasibility={feasibility}
                 onClick={() => handleDayClick(day)}
-                isActive={dayKey === activeDay}
+                isActive={dayKey === formattedActiveDay}
                 isDisabled={isDisabled}
               />
             </li>

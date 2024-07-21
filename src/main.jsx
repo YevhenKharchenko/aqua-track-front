@@ -15,7 +15,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
       <BrowserRouter>
         <ModalProvider>
-          <App />
+          <HelmetProvider>
+            <App />
+          </HelmetProvider>
         </ModalProvider>
       </BrowserRouter>
     </Provider>

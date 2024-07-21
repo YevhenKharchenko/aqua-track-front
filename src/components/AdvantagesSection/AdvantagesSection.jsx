@@ -5,15 +5,15 @@ import Female from '../../assets/images/Female.png';
 import { useSelector } from 'react-redux';
 import { useState, useEffect, useRef } from 'react';
 import Loader from '../../shared/components/Loader/Loader';
-import { selectUser, selectIsRefreshing, selectUserError } from '../../redux/selectors';
+import { selectUsers, selectIsRefreshing, selectCountUsers } from '../../redux/selectors';
 
 const AdvantagesSection = () => {
-  const allUsers = useSelector(selectUser);
+  const allUsers = useSelector(selectUsers);
   const loading = useSelector(selectIsRefreshing);
-  const error = useSelector(selectUserError);
   const userContainerRef = useRef(null);
-  // console.log(allUsers.users);
   const [isVisible, setIsVisible] = useState(false);
+
+  const countUsers = useSelector(selectCountUsers);
 
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
@@ -45,10 +45,18 @@ const AdvantagesSection = () => {
           <img className={css.avatar} src={Female} width={26} height={28} alt="User's avatar" />
         </div>
         <p className={css.text}>
-          Our <span className={css.accentText}>happy</span> customers
+          Our <span className={css.accentText}>{countUsers} happy</span> customers
         </p>
       </div>
-      <div className={css.advantages}></div>
+      <div className={css.advantages}>
+        <div className={css.thumb}>
+          <div className={css.habit}>Habit drive</div>
+          <div className={css.statistics}>
+            <a href="#statistics">View statistics</a>
+          </div>
+        </div>
+        <div className={css.personalRate}>Personal rate setting</div>
+      </div>
 
       {isVisible && (
         <div className={css.userContainer} ref={userContainerRef}>
@@ -56,10 +64,9 @@ const AdvantagesSection = () => {
             x
           </span>
           {loading && <Loader />}
-          {error && <p>Error: {error}</p>}
           <ul className={css.userList}>
-            {allUsers.users && allUsers.users.length > 0 ? (
-              allUsers.users.map(user => (
+            {allUsers && allUsers.length > 0 ? (
+              allUsers.map(user => (
                 <li className={css.userItem} key={user._id}>
                   <img
                     className={css.userPhoto}

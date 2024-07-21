@@ -70,8 +70,27 @@
   margin-top: 24px;
 }
 
+.text {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #323f47;
+  margin-top: 16px;
+  margin-bottom: 28px;
+}
+
 @media (min-width: 768px) {
   .box {
     flex-direction: row;
+  }
+
+  .text {
+    font-size: 18px;
+    line-height: 1.33333;
+    margin-top: 24px;
+    margin-bottom: 24px;
   }
 }
