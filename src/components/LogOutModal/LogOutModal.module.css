@@ -10,8 +10,11 @@
   padding: 40px 14px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 28px;
+  width: 344px;
+  height: 267px;
 }
 .logOutModalTextContainer {
   display: flex;
@@ -34,6 +37,8 @@
   background-color: #9be1a0;
   transition: background 250ms cubic-bezier(0.4, 0, 0.2, 1);
   outline: none;
+  width: 304px;
+  height: 46px;
 }
 .logOutButton:hover {
   background-color: #87d28d;
@@ -56,6 +61,8 @@
   background-color: #f0eff4;
   transition: background 250ms cubic-bezier(0.4, 0, 0.2, 1);
   outline: none;
+  width: 304px;
+  height: 46px;
 }
 .logOutModalCancelButton:hover {
   color: #323f47;

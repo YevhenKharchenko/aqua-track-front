@@ -15,6 +15,10 @@ const Loader = () => {
         wrapperStyle={{}}
         wrapperClass=""
       />
+      <p>
+        We are refreshing your session and loading the necessary data. This might take a few
+        moments. Thank you for your patience!
+      </p>
     </div>
   );
 };
