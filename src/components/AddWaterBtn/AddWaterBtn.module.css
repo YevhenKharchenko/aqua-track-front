@@ -28,9 +28,8 @@
 @media (min-width: 768px) {
   .btnContainer {
     padding: 14px 32px;
-    /* margin-right: 32px;
-    margin-bottom: 64px; */
   }
+
   .icon {
     display: inline-block;
     width: 24px;

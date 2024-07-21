@@ -5,14 +5,12 @@ import Female from '../../assets/images/Female.png';
 import { useSelector } from 'react-redux';
 import { useState, useEffect, useRef } from 'react';
 import Loader from '../../shared/components/Loader/Loader';
-import { selectUser, selectIsRefreshing, selectUserError } from '../../redux/selectors';
+import { selectUser, selectIsRefreshing } from '../../redux/selectors';
 
 const AdvantagesSection = () => {
   const allUsers = useSelector(selectUser);
   const loading = useSelector(selectIsRefreshing);
-  const error = useSelector(selectUserError);
   const userContainerRef = useRef(null);
-  // console.log(allUsers.users);
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => {
@@ -48,7 +46,15 @@ const AdvantagesSection = () => {
           Our <span className={css.accentText}>happy</span> customers
         </p>
       </div>
-      <div className={css.advantages}></div>
+      <div className={css.advantages}>
+        <div className={css.thumb}>
+          <div className={css.habit}>Habit drive</div>
+          <div className={css.statistics}>
+            <a href="#statistics">View statistics</a>
+          </div>
+        </div>
+        <div className={css.personalRate}>Personal rate setting</div>
+      </div>
 
       {isVisible && (
         <div className={css.userContainer} ref={userContainerRef}>
@@ -56,7 +62,6 @@ const AdvantagesSection = () => {
             x
           </span>
           {loading && <Loader />}
-          {error && <p>Error: {error}</p>}
           <ul className={css.userList}>
             {allUsers.users && allUsers.users.length > 0 ? (
               allUsers.users.map(user => (
