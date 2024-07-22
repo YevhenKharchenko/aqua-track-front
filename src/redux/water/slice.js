@@ -94,11 +94,17 @@ const waterSlice = createSlice({
         state.loading = false;
         state.error = false;
         console.log(action.payload);
-        console.log(JSON.stringify(state.waters.waterPerDay));
+
         if (!state.waters.waterPerDay.waterRecord) {
           state.waters.waterPerDay.waterRecord = [];
         }
+
         state.waters.waterPerDay.waterRecord.push(action.payload);
+
+        if (!state.waters.waterPerMonth) {
+          state.waters.waterPerMonth = [];
+        }
+
         state.waters.waterPerMonth.push(action.payload);
 
         //код Андрія
