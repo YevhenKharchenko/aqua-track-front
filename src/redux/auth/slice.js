@@ -6,6 +6,7 @@ import {
   registerUser,
   updateUser,
   getAllUsers,
+  loginUserGoogle,
 } from './operations';
 
 function handleRefreshing(state) {
@@ -40,13 +41,13 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    loginUserSuccess: (state, action) => {
-      const { token, user } = action.payload;
-      state.isLoggedIn = true;
-      state.token = token;
-      state.userInfo = user;
-      localStorage.setItem('accessToken', token);
-    },
+    // loginUserSuccess: (state, action) => {
+    //   const { token, user } = action.payload;
+    //   state.isLoggedIn = true;
+    //   state.token = token;
+    //   state.userInfo = user;
+    //   localStorage.setItem('accessToken', token);
+    // },
   },
   extraReducers: builder =>
     builder
@@ -99,6 +100,24 @@ const userSlice = createSlice({
         state.isRefreshing = false;
         state.countUsers = action.payload.totalRegisteredUsers;
         state.usersInfo = action.payload.users;
+      })
+      .addCase(getAllUsers.rejected, (state, action) => {
+        state.isRefreshing = false;
+        state.error = action.payload;
+      })
+      .addCase(loginUserGoogle.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(loginUserGoogle.fulfilled, (state, action) => {
+        state.loading = false;
+        state.isLoggedIn = true;
+        state.token = localStorage.getItem('accessToken');
+        state.userInfo = action.payload;
+      })
+      .addCase(loginUserGoogle.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       }),
   // .addCase(getAllUsers.rejected, handleError),
 });

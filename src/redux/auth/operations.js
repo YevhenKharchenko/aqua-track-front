@@ -145,3 +145,23 @@ export const getAllUsers = createAsyncThunk('auth/getAllUsers', async (_, thunkA
     return thunkAPI.rejectWithValue(error.message);
   }
 });
+
+
+export const loginUserGoogle = createAsyncThunk('auth/loginGoogle', async (_, thunkAPI) => {
+
+  try {
+    const persistedToken = localStorage.getItem('accessToken');
+
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue('Unable to fetch user');
+    }
+
+    setAuthHeader(persistedToken);
+
+    const res = await axios.get('/users/current-user-data');
+
+    return res.data.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
