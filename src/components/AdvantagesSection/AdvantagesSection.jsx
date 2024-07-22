@@ -1,7 +1,17 @@
 import css from './AdvantagesSection.module.css';
-import Male from '../../assets/images/Male.png';
-import Memojis from '../../assets/images/Memojis.png';
-import Female from '../../assets/images/Female.png';
+import ava1 from '../../assets/images/ava1.jpg';
+import ava1_2x from '../../assets/images/ava1_2x.jpg';
+import ava2 from '../../assets/images/ava2.jpg';
+import ava2_2x from '../../assets/images/ava2_2x.jpg';
+import ava3 from '../../assets/images/ava3.jpg';
+import ava3_2x from '../../assets/images/ava3_2x.jpg';
+import ava1tab from '../../assets/images/ava1tab.jpg';
+import ava1tab_2x from '../../assets/images/ava1tab_2x.jpg';
+import ava2tab from '../../assets/images/ava2tab.jpg';
+import ava2tab_2x from '../../assets/images/ava2tab_2x.jpg';
+import ava3tab from '../../assets/images/ava3tab.jpg';
+import ava3tab_2x from '../../assets/images/ava3tab_2x.jpg';
+
 import { useSelector } from 'react-redux';
 import { useState, useEffect, useRef } from 'react';
 import Loader from '../../shared/components/Loader/Loader';
@@ -24,15 +34,24 @@ const AdvantagesSection = () => {
     }
   };
 
+  const handleKeyDown = event => {
+    if (event.key === 'Escape') {
+      setIsVisible(false);
+    }
+  };
+
   useEffect(() => {
     if (isVisible) {
       document.addEventListener('mousedown', handleClickOutside);
+      window.addEventListener('keydown', handleKeyDown);
     } else {
       document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('keydown', handleKeyDown);
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, [isVisible]);
 
@@ -40,9 +59,39 @@ const AdvantagesSection = () => {
     <div className={css.container}>
       <div className={css.usersContainer} onClick={toggleVisibility}>
         <div className={css.imageThumb}>
-          <img className={css.avatar} src={Memojis} width={26} height={28} alt="User's avatar" />
-          <img className={css.avatar} src={Male} width={26} height={28} alt="User's avatar" />
-          <img className={css.avatar} src={Female} width={26} height={28} alt="User's avatar" />
+          <picture className={css.picture1}>
+            <source srcSet={`${ava1tab_2x} 2x, ${ava1tab} 1x`} media="(min-width: 768px)" />
+            <source srcSet={`${ava1_2x} 2x, ${ava1} 1x`} media="(max-width: 767px)" />
+            <img
+              className={`${css.avatar} ${css.avatar1}`}
+              src={ava1tab}
+              width={47}
+              height={47}
+              alt="User's avatar"
+            />
+          </picture>
+          <picture className={css.picture2}>
+            <source srcSet={`${ava2tab_2x} 2x, ${ava2tab} 1x`} media="(min-width: 768px)" />
+            <source srcSet={`${ava2_2x} 2x, ${ava2} 1x`} media="(max-width: 767px)" />
+            <img
+              className={`${css.avatar} ${css.avatar2}`}
+              src={ava2tab}
+              width={47}
+              height={47}
+              alt="User's avatar"
+            />
+          </picture>
+          <picture className={css.picture3}>
+            <source srcSet={`${ava3tab_2x} 2x, ${ava3tab} 1x`} media="(min-width: 768px)" />
+            <source srcSet={`${ava3_2x} 2x, ${ava3} 1x`} media="(max-width: 767px)" />
+            <img
+              className={`${css.avatar} ${css.avatar3}`}
+              src={ava3tab}
+              width={47}
+              height={47}
+              alt="User's avatar"
+            />
+          </picture>
         </div>
         <p className={css.text}>
           Our <span className={css.accentText}>{countUsers} happy</span> customers
