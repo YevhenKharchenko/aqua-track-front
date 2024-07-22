@@ -31,6 +31,7 @@ const getTimeFormat = () => {
 };
 
 export const WaterForm = ({ mode, onClose, water = {} }) => {
+  console.log(water);
   const {
     register,
     handleSubmit,
@@ -42,7 +43,7 @@ export const WaterForm = ({ mode, onClose, water = {} }) => {
     mode: 'onChange',
     resolver: yupResolver(schema),
     defaultValues: {
-      waterValue: Number(water.waterValue) || 50,
+      waterValue: Number(water.amount) || 50,
       localTime: water.localTime || getTimeFormat(),
     },
   });

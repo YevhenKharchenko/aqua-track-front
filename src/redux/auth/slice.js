@@ -73,12 +73,13 @@ const userSlice = createSlice({
         state.token = null;
         localStorage.removeItem('accessToken');
       })
-      .addCase(logoutUser.rejected, state => {
+      .addCase(logoutUser.rejected, (state, action) => {
         state.isRefreshing = false;
         state.isLoggedIn = false;
         state.userInfo = null;
         state.token = null;
         localStorage.removeItem('accessToken');
+        state.error = action.payload;
       })
       // .addCase(refreshUser.pending, handleRefreshing)
       .addCase(refreshUser.fulfilled, (state, action) => {
@@ -105,7 +106,7 @@ const userSlice = createSlice({
         state.isRefreshing = false;
         state.error = action.payload;
       })
-      .addCase(loginUserGoogle.pending, (state) => {
+      .addCase(loginUserGoogle.pending, state => {
         state.loading = true;
         state.error = null;
       })
