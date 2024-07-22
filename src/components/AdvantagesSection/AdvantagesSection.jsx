@@ -6,8 +6,11 @@ import { useSelector } from 'react-redux';
 import { useState, useEffect, useRef } from 'react';
 import Loader from '../../shared/components/Loader/Loader';
 import { selectUsers, selectIsRefreshing, selectCountUsers } from '../../redux/selectors';
+import { useTranslation } from 'react-i18next'; // імпорт хука useTranslation
+import '../../i18n'; // Імпортуйте конфігурацію i18next
 
 const AdvantagesSection = () => {
+  const { t } = useTranslation(); // використання хука для перекладу
   const allUsers = useSelector(selectUsers);
   const loading = useSelector(selectIsRefreshing);
   const userContainerRef = useRef(null);
@@ -45,17 +48,19 @@ const AdvantagesSection = () => {
           <img className={css.avatar} src={Female} width={26} height={28} alt="User's avatar" />
         </div>
         <p className={css.text}>
-          Our <span className={css.accentText}>{countUsers} happy</span> customers
+          {t('our')} <span className={css.accentText}>{countUsers} {t('happy')} </span> {t('customers')}   
         </p>
+
       </div>
       <div className={css.advantages}>
         <div className={css.thumb}>
-          <div className={css.habit}>Habit drive</div>
+          <div className={css.habit}>{t('habit drive')}</div>
           <div className={css.statistics}>
-            <a href="#statistics">View statistics</a>
+            <a href="#statistics">{t('view statistics')} 
+</a>
           </div>
         </div>
-        <div className={css.personalRate}>Personal rate setting</div>
+        <div className={css.personalRate}>{t('personal rate setting')}</div>
       </div>
 
       {isVisible && (
@@ -79,7 +84,7 @@ const AdvantagesSection = () => {
                 </li>
               ))
             ) : (
-              <li>No users found</li>
+              <li>{t('no users found')}</li>
             )}
           </ul>
         </div>

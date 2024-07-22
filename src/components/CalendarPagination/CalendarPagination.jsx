@@ -5,23 +5,26 @@ import { isMonthNameCurrent } from '../../helpers/isMonthNameCurrent.js';
 import css from './CalendarPagination.module.css';
 import { icons as sprite } from '../../assets/icons/index.js';
 import { formatDateToDayMonthYear } from '../../helpers/formatDateToDayMonthYear.js';
+import { useTranslation } from 'react-i18next'; // Імпортуйте хук useTranslation для перекладу
 
-const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
+// Перекладені назви місяців
+  const months = [
+    t('January'),
+    t('February'),
+    t('March'),
+    t('April'),
+    t('May'),
+    t('June'),
+    t('July'),
+    t('August'),
+    t('September'),
+    t('October'),
+    t('November'),
+    t('December'),
+  ];
 
 const CalendarPagination = () => {
+  const { t } = useTranslation(); // Використовуйте хук useTranslation для отримання функції перекладу
   const dispatch = useDispatch();
   const currentDate = useSelector(state => state.water.currentDate);
 
