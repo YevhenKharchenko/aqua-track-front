@@ -32,11 +32,4 @@
   "enter the value of the water used:": "Введіть значення спожитої води:",
   "save": "Зберегти",
   "today": "Сьогодні",
-  "invalid email format": "Неправильний формат електронної пошти",
-  "email is required": "Електронну пошту потрібно вказати",
-  "check your email for the password reset link.": "Перевірте вашу електронну пошту для посилання на скидання пароля.",
-  "failed to send reset password email. please try again later.": "Не вдалося надіслати електронний лист для скидання пароля. Будь ласка, спробуйте пізніше.",
-  "account recovery": "Відновлення акаунта",
-  "enter your email:": "Введіть вашу електронну пошту:",
-  "send": "Надіслати"
   }

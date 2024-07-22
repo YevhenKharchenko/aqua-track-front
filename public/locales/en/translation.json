@@ -31,15 +31,5 @@
   "recording time:": "Recording time:",
   "enter the value of the water used:": "Enter the value of the water used:",
   "save": "Save",
-  "today": "Today",
-  "invalid email format": "Invalid email format",
-  "email is required": "Email is required",
-  "check your email for the password reset link.": "Check your email for the password reset link.",
-  "failed to send reset password email. please try again later.": "Failed to send reset password email. Please try again later.",
-  "account recovery": "Account recovery",
-  "enter your email:": "Enter your email:",
-  "send": "Send",
-  "Setting": "Setting",
-  "Log out": "Log out",
-  "Delete": "Delete"
+  "today": "Today"
   }

@@ -1,4 +1,4 @@
- import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import Modal from 'react-modal';
 import css from './GlobalModal.module.css';
 import { icons as sprite } from '../../assets/icons/index.js';
@@ -11,6 +11,10 @@ const customStyles = {
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(47, 47, 47, 0.6)',
+    zIndex: 100,
+  },
+  content: {
+    zIndex: 100,
   },
 };
 
@@ -51,7 +55,7 @@ export const GlobalModal = ({ isOpen, onRequestClose, children, title }) => {
 
         <button className={css.closeBtn} onClick={onRequestClose}>
           <svg className={css.closeIcon}>
-            <use xlinkHref={${sprite}#icon-close-24x24}></use>
+            <use xlinkHref={`${sprite}#icon-close-24x24`}></use>
           </svg>
         </button>
       </div>
