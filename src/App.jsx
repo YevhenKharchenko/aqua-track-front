@@ -3,12 +3,10 @@ import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { lazy, useEffect } from 'react';
 import { refreshUser, getAllUsers } from './redux/auth/operations.js';
-import { selectIsRefreshing, selectIsLoggedIn } from './redux/selectors.js';
-import { loginUserSuccess } from './redux/auth/slice.js';
+import { selectIsRefreshing } from './redux/selectors.js';
 import { RestrictedRoute } from './components/RestrictedRoute';
 import { PrivateRoute } from './components/PrivateRoute';
 
-import Loader from './shared/components/Loader/Loader.jsx';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
 import GoogleAuth from './components/GoogleAuth/GoogleAuth.jsx';
