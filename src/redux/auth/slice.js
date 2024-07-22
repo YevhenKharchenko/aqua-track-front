@@ -55,7 +55,7 @@ const userSlice = createSlice({
         state.isRefreshing = false;
       })
       // .addCase(registerUser.rejected, handleError)
-      // .addCase(loginUser.pending, handleRefreshing)
+      .addCase(loginUser.pending, handleRefreshing)
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isRefreshing = false;
         state.token = action.payload.data.accessToken;
@@ -63,8 +63,8 @@ const userSlice = createSlice({
 
         localStorage.setItem('accessToken', action.payload.data.accessToken);
       })
-      // .addCase(loginUser.rejected, handleError)
-      // .addCase(logoutUser.pending, handleRefreshing)
+      .addCase(loginUser.rejected, handleError)
+      .addCase(logoutUser.pending, handleRefreshing)
       .addCase(logoutUser.fulfilled, state => {
         state.isRefreshing = false;
         state.isLoggedIn = false;
@@ -85,15 +85,15 @@ const userSlice = createSlice({
         state.isLoggedIn = true;
         state.userInfo = action.payload;
       })
-      // .addCase(refreshUser.rejected, handleError)
-      // .addCase(updateUser.pending, handleRefreshing)
+      .addCase(refreshUser.rejected, handleError)
+      .addCase(updateUser.pending, handleRefreshing)
       .addCase(updateUser.fulfilled, (state, action) => {
         state.isRefreshing = false;
         state.isLoggedIn = true;
-        state.userInfo = action.payload;
+        state.userInfo = action.payload.data;
         state.error = false;
       })
-      // .addCase(updateUser.rejected, handleError)
+      .addCase(updateUser.rejected, handleError)
       // .addCase(getAllUsers.pending, handleRefreshing)
       .addCase(getAllUsers.fulfilled, (state, action) => {
         state.isRefreshing = false;
