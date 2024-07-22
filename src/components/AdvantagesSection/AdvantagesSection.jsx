@@ -99,12 +99,12 @@ const AdvantagesSection = () => {
       </div>
       <div className={css.advantages}>
         <div className={css.thumb}>
-          <div className={css.habit}>Habit drive</div>
+          <p className={css.habit}>Habit drive</p>
           <div className={css.statistics}>
-            <a href="#statistics">View statistics</a>
+            <p>View statistics</p>
           </div>
         </div>
-        <div className={css.personalRate}>Personal rate setting</div>
+        <p className={css.personalRate}>Personal rate setting</p>
       </div>
 
       {isVisible && (

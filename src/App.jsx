@@ -12,6 +12,7 @@ import Loader from './shared/components/Loader/Loader.jsx';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
 import GoogleAuth from './components/GoogleAuth/GoogleAuth.jsx';
+import HourglassLoader from './shared/components/HourglassLoader/HourglassLoader.jsx';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage.jsx'));
 const SignUpPage = lazy(() => import('./pages/SignUpPage/SignUpPage.jsx'));
@@ -30,7 +31,7 @@ function App() {
   }, [dispatch]);
 
   return isRefreshing ? (
-    <Loader />
+    <HourglassLoader />
   ) : (
     <SharedLayout>
       <Toaster position="top-center" />

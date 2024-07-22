@@ -6,8 +6,8 @@ const Loader = () => {
     <div className={css.loader}>
       <RotatingLines
         visible={true}
-        height="96"
-        width="96"
+        height="56"
+        width="56"
         color="grey"
         strokeWidth="5"
         animationDuration="0.75"
@@ -15,10 +15,6 @@ const Loader = () => {
         wrapperStyle={{}}
         wrapperClass=""
       />
-      <p>
-        We are refreshing your session and loading the necessary data. This might take a few
-        moments. Thank you for your patience!
-      </p>
     </div>
   );
 };
