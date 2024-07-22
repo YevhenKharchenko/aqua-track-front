@@ -116,7 +116,7 @@ const SignInForm = () => {
         </div>
       </form>
 
-      <GoogleAuth />
+      <GoogleAuth  linkText={"Sign in with Google"}/>
 
       <div className={css.textWrapper}>
         Don’t have an account?
