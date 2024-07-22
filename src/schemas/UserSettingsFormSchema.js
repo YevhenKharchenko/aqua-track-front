@@ -15,7 +15,7 @@ export const userSettingsFormSchema = yup.object().shape({
   weight: yup
     .number()
     .typeError('Weight must be a number.')
-    .min(10, 'Weight must be 10 or more.')
+    .min(0, 'Weight must be a positive number.')
     .max(180, 'Weight must be less than or equal to 180 kg.'),
   sportTime: yup
     .number()
