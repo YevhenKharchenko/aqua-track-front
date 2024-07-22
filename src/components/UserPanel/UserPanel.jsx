@@ -9,8 +9,12 @@ import UserBarPopover from '../UserBarPopover/UserBarPopover';
 import LogOutModal from '../LogOutModal/LogOutModal.jsx';
 import UserSettingsModal from '../UserSettingsModal/UserSettingsModal.jsx';
 import css from './UserPanel.module.css';
+import { useTranslation } from 'react-i18next'; // хук useTranslation
+
 
 const UserPanel = () => {
+      const { t } = useTranslation(); //  хук для отримання функції перекладу
+
   const currentUser = useSelector(selectUser);
 
   const [showPopover, setShowPopover] = useState(false);
@@ -64,7 +68,7 @@ const UserPanel = () => {
     <>
       <div className={css.tabletThumb}>
         <h2 className={css.greeting}>
-          Hello, <span className={css.greetName}>{currentUser?.name}!</span>
+          {t('hello')}, <span className={css.greetName}>{currentUser?.name}!</span>
         </h2>
         <UserBar
           ref={userBarRef}
@@ -85,13 +89,13 @@ const UserPanel = () => {
             <svg width="16" height="16">
               <use className={css.iconSettings} xlinkHref={`${sprite}#icon-settings`}></use>
             </svg>
-            Setting
+            {t('setting')}
           </button>
           <button className={css.logoutBtn} type="button" onClick={openModal} data-logout-button>
             <svg width="16" height="16">
               <use className={css.iconLogout} xlinkHref={`${sprite}#icon-log-out-16x16`}></use>
             </svg>
-            Log out
+            {t('log out')}
           </button>
         </UserBarPopover>
       )}

@@ -7,8 +7,10 @@ import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next'; // хук useTranslation
 
 const ResetPasswordForm = () => {
+  const { t } = useTranslation(); //  хук для отримання функції перекладу
   const navigate = useNavigate();
   const location = useLocation();
   const [token, setToken] = useState('');
@@ -92,10 +94,10 @@ const ResetPasswordForm = () => {
   return (
     <div className={css.container}>
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-        <h2 className={css.header}>Change the password</h2>
+        <h2 className={css.header}>{t('сhange the password')}</h2>
 
         <div className={css.formGroupPassword}>
-          <label className={css.label}>New password:</label>
+          <label className={css.label}>{t('new password')}:</label>
           <div className={css.inputWrapper}>
             <input
               className={`${css.input} ${errors.password ? css.error : ''}`}
@@ -117,7 +119,7 @@ const ResetPasswordForm = () => {
         </div>
 
         <div className={css.formGroupPassword}>
-          <label className={css.label}>Repeat new password:</label>
+          <label className={css.label}>{t('repeat new password')}:</label>
           <div className={css.inputWrapper}>
             <input
               className={`${css.input} ${errors.repeatPassword ? css.error : ''}`}
@@ -142,7 +144,7 @@ const ResetPasswordForm = () => {
 
         <div className={css.buttonWrapper}>
           <button className={css.submitButton} type="submit">
-            Change
+            {t('change')}
           </button>
         </div>
       </form>

@@ -4,8 +4,10 @@ import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next'; // Імпортуйте хук useTranslation
 
 const ForgotPasswordForm = () => {
+  const { t } = useTranslation(); // Використовуйте хук для отримання функції перекладу
   const validationSchema = Yup.object().shape({
     email: Yup.string()
     .email('Invalid email format')
@@ -56,10 +58,10 @@ const ForgotPasswordForm = () => {
   return (
     <div className={css.container}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h2 className={css.header}>Account recovery</h2>
+        <h2 className={css.header}>{t('account recovery')}</h2>
 
         <div className={css.formGroup}>
-          <label className={css.label}>Enter your email:</label>
+          <label className={css.label}>{t('enter your email')}:</label>
           <div className={css.inputWrapper}>
             <input
               className={`${css.input} ${errors.email ? css.error : ''}`}
@@ -73,7 +75,7 @@ const ForgotPasswordForm = () => {
         </div>
         <div className={css.buttonWrapper}>
           <button className={css.submitButton} type="submit">
-            Send
+            {t('send')}
           </button>
         </div>
       </form>

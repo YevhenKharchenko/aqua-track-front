@@ -2,6 +2,8 @@ import { useModal } from '../hooks/useModal.jsx';
 import { useCallback } from 'react';
 import { icons as sprite } from '../assets/icons/index.js';
 import ExampleWaterModal from './ExampleWaterModal/ExampleWaterModal.jsx';
+import { useTranslation } from 'react-i18next'; // хук useTranslation
+
 
 const ModalContent = ({ onClose }) => {
   return (
@@ -15,6 +17,8 @@ const ModalContent = ({ onClose }) => {
 };
 
 const ExampleModal = () => {
+  const { t } = useTranslation(); //  хук для отримання функції перекладу
+
   const setModal = useModal();
 
   const closeModal = useCallback(() => {
@@ -28,7 +32,7 @@ const ExampleModal = () => {
   return (
     <>
       <button type="button" onClick={openModal}>
-        Open Modal
+        {t('open modal')}
         <svg style={{ width: 20, height: 20 }}>
           <use xlinkHref={`${sprite}#icon-arrow-right-18x18`}></use>
         </svg>

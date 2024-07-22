@@ -4,8 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../redux/auth/operations';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { icons as sprite } from '../../assets/icons/index.js';
+import { useTranslation } from 'react-i18next'; // хук useTranslation
+
 
 const LogOutModal = ({ closeModal }) => {
+  const { t } = useTranslation(); //  хук для отримання функції перекладу
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogOut = () => {
@@ -59,15 +62,15 @@ const LogOutModal = ({ closeModal }) => {
       </button>
 
       <div className={css.logOutModalTextContainer}>
-        <h4 className={css.logOutModalTitle}>Log out</h4>
-        <p className={css.logOutModalText}> Do you really want to leave?</p>
+        <h4 className={css.logOutModalTitle}>{t('log out')}</h4>
+        <p className={css.logOutModalText}>{t('do you really want to leave')}?</p>
       </div>
       <div className={css.logOutModalButtonsContainer}>
         <button className={css.logOutButton} onClick={handleLogOut}>
-          Log out
+          {t('log out')}
         </button>
         <button className={css.logOutModalCancelButton} onClick={closeModal}>
-          Cancel
+          {t('cancel')}
         </button>
       </div>
     </div>

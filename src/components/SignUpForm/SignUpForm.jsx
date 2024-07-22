@@ -8,8 +8,13 @@ import { registerUser } from '../../redux/auth/operations';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next'; // хук useTranslation
+
 
 const SignUpForm = () => {
+
+    const { t } = useTranslation(); //  хук для отримання функції перекладу
+
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -70,10 +75,10 @@ const SignUpForm = () => {
   return (
     <div className={css.container}>
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-        <h2 className={css.header}>Sign Up</h2>
+        <h2 className={css.header}>{t('sign up')}</h2>
 
         <div className={css.formGroup}>
-          <label className={css.label}>Email:</label>
+          <label className={css.label}>{t('email')}:</label>
           <div className={css.inputWrapper}>
             <input
               className={`${css.input} ${errors.email ? css.error : ''}`}
@@ -87,7 +92,7 @@ const SignUpForm = () => {
         </div>
 
         <div className={css.formGroupPassword}>
-          <label className={css.label}>Password:</label>
+          <label className={css.label}>{t('password')}:</label>
           <div className={css.inputWrapper}>
             <input
               className={`${css.input} ${errors.password ? css.error : ''}`}
@@ -109,7 +114,7 @@ const SignUpForm = () => {
         </div>
 
         <div className={css.formGroupPassword}>
-          <label className={css.label}>Repeat Password:</label>
+          <label className={css.label}>{t('repeat password')}:</label>
           <div className={css.inputWrapper}>
             <input
               className={`${css.input} ${errors.repeatPassword ? css.error : ''}`}
@@ -133,14 +138,14 @@ const SignUpForm = () => {
 
         <div className={css.buttonWrapper}>
           <button className={css.submitButton} type="submit">
-            Sign Up
+            {t('sign up')}
           </button>
         </div>
       </form>
       <div className={css.textWrapper}>
-        Already have an account?
+        {t('already have an account')}
         <NavLink className={css.link} to="/signin">
-          Sign In
+          {t('sign in')}
         </NavLink>
       </div>
     </div>

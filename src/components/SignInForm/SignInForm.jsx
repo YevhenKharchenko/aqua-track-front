@@ -9,8 +9,11 @@ import { loginUser } from '../../redux/auth/operations';
 import { useDispatch } from 'react-redux';
 import GoogleAuth from '../GoogleAuth/GoogleAuth';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next'; // хук useTranslation
+
 
 const SignInForm = () => {
+  const { t } = useTranslation(); //  хук для отримання функції перекладу
   const dispatch = useDispatch();
 
   const validationSchema = Yup.object().shape({
@@ -71,10 +74,10 @@ const SignInForm = () => {
   return (
     <div className={css.container}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h2 className={css.header}>Sign In</h2>
+        <h2 className={css.header}>{t('sign in')}</h2>
 
         <div className={css.formGroup}>
-          <label className={css.label}>Email:</label>
+          <label className={css.label}>{t('email')}:</label>
           <div className={css.inputWrapper}>
             <input
               className={`${css.input} ${errors.email ? css.error : ''}`}
@@ -88,7 +91,7 @@ const SignInForm = () => {
         </div>
 
         <div className={css.formGroupPassword}>
-          <label className={css.label}>Password:</label>
+          <label className={css.label}>{t('password')}:</label>
           <div className={css.inputWrapper}>
             <input
               className={`${css.input} ${errors.password ? css.error : ''}`}
@@ -111,7 +114,7 @@ const SignInForm = () => {
 
         <div className={css.buttonWrapper}>
           <button className={css.submitButton} type="submit">
-            Sign In
+            {t('sign in')}
           </button>
         </div>
       </form>
@@ -119,13 +122,13 @@ const SignInForm = () => {
       <GoogleAuth />
 
       <div className={css.textWrapper}>
-        Don’t have an account?
+        {t('don’t have an account')}?
         <NavLink className={css.link} to="/signup">
-          Sign Up
+          {t('sign up')}
         </NavLink>
       </div>
       <NavLink className={css.forgotPassword} to="/request-reset">
-        Forgot password?
+        {t('forgot password')}?
       </NavLink>
     </div>
   );

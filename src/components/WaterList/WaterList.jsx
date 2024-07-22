@@ -2,10 +2,14 @@ import { useWater } from '../../hooks/useWater.jsx';
 import { WaterItem } from '../WaterItem/WaterItem.jsx';
 import css from './WaterList.module.css';
 import { useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next'; // хук useTranslation
+
 
 export function WaterList() {
   // я додав
   const { waterRecord = [] } = useWater().waterPerDay;
+          const { t } = useTranslation(); //  хук для отримання функції перекладу
+
   //
 
   // код Андрія
@@ -39,7 +43,7 @@ export function WaterList() {
         })
       ) : (
         <div className={css.empty}>
-          <p>🌵It is as dry as a desert</p>
+          <p>🌵{t('it is as dry as a desert')}</p>
         </div>
       )}
     </div>

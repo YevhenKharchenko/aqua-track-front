@@ -6,7 +6,11 @@ import { calculateFeasibility } from '../../helpers/calculateFeasibility.js';
 
 import css from './WaterProgressBar.module.css';
 
+import { useTranslation } from 'react-i18next'; // хук useTranslation
+
 const WaterProgressBar = ({ dailyNorm }) => {
+    const { t } = useTranslation(); //  хук для отримання функції перекладу
+
   const waterPerDay = useSelector(selectWaterPerDayArr);
   const feasibility = calculateFeasibility(waterPerDay, dailyNorm);
 
@@ -14,7 +18,7 @@ const WaterProgressBar = ({ dailyNorm }) => {
 
   return (
     <div className={css.progressBarContainer}>
-      <h3 className={css.progressTitle}>Today</h3>
+      <h3 className={css.progressTitle}>{t('today')}</h3>
 
       <div className={css.progressBar}>
         <div className={css.progressBarFill} style={{ width: `${feasibility}%` }}>

@@ -13,7 +13,12 @@ import { toast } from 'react-hot-toast';
 
 import css from './UserSettingsForm.module.css';
 
+import { useTranslation } from 'react-i18next'; // хук useTranslation
+
+
 const UserSettingsForm = ({ onClose }) => {
+  const { t } = useTranslation(); //  хук для отримання функції перекладу
+
   const dispatch = useDispatch();
 
   const currentUser = useSelector(selectUser);
@@ -124,13 +129,13 @@ const UserSettingsForm = ({ onClose }) => {
           <svg className={css.uploadIcon} width="18" height="18">
             <use xlinkHref={`${icons}#icon-upload-18x18`}></use>
           </svg>
-          <p className={css.text}>Upload a photo</p>
+          <p className={css.text}>{t('upload a photo')}</p>
         </label>
       </div>
 
       <div className={css.formWrapper}>
         <div>
-          <h2 className={css.inputTitle}>Your gender identity</h2>
+          <h2 className={css.inputTitle}>{t('your gender identity')}</h2>
 
           <div className={css.genderInputWrapper}>
             <label className={`${css.genderButton} ${css.text}`}>
@@ -151,7 +156,7 @@ const UserSettingsForm = ({ onClose }) => {
                   ></use>
                 </svg>
               </span>
-              Woman
+              {t('woman')}
             </label>
             <label className={`${css.genderButton} ${css.text}`}>
               <input
@@ -171,7 +176,7 @@ const UserSettingsForm = ({ onClose }) => {
                   ></use>
                 </svg>
               </span>
-              Man
+              {t('man')}
             </label>
           </div>
         </div>
@@ -181,7 +186,7 @@ const UserSettingsForm = ({ onClose }) => {
             <div className={css.userInroWrapper}>
               <div className={css.userInputWrap}>
                 <label className={css.userInputTitle} htmlFor="name">
-                  Your name
+                  {t('your name')}
                 </label>
                 <input
                   className={`${css.userInput} ${css.text} ${errors.name ? css.error : ''}`}
@@ -196,7 +201,7 @@ const UserSettingsForm = ({ onClose }) => {
 
               <div className={css.userInputWrap}>
                 <label className={css.userInputTitle} htmlFor="email">
-                  Email
+                  {t('email')}
                 </label>
                 <input
                   className={`${css.userInput} ${css.text} ${errors.email ? css.error : ''}`}
@@ -211,30 +216,27 @@ const UserSettingsForm = ({ onClose }) => {
             </div>
 
             <div className={css.dailyNormaWrap}>
-              <h2 className={css.inputTitle}>My daily norma</h2>
+              <h2 className={css.inputTitle}>{t('my daily norma')}</h2>
               <div className={css.flexWrap}>
                 <div className={css.dailyInfoWrapper}>
-                  <h3 className={css.text}>For woman:</h3>
+                  <h3 className={css.text}>{t('for woman')}:</h3>
                   <p className={css.accentText}>V=(M*0,03) + (T*0,4)</p>
                 </div>
                 <div className={css.dailyInfoWrapper}>
-                  <h3 className={css.text}>For man:</h3>
+                  <h3 className={css.text}>{t('for man')}:</h3>
                   <p className={css.accentText}>V=(M*0,04) + (T*0,6)</p>
                 </div>
               </div>
 
               <div>
                 <p className={`${css.text} ${css.waterInfo}`}>
-                  <span className={css.accentText}>*</span> V is the volume of the water norm in
-                  liters per day, M is your body weight, T is the time of active sports, or another
-                  type of activity commensurate in terms of loads (in the absence of these, you must
-                  set 0)
+                  <span className={css.accentText}>*</span> {t('v')} 
                 </p>
                 <div className={css.activityWrapper}>
                   <svg className={css.iconImportant} width="18" height="18">
                     <use xlinkHref={`${icons}#icon-important`}></use>
                   </svg>
-                  <p className={css.text}>Active time in hours</p>
+                  <p className={css.text}>{t('active time in hours')}</p>
                 </div>
               </div>
             </div>
@@ -244,7 +246,7 @@ const UserSettingsForm = ({ onClose }) => {
             <div className={css.waterNormaWrapper}>
               <div className={css.userInputWrap}>
                 <label className={`${css.text} ${css.calcInput}`} htmlFor="weight">
-                  Your weight in kilograms:
+                  {t('your weight in kilograms')}:
                 </label>
                 <input
                   className={`${css.userInput} ${css.text} ${errors.weight ? css.error : ''}`}
@@ -259,7 +261,7 @@ const UserSettingsForm = ({ onClose }) => {
 
               <div className={css.userInputWrap}>
                 <label className={`${css.text} ${css.calcInput}`} htmlFor="sportTime">
-                  The time of active participation in sports:
+                  {t('the time of active participation in sports')}:
                 </label>
                 <input
                   className={`${css.userInput} ${css.text} ${errors.sportTime ? css.error : ''}`}
@@ -275,13 +277,13 @@ const UserSettingsForm = ({ onClose }) => {
 
             <div className={css.amountWrap}>
               <h3 className={css.text}>
-                The required amount of water in liters per day:{' '}
+                {t('the required amount of water in liters per day')}:{' '}
                 <span className={css.accentTextL}>{calcWaterByGender(gender)} L</span>
               </h3>
             </div>
             <div className={css.userInputWrap}>
               <label className={css.userInputTitle} htmlFor="waterNorma">
-                Write down how much water you will drink:
+                {t('write down how much water you will drink')}:
               </label>
               <input
                 className={`${css.userInput} ${css.text} ${errors.waterNorma ? css.error : ''}`}
@@ -298,7 +300,7 @@ const UserSettingsForm = ({ onClose }) => {
       </div>
 
       <button className={`${css.submitButton} ${css.text}`} type="submit">
-        Save
+        {t('save')}
       </button>
     </form>
   );

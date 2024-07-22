@@ -8,6 +8,8 @@ import { addWater, changeWater } from '../../redux/water/operations';
 import { selectActiveDay } from '../../redux/selectors';
 import { convertDateFormatForActiveDay } from '../../helpers/convertDateFormatForActiveDay.js';
 import css from './WaterForm.module.css';
+import { useTranslation } from 'react-i18next'; // хук useTranslation
+
 
 const schema = Yup.object().shape({
   waterValue: Yup.number()
@@ -31,6 +33,8 @@ const getTimeFormat = () => {
 };
 
 export const WaterForm = ({ mode, onClose, water = {} }) => {
+        const { t } = useTranslation(); //  хук для отримання функції перекладу
+
   const {
     register,
     handleSubmit,
@@ -95,7 +99,7 @@ export const WaterForm = ({ mode, onClose, water = {} }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <p className={css.amountTitle}>Amount of water:</p>
+      <p className={css.amountTitle}> {t('amount of water')}:</p>
       <div className={css.amountWrap}>
         <button
           type="button"
@@ -127,7 +131,7 @@ export const WaterForm = ({ mode, onClose, water = {} }) => {
       <div>
         <div className={css.valueDiv}>
           <label className={css.labelTime} htmlFor="localTime">
-            Recording time:
+            {t('recording time')}:
           </label>
           <input
             {...register('localTime')}
@@ -141,7 +145,7 @@ export const WaterForm = ({ mode, onClose, water = {} }) => {
 
         <div className={css.valueDiv}>
           <label className={css.labelVal} htmlFor="value">
-            Enter the value of the water used:
+            {t('enter the value of the water used')}:
           </label>
           <input
             {...register('waterValue')}
@@ -161,7 +165,7 @@ export const WaterForm = ({ mode, onClose, water = {} }) => {
         </div>
       </div>
       <button className={css.btnSubmit} type="submit">
-        Save
+        {t('save')}
       </button>
     </form>
   );

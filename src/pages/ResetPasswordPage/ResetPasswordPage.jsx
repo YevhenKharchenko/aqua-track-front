@@ -4,8 +4,12 @@ import ResetPasswordForm from '../../components/ResetPasswordForm/ResetPasswordF
 import DocumentTitle from '../../components/DocumentTitle';
 import css from './ResetPasswordPage.module.css';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next'; // хук useTranslation
+
 
 const ResetPasswordPage = () => {
+        const { t } = useTranslation(); //  хук для отримання функції перекладу
+
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 1440);
 
   useEffect(() => {
@@ -21,7 +25,7 @@ const ResetPasswordPage = () => {
 
   return (
     <div className={css.wrapper}>
-      <DocumentTitle>Aqua Track - Reset Password</DocumentTitle>
+      <DocumentTitle>{t('aqua track - reset password')}</DocumentTitle>
       <div className={css.backdrop}>
         <Logo />
         <ResetPasswordForm />
