@@ -1,4 +1,7 @@
 .loader {
-  padding-top: 100px;
   text-align: center;
+  width: 50px;
+  padding-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
 }

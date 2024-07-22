@@ -3,24 +3,21 @@ import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { lazy, useEffect } from 'react';
 import { refreshUser, getAllUsers } from './redux/auth/operations.js';
-import { selectIsRefreshing, selectIsLoggedIn } from './redux/selectors.js';
-import { loginUserSuccess } from './redux/auth/slice.js';
+import { selectIsRefreshing } from './redux/selectors.js';
 import { RestrictedRoute } from './components/RestrictedRoute';
 import { PrivateRoute } from './components/PrivateRoute';
-import Loader from './shared/components/Loader/Loader.jsx';
+
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
-import HomePage from './pages/HomePage/HomePage.jsx';
-import SignUpPage from './pages/SignUpPage/SignUpPage.jsx';
-import SignInPage from './pages/SignInPage/SignInPage.jsx';
 import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
-import ExampleModal from './components/ExampleModal.jsx';
-
-import LogOutModal from './components/LogOutModal/LogOutModal.jsx';
-
-import TrackerPage from './pages/TrackerPage/TrackerPage.jsx';
-import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPasswordPage.jsx';
-import ResetPasswordPage from './pages/ResetPasswordPage/ResetPasswordPage.jsx';
 import GoogleAuth from './components/GoogleAuth/GoogleAuth.jsx';
+import HourglassLoader from './shared/components/HourglassLoader/HourglassLoader.jsx';
+
+const HomePage = lazy(() => import('./pages/HomePage/HomePage.jsx'));
+const SignUpPage = lazy(() => import('./pages/SignUpPage/SignUpPage.jsx'));
+const SignInPage = lazy(() => import('./pages/SignInPage/SignInPage.jsx'));
+const TrackerPage = lazy(() => import('./pages/TrackerPage/TrackerPage.jsx'));
+const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage/ForgotPasswordPage.jsx'));
+const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage/ResetPasswordPage.jsx'));
 
 function App() {
   const dispatch = useDispatch();
@@ -32,7 +29,7 @@ function App() {
   }, [dispatch]);
 
   return isRefreshing ? (
-    <Loader />
+    <HourglassLoader />
   ) : (
     <SharedLayout>
       <Toaster position="top-center" />
@@ -48,18 +45,17 @@ function App() {
         />
         <Route
           path="/request-reset"
-          element={<RestrictedRoute component={<ForgotPasswordPage />} />}
+          element={<RestrictedRoute redirectTo="/tracker" component={<ForgotPasswordPage />} />}
         />
         <Route
           path="/reset-password"
-          element={<RestrictedRoute component={<ResetPasswordPage />} />}
+          element={<RestrictedRoute redirectTo="/tracker" component={<ResetPasswordPage />} />}
         />
         <Route path="/google-auth" element={<GoogleAuth />} />
         <Route
           path="/tracker"
           element={<PrivateRoute redirectTo="/signin" component={<TrackerPage />} />}
         />
-        <Route path="/modal" element={<ExampleModal />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </SharedLayout>

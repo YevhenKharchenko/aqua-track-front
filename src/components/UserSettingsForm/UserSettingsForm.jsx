@@ -20,11 +20,9 @@ const UserSettingsForm = ({ onClose }) => {
 
   // avatar change
   const currentAvatar = useSelector(selectUserAvatar);
-
   const fileInputRef = useRef(null);
 
   const [preview, setPreview] = useState(currentAvatar);
-  // console.log('Preview URL:', preview);
 
   useEffect(() => {
     if (currentAvatar) {
@@ -34,33 +32,37 @@ const UserSettingsForm = ({ onClose }) => {
 
   const onFileChange = event => {
     const selectedAvatar = event.target.files[0];
-    // console.log('Selected file:', selectedAvatar);
+    
 
     if (selectedAvatar) {
       const objectURL = URL.createObjectURL(selectedAvatar);
-      // console.log('Preview URL:', objectURL);
       setPreview(objectURL);
     }
   };
 
+
+  //react-hook-form
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
     trigger,
+    setValue,
+    getValues,
   } = useForm({
     resolver: yupResolver(userSettingsFormSchema),
     defaultValues: {
       name: currentUser?.name,
       email: currentUser?.email,
       gender: currentUser?.gender || 'woman',
-      weight: currentUser?.weight || '',
-      sportTime: currentUser?.sportTime || '',
+      weight: currentUser?.weight || 0,
+      sportTime: currentUser?.sportTime || 0,
       waterNorma: currentUser?.waterNorma || '',
     },
   });
 
+  //calculate water
   const gender = watch('gender');
 
   const calcWaterByGender = gender => {
@@ -80,6 +82,14 @@ const UserSettingsForm = ({ onClose }) => {
     return 0;
   };
 
+
+  //on focus change
+  const handleBlur = (field, defaultValue) => {
+    if (getValues(field) === '') {
+      setValue(field, defaultValue);
+    }
+  };
+
   const onSubmit = async formData => {
     const data = new FormData();
     data.append('name', formData.name);
@@ -88,9 +98,11 @@ const UserSettingsForm = ({ onClose }) => {
     data.append('weight', formData.weight);
     data.append('sportTime', formData.sportTime);
     data.append('waterNorma', formData.waterNorma);
+
     if (fileInputRef.current.files[0]) {
       data.append('avatar', fileInputRef.current.files[0]);
     }
+
     dispatch(updateUser(data))
       .then(() => {
         onClose();
@@ -98,6 +110,7 @@ const UserSettingsForm = ({ onClose }) => {
           autoClose: 5000,
         });
       })
+
       .catch(error => {
         console.log(error);
         toast.error(
@@ -252,7 +265,7 @@ const UserSettingsForm = ({ onClose }) => {
                   id="weight"
                   step={0.1}
                   {...register('weight')}
-                  onBlur={() => trigger('weight')}
+                  onBlur={() => handleBlur('weight', 0)}
                 />
                 {errors.weight && <p className={css.error}>{errors.weight.message}</p>}
               </div>
@@ -267,7 +280,7 @@ const UserSettingsForm = ({ onClose }) => {
                   name="sportTime"
                   step={0.1}
                   {...register('sportTime')}
-                  onBlur={() => trigger('sportTime')}
+                  onBlur={() => handleBlur('sportTime', 0)}
                 />
                 {errors.sportTime && <p className={css.error}>{errors.sportTime.message}</p>}
               </div>
