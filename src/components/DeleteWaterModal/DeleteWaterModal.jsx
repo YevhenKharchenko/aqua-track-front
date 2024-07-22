@@ -3,26 +3,28 @@ import { useDispatch } from 'react-redux';
 import { ModalBtn } from '../ModalBtn/ModalBtn';
 import { deleteWater } from '../../redux/water/operations';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next'; // хук useTranslation
 
 export const DeleteWaterModal = ({ onRequestClose, water }) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation(); //  хук для отримання функції перекладу
 
   const onDelete = () => {
     try {
       dispatch(deleteWater(water._id));
       onRequestClose();
-      toast.success('The amount of water consumed has been successfully deleted.');
+      toast.success(t('water deleted successfully')); 
     } catch (error) {
-      toast.error('Something went wrong. Please try again.');
+      toast.error(t('something went wrong')); 
     }
   };
 
   return (
     <>
-      <p className={css.text}>Are you sure you want to delete the entry?</p>
+      <p className={css.text}>{t('confirm delete entry')}</p> 
       <div className={css.box}>
-        <ModalBtn text={'Delete'} onClick={onDelete}></ModalBtn>
-        <ModalBtn text={'Cancel'} onClick={onRequestClose}></ModalBtn>
+        <ModalBtn text={t('delete')} onClick={onDelete} /> 
+        <ModalBtn text={t('cancel')} onClick={onRequestClose} /> 
       </div>
     </>
   );

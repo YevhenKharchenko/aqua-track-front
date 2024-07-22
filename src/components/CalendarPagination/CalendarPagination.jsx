@@ -6,8 +6,14 @@ import css from './CalendarPagination.module.css';
 import { icons as sprite } from '../../assets/icons/index.js';
 import { formatDateToDayMonthYear } from '../../helpers/formatDateToDayMonthYear.js';
 import { useTranslation } from 'react-i18next'; // Імпортуйте хук useTranslation для перекладу
+import '../../i18n'; // Імпортуйте конфігурацію i18next
 
-// Перекладені назви місяців
+const CalendarPagination = () => {
+  const { t } = useTranslation(); // Використовуйте хук useTranslation для отримання функції перекладу
+  const dispatch = useDispatch();
+  const currentDate = useSelector(state => state.water.currentDate);
+
+  // Перекладені назви місяців повинні бути визначені всередині компонента
   const months = [
     t('January'),
     t('February'),
@@ -22,11 +28,6 @@ import { useTranslation } from 'react-i18next'; // Імпортуйте хук u
     t('November'),
     t('December'),
   ];
-
-const CalendarPagination = () => {
-  const { t } = useTranslation(); // Використовуйте хук useTranslation для отримання функції перекладу
-  const dispatch = useDispatch();
-  const currentDate = useSelector(state => state.water.currentDate);
 
   const fetchAndSetDate = newDate => {
     const localDate = newDate.toLocaleDateString();
@@ -51,6 +52,8 @@ const CalendarPagination = () => {
     newDate.setMonth(newDate.getMonth() + 1);
     fetchAndSetDate(newDate);
   };
+
+  // Використовуйте перекладені місяці для перевірки, чи є поточний місяць доступним
   const isDisabled = isMonthNameCurrent(months[new Date(currentDate).getMonth()]);
 
   return (

@@ -31,7 +31,7 @@ const ForgotPasswordForm = () => {
         }
       );
       if (response.status === 200) {
-        toast.success(`Check your email for the password reset link.`, {
+        toast.success(Check your email for the password reset link., {
           duration: 4000,
           position: 'top-center',
           style: {
@@ -41,7 +41,7 @@ const ForgotPasswordForm = () => {
         });
       }
     } catch (error) {
-      toast.error(`Failed to send reset password email. Please try again later.`, {
+      toast.error(Failed to send reset password email. Please try again later., {
         duration: 4000,
         position: 'top-center',
         style: {
@@ -62,7 +62,7 @@ const ForgotPasswordForm = () => {
           <label className={css.label}>Enter your email:</label>
           <div className={css.inputWrapper}>
             <input
-              className={`${css.input} ${errors.email ? css.error : ''}`}
+              className={${css.input} ${errors.email ? css.error : ''}}
               type="text"
               name="email"
               placeholder="Enter your email"

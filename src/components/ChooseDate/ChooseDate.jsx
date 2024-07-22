@@ -1,8 +1,10 @@
 import { useSelector } from "react-redux";
 import css from "./ChooseDate.module.css";
 import { selectActiveDay } from "../../redux/selectors";
+import { useTranslation } from 'react-i18next'; // Імпортуйте хук useTranslation для перекладу
 
 export function ChooseDate() {
+  const { t } = useTranslation(); // Використовуйте хук useTranslation для отримання функції перекладу
   const currentDate = useSelector(selectActiveDay);
 
   const localDate = () => {
@@ -12,33 +14,36 @@ export function ChooseDate() {
     return date.toLocaleDateString().replace(/\//g, ".");
   };
 
-  let day;
+  let day = currentDate.replace(/\//g, ".").split(".")[0];
 
-  day = currentDate.replace(/\//g, ".").split(".")[0];
-
+  // Перекладені назви місяців
   const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    t('January'),
+    t('February'),
+    t('March'),
+    t('April'),
+    t('May'),
+    t('June'),
+    t('July'),
+    t('August'),
+    t('September'),
+    t('October'),
+    t('November'),
+    t('December'),
   ];
 
-  const month = months[+currentDate.split("/")[1] - 1];
-  const monthDot = months[+currentDate.split(".")[1] - 1];
+  // Отримання назви місяця за допомогою перекладу
+  const monthIndex = +currentDate.split("/")[1] - 1;
+  const monthDotIndex = +currentDate.split(".")[1] - 1;
+
+  const month = months[monthIndex];
+  const monthDot = months[monthDotIndex];
 
   return (
     <>
       <h2 className={css.date}>
         {currentDate.replace(/\//g, ".") === localDate()
-          ? "Today"
+          ? t('today') // Текст "Today"
           : `${day}, ${month || monthDot}`}
       </h2>
     </>

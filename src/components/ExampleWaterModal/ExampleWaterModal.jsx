@@ -2,12 +2,15 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { icons as sprite } from '../../assets/icons/index.js';
 import css from './ExampleWaterModal.module.css';
+import { useTranslation } from 'react-i18next'; // Імпортуйте хук useTranslation
 
 const ExampleWaterModal = ({ onClose, operation }) => {
+  const { t } = useTranslation(); // Використовуйте хук для отримання функції перекладу
   const [value, setValue] = useState(50);
 
-  const modalTitle = operation === 'add' ? 'Add water' : 'Edit the entered amount of water';
-  const modalText = operation === 'add' ? 'Choose a value:' : 'Correct entered data:';
+  // Замість жорстко закодованих рядків використовуйте t для перекладу
+  const modalTitle = operation === 'add' ? t('Add water') : t('Edit the entered amount of water');
+  const modalText = operation === 'add' ? t('Choose a value:') : t('Correct entered data:');
 
   const currentTime = new Date().toTimeString().slice(0, 5);
 
@@ -33,7 +36,7 @@ const ExampleWaterModal = ({ onClose, operation }) => {
       </button>
       <h2 className={css.modalTitle}>{modalTitle}</h2>
       <p className={css.modalText}>{modalText}</p>
-      <p className={css.amountText}>Amount of water:</p>
+      <p className={css.amountText}>{t('Amount of water:')}</p>
       <div className={css.quantityWrapper}>
         <button className={css.quantityBtn} type="button" onClick={handleDecrement}>
           <svg className={css.quantityIcon}>
@@ -51,15 +54,15 @@ const ExampleWaterModal = ({ onClose, operation }) => {
       </div>
       <form className={css.waterForm}>
         <label htmlFor="" className={css.labelTime}>
-          Recording time:
+          {t('Recording time:')}
           <input className={css.modalInput} type="text" defaultValue={currentTime} />
         </label>
         <label htmlFor="" className={css.labelValue}>
-          Enter the value of the water used:
+          {t('Enter the value of the water used:')}
           <input className={css.modalInput} type="text" value={value} onChange={handleChange} />
         </label>
         <button type="submit" className={css.saveBtn}>
-          Save
+          {t('Save')}
         </button>
       </form>
     </div>
