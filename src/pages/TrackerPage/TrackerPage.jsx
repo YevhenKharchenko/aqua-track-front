@@ -6,8 +6,12 @@ import { selectIsLoggedIn } from '../../redux/selectors.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshUser } from '../../redux/auth/operations.js';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next'; // хук useTranslation
+
 
 const TrackerPage = () => {
+  const { t } = useTranslation(); //  хук для отримання функції перекладу
+
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
@@ -19,7 +23,7 @@ const TrackerPage = () => {
 
   return (
     <div className={css.container}>
-      <DocumentTitle>Aqua Track - Main Page</DocumentTitle>
+      <DocumentTitle>{t('aqua track - main page')}</DocumentTitle>
       <WaterMainInfo />
       <WaterDetailedInfo />
     </div>

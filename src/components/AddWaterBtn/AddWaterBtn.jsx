@@ -24,7 +24,7 @@ const AddWaterBtn = ({ className, icon, iconClassName }) => {
         <svg className={clsx(css.icon, iconClassName)}>
           <use href={icon}></use>
         </svg>
-        {t('addWater')} 
+        {t('add water')} 
             </button>
     </>
   );

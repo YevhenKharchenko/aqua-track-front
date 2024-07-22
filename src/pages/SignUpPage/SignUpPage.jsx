@@ -4,8 +4,12 @@ import SignUpForm from '../../components/SignUpForm/SignUpForm';
 import css from './SignUpPage.module.css';
 import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection';
 import DocumentTitle from '../../components/DocumentTitle';
+import { useTranslation } from 'react-i18next'; // хук useTranslation
+
 
 const SignUpPage = () => {
+    const { t } = useTranslation(); //  хук для отримання функції перекладу
+
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 1440);
 
   useEffect(() => {
@@ -20,7 +24,7 @@ const SignUpPage = () => {
   }, []);
   return (
     <div className={css.wrapper}>
-      <DocumentTitle>Aqua Track - Register</DocumentTitle>
+      <DocumentTitle>{t('aqua track - register')}</DocumentTitle>
       <div className={css.backdrop}>
         <Logo />
         <SignUpForm />
