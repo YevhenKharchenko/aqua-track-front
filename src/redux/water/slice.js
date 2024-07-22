@@ -20,9 +20,9 @@ function handleLoading(state) {
 }
 
 function handleError(state, action) {
-  state.waters.waterPerDay.waterRecord = [];
-  state.error = action.payload;
   state.loading = false;
+  // state.waters.waterPerDay.waterRecord = [];
+  state.error = action.payload;
 }
 
 const waterSlice = createSlice({
@@ -31,8 +31,8 @@ const waterSlice = createSlice({
     waters: {
       waterPerMonth: [],
       waterPerDay: {
-        // waterRate: 1.5,
         waterRecord: [],
+        // waterRate: 1.5,
       },
     },
     loading: false,
@@ -93,6 +93,11 @@ const waterSlice = createSlice({
       .addCase(addWater.fulfilled, (state, action) => {
         state.loading = false;
         state.error = false;
+        console.log(action.payload);
+        console.log(JSON.stringify(state.waters.waterPerDay));
+        if (!state.waters.waterPerDay.waterRecord) {
+          state.waters.waterPerDay.waterRecord = [];
+        }
         state.waters.waterPerDay.waterRecord.push(action.payload);
         state.waters.waterPerMonth.push(action.payload);
 

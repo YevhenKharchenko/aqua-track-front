@@ -44,6 +44,7 @@ export const deleteWater = createAsyncThunk('water/delete', async id => {
 export const addWater = createAsyncThunk(
   'water/add',
   async ({ localDate, localTime: time, waterValue: amount }, thunkAPI) => {
+    console.log('in thunk');
     const date = formatDateForAddOrEditWater(localDate);
     console.log(date);
     try {
@@ -52,7 +53,7 @@ export const addWater = createAsyncThunk(
         time,
         amount,
       });
-
+      console.log(response.data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
