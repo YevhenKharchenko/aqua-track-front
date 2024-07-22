@@ -7,8 +7,8 @@ import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginUser } from '../../redux/auth/operations';
 import { useDispatch } from 'react-redux';
-import GoogleAuth from '../GoogleAuth/GoogleAuth';
 import toast from 'react-hot-toast';
+import GoogleAuth from '../GoogleAuth/GoogleAuth';
 
 const SignInForm = () => {
   const dispatch = useDispatch();
@@ -69,7 +69,7 @@ const SignInForm = () => {
   };
 
   return (
-    <div className={css.container}>
+      <div className={css.container}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h2 className={css.header}>Sign In</h2>
 
@@ -127,7 +127,7 @@ const SignInForm = () => {
       <NavLink className={css.forgotPassword} to="/request-reset">
         Forgot password?
       </NavLink>
-    </div>
+    </div>   
   );
 };
 

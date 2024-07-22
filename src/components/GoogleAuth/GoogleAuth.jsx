@@ -1,15 +1,16 @@
-
+import css from './GoogleAuth.module.css';
+import sprite from '../../assets/icons/sprite.svg';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { loginUserSuccess } from '../../redux/auth/slice';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import GoogleAuthLink from '../GoogleAuthLink/GoogleAuthLink';
+import { loginUserGoogle } from '../../redux/auth/operations';
 
 const GoogleAuth = () => {
   const [googleAuthUrl, setGoogleAuthUrl] = useState('');
+  const [isAuthorizing, setIsAuthorizing] = useState(false);
+  const isLoggedIn = useSelector(state => state.user.isLoggedIn);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -50,53 +51,56 @@ const GoogleAuth = () => {
       const urlParams = new URLSearchParams(window.location.search);
       const code = urlParams.get('code');
 
-      if (!code) return;
+      if (code && !isAuthorizing) {
+        setIsAuthorizing(true);
+        try {
+          const response = await axios.post(
+            'https://project6-back.onrender.com/users/confirm-oauth',
+            { code }
+          );
 
-      try {
-        const response = await axios.post('https://project6-back.onrender.com/users/confirm-oauth', { code });
-        const { data } = response;
+          if (response.status === 200) {
+            const { accessToken } = response.data.data;
+            localStorage.setItem('accessToken', accessToken);
+            dispatch(loginUserGoogle());
 
-        if (response.status === 200) {
-          const { accessToken, user } = data.data;
-          dispatch(loginUserSuccess({ token: accessToken, user }));
-          localStorage.setItem('accessToken', accessToken);
-
-          toast.success('Successfully logged in with Google OAuth!', {
-            duration: 4000,
-            position: 'top-center',
-            style: {
-              textAlign: 'center',
-              boxShadow: '8px 11px 27px -8px rgba(66, 68, 90, 1)',
-            },
-          });
-          navigate('/tracker');
-        } else {
-          toast.error(`Failed to log in with Google OAuth: ${data.message}`, {
-            duration: 4000,
-            position: 'top-center',
-            style: {
-              textAlign: 'center',
-              boxShadow: '8px 11px 27px -8px rgba(66, 68, 90, 1)',
-            },
-          });
+            toast.success('Successfully logged in with Google OAuth!', {
+              duration: 4000,
+              position: 'top-center',
+              style: {
+                textAlign: 'center',
+                boxShadow: '8px 11px 27px -8px rgba(66, 68, 90, 1)',
+              },
+            });
+            navigate('/tracker');
+          } else {
+            throw new Error(`Failed to log in with Google OAuth: ${response.data.message}`);
+          }
+        } catch (error) {
+          throw new Error(
+            `Error logging in with Google OAuth: ${error.response?.data?.message || error.message}`
+          );
+        } finally {
+          setIsAuthorizing(false);
         }
-      } catch (error) {
-        console.error(`Error in handleGoogleRedirect: ${JSON.stringify(error.response?.data || error.message)}`);
-        toast.error(`Error logging in with Google OAuth: ${error.response?.data?.message || error.message}`, {
-          duration: 4000,
-          position: 'top-center',
-          style: {
-            textAlign: 'center',
-            boxShadow: '8px 11px 27px -8px rgba(66, 68, 90, 1)',
-          },
-        });
       }
     };
 
     handleGoogleRedirect();
-  }, [dispatch, navigate]);
+  }, [dispatch, navigate, isAuthorizing]);
 
-  return googleAuthUrl ? <GoogleAuthLink googleAuthUrl={googleAuthUrl} /> : null;
+  if (isLoggedIn || isAuthorizing) {
+    return null;
+  }
+
+  return (
+    <a className={css.linkGoogle} href={googleAuthUrl}>
+      <svg width="20px" height="20px">
+        <use xlinkHref={`${sprite}#icon-icons8-google-48`} />
+      </svg>
+      Sign in with Google
+    </a>
+  );
 };
 
 export default GoogleAuth;
