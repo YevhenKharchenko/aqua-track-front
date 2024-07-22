@@ -9,6 +9,7 @@ import { ModalProvider } from './context/ModalProvider.jsx';
 import App from './App.jsx';
 import { store, persistor } from './redux/store.js';
 import './index.css';
+import './i18n.js'; // Імпортуйте ваш файл i18n.js
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

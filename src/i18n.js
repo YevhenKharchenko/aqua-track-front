@@ -13,7 +13,7 @@ i18n
     debug: true, // Виводити помилки у консоль
     backend: {
       // Шляхи до файлів перекладу
-      loadPath: '/locales/{{lng}}/translation.json'
+      loadPath: './locales/{{lng}}/translation.json'
     },
     interpolation: {
       escapeValue: false // React вже обробляє escape HTML

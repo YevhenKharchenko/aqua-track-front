@@ -22,6 +22,8 @@ import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPasswordPage.js
 import ResetPasswordPage from './pages/ResetPasswordPage/ResetPasswordPage.jsx';
 import GoogleAuth from './components/GoogleAuth/GoogleAuth.jsx';
 
+import LanguageSwitcher from './components/LanguageSwitcher/LanguageSwitcher.jsx'; //імпорт перемикача мов
+
 function App() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
@@ -35,7 +37,8 @@ function App() {
     <Loader />
   ) : (
     <SharedLayout>
-      <Toaster position="top-center" />
+        <Toaster position="top-center" />
+        <LanguageSwitcher /> 
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route
