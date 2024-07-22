@@ -91,7 +91,7 @@ const userSlice = createSlice({
         state.isRefreshing = false;
         state.isLoggedIn = true;
         state.userInfo = action.payload;
-        state.error = '';
+        state.error = false;
       })
       // .addCase(updateUser.rejected, handleError)
       // .addCase(getAllUsers.pending, handleRefreshing)
