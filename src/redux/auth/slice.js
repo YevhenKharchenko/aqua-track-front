@@ -9,14 +9,13 @@ import {
 } from './operations';
 
 function handleRefreshing(state) {
-  state.loading = true;
-  state.error = null;
+  state.isRefreshing = true;
+  state.error = false;
 }
 
 function handleError(state, action) {
-  state.waters.waterPerDay.waterRecord = [];
+  state.isRefreshing = false;
   state.error = action.payload;
-  state.loading = false;
 }
 
 export const initialState = {
@@ -32,7 +31,7 @@ export const initialState = {
   token: localStorage.getItem('accessToken') || null,
   isLoggedIn: false,
   isRefreshing: false,
-  error: '',
+  error: false,
   countUsers: null,
   usersInfo: [],
 };
@@ -51,18 +50,12 @@ const userSlice = createSlice({
   },
   extraReducers: builder =>
     builder
-      .addCase(registerUser.fulfilled, (state, action) => {
-        handleRefreshing;
-      })
+      // .addCase(registerUser.pending, handleRefreshing)
       .addCase(registerUser.fulfilled, (state, action) => {
         state.isRefreshing = false;
       })
-      .addCase(registerUser.fulfilled, (state, action) => {
-        handleError;
-      })
-      .addCase(loginUser.pending, state => {
-        handleRefreshing;
-      })
+      // .addCase(registerUser.rejected, handleError)
+      // .addCase(loginUser.pending, handleRefreshing)
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isRefreshing = false;
         state.token = action.payload.data.accessToken;
@@ -70,59 +63,44 @@ const userSlice = createSlice({
 
         localStorage.setItem('accessToken', action.payload.data.accessToken);
       })
-      .addCase(loginUser.rejected, (state, action) => {
-        handleError;
-      })
-      .addCase(logoutUser.pending, state => {
-        handleRefreshing;
-      })
+      // .addCase(loginUser.rejected, handleError)
+      // .addCase(logoutUser.pending, handleRefreshing)
       .addCase(logoutUser.fulfilled, state => {
+        state.isRefreshing = false;
         state.isLoggedIn = false;
         state.userInfo = null;
         state.token = null;
         localStorage.removeItem('accessToken');
       })
       .addCase(logoutUser.rejected, state => {
+        state.isRefreshing = false;
         state.isLoggedIn = false;
         state.userInfo = null;
         state.token = null;
         localStorage.removeItem('accessToken');
       })
-      .addCase(refreshUser.pending, (state, action) => {
-        handleRefreshing;
-      })
+      // .addCase(refreshUser.pending, handleRefreshing)
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.isRefreshing = false;
         state.isLoggedIn = true;
         state.userInfo = action.payload;
       })
-      .addCase(refreshUser.rejected, (state, action) => {
-        handleError;
-      })
-      .addCase(updateUser.pending, state => {
-        handleRefreshing;
-      })
+      // .addCase(refreshUser.rejected, handleError)
+      // .addCase(updateUser.pending, handleRefreshing)
       .addCase(updateUser.fulfilled, (state, action) => {
         state.isRefreshing = false;
         state.isLoggedIn = true;
         state.userInfo = action.payload;
         state.error = '';
       })
-      .addCase(updateUser.rejected, (state, action) => {
-        handleError;
-      })
-
-      .addCase(getAllUsers.pending, state => {
-        handleRefreshing;
-      })
+      // .addCase(updateUser.rejected, handleError)
+      // .addCase(getAllUsers.pending, handleRefreshing)
       .addCase(getAllUsers.fulfilled, (state, action) => {
         state.isRefreshing = false;
         state.countUsers = action.payload.totalRegisteredUsers;
         state.usersInfo = action.payload.users;
-      })
-      .addCase(getAllUsers.rejected, (state, action) => {
-        handleError;
       }),
+  // .addCase(getAllUsers.rejected, handleError),
 });
 
 export const { loginUserSuccess } = userSlice.actions;
