@@ -1,16 +1,16 @@
 import css from './AdvantagesSection.module.css';
-import ava1 from '../../assets/images/ava1.jpg';
-import ava1_2x from '../../assets/images/ava1_2x.jpg';
-import ava2 from '../../assets/images/ava2.jpg';
-import ava2_2x from '../../assets/images/ava2_2x.jpg';
-import ava3 from '../../assets/images/ava3.jpg';
-import ava3_2x from '../../assets/images/ava3_2x.jpg';
-import ava1tab from '../../assets/images/ava1tab.jpg';
-import ava1tab_2x from '../../assets/images/ava1tab_2x.jpg';
-import ava2tab from '../../assets/images/ava2tab.jpg';
-import ava2tab_2x from '../../assets/images/ava2tab_2x.jpg';
-import ava3tab from '../../assets/images/ava3tab.jpg';
-import ava3tab_2x from '../../assets/images/ava3tab_2x.jpg';
+import ava1 from '../../assets/images/ava1.png';
+import ava1_2x from '../../assets/images/ava1_2x.png';
+import ava2 from '../../assets/images/ava2.png';
+import ava2_2x from '../../assets/images/ava2_2x.png';
+import ava3 from '../../assets/images/ava3.png';
+import ava3_2x from '../../assets/images/ava3_2x.png';
+import ava1tab from '../../assets/images/ava1tab.png';
+import ava1tab_2x from '../../assets/images/ava1tab_2x.png';
+import ava2tab from '../../assets/images/ava2tab.png';
+import ava2tab_2x from '../../assets/images/ava2tab_2x.png';
+import ava3tab from '../../assets/images/ava3tab.png';
+import ava3tab_2x from '../../assets/images/ava3tab_2x.png';
 
 import { useSelector } from 'react-redux';
 import { useState, useEffect, useRef } from 'react';
