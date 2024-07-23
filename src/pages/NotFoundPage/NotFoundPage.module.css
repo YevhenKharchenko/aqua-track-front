@@ -1,1 +1,35 @@
+.notFoundWrapper {
+  padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
 
+.text {
+  font-size: 32px;
+}
+
+.link {
+  border-radius: 30px;
+  padding: 16px;
+  width: 169px;
+  height: 50px;
+  background-color: #9be1a0;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: #323f47;
+  display: flex;
+  justify-content: center;
+
+  transition: 0.3s;
+}
+
+.link:hover,
+.link:focus,
+.link:active {
+  box-shadow: inset 0 0 0 2em #87d28d;
+}

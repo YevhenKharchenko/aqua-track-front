@@ -60,7 +60,7 @@
 @media only screen and (min-width: 768px) {
   .modalWrapper {
     min-width: 648px;
-
+    top: 64px;
     padding: 40px;
   }
 

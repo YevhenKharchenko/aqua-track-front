@@ -7,7 +7,6 @@ import { selectIsRefreshing } from './redux/selectors.js';
 import { RestrictedRoute } from './components/RestrictedRoute';
 import { PrivateRoute } from './components/PrivateRoute';
 
-import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
 import GoogleAuth from './components/GoogleAuth/GoogleAuth.jsx';
 import HourglassLoader from './shared/components/HourglassLoader/HourglassLoader.jsx';
@@ -18,6 +17,7 @@ const SignInPage = lazy(() => import('./pages/SignInPage/SignInPage.jsx'));
 const TrackerPage = lazy(() => import('./pages/TrackerPage/TrackerPage.jsx'));
 const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage/ForgotPasswordPage.jsx'));
 const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage/ResetPasswordPage.jsx'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
 
 function App() {
   const dispatch = useDispatch();
