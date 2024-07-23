@@ -44,7 +44,7 @@ export const WaterForm = ({ mode, onClose, water = {} }) => {
     resolver: yupResolver(schema),
     defaultValues: {
       waterValue: Number(water.amount) || 50,
-      localTime: water.localTime || getTimeFormat(),
+      localTime: water.time || getTimeFormat(),
     },
   });
 
