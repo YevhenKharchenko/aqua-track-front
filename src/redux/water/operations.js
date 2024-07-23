@@ -33,10 +33,14 @@ export const fetchWaterPerMonth = createAsyncThunk(
   }
 );
 
-export const deleteWater = createAsyncThunk('water/delete', async id => {
-  const response = await axios.delete(`/water/remove/${id}`);
+export const deleteWater = createAsyncThunk('water/delete', async (id, thunkAPI) => {
+  try {
+    const response = await axios.delete(`/water/remove/${id}`);
 
-  return response.data;
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
 });
 
 export const addWater = createAsyncThunk(
