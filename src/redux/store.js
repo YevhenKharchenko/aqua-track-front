@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import {
   persistStore,
   persistReducer,
@@ -26,11 +26,20 @@ const waterPersistConfig = {
   whitelist: [],
 };
 
+const appReducer = combineReducers({
+  user: persistReducer(userPersistConfig, userReducer),
+  water: persistReducer(waterPersistConfig, waterReducer),
+});
+
+const rootReducer = (state, action) => {
+  if (action.type === 'auth/logout/fulfilled') {
+    state = undefined;
+  }
+  return appReducer(state, action);
+};
+
 export const store = configureStore({
-  reducer: {
-    user: persistReducer(userPersistConfig, userReducer),
-    water: persistReducer(waterPersistConfig, waterReducer),
-  },
+  reducer: rootReducer,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
