@@ -11,6 +11,7 @@ const clearAuthHeader = () => {
 };
 
 axios.defaults.baseURL = 'https://project6-back.onrender.com';
+// axios.defaults.withCredentials = true;
 
 axios.interceptors.request.use(config => {
   const token = localStorage.getItem('accessToken');
