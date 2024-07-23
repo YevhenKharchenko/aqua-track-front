@@ -32,14 +32,12 @@ const UserSettingsForm = ({ onClose }) => {
 
   const onFileChange = event => {
     const selectedAvatar = event.target.files[0];
-    
 
     if (selectedAvatar) {
       const objectURL = URL.createObjectURL(selectedAvatar);
       setPreview(objectURL);
     }
   };
-
 
   //react-hook-form
   const {
@@ -82,7 +80,6 @@ const UserSettingsForm = ({ onClose }) => {
     return 0;
   };
 
-
   //on focus change
   const handleBlur = (field, defaultValue) => {
     if (getValues(field) === '') {
@@ -90,34 +87,35 @@ const UserSettingsForm = ({ onClose }) => {
     }
   };
 
-  const onSubmit = async formData => {
-    const data = new FormData();
-    data.append('name', formData.name);
-    data.append('email', formData.email);
-    data.append('gender', formData.gender);
-    data.append('weight', formData.weight);
-    data.append('sportTime', formData.sportTime);
-    data.append('waterNorma', formData.waterNorma);
+  const onSubmit = formData => {
+    try {
+      const data = new FormData();
+      data.append('name', formData.name);
+      data.append('email', formData.email);
+      data.append('gender', formData.gender);
+      data.append('weight', formData.weight);
+      data.append('sportTime', formData.sportTime);
+      data.append('waterNorma', formData.waterNorma);
 
-    if (fileInputRef.current.files[0]) {
-      data.append('avatar', fileInputRef.current.files[0]);
-    }
+      if (fileInputRef.current.files[0]) {
+        data.append('avatar', fileInputRef.current.files[0]);
+      }
 
-    dispatch(updateUser(data))
-      .then(() => {
-        onClose();
-        toast.success('We successfully updated your data on server', {
-          autoClose: 5000,
-        });
-      })
+      onClose();
 
-      .catch(error => {
-        console.log(error);
-        toast.error(
-          `Something went wrong. During sending your data to server. Error: ${error.message}`,
-          { duration: 8000 }
-        );
+      dispatch(updateUser(data));
+
+      toast.success('We successfully updated your data on server', {
+        autoClose: 5000,
       });
+    } catch (error) {
+      console.log(error);
+
+      toast.error(
+        `Something went wrong. During sending your data to server. Error: ${error.message}`,
+        { duration: 8000 }
+      );
+    }
   };
 
   return (

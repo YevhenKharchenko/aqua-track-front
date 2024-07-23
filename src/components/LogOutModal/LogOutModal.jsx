@@ -9,12 +9,15 @@ const LogOutModal = ({ closeModal }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogOut = () => {
-    dispatch(logoutUser())
-      .then(() => {
-        closeModal();
-        navigate('/');
-      })
-      .catch(error => console.log(error));
+    try {
+      closeModal();
+
+      dispatch(logoutUser());
+
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
   };
   const [closeIcon, setCloseIcon] = useState('icon-close-24x24');
   const svgRef = useRef(null);
