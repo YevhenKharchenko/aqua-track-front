@@ -4,5 +4,8 @@
 }
 
 .loaderText {
-  font-size: 20px;
+  font-size: 22px;
+  color: #323f47;
+  font-weight: 500;
+  line-height: 1.5;
 }

@@ -31,7 +31,6 @@ const getTimeFormat = () => {
 };
 
 export const WaterForm = ({ mode, onClose, water = {} }) => {
-  console.log(water);
   const {
     register,
     handleSubmit,
@@ -71,11 +70,9 @@ export const WaterForm = ({ mode, onClose, water = {} }) => {
 
     try {
       if (mode === 'add') {
-        console.log(newData);
         dispatch(addWater(newData));
         toast.success(`The amount of water consumed has been added successfully.`);
       } else if (mode === 'edit') {
-        console.log({ _id: water._id, ...newData });
         dispatch(changeWater({ _id: water._id, ...newData }));
         toast.success('The amount of water consumed has been successfully updated.');
       }

@@ -93,7 +93,6 @@ const waterSlice = createSlice({
       .addCase(addWater.fulfilled, (state, action) => {
         state.loading = false;
         state.error = false;
-        console.log(action.payload);
 
         if (!state.waters.waterPerDay.waterRecord) {
           state.waters.waterPerDay.waterRecord = [];
@@ -128,7 +127,7 @@ const waterSlice = createSlice({
       .addCase(changeWater.fulfilled, (state, action) => {
         state.loading = false;
         state.error = false;
-        console.log(action.payload);
+
         const updatedEntry = action.payload;
         const index = state.waters.waterPerDay.waterRecord.findIndex(
           entry => entry._id === updatedEntry._id

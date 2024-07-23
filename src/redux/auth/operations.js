@@ -55,7 +55,7 @@ export const registerUser = createAsyncThunk(
     try {
       const res = await axios.post('/users/register', { email, password });
 
-      setAuthHeader(res.data.data.accessToken);
+      // setAuthHeader(res.data.data.accessToken);
 
       return res.data;
     } catch (error) {
@@ -68,7 +68,7 @@ export const loginUser = createAsyncThunk('auth/login', async ({ email, password
   try {
     const res = await axios.post('/users/login', { email, password });
 
-    setAuthHeader(res.data.data.accessToken);
+    // setAuthHeader(res.data.data.accessToken);
 
     return res.data;
   } catch (error) {

@@ -34,9 +34,7 @@ export const fetchWaterPerMonth = createAsyncThunk(
 );
 
 export const deleteWater = createAsyncThunk('water/delete', async id => {
-  console.log(id);
   const response = await axios.delete(`/water/remove/${id}`);
-  console.log(response.data._id);
 
   return response.data;
 });
@@ -44,16 +42,15 @@ export const deleteWater = createAsyncThunk('water/delete', async id => {
 export const addWater = createAsyncThunk(
   'water/add',
   async ({ localDate, localTime: time, waterValue: amount }, thunkAPI) => {
-    console.log('in thunk');
     const date = formatDateForAddOrEditWater(localDate);
-    console.log(date);
+
     try {
       const response = await axios.post('/water/add', {
         date,
         time,
         amount,
       });
-      console.log(response.data);
+
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -66,15 +63,12 @@ export const changeWater = createAsyncThunk(
   async ({ localDate, localTime: time, _id, waterValue: amount }, thunkAPI) => {
     const date = formatDateForAddOrEditWater(localDate);
 
-    console.log(date);
-
     try {
       const response = await axios.patch(`/water/edit/${_id}`, {
         date,
         time,
         amount,
       });
-      console.log(response.data._id);
 
       return response.data;
     } catch (error) {
