@@ -87,7 +87,7 @@ const UserSettingsForm = ({ onClose }) => {
     }
   };
 
-  const onSubmit = formData => {
+  const onSubmit = async formData => {
     try {
       const data = new FormData();
       data.append('name', formData.name);
@@ -103,7 +103,7 @@ const UserSettingsForm = ({ onClose }) => {
 
       onClose();
 
-      dispatch(updateUser(data));
+      await dispatch(updateUser(data)).unwrap();
 
       toast.success('We successfully updated your data on server', {
         autoClose: 5000,

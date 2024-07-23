@@ -4,17 +4,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../redux/auth/operations';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { icons as sprite } from '../../assets/icons/index.js';
+import toast from 'react-hot-toast';
 
 const LogOutModal = ({ closeModal }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleLogOut = () => {
+  const handleLogOut = async () => {
     try {
       closeModal();
 
-      dispatch(logoutUser());
+      await dispatch(logoutUser()).unwrap();
 
       navigate('/');
+
+      toast.success('You are successfully logged out!', {
+        duration: 4000,
+        position: 'top-center',
+        style: {
+          textAlign: 'center',
+          boxShadow: '8px 11px 27px -8px rgba(66, 68, 90, 1)',
+        },
+      });
     } catch (error) {
       console.log(error);
     }
