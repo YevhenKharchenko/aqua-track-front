@@ -10,9 +10,11 @@
   box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
   z-index: 100;
 }
+
 @media only screen and (min-width: 768px) {
   .popover {
     width: 157px;
     height: 82px;
   }
 }
+
