@@ -48,7 +48,7 @@
   align-items: center;
   border-radius: 30px;
   padding: 10px 14px 10px 75px;
-  width: 174px;
+  width: 180px;
   height: 48px;
   box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
   background-color: #fff;
@@ -66,6 +66,7 @@
   font-size: 12px;
   line-height: 1.17;
   color: #323f47;
+  margin-left: 4px;
 }
 
 .accentText {
@@ -273,7 +274,7 @@
     left: 32px;
     bottom: 96px;
     padding: 10px 20px 10px 120px;
-    width: 250px;
+    width: 254px;
     height: 67px;
   }
 }
