@@ -51,11 +51,15 @@ const userSlice = createSlice({
   },
   extraReducers: builder =>
     builder
-      // .addCase(registerUser.pending, handleRefreshing)
+      .addCase(registerUser.pending, handleRefreshing)
       .addCase(registerUser.fulfilled, (state, action) => {
         state.isRefreshing = false;
+        state.token = action.payload.data.accessToken;
+        state.isLoggedIn = true;
+
+        localStorage.setItem('accessToken', action.payload.data.accessToken);
       })
-      // .addCase(registerUser.rejected, handleError)
+      .addCase(registerUser.rejected, handleError)
       .addCase(loginUser.pending, handleRefreshing)
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isRefreshing = false;

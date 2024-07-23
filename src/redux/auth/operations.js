@@ -146,9 +146,7 @@ export const getAllUsers = createAsyncThunk('auth/getAllUsers', async (_, thunkA
   }
 });
 
-
 export const loginUserGoogle = createAsyncThunk('auth/loginGoogle', async (_, thunkAPI) => {
-
   try {
     const persistedToken = localStorage.getItem('accessToken');
 
