@@ -93,12 +93,17 @@ const waterSlice = createSlice({
       .addCase(addWater.fulfilled, (state, action) => {
         state.loading = false;
         state.error = false;
-        console.log(action.payload);
-        console.log(JSON.stringify(state.waters.waterPerDay));
+
         if (!state.waters.waterPerDay.waterRecord) {
           state.waters.waterPerDay.waterRecord = [];
         }
+
         state.waters.waterPerDay.waterRecord.push(action.payload);
+
+        if (!state.waters.waterPerMonth) {
+          state.waters.waterPerMonth = [];
+        }
+
         state.waters.waterPerMonth.push(action.payload);
 
         //код Андрія
@@ -122,7 +127,7 @@ const waterSlice = createSlice({
       .addCase(changeWater.fulfilled, (state, action) => {
         state.loading = false;
         state.error = false;
-        console.log(action.payload);
+
         const updatedEntry = action.payload;
         const index = state.waters.waterPerDay.waterRecord.findIndex(
           entry => entry._id === updatedEntry._id

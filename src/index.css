@@ -3,6 +3,7 @@
   src: url('../src/assets/fonts/Poppins-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
+  crossorigin: anonymous;
 }
 
 @font-face {
@@ -10,6 +11,7 @@
   src: url('../src/assets/fonts/Poppins-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
+  crossorigin: anonymous;
 }
 
 @font-face {
@@ -17,6 +19,7 @@
   src: url('../src/assets/fonts/Gilroy-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
+  crossorigin: anonymous;
 }
 
 @font-face {
@@ -24,6 +27,7 @@
   src: url('../src/assets/fonts/Gilroy-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
+  crossorigin: anonymous;
 }
 
 body {

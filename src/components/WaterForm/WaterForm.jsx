@@ -42,8 +42,8 @@ export const WaterForm = ({ mode, onClose, water = {} }) => {
     mode: 'onChange',
     resolver: yupResolver(schema),
     defaultValues: {
-      waterValue: Number(water.waterValue) || 50,
-      localTime: water.localTime || getTimeFormat(),
+      waterValue: Number(water.amount) || 50,
+      localTime: water.time || getTimeFormat(),
     },
   });
 
@@ -70,11 +70,9 @@ export const WaterForm = ({ mode, onClose, water = {} }) => {
 
     try {
       if (mode === 'add') {
-        console.log(newData);
         dispatch(addWater(newData));
         toast.success(`The amount of water consumed has been added successfully.`);
       } else if (mode === 'edit') {
-        console.log({ _id: water._id, ...newData });
         dispatch(changeWater({ _id: water._id, ...newData }));
         toast.success('The amount of water consumed has been successfully updated.');
       }

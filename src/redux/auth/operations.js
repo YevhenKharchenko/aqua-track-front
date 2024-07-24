@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { toast } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 export const setAuthHeader = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -11,6 +11,7 @@ const clearAuthHeader = () => {
 };
 
 axios.defaults.baseURL = 'https://project6-back.onrender.com';
+// axios.defaults.withCredentials = true;
 
 axios.interceptors.request.use(config => {
   const token = localStorage.getItem('accessToken');
@@ -55,6 +56,8 @@ export const registerUser = createAsyncThunk(
     try {
       const res = await axios.post('/users/register', { email, password });
 
+      setAuthHeader(res.data.data.accessToken);
+
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -66,7 +69,7 @@ export const loginUser = createAsyncThunk('auth/login', async ({ email, password
   try {
     const res = await axios.post('/users/login', { email, password });
 
-    setAuthHeader(res.data.accessToken);
+    setAuthHeader(res.data.data.accessToken);
 
     return res.data;
   } catch (error) {
@@ -79,9 +82,6 @@ export const logoutUser = createAsyncThunk('auth/logout', async (_, thunkAPI) =>
     const res = await axios.post('/users/logout');
     clearAuthHeader();
     localStorage.removeItem('accessToken');
-    toast.success('You are successfully logged out!', {
-      autoClose: 5000,
-    });
     return res.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -146,9 +146,7 @@ export const getAllUsers = createAsyncThunk('auth/getAllUsers', async (_, thunkA
   }
 });
 
-
 export const loginUserGoogle = createAsyncThunk('auth/loginGoogle', async (_, thunkAPI) => {
-
   try {
     const persistedToken = localStorage.getItem('accessToken');
 

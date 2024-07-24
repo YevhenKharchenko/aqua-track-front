@@ -7,11 +7,13 @@
   border-radius: 30px;
   border: none;
   margin-top: 14px;
+
+  transition: 0.5s;
 }
 
 .saveBtn:hover {
-  background-color: #87d28d;
-  transition: all var(--animation);
+  box-shadow: inset 0 0 0 2em #87D28D;
+  /* transition: all var(--animation); */
 }
 
 .logOutBtn {
@@ -23,11 +25,13 @@
   border-radius: 30px;
   border: none;
   width: 304px;
+
+  transition: 0.5s;
 }
 
 .logOutBtn:hover {
-  background-color: #87d28d;
-  outline: transparent;
+  box-shadow: inset 0 0 0 2em #87D28D;
+  /* outline: transparent; */
 }
 .logOutBtn:focus {
   outline: none;
@@ -45,6 +49,8 @@
   border-radius: 30px;
   border: none;
   width: 304px;
+
+  transition: 0.5s;
 }
 
 .cancelBtn:hover {

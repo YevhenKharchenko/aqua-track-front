@@ -21,10 +21,12 @@
   color: #323f47;
   display: flex;
   justify-content: center;
+
+  transition: 0.5s;
 }
 .navButtonSignup:hover,
 .navButtonSignup:focus {
-  background-color: #87d28d;
+ box-shadow: inset 0 0 0 2em #87D28D;
 }
 .navButtonSignin {
   border: 1px solid #323f47;
@@ -41,6 +43,8 @@
   color: #323f47;
   display: flex;
   justify-content: center;
+
+  transition: 0.5s;
 }
 .navButtonSignin:hover,
 .navButtonSignin:focus {

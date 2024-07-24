@@ -18,15 +18,6 @@
   width: 137px;
 }
 
-@media only screen and (min-width: 768px) {
-  .userBarBtn {
-    max-width: 157px;
-    height: 56px;
-    margin-bottom: 49px;
-    width: 157px;
-  }
-}
-
 .userBarBtn:hover .iconArrowDown {
   stroke: #9be1a0;
 }
@@ -38,6 +29,17 @@
 .userBarBtn:hover .greetNameText {
   color: #9be1a0;
 }
+
+@media only screen and (min-width: 768px) {
+  .userBarBtn {
+    max-width: 157px;
+    height: 56px;
+    margin-bottom: 49px;
+    width: 157px;
+  }
+}
+
+
 .greetNameText {
   font-family: 'Poppins', sans-serif;
   font-weight: 700;

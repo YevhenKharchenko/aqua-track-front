@@ -15,7 +15,6 @@ export function getCurrentMonthName() {
   ];
 
   const currentMonthIndex = new Date().getMonth();
+
   return monthNames[currentMonthIndex];
 }
-
-console.log(getCurrentMonthName());

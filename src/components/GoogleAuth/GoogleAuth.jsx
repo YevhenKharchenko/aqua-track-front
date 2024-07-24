@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { loginUserGoogle } from '../../redux/auth/operations';
 
-const GoogleAuth = () => {
+const GoogleAuth = ({ linkText }) => {
   const [googleAuthUrl, setGoogleAuthUrl] = useState('');
   const [isAuthorizing, setIsAuthorizing] = useState(false);
   const isLoggedIn = useSelector(state => state.user.isLoggedIn);
@@ -98,7 +98,7 @@ const GoogleAuth = () => {
       <svg width="20px" height="20px">
         <use xlinkHref={`${sprite}#icon-icons8-google-48`} />
       </svg>
-      Sign in with Google
+      { linkText }
     </a>
   );
 };

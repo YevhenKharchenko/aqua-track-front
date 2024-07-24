@@ -63,10 +63,12 @@
   color: #323f47;
   display: flex;
   justify-content: center;
+
+  transition: 0.3s;
 }
 .submitButton:hover,
 .submitButton:focus {
-  background-color: #87d28d;
+  box-shadow: inset 0 0 0 2em #87D28D;
 }
 .buttonWrapper {
   padding-top: 32px;

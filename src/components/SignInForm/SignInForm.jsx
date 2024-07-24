@@ -15,9 +15,9 @@ const SignInForm = () => {
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
-    .email('Invalid email format')
-    .matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/, 'Invalid email format')
-    .required('Email is required'),
+      .email('Invalid email format')
+      .matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/, 'Invalid email format')
+      .required('Email is required'),
     password: Yup.string()
       .min(8, 'Password must be at least 8 characters')
       .required('Password is required'),
@@ -51,7 +51,7 @@ const SignInForm = () => {
         });
       })
       .catch(() => {
-        toast.error(`Account not found. Please sign up.`, {
+        toast.error(`The email or password you entered is incorrect. Please try again.`, {
           duration: 4000,
           position: 'top-center',
           style: {
@@ -69,7 +69,7 @@ const SignInForm = () => {
   };
 
   return (
-      <div className={css.container}>
+    <div className={css.container}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h2 className={css.header}>Sign In</h2>
 
@@ -116,7 +116,7 @@ const SignInForm = () => {
         </div>
       </form>
 
-      <GoogleAuth />
+      <GoogleAuth linkText={'Sign in with Google'} />
 
       <div className={css.textWrapper}>
         Don’t have an account?
@@ -127,7 +127,7 @@ const SignInForm = () => {
       <NavLink className={css.forgotPassword} to="/request-reset">
         Forgot password?
       </NavLink>
-    </div>   
+    </div>
   );
 };
 
