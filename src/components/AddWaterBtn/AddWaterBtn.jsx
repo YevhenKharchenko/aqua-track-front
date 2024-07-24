@@ -17,7 +17,12 @@ const AddWaterBtn = ({ className, icon, iconClassName }) => {
 
   return (
     <>
-      <button type="button" className={clsx(css.btnContainer, className)} onClick={openModal}>
+      <button
+        data-tour="add-water-btn-step"
+        type="button"
+        className={clsx(css.btnContainer, className)}
+        onClick={openModal}
+      >
         <svg className={clsx(css.icon, iconClassName)}>
           <use href={icon}></use>
         </svg>

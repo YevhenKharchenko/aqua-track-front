@@ -11,7 +11,6 @@ import ava2tab from '../../assets/images/ava2tab.png';
 import ava2tab_2x from '../../assets/images/ava2tab_2x.png';
 import ava3tab from '../../assets/images/ava3tab.png';
 import ava3tab_2x from '../../assets/images/ava3tab_2x.png';
-
 import { useSelector } from 'react-redux';
 import { useState, useEffect, useRef } from 'react';
 import Loader from '../../shared/components/Loader/Loader';

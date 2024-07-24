@@ -12,6 +12,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@popperjs/core": "^2.11.8",
+    "@reactour/tour": "^3.7.0",
     "@reduxjs/toolkit": "^2.2.3",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",

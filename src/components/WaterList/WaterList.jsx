@@ -39,7 +39,7 @@ export function WaterList() {
   const scrollRef = useHorizontalScroll();
 
   return (
-    <div ref={scrollRef} className={css.waterList}>
+    <div data-tour="records-list-step" ref={scrollRef} className={css.waterList}>
       {loading ? (
         <Loader />
       ) : waterRecord.length > 0 ? (

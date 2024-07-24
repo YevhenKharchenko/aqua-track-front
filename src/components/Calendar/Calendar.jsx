@@ -99,7 +99,7 @@ const Calendar = () => {
   const formattedActiveDay = convertDateFormatForActiveDay(activeDay);
 
   return (
-    <div className={css.container}>
+    <div data-tour="calendar-step" className={css.container}>
       <ul className={css.list}>
         {daysArray.map(day => {
           const dayKey = `${String(day).padStart(2, '0')}.${String(month + 1).padStart(

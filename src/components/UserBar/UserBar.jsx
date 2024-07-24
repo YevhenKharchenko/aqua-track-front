@@ -4,7 +4,13 @@ import { icons as sprite } from '../../assets/icons/index.js';
 
 const UserBar = forwardRef(({ onClick, name, avatar, showPopover }, ref) => {
   return (
-    <button className={css.userBarBtn} ref={ref} onClick={onClick} type="button">
+    <button
+      data-tour="user-bar-step"
+      className={css.userBarBtn}
+      ref={ref}
+      onClick={onClick}
+      type="button"
+    >
       <p className={css.greetNameText}>{name}</p>
       <img className={css.avatar} src={avatar} width="38" height="38" alt="User's avatar" />
       {showPopover ? (

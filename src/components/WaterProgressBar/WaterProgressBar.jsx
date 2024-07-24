@@ -13,7 +13,7 @@ const WaterProgressBar = ({ dailyNorm }) => {
   const shouldShowDynamicLabel = feasibility !== 0 && feasibility !== 50 && feasibility !== 100;
 
   return (
-    <div className={css.progressBarContainer}>
+    <div data-tour="progress-bar-step" className={css.progressBarContainer}>
       <h3 className={css.progressTitle}>Today</h3>
 
       <div className={css.progressBar}>
