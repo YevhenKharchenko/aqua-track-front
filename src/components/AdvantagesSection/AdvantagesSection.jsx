@@ -1,4 +1,5 @@
 import css from './AdvantagesSection.module.css';
+
 import ava1 from '../../assets/images/ava1.jpg';
 import ava1_2x from '../../assets/images/ava1_2x.jpg';
 import ava2 from '../../assets/images/ava2.jpg';

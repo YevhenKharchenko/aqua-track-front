@@ -1,4 +1,5 @@
 .infoContainer {
+  position: relative;
   display: flex;
   flex-direction: column;
   height: fit-content;
@@ -57,5 +58,35 @@
       background-image: url(../../assets/images/transparent_bottle_for_water_desktop_2x-min.png);
       background-size: 472px 604px;
     }
+  }
+}
+
+.startTourBtn {
+  position: absolute;
+  right: 16px;
+  top: 30px;
+  width: 81px;
+  height: 26px;
+  padding: 9px 12px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  vertical-align: middle;
+  border-radius: 30px;
+  background-color: #323f47;
+  color: #fff;
+}
+
+@media screen and (min-width: 768px) {
+  .startTourBtn {
+    position: absolute;
+    right: 32px;
+    top: 32px;
+    padding: 11px 16px;
+    width: 111px;
+    height: 34px;
+    font-size: 12px;
   }
 }
